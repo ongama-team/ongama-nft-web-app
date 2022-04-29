@@ -1,10 +1,16 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { GraphQLClient, Variables } from "graphql-request";
 
-const APIURL = `https://api.studio.thegraph.com/query/${process.env.NEXT_PUBLIC_SUBGRAPH_NAME}`;
+const endpoint = `https://api.thegraph.com/subgraphs/${process.env.NEXT_PUBLIC_SUBGRAPH_NAME}`;
 
-const client = new ApolloClient({
-  uri: APIURL,
-  cache: new InMemoryCache(),
-});
+const client = new GraphQLClient(endpoint);
+
+export const gqlFetch = async (query: string, variables?: Variables) => {
+  try {
+    const data = await client.request(query, variables);
+    return data;
+  } catch (error) {
+    return error;
+  }
+};
 
 export default client;
