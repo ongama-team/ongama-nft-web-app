@@ -1,0 +1,39 @@
+name: Build Frontend App
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+      - master
+jobs:
+  lint:
+    name: Lint & Build App
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Cache Code
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm i --legacy-peer-deps
+
+      - name: Run Lint
+        run: npm run lint
+
+      - name: Build App
+        run: npm run build
