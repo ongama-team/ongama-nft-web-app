@@ -1,6 +1,7 @@
 import { Button } from "antd";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { web3Actions } from "../lib/web3";
 
 const Home: NextPage = () => {
   return (
@@ -13,7 +14,9 @@ const Home: NextPage = () => {
 
       <div className="h-full flex flex-col justify-center items-center">
         <h1 className="text-white text-4xl mb-4">ONGAMA NFT MARKET</h1>
-        <Button className="text-white">Ant Design And Tailwind</Button>
+        <Button className="text-white" onClick={web3Actions.connectWallet}>
+          Connect Wallet
+        </Button>
       </div>
     </div>
   );
