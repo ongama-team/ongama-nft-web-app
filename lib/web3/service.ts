@@ -62,6 +62,7 @@ class Web3Service {
         ],
       },
     });
+
     try {
       await provider.enable();
     } catch (err) {
