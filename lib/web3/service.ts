@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 import { TChain } from "../../types/chains";
 import { CHAINS_ENV } from "../config/chains";
 import NFTABI from "./abis/NFT.json";
@@ -40,6 +41,36 @@ class Web3Service {
     await provider.send("eth_requestAccounts", []);
 
     const signer = provider.getSigner();
+    return signer;
+  }
+
+  public async connectTrustWallet() {
+    const provider = new WalletConnectProvider({
+      rpc: {
+        [CHAINS_ENV.polygon.chainId]: CHAINS_ENV.polygon.nodeRPC,
+      },
+      bridge: "https://bridge.walletconnect.org",
+      qrcode: true,
+      qrcodeModalOptions: {
+        mobileLinks: [
+          "rainbow",
+          "metamask",
+          "argent",
+          "trust",
+          "imtoken",
+          "pillar",
+        ],
+      },
+    });
+    try {
+      await provider.enable();
+    } catch (err) {
+      console.log("error", err);
+    }
+
+    const web3Provider = new ethers.providers.Web3Provider(provider);
+    const signer = web3Provider.getSigner();
+
     return signer;
   }
 }

@@ -7,6 +7,13 @@ class Web3Actions {
 
     console.log(signer);
   }
+
+  public async connectTrustWallet() {
+    const web3Instance = new Web3Service();
+    const trustWallerSigner = await web3Instance.connectTrustWallet();
+
+    console.log("Trust Wallet Signer", trustWallerSigner);
+  }
 }
 
 const web3Actions = new Web3Actions();
