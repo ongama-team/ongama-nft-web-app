@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { TChain } from "../../types/chains";
 import { CHAINS_ENV } from "../config/chains";
 import NFTABI from "./abis/NFT.json";
+import { connector } from "./walletConnect";
 
 class Web3Service {
   public provider;
@@ -36,6 +37,10 @@ class Web3Service {
       return new Error("Browser does not support Web3");
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    //walletConnect connection
+    /*await connector.enable()
+    const provider = new ethers.providers.Web3Provider(connector);*/
 
     await provider.send("eth_requestAccounts", []);
 
