@@ -10,9 +10,9 @@ class Web3Actions {
 
   public async connectTrustWallet() {
     const web3Instance = new Web3Service();
-    const trustWallerSigner = await web3Instance.connectTrustWallet();
+    const trustWalletSigner = await web3Instance.connectTrustWallet();
 
-    console.log("Trust Wallet Signer", trustWallerSigner);
+    console.log("Trust Wallet Signer", trustWalletSigner);
   }
 }
 
