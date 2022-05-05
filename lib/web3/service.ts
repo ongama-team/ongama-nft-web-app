@@ -38,12 +38,15 @@ class Web3Service {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    //walletConnect connection
-    /*await connector.enable()
-    const provider = new ethers.providers.Web3Provider(connector);*/
-
     await provider.send("eth_requestAccounts", []);
 
+    const signer = provider.getSigner();
+    return signer;
+  }
+
+  public async walletConnectConnector() {
+    await connector.enable();
+    const provider = new ethers.providers.Web3Provider(connector);
     const signer = provider.getSigner();
     return signer;
   }
