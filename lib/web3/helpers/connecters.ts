@@ -15,12 +15,12 @@ export const connectCoinbase = async () => {
       darkMode: false,
     });
 
-    const ethereum = coinbaseWallet.makeWeb3Provider(
+    const provider = coinbaseWallet.makeWeb3Provider(
       DEFAULT_ETH_JSONRPC_URL,
       DEFAULT_CHAIN_ID
     );
-    const web3 = new Web3(ethereum as any);
-    const accounts: string[] = await ethereum.request({
+    const web3 = new Web3(provider as any);
+    const accounts: string[] = await provider.request({
       method: "eth_requestAccounts",
     });
     const account = accounts[0];
