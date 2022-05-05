@@ -3,8 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import ConnectWallets from "../components/modules/__auth";
-import CrossVector from "../components/modules/__modules__/_vectors/crossVector";
-import { web3Actions } from "../lib/web3";
+import { CrossVector } from "../components/modules/__modules__/_vectors/";
 
 const Home: NextPage = () => {
   const [openWalletMenu, setOpenWalletMenu] = useState(true);
@@ -23,38 +22,38 @@ const Home: NextPage = () => {
         <div
           className={`relative ${
             openWalletMenu ? "hidden" : ""
-          }  bottom-2  rounded-lg shadow-lg transition-all duration-300 `}
+          }  bottom-2 rounded-lg shadow-lg transition-all duration-300 `}
         >
           <div
-            className="fixed   inset-0 backdrop-filter backdrop-blur-lg bg-opacity-50 overflow-y-auto h-full w-full"
+            className="fixed inset-0 backdrop-filter backdrop-blur-lg bg-opacity-50 overflow-y-auto h-full w-full"
             id="my-modal"
           ></div>
-          <div className="  absolute top-2 -right-8 flex place-content-end ">
-            <button
+          <div className="absolute top-2 -right-8 flex place-content-end ">
+            <Button
               onClick={() => {
                 setOpenWalletMenu((prev) => !prev);
               }}
-              className=" rounded-full p-2 bg-gray-100"
+              className="rounded-full bg-white p-2 "
             >
               <CrossVector className="h-4 w-4" />
-            </button>
+            </Button>
           </div>
 
-          <div className=" relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+          <div className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
             <ConnectWallets openWalletMenu />
           </div>
         </div>
 
-        <button
+        <Button
           onClick={() => {
             setOpenWalletMenu((prev) => !prev);
           }}
           className={` ${
             openWalletMenu ? "" : "hidden"
-          } text-xl border border-white p-4 rounded-md text-white font-medium bg-gray-400`}
+          } text-xl flex justify-center items-center  rounded-md text-white font-medium `}
         >
           Connect to your Wallet
-        </button>
+        </Button>
 
         {/* <Button className="text-white" onClick={web3Actions.connectWallet}>
           Connect Wallet
