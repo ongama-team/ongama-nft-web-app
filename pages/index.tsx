@@ -1,9 +1,14 @@
 import { Button } from "antd";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useState } from "react";
+import ConnectWallets from "../components/modules/__auth";
+import CrossVector from "../components/modules/__modules__/_vectors/crossVector";
 import { web3Actions } from "../lib/web3";
 
 const Home: NextPage = () => {
+  const [openWalletMenu, setOpenWalletMenu] = useState(true);
+
   return (
     <div className="bg-slate-800 h-screen">
       <Head>
@@ -14,9 +19,46 @@ const Home: NextPage = () => {
 
       <div className="h-full flex flex-col justify-center items-center">
         <h1 className="text-white text-4xl mb-4">ONGAMA NFT MARKET</h1>
-        <Button className="text-white" onClick={web3Actions.connectWallet}>
+
+        <div
+          className={`relative ${
+            openWalletMenu ? "hidden" : ""
+          }  bottom-2  rounded-lg shadow-lg transition-all duration-300 `}
+        >
+          <div
+            className="fixed   inset-0 backdrop-filter backdrop-blur-lg bg-opacity-50 overflow-y-auto h-full w-full"
+            id="my-modal"
+          ></div>
+          <div className="  absolute top-2 -right-8 flex place-content-end ">
+            <button
+              onClick={() => {
+                setOpenWalletMenu((prev) => !prev);
+              }}
+              className=" rounded-full p-2 bg-gray-100"
+            >
+              <CrossVector className="h-4 w-4" />
+            </button>
+          </div>
+
+          <div className=" relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <ConnectWallets openWalletMenu />
+          </div>
+        </div>
+
+        <button
+          onClick={() => {
+            setOpenWalletMenu((prev) => !prev);
+          }}
+          className={` ${
+            openWalletMenu ? "" : "hidden"
+          } text-xl border border-white p-4 rounded-md text-white font-medium bg-gray-400`}
+        >
+          Connect to your Wallet
+        </button>
+
+        {/* <Button className="text-white" onClick={web3Actions.connectWallet}>
           Connect Wallet
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
