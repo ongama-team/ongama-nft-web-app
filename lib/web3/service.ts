@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { TChain } from "../../types/chains";
 import { CHAINS_ENV } from "../config/chains";
 import NFTABI from "./abis/NFT.json";
+import { connector } from "./walletConnect";
 
 class Web3Service {
   public provider;
@@ -39,6 +40,13 @@ class Web3Service {
 
     await provider.send("eth_requestAccounts", []);
 
+    const signer = provider.getSigner();
+    return signer;
+  }
+
+  public async walletConnectConnector() {
+    await connector.enable();
+    const provider = new ethers.providers.Web3Provider(connector);
     const signer = provider.getSigner();
     return signer;
   }
