@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types/inde";
+import { classNameInterface } from "../../../../types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
