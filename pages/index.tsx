@@ -1,21 +1,9 @@
-import { useWeb3React } from "@web3-react/core";
 import { Button } from "antd";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { web3Actions } from "../lib/web3";
-import { walletLink } from "../lib/web3/helpers/connecters";
 
 const Home: NextPage = () => {
-  const web3reactContext = useWeb3React();
-
-  const connectCoinbaseSimple = async () => {
-    try {
-      await web3reactContext.activate(walletLink);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div className="bg-slate-800 h-screen">
       <Head>
@@ -27,34 +15,9 @@ const Home: NextPage = () => {
       <div className="h-full flex flex-col justify-center items-center">
         <h1 className="text-white text-4xl mb-4">ONGAMA NFT MARKET</h1>
 
-        <Button className="text-white" onClick={web3Actions.connectWallet}>
+        <Button className="text-white" onClick={web3Actions.coinBaseWallet}>
           Connect Wallet
         </Button>
-
-        <button
-          className={` ${
-            web3reactContext.account ? "" : ""
-          }mt-12 border p-2 text-white`}
-          onClick={() => {
-            if (web3reactContext.account) {
-              try {
-                localStorage.clear();
-                web3reactContext.deactivate();
-              } catch (error) {
-                console.log(error);
-              }
-            } else {
-              connectCoinbaseSimple();
-            }
-          }}
-        >
-          {web3reactContext.account ? "Disconnect" : "Connect coin base Wallet"}
-        </button>
-        <p className="mt-8 text-white text-xl font-mono">
-          {web3reactContext.account
-            ? `${web3reactContext.account}`
-            : "Not Connected"}
-        </p>
       </div>
     </div>
   );
