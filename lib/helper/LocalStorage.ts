@@ -1,10 +1,10 @@
 class LocalStorage {
-  static getAccountAddress(key: string) {
+  static getItem(key: string) {
     return localStorage.getItem(key);
   }
 
-  static setAccountAddress(key: string, address: string) {
-    localStorage.setItem(key, address);
+  static setItem(key: string, value: string) {
+    localStorage.setItem(key, value);
   }
 }
 
