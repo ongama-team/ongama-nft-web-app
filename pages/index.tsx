@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 import ConnectWallets from "../components/modules/__auth";
 import { CrossVector } from "../components/modules/__modules__/_vectors/";
+import { web3Actions } from "../lib/web3";
 
 const Home: NextPage = () => {
   const [openWalletMenu, setOpenWalletMenu] = useState(true);
@@ -55,9 +56,9 @@ const Home: NextPage = () => {
           Connect to your Wallet
         </Button>
 
-        {/* <Button className="text-white" onClick={web3Actions.connectWallet}>
+        <Button className="text-white" onClick={web3Actions.connectWallet}>
           Connect Wallet
-        </Button> */}
+        </Button>
       </div>
     </div>
   );

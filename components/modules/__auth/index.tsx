@@ -13,11 +13,7 @@ type openMenuT = {
 };
 
 const ConnectWallets: FC<openMenuT> = ({ openWalletMenu }) => {
-  return (
-    <div>
-      <ConnectWalletsModal />
-    </div>
-  );
+  return <ConnectWalletsModal />;
 };
 
 export default ConnectWallets;
