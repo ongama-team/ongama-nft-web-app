@@ -1,17 +1,11 @@
-import React, { MouseEventHandler } from "react";
-import { defaultVectorProps } from "../../../types";
+import React from "react";
+import { classNameInterface, defaultVectorProps } from "../../../types";
 
-interface IProps {
-  className: string;
-  onClick: MouseEventHandler<SVGSVGElement>;
-}
-
-const ChevroLeftVector = ({ className, onClick }: IProps) => {
+const ChevroLeftVector = ({ className }: classNameInterface) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      onClick={onClick}
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
