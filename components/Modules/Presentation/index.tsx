@@ -10,7 +10,10 @@ const Presentation = () => {
   const sideScroll = useSideScroll();
 
   return (
-    <div className="snap-x mt-20 mx-auto 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] overflow-x-auto px-5">
+    <div
+      className="mt-20 mx-auto 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] overflow-x-auto px-5 scrollbar-hide"
+      ref={scrollContainer}
+    >
       <button className="z-10 absolute h-full flex items-center">
         <ChevronLeftVector
           onClick={
@@ -40,10 +43,7 @@ const Presentation = () => {
           className="bg-white px-2 py-2 absolute z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer"
         />
       </button>
-      <div
-        className="presentation-grid md:w-max sm:w-full snap-center scroll-smooth"
-        ref={scrollContainer}
-      >
+      <div className="presentation-grid md:w-max sm:w-full scroll-smooth">
         <StoryPresentation />
         <StaticMode />
       </div>
