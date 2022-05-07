@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import { Button } from "antd";
 import type { NextPage } from "next";
 import Head from "next/head";
 import LandingPage from "../components/LandingPage";
-import { web3Actions } from "../lib/web3";
 
 const Home: NextPage = () => {
   return (
@@ -24,20 +22,4 @@ const Home: NextPage = () => {
   );
 };
 
-{
-  /* <div className="h-full flex flex-col justify-center items-center">
-        <h1 className="text-white text-4xl mb-4">ONGAMA NFT MARKET</h1>
-        <Button className="text-white" onClick={web3Actions.connectWallet}>
-          Connect Wallet
-        </Button>
-        <Button
-          className="text-white mt-3"
-          onClick={web3Actions.connectTrustWallet}
-        >
-          Connect with Trust Wallet
-        </Button>
-      
-      </div>
-      */
-}
 export default Home;

@@ -1,15 +1,23 @@
 import React from "react";
+import DotHorizontalVector from "../../vectors/dotHorizontalVector";
 
 const Menu = () => {
+  const onDotVectorClick = () => {
+    console.log("dot vector click");
+  };
+
   return (
-    <div>
-      <ul className="flex justify-around font-IBEM_Plex_Sans">
-        <li>Explore</li>
-        <li>My Profile</li>
-        <li>Following</li>
-        <li>Activity</li>
-        <li>How it works</li>
-        <li>Community</li>
+    <div className="min_md:hidden block">
+      <ul className="flex justify-between font-IBEM_Plex_Sans mr-2 min_lg:mx-5 items-center">
+        <li className="min_lg:pr-3">Explore</li>
+        <li className="min_lg:px-3">My Profile</li>
+        <li className="min_lg:px-3">Following</li>
+        <li className="min_lg:px-3">Activity</li>
+        <li className="hidden min_xl:block mx-3">
+          <DotHorizontalVector onClick={onDotVectorClick} />
+        </li>
+        <li className="min_xl:hidden">How it works</li>
+        <li className="min_xl:hidden">Community</li>
       </ul>
     </div>
   );
