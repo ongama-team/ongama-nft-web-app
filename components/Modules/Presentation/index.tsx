@@ -26,24 +26,18 @@ const Presentation = () => {
       scrollContainer.current?.offsetWidth as number
     );
   };
-
+  //   mx-auto 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%]
   return (
-    <>
+    <div className="mt-20 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5">
       <button
-        className="z-10 absolute h-full flex items-center"
+        className="z-10 w-fit h-fit rounded-full -mr-4 mobile:hidden"
         onClick={onScrollLeft}
       >
-        <ChevronLeftVector className="bg-white px-2 py-2 absolute z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
+        <ChevronLeftVector className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
       </button>
 
-      <button
-        className="z-10 absolute h-full flex items-center"
-        onClick={onScrollRight}
-      >
-        <ChevronRightVector className="bg-white px-2 py-2 absolute z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
-      </button>
       <div
-        className="mt-20 mx-auto 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] overflow-x-auto px-5 scrollbar-hide  scroll-smooth"
+        className="overflow-x-auto scrollbar-hide  scroll-smooth"
         ref={scrollContainer}
       >
         <div className="presentation-grid md:w-max sm:w-full">
@@ -51,7 +45,13 @@ const Presentation = () => {
           <StaticMode />
         </div>
       </div>
-    </>
+      <button
+        className="z-10 w-fit h-fit rounded-full -ml-5 mobile:hidden"
+        onClick={onScrollRight}
+      >
+        <ChevronRightVector className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
+      </button>
+    </div>
   );
 };
 
