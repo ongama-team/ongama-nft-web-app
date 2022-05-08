@@ -1,13 +1,13 @@
 import React from "react";
-import Header from "../Modules/Header";
-import Presentation from "../Modules/Presentation";
+import Header from "../modules/_noAuth/Header";
+import Presentation from "../modules/_noAuth/Presentation";
 
 const LandingPage = () => {
   return (
-    <div>
+    <>
       <Header />
       <Presentation />
-    </div>
+    </>
   );
 };
 

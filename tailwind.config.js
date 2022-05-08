@@ -9,14 +9,14 @@ module.exports = {
         sm: "649px",
         md: "650px",
         mobile: { max: "649px" },
-        min_xl: { max: "1280px" },
-        min_lg: { max: "1024px" },
-        min_md: { max: "838px" },
+        "min-xl": { max: "1280px" },
+        "min-lg": { max: "1024px" },
+        "min-md": { max: "838px" },
       },
       fontFamily: {
         IBEM_Plex_Sans: ['"IBM Plex Sans"', "sans-serif"],
       },
     },
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [],
 };

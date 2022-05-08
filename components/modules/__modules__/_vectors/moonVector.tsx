@@ -1,7 +1,11 @@
-import React from "react";
-import { classNameInterface, defaultVectorProps } from "../../../types";
+import React, { FC } from "react";
+import { classNameInterface } from "../../../../types/index";
 
-const MoonVector = ({ className }: classNameInterface) => {
+const defaultProps: classNameInterface = {
+  className: "h-6 w-6",
+};
+
+const MoonVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       width="700pt"
@@ -16,6 +20,6 @@ const MoonVector = ({ className }: classNameInterface) => {
   );
 };
 
-MoonVector.defaultProps = defaultVectorProps;
+MoonVector.defaultProps = defaultProps;
 
 export default MoonVector;

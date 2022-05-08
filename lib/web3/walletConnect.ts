@@ -12,7 +12,7 @@ export const connector = new WalletConnectProvider({
 
 // Subscribe to accounts change
 connector.on("accountsChanged", (accounts: string[]) => {
-  LocalStorage.setAccountAddress("ongama_signer_address", accounts[0]);
+  LocalStorage.setItem("ongama_signer_address", accounts[0]);
   console.log("account changed");
 });
 

@@ -2,7 +2,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useRef, useState } from "react";
 import { dummy_data } from "../dummy_data";
-import ChevronLeftVector from "../../vectors/chevronLeftVector";
 
 const StoryPresentation = () => {
   const { story } = dummy_data;
@@ -27,13 +26,11 @@ const StoryPresentation = () => {
   return (
     <div className="relative">
       <div className="relative">
-        <div>
-          <img
-            src={story[currentStoryIndex].url as string}
-            alt={story[currentStoryIndex].name}
-            className="2xl:w-[33rem] 2xl:h-[33rem] xl:h-[29rem] xl:w-[29rem] lg:w-[23rem] lg:h-[23rem] md:w-[17rem] md:h-[17rem] w-[-webkit-fill-available] h-96 object-cover rounded-2xl cursor-pointer"
-          />
-        </div>
+        <img
+          src={story[currentStoryIndex].url as string}
+          alt={story[currentStoryIndex].name}
+          className="2xl:w-[33rem] 2xl:h-[33rem] xl:h-[29rem] xl:w-[29rem] lg:w-[23rem] lg:h-[23rem] md:w-[17rem] md:h-[17rem] w-[-webkit-fill-available] h-96 object-cover rounded-2xl cursor-pointer"
+        />
         <p className="absolute top-0 text-white px-5 py-5 text-3xl font-IBEM_Plex_Sans transition-all ease-in-out duration-500">
           {story[currentStoryIndex].name}
         </p>

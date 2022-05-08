@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import {
+  SunVector,
+  MoonVector,
+  SearchVector,
+  MenuVector,
+} from "../../__modules__/_vectors";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
-import MoonVector from "../vectors/moonVector";
-import SunVector from "../vectors/sunVector";
-import SearchVector from "../vectors/searchVector";
-import MenuVector from "../vectors/menuVector";
 
 const Header = () => {
   const [isLightTheme, setIsLightTheme] = useState(true);
@@ -20,18 +22,18 @@ const Header = () => {
           <span className="text-blue-500">O</span>ngama
         </p>
       </div>
-      <div className="grid grid-cols-2 min_lg:flex min_lg:justify-start justify-center items-center w-full">
+      <div className="grid grid-cols-2 min-lg:flex min-lg:justify-start justify-center items-center w-full">
         <SearchInputBar />
         <Menu />
       </div>
       <div className="flex items-center">
-        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min_lg:block hidden">
-          <SearchVector />
+        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-lg:block hidden">
+          <SearchVector className="w-6 h-6" />
         </button>
-        <button className="border-none px-2 py-3 mx-1 w-20 rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-IBEM_Plex_Sans min_md:hidden">
+        <button className="border-none px-2 py-3 mx-1 w-20 rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-IBEM_Plex_Sans min-md:hidden">
           Create
         </button>
-        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-IBEM_Plex_Sans min_md:hidden">
+        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-IBEM_Plex_Sans min-md:hidden">
           Sign in
         </button>
         <button
@@ -44,8 +46,8 @@ const Header = () => {
             <SunVector className="w-5 h-5" />
           )}
         </button>
-        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min_md:block hidden">
-          <MenuVector />
+        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block hidden">
+          <MenuVector className="w-6-h-6" />
         </button>
       </div>
     </div>

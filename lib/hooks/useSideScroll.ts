@@ -3,7 +3,7 @@ const useSideScroll = () => {
     element: HTMLDivElement,
     speed: number,
     distance: number,
-    step: number | undefined
+    step = 10
   ) => {
     let scrollAmount = 0;
 

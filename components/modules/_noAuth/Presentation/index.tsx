@@ -1,9 +1,11 @@
 import React, { useRef } from "react";
 import StaticMode from "./StaticMode";
+import {
+  ChevronLeftVector,
+  ChevronRightVector,
+} from "../../../modules/__modules__/_vectors";
 import StoryPresentation from "./StoryPresentation";
-import ChevronRightVector from "../vectors/chevronRightVector";
-import ChevronLeftVector from "../vectors/chevronLeftVector";
-import useSideScroll from "../../../lib/hooks/useSideScroll";
+import useSideScroll from "../../../../lib/hooks/useSideScroll";
 
 const Presentation = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
@@ -26,7 +28,7 @@ const Presentation = () => {
       scrollContainer.current?.offsetWidth as number
     );
   };
-  //   mx-auto 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%]
+
   return (
     <div className="mt-20 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5">
       <button
