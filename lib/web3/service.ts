@@ -44,7 +44,7 @@ class Web3Service {
     return signer;
   }
 
-  public async walletConnectConnector() {
+  public async walletConnectHandler() {
     await connector.enable();
     const provider = new ethers.providers.Web3Provider(connector);
     const signer = provider.getSigner();
