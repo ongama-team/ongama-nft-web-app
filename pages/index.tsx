@@ -19,7 +19,6 @@ const Home: NextPage = () => {
 
       <div className="h-full flex flex-col justify-center items-center">
         <h1 className="text-white text-4xl mb-4">ONGAMA NFT MARKET</h1>
-
         <div
           className={`relative ${
             openWalletMenu ? "hidden" : ""
