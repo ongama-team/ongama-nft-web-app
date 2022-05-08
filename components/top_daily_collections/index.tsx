@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import React from "react";
+>>>>>>> 5a370f5 (set collection volume filter)
 import CollectionCard from "./CollectionCard";
 
 function index() {
@@ -9,7 +13,13 @@ function index() {
           name="days"
           className="bg-transparent font-bold border-none outline-none text-blue-500 px-1"
         >
+<<<<<<< HEAD
           <option defaultChecked value="1">1 day</option>
+=======
+          <option defaultChecked value="1">
+            1 day
+          </option>
+>>>>>>> 5a370f5 (set collection volume filter)
           <option value="7"> 7 days</option>
           <option value="30">30 days</option>
         </select>
