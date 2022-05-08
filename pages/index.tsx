@@ -59,7 +59,7 @@ const Home: NextPage = () => {
         <Button className="text-white" onClick={web3Actions.connectWallet}>
           Connect Wallet
         </Button>
-      </div>
+  </div>
     </div>
   );
 };

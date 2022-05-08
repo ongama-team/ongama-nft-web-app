@@ -1,4 +1,3 @@
-import React from "react";
 import CollectionCard from "./CollectionCard";
 
 function index() {
@@ -10,9 +9,7 @@ function index() {
           name="days"
           className="bg-transparent font-bold border-none outline-none text-blue-500 px-1"
         >
-          <option defaultChecked value="1">
-            1 day
-          </option>
+          <option defaultChecked value="1">1 day</option>
           <option value="7"> 7 days</option>
           <option value="30">30 days</option>
         </select>
