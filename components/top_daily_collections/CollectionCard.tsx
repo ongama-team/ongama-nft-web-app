@@ -1,6 +1,6 @@
-function CollectorCard() {
+function CollectionCard() {
   return (
-    <div className=" flex-none h-14 w-[280px] bg-none flex items-center mx-1 my-2">
+    <div className=" flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2">
       <span className="text-gray-400">1</span>
       <div className="flex">
         <section className="relative">
@@ -27,4 +27,4 @@ function CollectorCard() {
   );
 }
 
-export default CollectorCard;
+export default CollectionCard;
