@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-10">
       <div>
-        <p className="flex items-center text-3xl font-ibemPlexSans">
+        <p className="flex items-center text-3xl font-ibmPlexSans">
           <span className="text-blue-500">O</span>ngama
         </p>
       </div>
@@ -25,10 +25,10 @@ const Header = () => {
         <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-lg:block hidden">
           <VSearch className="w-6 h-6" />
         </button>
-        <button className="border-none px-2 py-3 mx-1 w-20 rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-ibemPlexSans min-md:hidden">
+        <button className="border-none px-2 py-3 mx-1 w-20 rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-ibmPlexSans min-md:hidden">
           Create
         </button>
-        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-ibemPlexSans min-md:hidden">
+        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden">
           Sign in
         </button>
         <button

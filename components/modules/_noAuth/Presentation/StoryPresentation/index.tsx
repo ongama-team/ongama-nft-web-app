@@ -31,7 +31,7 @@ const StoryPresentation = () => {
           alt={story[currentStoryIndex].name}
           className="2xl:w-[33rem] 2xl:h-[33rem] xl:h-[29rem] xl:w-[29rem] lg:w-[23rem] lg:h-[23rem] md:w-[17rem] md:h-[17rem] w-[-webkit-fill-available] h-96 object-cover rounded-2xl cursor-pointer"
         />
-        <p className="absolute top-0 text-white px-5 py-5 text-3xl font-ibemPlexSans transition-all ease-in-out duration-500 bg-black bg-opacity-40 w-full rounded-t-2xl">
+        <p className="absolute top-0 text-white px-5 py-5 text-3xl font-ibmPlexSans transition-all ease-in-out duration-500 bg-black bg-opacity-40 w-full rounded-t-2xl">
           {story[currentStoryIndex].name}
         </p>
       </div>
