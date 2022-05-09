@@ -7,6 +7,12 @@ class Web3Actions {
 
     console.log(signer);
   }
+
+  public async coinBaseWallet() {
+    const web3Instance = new Web3Service();
+    const signer = await web3Instance.coinBaseConnect();
+    console.log("Coinbase ", signer);
+  }
 }
 
 const web3Actions = new Web3Actions();

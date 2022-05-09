@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { TChain } from "../../types/chains";
 import { CHAINS_ENV } from "../config/chains";
 import NFTABI from "./abis/NFT.json";
+import { connectCoinbase } from "./helpers/connecters";
 import { connector } from "./walletConnect";
 
 class Web3Service {
@@ -44,6 +45,10 @@ class Web3Service {
     return signer;
   }
 
+  public async coinBaseConnect() {
+    const connectCoinbaseWallet = await connectCoinbase();
+    return connectCoinbaseWallet;
+  }
   public async walletConnectConnector() {
     await connector.enable();
     const provider = new ethers.providers.Web3Provider(connector);
@@ -51,5 +56,4 @@ class Web3Service {
     return signer;
   }
 }
-
 export default Web3Service;
