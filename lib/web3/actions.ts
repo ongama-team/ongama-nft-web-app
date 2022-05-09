@@ -12,6 +12,11 @@ class Web3Actions {
     const trustWalletSigner = await web3Instance.walletConnectConnector();
     console.log("trust wallet Singer", trustWalletSigner);
   }
+
+  public async ConnectCoinBaseWallet() {
+    const signer = await web3Instance.coinBaseConnect();
+    console.log("Coinbase ", signer);
+  }
 }
 
 const web3Actions = new Web3Actions();
