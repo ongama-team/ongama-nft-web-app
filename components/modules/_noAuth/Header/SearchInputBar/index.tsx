@@ -1,12 +1,14 @@
 import React, { ChangeEventHandler, useState } from "react";
-import { CrossVector, SearchVector } from "../../../__modules__/_vectors";
+import { CrossVector, VSearch } from "../../../__modules__/_vectors";
 
 const SearchInputBar = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
-  const onInputSeachChange: ChangeEventHandler<HTMLInputElement> = (event) => {
-    const { value } = event.target;
+  const onInputSeachChange: ChangeEventHandler<HTMLInputElement> = ({
+    target,
+  }) => {
+    const { value } = target;
     setInputValue(value);
   };
 
@@ -28,7 +30,7 @@ const SearchInputBar = () => {
         isInputFocused && "bg-white shadow-md"
       } min-lg:hidden`}
     >
-      <SearchVector className="text-gray-500 h-6 w-6" />
+      <VSearch className="text-gray-500 h-6 w-6" />
       <input
         type="search"
         onChange={onInputSeachChange}

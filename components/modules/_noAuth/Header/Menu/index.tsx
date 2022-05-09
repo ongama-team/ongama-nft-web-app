@@ -1,5 +1,5 @@
 import React from "react";
-import { DotHorizontalVector } from "../../../__modules__/_vectors";
+import { VDotHorizontal } from "../../../__modules__/_vectors";
 
 const Menu = () => {
   const onDotVectorClick = () => {
@@ -15,7 +15,7 @@ const Menu = () => {
         <li className="min-lg:px-3">Activity</li>
         <li className="hidden min-xl:block mx-3">
           <button onClick={onDotVectorClick}>
-            <DotHorizontalVector className="h-6 w-6" />
+            <VDotHorizontal className="h-6 w-6" />
           </button>
         </li>
         <li className="min-xl:hidden">How it works</li>

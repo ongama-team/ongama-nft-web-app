@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import StaticMode from "./StaticMode";
 import {
-  ChevronLeftVector,
-  ChevronRightVector,
+  VChevronLeft,
+  VChevronRight,
 } from "../../../modules/__modules__/_vectors";
 import StoryPresentation from "./StoryPresentation";
 import useSideScroll from "../../../../lib/hooks/useSideScroll";
@@ -35,7 +35,7 @@ const Presentation = () => {
         className="z-10 w-fit h-fit rounded-full -mr-4 mobile:hidden"
         onClick={onScrollLeft}
       >
-        <ChevronLeftVector className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
+        <VChevronLeft className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
       </button>
 
       <div
@@ -51,7 +51,7 @@ const Presentation = () => {
         className="z-10 w-fit h-fit rounded-full -ml-5 mobile:hidden"
         onClick={onScrollRight}
       >
-        <ChevronRightVector className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
+        <VChevronRight className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
       </button>
     </div>
   );

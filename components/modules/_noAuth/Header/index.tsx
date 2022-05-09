@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  SunVector,
-  MoonVector,
-  SearchVector,
-  MenuVector,
-} from "../../__modules__/_vectors";
+import { VSun, MoonVector, VSearch, VMenu } from "../../__modules__/_vectors";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
 
@@ -28,7 +23,7 @@ const Header = () => {
       </div>
       <div className="flex items-center">
         <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-lg:block hidden">
-          <SearchVector className="w-6 h-6" />
+          <VSearch className="w-6 h-6" />
         </button>
         <button className="border-none px-2 py-3 mx-1 w-20 rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-IBEM_Plex_Sans min-md:hidden">
           Create
@@ -43,11 +38,11 @@ const Header = () => {
           {isLightTheme ? (
             <MoonVector className="w-5 h-5" />
           ) : (
-            <SunVector className="w-5 h-5" />
+            <VSun className="w-5 h-5" />
           )}
         </button>
         <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block hidden">
-          <MenuVector className="w-6-h-6" />
+          <VMenu className="w-6-h-6" />
         </button>
       </div>
     </div>
