@@ -14,7 +14,7 @@ module.exports = {
         "min-md": { max: "838px" },
       },
       fontFamily: {
-        IBEM_Plex_Sans: ['"IBM Plex Sans"', "sans-serif"],
+        ibemPlexSans: ['"IBM Plex Sans"', "sans-serif"],
       },
     },
   },

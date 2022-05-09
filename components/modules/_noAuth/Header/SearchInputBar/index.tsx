@@ -38,7 +38,7 @@ const SearchInputBar = () => {
         onBlur={onInputSearchBlur}
         value={inputValue}
         placeholder="Collections, items, user"
-        className="w-full py-2  bg-transparent placeholder:text-gray-500 outline-none px-2 font-IBEM_Plex_Sans "
+        className="w-full py-2  bg-transparent placeholder:text-gray-500 outline-none px-2 font-ibemPlexSans "
       />
       {inputValue && (
         <div onClick={cleanInputVlaue}>

@@ -8,7 +8,7 @@ const Menu = () => {
 
   return (
     <div className="min-md:hidden block">
-      <ul className="flex justify-between font-IBEM_Plex_Sans mr-2 min-lg:mx-5 items-center text-gray-400">
+      <ul className="flex justify-between font-ibemPlexSans mr-2 min-lg:mx-5 items-center text-gray-400">
         <li className="min-lg:pr-3">Explore</li>
         <li className="min-lg:px-3">My Profile</li>
         <li className="min-lg:px-3">Following</li>
