@@ -9,7 +9,6 @@ import useSideScroll from "../../../../lib/hooks/useSideScroll";
 
 const Presentation = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
-  const imageRef = useRef(null);
   const sideScroll = useSideScroll();
 
   const onScrollLeft = () => {
