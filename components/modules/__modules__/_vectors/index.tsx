@@ -13,6 +13,10 @@ import {
   HiChevronLeft as VChevronLeft,
 } from "react-icons/hi";
 
+import DotsVector from "./dotsVector";
+import Ethereum from "./ethereumVector";
+import HeartVector from "./heartVector";
+
 export {
   CoinBaseVector,
   CrossVector,
@@ -20,6 +24,9 @@ export {
   TrustWalletVector,
   WalletConnectVector,
   MoonVector,
+  DotsVector,
+  HeartVector,
+  Ethereum,
   VMenu,
   VChevronLeft,
   VChevronRight,
