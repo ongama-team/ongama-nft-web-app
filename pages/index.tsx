@@ -5,6 +5,7 @@ import { useState } from "react";
 import ConnectWallets from "../components/modules/__auth";
 import { CrossVector } from "../components/modules/__modules__/_vectors/";
 import { web3Actions } from "../lib/web3";
+import TopDailyCollectors from "../components/top_daily_collections";
 
 const Home: NextPage = () => {
   const [openWalletMenu, setOpenWalletMenu] = useState(true);
