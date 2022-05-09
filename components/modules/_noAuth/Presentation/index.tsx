@@ -9,6 +9,7 @@ import useSideScroll from "../../../../lib/hooks/useSideScroll";
 
 const Presentation = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
+  const imageRef = useRef(null);
   const sideScroll = useSideScroll();
 
   const onScrollLeft = () => {
@@ -30,7 +31,7 @@ const Presentation = () => {
   };
 
   return (
-    <div className="mt-20 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5">
+    <div className="mt-24 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5">
       <button
         className="z-10 w-fit h-fit rounded-full -mr-4 mobile:hidden"
         onClick={onScrollLeft}
