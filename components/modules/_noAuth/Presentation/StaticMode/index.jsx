@@ -19,7 +19,7 @@ const StaticMode = () => {
                 className="rounded-2xl object-fill md:h-[inherit] md:w-auto h-32 w-32"
               />
             </div>
-            <p className="absolute top-0 text-white px-5 py-5 text-sm w-full font-ibmPlexSans transition-all ease-in-out duration-500 bg-black bg-opacity-40 w-full rounded-t-2xl">
+            <p className="absolute top-0 text-white px-5 py-5 text-sm w-full font-ibmPlexSans transition-all ease-in-out duration-500 bg-black bg-opacity-40 rounded-t-2xl text-shadow">
               {staticImage.name}
             </p>
           </div>

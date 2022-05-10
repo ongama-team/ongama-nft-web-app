@@ -15,6 +15,10 @@
   scrollbar-width: none;
 }
 
+.text-shadow {
+  text-shadow: rgb(255, 220, 80) 1px 0 10px;
+}
+
 .presentation-grid {
   display: grid;
   grid-template-columns: 0.5fr 2fr;
