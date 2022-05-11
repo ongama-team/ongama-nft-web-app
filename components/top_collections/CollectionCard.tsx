@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { formatToDollars } from "../../helpers/numberFormatter";
 
 type Props = {
   rank: number;
@@ -13,13 +14,6 @@ const CollectionCard: FC<Props> = ({
   collectionName,
   volumeTraded,
 }) => {
-  const formatToDollars = (number: number): string => {
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(number);
-  };
-
   return (
     <div className=" flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2">
       <span className="text-gray-400">{rank}</span>
