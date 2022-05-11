@@ -49,6 +49,7 @@ class Web3Service {
     const connectCoinbaseWallet = await connectCoinbase();
     return connectCoinbaseWallet;
   }
+
   public async walletConnectConnector() {
     await connector.enable();
     const provider = new ethers.providers.Web3Provider(connector);

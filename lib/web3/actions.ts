@@ -13,8 +13,7 @@ class Web3Actions {
     console.log("trust wallet Singer", trustWalletSigner);
   }
 
-  public async coinBaseWallet() {
-    const web3Instance = new Web3Service();
+  public async ConnectCoinBaseWallet() {
     const signer = await web3Instance.coinBaseConnect();
     console.log("Coinbase ", signer);
   }
