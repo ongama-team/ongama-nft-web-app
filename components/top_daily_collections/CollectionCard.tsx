@@ -1,4 +1,4 @@
-function CollectionCard() {
+const CollectionCard = () => {
   return (
     <div className=" flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2">
       <span className="text-gray-400">1</span>
@@ -25,6 +25,6 @@ function CollectionCard() {
       </div>
     </div>
   );
-}
+};
 
 export default CollectionCard;

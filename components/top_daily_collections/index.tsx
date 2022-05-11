@@ -1,6 +1,6 @@
 import CollectionCard from "./CollectionCard";
 
-function index() {
+const index = () => {
   return (
     <div>
       <div className="font-bold text-xl text-white font-plex md:text-2xl lg:text-3xl px-8">
@@ -35,6 +35,6 @@ function index() {
       </div>
     </div>
   );
-}
+};
 
 export default index;
