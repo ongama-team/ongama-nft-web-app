@@ -1,11 +1,32 @@
-const CollectionCard = () => {
+import { FC } from "react";
+
+type Props = {
+  rank: number;
+  collectionProfile: string;
+  collectionName: string;
+  volumeTraded: number;
+};
+
+const CollectionCard: FC<Props> = ({
+  rank,
+  collectionProfile,
+  collectionName,
+  volumeTraded,
+}) => {
+  const formatToDollars = (number: number): string => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(number);
+  };
+
   return (
     <div className=" flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2">
-      <span className="text-gray-400">1</span>
+      <span className="text-gray-400">{rank}</span>
       <div className="flex">
         <section className="relative">
           <img
-            src="https://i.insider.com/61b36edd0e2e8d001846a6c7?width=962&format=jpeg"
+            src={collectionProfile}
             alt="profile"
             className="h-12 w-12 rounded-full ml-4 mr-4"
           />
@@ -17,9 +38,9 @@ const CollectionCard = () => {
         </section>
 
         <section>
-          <h4 className="text-white text-sm font-bold">MutantApeYachtClub</h4>
+          <h4 className="text-white text-sm font-bold">{collectionName}</h4>
           <span className="text-sm font-semibold text-gray-400">
-            $9,015,192
+            {formatToDollars(volumeTraded)}
           </span>
         </section>
       </div>
