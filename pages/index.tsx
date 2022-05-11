@@ -25,7 +25,7 @@ const Home: NextPage = () => {
         />
       </Head>
       <LandingPage />
-      <div className="h-full flex flex-col justify-center items-center bg-slate-700">
+      <div className="h-full flex flex-col justify-center items-center">
         <h1 className="text-white text-4xl mb-4">ONGAMA NFT MARKET</h1>
         <div
           className={`relative ${
@@ -41,7 +41,7 @@ const Home: NextPage = () => {
               onClick={() => {
                 setOpenWalletMenu((prev) => !prev);
               }}
-              className="rounded-full bg-white p-2 "
+              className="rounded-full p-2 "
             >
               <CrossVector className="h-4 w-4" />
             </Button>
@@ -53,17 +53,22 @@ const Home: NextPage = () => {
         </div>
 
         <Button
+          type="primary"
           onClick={() => {
             setOpenWalletMenu((prev) => !prev);
           }}
           className={` ${
             openWalletMenu ? "" : "hidden"
-          } text-xl flex justify-center items-center  rounded-md text-white font-medium `}
+          } text-xl flex justify-center items-center  rounded-md text-black font-medium `}
         >
           Connect to your Wallet
         </Button>
 
-        <Button className="text-white" onClick={web3Actions.connectWallet}>
+        <Button
+          type="primary"
+          className="text-black my-5"
+          onClick={web3Actions.connectWallet}
+        >
           Connect Wallet
         </Button>
       </div>
