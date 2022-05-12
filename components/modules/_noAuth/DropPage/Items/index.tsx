@@ -3,12 +3,7 @@ import Card from "../../../__modules__/Card";
 
 const Items = () => {
   return (
-    <div className="mt-10">
-      <ul className="flex border-b border-gray-200 justify-center font-ibmPlexSans">
-        <li className="px-4 py-4  border-b-2 border-black h-full">Items</li>
-        <li className="px-4 py-4 text-gray-400">Activity</li>
-        <li className="px-4 py-4 text-gray-400">Stats</li>
-      </ul>
+    <div>
       <div className="flex flex-wrap justify-center my-5">
         {Array.from({ length: 10 }).map((_, index) => {
           return (
