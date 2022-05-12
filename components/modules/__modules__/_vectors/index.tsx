@@ -12,6 +12,7 @@ import {
   HiChevronRight as VChevronRight,
   HiChevronLeft as VChevronLeft,
 } from "react-icons/hi";
+import { FaEthereum as VEthereum } from "react-icons/fa";
 
 import DotsVector from "./dotsVector";
 import Ethereum from "./ethereumVector";
@@ -33,4 +34,5 @@ export {
   VDotHorizontal,
   VSearch,
   VSun,
+  VEthereum,
 };

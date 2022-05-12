@@ -1,9 +1,6 @@
 import React, { useRef } from "react";
 import StaticMode from "./StaticMode";
-import {
-  VChevronLeft,
-  VChevronRight,
-} from "../../../modules/__modules__/_vectors";
+import { VChevronLeft, VChevronRight } from "../../__modules__/_vectors";
 import StoryPresentation from "./StoryPresentation";
 import useSideScroll from "../../../../lib/hooks/useSideScroll";
 
