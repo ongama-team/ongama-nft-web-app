@@ -1,49 +1,72 @@
+/* eslint-disable @next/next/no-img-element */
 import { DotsVector, Ethereum, HeartVector } from "../_vectors";
-import Image from "next/image";
-import pic from "../../assets/pic1.png";
-import nft from "../../assets/nft.png";
+import { FC } from "react";
 
-function Card() {
+interface IProps {
+  nftUrl: string;
+  nftPrice: string;
+  nftName: string;
+  ownerProfile: string;
+  ownerName: string;
+  likes: number;
+  auction: string;
+}
+
+const Card: FC<IProps> = ({
+  nftUrl,
+  nftName,
+  nftPrice,
+  likes,
+  auction,
+  ownerName,
+  ownerProfile,
+}) => {
   return (
-    <div className="flex w-[500px] shadow-lg mx-auto p-8 rounded-xl flex-col bg-white">
-      <div className="flex mx-4 items-center justify-between">
-        <div className="rounded-full overflow-hidden w-12 h-12">
-          <Image src={pic} alt="profile" className="w-full object-cover" />
+    <div className="flex w-full shadow-lg mx-auto p-5 rounded-xl flex-col bg-white">
+      <div className="flex mx-1 items-center justify-between">
+        <div className="rounded-full overflow-hidden w-7 h-7">
+          <img
+            src={ownerProfile}
+            alt={ownerName}
+            className="w-full object-cover"
+          />
         </div>
-        <DotsVector className="w-8 h-8 opacity-70" />
+        <DotsVector className="w-4 h-4 opacity-70" />
       </div>
 
       <div className="rounded-3xl mt-4 overflow-hidden">
-        <Image
+        <img
           width={500}
           height={500}
-          src={nft}
-          alt="nft"
+          src={nftUrl}
+          alt={nftName}
           className="object-cover"
         />
       </div>
 
-      <div className="mt-4 flex justify-between">
-        <p className="text-3xl font-bold">Derick #3214</p>
-        <Ethereum className="h-10 w-10" />
+      <div className="mt-3 flex justify-between">
+        <p className="text-sm font-bold">{nftName}</p>
+        <Ethereum className="h-6 w-6" />
       </div>
       <div className="mt-4 flex items-end justify-between">
         <div>
-          <p className="text-3xl font-bold">
-            2.5 ETH{" "}
-            <label className="text-gray-500  text-3xl font-bold">1/1</label>
+          <p className="text-sm font-bold">
+            {nftPrice} ETH
+            <span className="text-gray-500 text-sm font-bold mx-1">
+              {auction}
+            </span>
           </p>
-          <button className="text-blue-500 font-bold text-3xl pt-4">
+          <button className="text-blue-500 font-bold text-sm pt-1">
             Buy now
           </button>
         </div>
         <div className="flex opacity-80">
-          <HeartVector className="h-10 w-10" />
-          <p className="text-3xl ml-2 font-bold">3</p>
+          <HeartVector className="h-6 w-6" />
+          <p className="text-xl ml-2 font-bold">{likes}</p>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Card;

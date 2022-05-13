@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { VSun, MoonVector, VSearch, VMenu } from "../../__modules__/_vectors";
+import {
+  VSun,
+  MoonVector,
+  VSearch,
+  VMenu,
+} from "@components/modules/__modules__/_vectors";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
 

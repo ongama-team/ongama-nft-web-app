@@ -3,9 +3,9 @@ import StaticMode from "./StaticMode";
 import {
   VChevronLeft,
   VChevronRight,
-} from "../../../modules/__modules__/_vectors";
+} from "@components/modules/__modules__/_vectors";
 import StoryPresentation from "./StoryPresentation";
-import useSideScroll from "../../../../lib/hooks/useSideScroll";
+import useSideScroll from "@lib/hooks/useSideScroll";
 
 const Presentation = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);
