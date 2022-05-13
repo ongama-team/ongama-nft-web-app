@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;500&family=Syne+Mono&display=swap");
 
 .b-4 {
   border-width: 4px;
