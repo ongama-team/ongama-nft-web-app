@@ -1,7 +1,7 @@
 const minifyAddress = (
   address: string,
-  startingCharacters: number,
-  endingCharacters: number
+  startingCharacters = 6,
+  endingCharacters = 3
 ): string => {
   return `${address.slice(0, startingCharacters)}...${address.slice(
     address.length - endingCharacters
