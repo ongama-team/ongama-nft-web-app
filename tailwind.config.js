@@ -5,8 +5,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        sm: "649px",
+        md: "650px",
+        mobile: { max: "649px" },
+        "min-xl": { max: "1280px" },
+        "min-lg": { max: "1024px" },
+        "min-md": { max: "838px" },
+      },
       fontFamily: {
-        plex: ["IBM Plex Sans", "sans-serif"],
+        ibmPlexSans: ['"IBM Plex Sans"', "sans-serif"],
       },
     },
   },

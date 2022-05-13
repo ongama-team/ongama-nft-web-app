@@ -7,11 +7,28 @@
   border-width: 4px;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+.text-shadow {
+  text-shadow: rgb(255, 220, 80) 1px 0 10px;
+}
+
+.presentation-grid {
+  display: grid;
+  grid-template-columns: 0.5fr 2fr;
+  gap: 10px;
+}
+
+@media screen and (max-width: 658px) {
+  .presentation-grid {
+    display: flex;
+    flex-direction: column;
+  }
 }
