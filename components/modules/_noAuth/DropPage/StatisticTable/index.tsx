@@ -1,13 +1,19 @@
-import React from "react";
-import dummy_stat from "./dummy_stat";
-import ConvertNumber from "../../../../../lib/helper/ConvertNumber";
+import convertNumber from "@lib/helper/covertNumber";
+import React, { FC } from "react";
 
-const StatisticTable = () => {
-  const { convert } = ConvertNumber;
+interface IProps {
+  statisticDtata: {
+    title: string;
+    value: number;
+    type: string;
+  }[];
+}
+
+const StatisticTable: FC<IProps> = ({ statisticDtata }) => {
   return (
     <div className="flex flex-col justify-center w-full">
       <div className="flex flex-wrap my-6 mobile:my-2 mx-auto rounded-2xl justify-center font-ibmPlexSans">
-        {dummy_stat.map((stat, index) => {
+        {statisticDtata.map((stat, index) => {
           return (
             <div
               key={index}
@@ -16,8 +22,8 @@ const StatisticTable = () => {
               <p className="text-gray-400">{stat.title}</p>
               <p className="font-semibold">
                 {stat.type === "price"
-                  ? `$${convert(stat.value)}`
-                  : `${convert(stat.value)}`}
+                  ? `$${convertNumber(stat.value)}`
+                  : `${convertNumber(stat.value)}`}
               </p>
             </div>
           );

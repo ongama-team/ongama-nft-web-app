@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Activity from "./Activity";
 import AvatarAndCover from "./AvatarAndCover";
+import dummy_profile from "./AvatarAndCover/dummy_profile";
 import Items from "./Items";
 import StatisticTable from "./StatisticTable";
 
@@ -9,8 +10,8 @@ const DropPage = () => {
 
   return (
     <div className="flex flex-col justify-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto px-5 mt-24">
-      <AvatarAndCover />
-      <StatisticTable />
+      <AvatarAndCover {...dummy_profile} />
+      <StatisticTable statisticDtata={dummy_profile.stat} />
       <div className="mt-10">
         <ul className="flex border-b border-gray-200 justify-center font-ibmPlexSans">
           <li

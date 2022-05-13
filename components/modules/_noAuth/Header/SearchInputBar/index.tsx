@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, useState } from "react";
-import { CrossVector, VSearch } from "../../../__modules__/_vectors";
+import { CrossVector, VSearch } from "@components/modules/__modules__/_vectors";
 
 const SearchInputBar = () => {
   const [isInputFocused, setIsInputFocused] = useState(false);
