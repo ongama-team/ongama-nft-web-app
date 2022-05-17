@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { DotsVector, Ethereum, HeartVector } from "../_vectors";
+import { DotsVector, Ethereum, HeartVector } from "../../_vectors";
 import { FC } from "react";
 
 interface IProps {

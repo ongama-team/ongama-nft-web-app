@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { dummy_data } from "../../Presentation/dummy_data";
+import { dummy_data } from "@components/modules/_noAuth/Presentation/dummy_data";
 
 const Activity = () => {
   const { staticImages } = dummy_data;
