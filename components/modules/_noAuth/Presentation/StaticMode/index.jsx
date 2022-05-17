@@ -5,7 +5,7 @@ import { dummy_data } from "../dummy_data";
 const StaticMode = () => {
   const { staticImages } = dummy_data;
   return (
-    <div className="md:grid md:grid-rows-2 gap-3 gap-y-3 md:grid-flow-col grid-flow-col-dense grid grid-rows-1 min-md:overflow-x-auto min-md:scrollbar-hide">
+    <div className="md:grid md:grid-rows-2 gap-3 gap-y-3 md:grid-flow-col grid-flow-col-dense grid grid-rows-1 min-md:overflow-x-auto min-md:scrollbar-hide scrollbar-hide">
       {staticImages.map((staticImage, index) => {
         return (
           <div

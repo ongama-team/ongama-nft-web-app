@@ -1,7 +1,7 @@
-import CollectionCard from "./CollectionCard";
+import CollectionCard from "../../__modules__/Card/CollectionCard";
 
-const index = () => {
-  const topCollections = new Array(8).fill({
+const TopCollection = () => {
+  const topCollections = new Array(15).fill({
     id: Math.random() * Math.random(), //this will act as a key while looping through the array
     rank: 1,
     collectionName: "MutantApeYatchClub",
@@ -11,21 +11,25 @@ const index = () => {
   });
 
   return (
-    <div>
-      <div className="font-bold text-xl text-white font-ibmPlexSans md:text-2xl lg:text-3xl px-8">
+    <div className="flex flex-col justify-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto px-5 my-10">
+      <div className="font-bold text-xl text-black font-ibmPlexSans md:text-2xl lg:text-3xl">
         Top collections in
         <select
           name="days"
           className="bg-transparent font-bold border-none outline-none text-blue-500 px-1"
         >
-          <option defaultChecked value="1">
+          <option defaultChecked value="1" className="text-sm border-none py-2">
             1 day
           </option>
-          <option value="7"> 7 days</option>
-          <option value="30">30 days</option>
+          <option value="7" className="text-black text-sm  py-2">
+            7 days
+          </option>
+          <option value="30" className="text-black text-sm py-2">
+            30 days
+          </option>
         </select>
       </div>
-      <div className="h-72 flex flex-col flex-wrap font-ibmPlexSans overflow-x-scroll  px-8 py-6 scrollbar-hide">
+      <div className="h-72 flex flex-col flex-wrap font-ibmPlexSans overflow-x-scroll px-0 py-6 scrollbar-hide">
         {topCollections?.map(
           ({ id, rank, collectionName, collectionProfile, volumeTraded }) => (
             <CollectionCard
@@ -42,4 +46,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default TopCollection;

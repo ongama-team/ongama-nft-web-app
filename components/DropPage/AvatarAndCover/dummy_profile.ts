@@ -1,5 +1,4 @@
-import { dummy_data } from "../../Presentation/dummy_data";
-
+import { dummy_data } from "@components/modules/_noAuth/Presentation/dummy_data";
 const { staticImages } = dummy_data;
 
 const dummy_profile = {

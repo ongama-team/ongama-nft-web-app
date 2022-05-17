@@ -30,12 +30,12 @@ const Presentation = () => {
   };
 
   return (
-    <div className="my-24 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5">
+    <div className="mt-24 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5">
       <button
         className="z-10 w-fit h-fit rounded-full -mr-4 mobile:hidden"
         onClick={onScrollLeft}
       >
-        <VChevronLeft className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
+        <VChevronLeft className="bg-white px-2 py-2 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
       </button>
 
       <div
@@ -51,7 +51,7 @@ const Presentation = () => {
         className="z-10 w-fit h-fit rounded-full -ml-5 mobile:hidden"
         onClick={onScrollRight}
       >
-        <VChevronRight className="bg-white px-2 py-2 z-10 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
+        <VChevronRight className="bg-white px-2 py-2 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
       </button>
     </div>
   );

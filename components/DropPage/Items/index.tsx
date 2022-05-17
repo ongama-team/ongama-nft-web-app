@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "@components/modules/__modules__/Card";
-import { dummy_data } from "../../Presentation/dummy_data";
+import Card from "@components/modules/__modules__/Card/NftCard";
+import { dummy_data } from "../../modules/_noAuth/Presentation/dummy_data";
 
 const Items = () => {
   const { staticImages } = dummy_data;
