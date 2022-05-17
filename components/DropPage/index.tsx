@@ -9,12 +9,18 @@ import StatisticTable from "./StatisticTable";
 
 const DropPage = () => {
   const [activeMenu, setActiveMenu] = useState("items");
+  const { avatar, profileImage, name, address } = dummy_profile;
 
   return (
     <>
       <Header />
       <div className="flex flex-col justify-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto px-5 mt-24 pb-10">
-        <AvatarAndCover {...dummy_profile} />
+        <AvatarAndCover
+          avatar={avatar}
+          profileImage={profileImage}
+          name={name}
+          address={address}
+        />
         <StatisticTable statisticDtata={dummy_profile.stat} />
         <div className="mt-10">
           <ul className="flex border-b border-gray-200 justify-center font-ibmPlexSans">
