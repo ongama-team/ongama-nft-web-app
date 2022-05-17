@@ -20,7 +20,6 @@ const Header = () => {
   };
 
   const toggleWallets = () => {
-    console.log("wallets state", isWalletsDisplayed);
     setIsWalletsDisplayed(!isWalletsDisplayed);
   };
 
