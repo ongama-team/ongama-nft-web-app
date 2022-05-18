@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { VDotHorizontal } from "../../../__modules__/_vectors";
 
@@ -10,7 +11,11 @@ const Menu = () => {
     <div className="min-md:hidden block">
       <ul className="flex justify-between font-ibmPlexSans mr-2 min-lg:mx-5 items-center text-gray-400">
         <li className="min-lg:pr-3">Explore</li>
-        <li className="min-lg:px-3">My Profile</li>
+        <Link href="/profile" passHref>
+          <li className="min-lg:px-3 hover:text-gray-800 hover:cursor-pointer">
+            My Profile
+          </li>
+        </Link>
         <li className="min-lg:px-3">Following</li>
         <li className="min-lg:px-3">Activity</li>
         <li className="hidden min-xl:block mx-3">

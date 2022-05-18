@@ -4,8 +4,11 @@ import MetaMaskVector from "./metamaskVector";
 import TrustWalletVector from "./trustWalletVector";
 import WalletConnectVector from "./walletconnectVector";
 import MoonVector from "./moonVector";
+import ShareVector from "./shareVector";
+
 import {
   HiOutlineMenuAlt4 as VMenu,
+  HiGlobeAlt as VGlobe,
   HiOutlineSun as VSun,
   HiOutlineSearch as VSearch,
   HiOutlineDotsHorizontal as VDotHorizontal,
@@ -28,6 +31,7 @@ export {
   DotsVector,
   HeartVector,
   Ethereum,
+  ShareVector,
   VMenu,
   VChevronLeft,
   VChevronRight,
@@ -35,4 +39,5 @@ export {
   VSearch,
   VSun,
   VEthereum,
+  VGlobe,
 };

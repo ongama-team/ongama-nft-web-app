@@ -16,6 +16,7 @@ export const dummy_data = {
   staticImages: [
     {
       name: "Monkey King",
+
       url: "https://cdn.vox-cdn.com/thumbor/2xj1ySLIz1EZ49NvSsPzq8Itjyg=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/23084330/bored_ape_nft_accidental_.jpg",
     },
     {
@@ -57,6 +58,26 @@ export const dummy_data = {
     {
       name: "Monkey King",
       url: "https://lh3.googleusercontent.com/FqqHDAgya7fdEyqmo31A1n7d3kKiJlSRUEZ2k3EgsB4yf5TO5pCK6f8B1Px5r7MyrTk7NM5hLK0QM9n7E8KYQRX_PGLDnyaIGkwn9w=w600",
+    },
+    {
+      name: "Satoshi Ns",
+      nft: "0xdab0c893c1e5488302971efefb6cc399085f640c",
+      bio: "Kristel Bechara NFT Artwork Satoshi-NSekki ",
+      url: "https://img.rarible.com/prod/image/upload/t_avatar_big/prod-users/0xdab0c893c1e5488302971efefb6cc399085f640c/avatar/QmVLRyZmfax211HjEqBcorUf5mPM2DQpWMjDH1Ydn3X8Ho",
+    },
+  ],
+  coverImages: [
+    {
+      name: "Cover King",
+      url: "https://rarible.mypinata.cloud/ipfs/QmZZLe2EbtCWfiTdTHJhH3Gv4gHJCBGsK4dzMCLfpShewe",
+    },
+    {
+      name: "Cover King",
+      url: "https://rarible.mypinata.cloud/ipfs/QmTC1iN4NP8Fpvm8nADBn3Xa6ei7SYx9VhVXh1511gHJ4o",
+    },
+    {
+      name: "Cover King",
+      url: "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=s2500",
     },
   ],
 };

@@ -7,6 +7,7 @@ import {
 } from "@components/modules/__modules__/_vectors";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
+import Link from "next/link";
 
 const Header = () => {
   const [isLightTheme, setIsLightTheme] = useState(true);
@@ -16,11 +17,13 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-10">
+    <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 shadow-md right-0 backdrop-blur-lg z-10">
       <div>
-        <p className="flex items-center text-3xl font-ibmPlexSans">
-          <span className="text-blue-500">O</span>ngama
-        </p>
+        <Link passHref href="/">
+          <p className="flex items-center text-3xl font-ibmPlexSans hover:cursor-pointer">
+            <span className="text-blue-500">O</span>ngama
+          </p>
+        </Link>
       </div>
       <div className="grid grid-cols-2 min-lg:flex min-lg:justify-start justify-center items-center w-full">
         <SearchInputBar />
