@@ -43,9 +43,7 @@ const Header = () => {
     const memorizedWalletAddress = LocalStorage.getItem(
       "ongama_signer_address"
     );
-    memorizedWalletAddress
-      ? setWalletAddress(memorizedWalletAddress)
-      : setWalletAddress("");
+    setWalletAddress(memorizedWalletAddress ? memorizedWalletAddress : "");
   }, [setWalletAddress]);
 
   return (
