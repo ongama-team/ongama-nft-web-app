@@ -22,5 +22,5 @@ connector.on("chainChanged", (chainId: number) => {
 
 // Subscribe to session disconnection
 connector.on("disconnect", (code: number, reason: string) => {
-  console.log(code, reason);
+  LocalStorage.removeItem("ongama_signer_address");
 });

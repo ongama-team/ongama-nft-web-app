@@ -1,21 +1,39 @@
 import Web3Service from "./service";
+import LocalStorage from "@lib/helper/LocalStorage";
 
 const web3Instance = new Web3Service();
 
 class Web3Actions {
   public async connectBrowserWallet() {
-    const signer = await web3Instance.connect();
-    console.log(signer);
+    let signer;
+    try {
+      signer = await web3Instance.connect();
+      LocalStorage.setItem("ongama_signer_address", signer as string);
+      return signer;
+    } catch {
+      return signer;
+    }
   }
 
   public async connectTrustOrConnectWallet() {
-    const trustWalletSigner = await web3Instance.walletConnectConnector();
-    console.log("trust wallet Singer", trustWalletSigner);
+    let signer;
+    try {
+      signer = await (await web3Instance.walletConnectConnector()).getAddress();
+      return signer;
+    } catch {
+      return signer;
+    }
   }
 
   public async connectCoinBaseWallet() {
-    const signer = await web3Instance.coinBaseConnect();
-    console.log("Coinbase ", signer);
+    let signer;
+    try {
+      signer = await web3Instance.coinBaseConnect();
+      LocalStorage.setItem("ongama_signer_address", signer!);
+      return signer;
+    } catch {
+      return signer;
+    }
   }
 }
 
