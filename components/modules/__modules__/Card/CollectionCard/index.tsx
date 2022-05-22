@@ -1,5 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import { FC } from "react";
-import { formatToDollars } from "../../helpers/numberFormatter";
+import { formatToDollars } from "../../../../../helpers/numberFormatter";
 
 type Props = {
   rank: number;
@@ -32,7 +33,7 @@ const CollectionCard: FC<Props> = ({
         </section>
 
         <section>
-          <h4 className="text-white text-sm font-bold">{collectionName}</h4>
+          <h4 className="text-black text-sm font-bold">{collectionName}</h4>
           <span className="text-sm font-semibold text-gray-400">
             {formatToDollars(volumeTraded)}
           </span>

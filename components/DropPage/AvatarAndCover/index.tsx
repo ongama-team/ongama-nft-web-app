@@ -4,18 +4,16 @@ import minifyAddress from "@lib/helper/minifyAddress";
 import { VEthereum } from "@components/modules/__modules__/_vectors";
 
 interface IProps {
-  avatar: string;
-  profileImage: string;
-  name: string;
-  address: string;
+  profile: {
+    avatar: string;
+    profileImage: string;
+    name: string;
+    address: string;
+  };
 }
 
-const AvatarAndCover: FC<IProps> = ({
-  avatar,
-  profileImage,
-  name,
-  address,
-}) => {
+const AvatarAndCover: FC<IProps> = ({ profile }) => {
+  const { avatar, profileImage, name, address } = profile;
   const minifiedAddress = minifyAddress(address, 6, 3);
 
   return (
