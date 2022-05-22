@@ -1,5 +1,4 @@
 import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
-import Web3 from "web3";
 import { CHAINS_ENV } from "../../config/chains";
 
 const APP_NAME = "ongama-nft-marketplace";
@@ -20,7 +19,6 @@ export const connectCoinbase = async () => {
       DEFAULT_CHAIN_ID
     );
 
-    const web3 = new Web3(ethereum as any);
     const accounts: string[] = await (ethereum as any).request({
       method: "eth_requestAccounts",
     });

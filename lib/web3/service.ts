@@ -51,10 +51,14 @@ class Web3Service {
   }
 
   public async walletConnectConnector() {
-    await connector.enable();
-    const provider = new ethers.providers.Web3Provider(connector);
-    const signer = provider.getSigner();
-    return signer;
+    try {
+      await connector.enable();
+      const provider = new ethers.providers.Web3Provider(connector);
+      const signer = provider.getSigner();
+      return signer;
+    } catch (error) {
+      console.log("Trust wallet error", error);
+    }
   }
 }
 export default Web3Service;

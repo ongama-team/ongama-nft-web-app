@@ -13,7 +13,7 @@ type openMenuT = {
 };
 
 const ConnectWalletsModal = () => {
-  const [editMode, setEditMode] = useState(false);
+  const [authMode, setAuthMode] = useState(false);
   const [startProcess, setStartProcess] = useState(false);
 
   const {
@@ -22,8 +22,8 @@ const ConnectWalletsModal = () => {
     connectBrowserWallet,
   } = web3Actions;
 
-  const onEditMode = () => {
-    setEditMode((prev) => !prev);
+  const onAuthMode = () => {
+    setAuthMode((prev) => !prev);
   };
 
   return (
@@ -38,8 +38,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"coinBase"}
           processing={startProcess}
-          editMode={editMode}
-          onEditMode={onEditMode}
+          authMode={authMode}
+          onAuthMode={onAuthMode}
         >
           <div
             onClick={connectCoinBaseWallet}
@@ -52,8 +52,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"MetaMask"}
           processing={startProcess}
-          editMode={editMode}
-          onEditMode={onEditMode}
+          authMode={authMode}
+          onAuthMode={onAuthMode}
         >
           <div
             onClick={connectBrowserWallet}
@@ -66,8 +66,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"Trust Wallet"}
           processing={startProcess}
-          editMode={editMode}
-          onEditMode={onEditMode}
+          authMode={authMode}
+          onAuthMode={onAuthMode}
         >
           <div
             onClick={connectTrustOrConnectWallet}
@@ -80,8 +80,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"Wallet Connect"}
           processing={startProcess}
-          editMode={editMode}
-          onEditMode={onEditMode}
+          authMode={authMode}
+          onAuthMode={onAuthMode}
         >
           <div
             onClick={connectTrustOrConnectWallet}
