@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { FC } from "react";
 import { formatToDollars } from "../../../../../helpers/numberFormatter";
-import VerfiedImg from "../../../../../public/images/rarible-checkmark.png";
+import { VerifiedImg } from "@lib/Resources";
 
 type Props = {
   rank: number;
@@ -27,7 +27,7 @@ const CollectionCard: FC<Props> = ({
             className="h-12 w-12 rounded-full ml-4 mr-4"
           />
           <img
-            src="/images/rarible-checkmark.png"
+            src={VerifiedImg}
             alt="checkmark"
             className="h-8 absolute bottom-[-8px] right-0"
           />

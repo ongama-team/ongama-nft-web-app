@@ -6,6 +6,7 @@ import {
   VSearch,
   VMenu,
 } from "@components/modules/__modules__/_vectors";
+import Link from "next/link";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -49,9 +50,11 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-20">
       <div className="cursor-pointer">
-        <p className="flex items-center text-3xl font-ibmPlexSans">
-          <span className="text-blue-500">O</span>ngama
-        </p>
+        <Link href="/">
+          <p className="flex items-center text-3xl font-ibmPlexSans">
+            <span className="text-blue-500">O</span>ngama
+          </p>
+        </Link>
       </div>
       <div className="grid grid-cols-2 min-lg:flex min-lg:justify-start justify-center items-center w-full">
         <SearchInputBar />
