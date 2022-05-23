@@ -37,7 +37,7 @@ const ConnectWalletsModal = () => {
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress(signer);
-    onEditMode();
+    onAuthMode();
   };
 
   const onConnectCoinBaseWallet = async () => {
@@ -45,7 +45,7 @@ const ConnectWalletsModal = () => {
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress(signer);
-    onEditMode();
+    onAuthMode();
   };
 
   const onConnectBrowserWallet = async () => {
@@ -53,7 +53,7 @@ const ConnectWalletsModal = () => {
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress(signer as string);
-    onEditMode();
+    onAuthMode();
   };
 
   return (
