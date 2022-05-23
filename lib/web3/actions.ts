@@ -18,7 +18,7 @@ class Web3Actions {
   public async connectTrustOrConnectWallet() {
     let signer;
     try {
-      signer = await (await web3Instance.walletConnectConnector()).getAddress();
+      signer = await web3Instance.walletConnectConnector().getAddress();
       return signer;
     } catch {
       return signer;
