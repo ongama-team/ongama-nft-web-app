@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 const walletAtom = atom({
-  key: "displayWalletState",
+  key: "displayWallet",
   default: true,
 });
 

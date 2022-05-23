@@ -1,3 +1,4 @@
 import walletAtom from "./walletAtom";
+import walletAddressAtom from "./walletAddressAtom";
 
-export { walletAtom };
+export { walletAtom, walletAddressAtom };

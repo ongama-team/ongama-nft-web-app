@@ -1,4 +1,5 @@
-import { ethers } from "ethers";
+import LocalStorage from "@lib/helper/LocalStorage";
+import { ethers, VoidSigner } from "ethers";
 import { TChain } from "../../types/chains";
 import { CHAINS_ENV } from "../config/chains";
 import NFTABI from "./abis/NFT.json";
@@ -42,7 +43,8 @@ class Web3Service {
     await provider.send("eth_requestAccounts", []);
 
     const signer = provider.getSigner();
-    return signer;
+    const signerWalletAddress = await signer.getAddress();
+    return signerWalletAddress;
   }
 
   public async coinBaseConnect() {
