@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import SelectedItem from "../../__auth/SelectedItem";
+import SelectedItem from "../../__secured/SelectedItem";
 import {
   WalletConnectVector,
   TrustWalletVector,

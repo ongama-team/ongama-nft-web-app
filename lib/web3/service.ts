@@ -1,6 +1,6 @@
 import LocalStorage from "@lib/helper/LocalStorage";
 import { ethers, VoidSigner } from "ethers";
-import { TChain } from "../../types/chains";
+import { TChain } from "../@Types/chains";
 import { CHAINS_ENV } from "../config/chains";
 import NFTABI from "./abis/NFT.json";
 import { connectCoinbase } from "./helpers/connecters";

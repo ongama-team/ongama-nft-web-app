@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { FC } from "react";
 import { formatToDollars } from "../../../../../helpers/numberFormatter";
+import VerfiedImg from "../../../../../public/images/rarible-checkmark.png";
 
 type Props = {
   rank: number;
