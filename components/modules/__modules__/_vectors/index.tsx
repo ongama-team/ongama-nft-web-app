@@ -5,7 +5,13 @@ import TrustWalletVector from "./trustWalletVector";
 import WalletConnectVector from "./walletconnectVector";
 import MoonVector from "./moonVector";
 import ShareVector from "./shareVector";
-
+import Collections from "./collectionVector";
+import Block from "./blockVector";
+import ControlVector from "./controlVector";
+import LinkVector from "./linkVector";
+import FacebookVector from "./facebookVector";
+import TwitterVector from "./twitterVector";
+import TelegramVector from "./telegramVector";
 import {
   HiOutlineMenuAlt4 as VMenu,
   HiGlobeAlt as VGlobe,
@@ -32,6 +38,13 @@ export {
   HeartVector,
   Ethereum,
   ShareVector,
+  Collections,
+  Block,
+  ControlVector,
+  LinkVector,
+  FacebookVector,
+  TwitterVector,
+  TelegramVector,
   VMenu,
   VChevronLeft,
   VChevronRight,
