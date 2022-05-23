@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect, useState } from "react";
 import {
   VSun,
   MoonVector,
@@ -8,13 +9,18 @@ import {
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
 import Link from "next/link";
-import { useRecoilState } from "recoil";
-import { walletAtom } from "@lib/atoms";
+
+import { useRecoilState, useRecoilValue } from "recoil";
+import { walletAtom, walletAddressAtom } from "@lib/atoms";
+import LocalStorage from "@lib/helper/LocalStorage";
+import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 
 const Header = () => {
   const [isLightTheme, setIsLightTheme] = useState(true);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
+  const [_, setWalletAddress] = useRecoilState(walletAddressAtom);
+  const walletAddress = useRecoilValue(walletAddressAtom);
 
   const toggleTheme = () => {
     setIsLightTheme(!isLightTheme);
@@ -23,6 +29,24 @@ const Header = () => {
   const toggleWallets = () => {
     setIsWalletsDisplayed(!isWalletsDisplayed);
   };
+
+  // --- detect when browser wallet is deconnected
+  useEffect(() => {
+    if (window && !window?.ethereum) return;
+    window.ethereum.on("accountsChanged", (accounts: string[]) => {
+      if (!accounts.length) {
+        LocalStorage.removeItem("ongama_signer_address");
+        setWalletAddress("");
+      }
+    });
+  }, [setWalletAddress]);
+
+  useEffect(() => {
+    const memorizedWalletAddress = LocalStorage.getItem(
+      "ongama_signer_address"
+    );
+    setWalletAddress(memorizedWalletAddress || "");
+  }, [setWalletAddress]);
 
   return (
     <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-20">
@@ -46,7 +70,8 @@ const Header = () => {
         </button>
         <button
           onClick={toggleWallets}
-          className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden"
+          className={`${walletAddress && "hidden"}
+           border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden`}
         >
           Sign in
         </button>
@@ -60,8 +85,15 @@ const Header = () => {
             <VSun className="w-5 h-5" />
           )}
         </button>
+        <div className={`${!walletAddress && "hidden"} w-12 h-12 ml-1`}>
+          <img
+            src={dummy_profile.profileImage}
+            alt={dummy_profile.name}
+            className="w-12 h-12 object-cover rounded-full"
+          />
+        </div>
         <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block hidden">
-          <VMenu className="w-6-h-6" />
+          <VMenu className="w-6 h-6" />
         </button>
       </div>
     </div>
