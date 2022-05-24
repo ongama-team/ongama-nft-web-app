@@ -4,32 +4,32 @@ import { useRecoilState } from "recoil";
 
 type Props = {
   processing?: boolean;
-  authMode: boolean;
+  editMode: boolean;
   children: JSX.Element;
-  onAuthMode: () => void;
+  onEditMode: () => void;
 };
 
 const defaultProps: Partial<Props> = {
   processing: false,
 };
 
-const SelectedItem: FC<Props> = ({ children, authMode, onAuthMode }: Props) => {
+const SelectedItem: FC<Props> = ({ children, editMode, onEditMode }: Props) => {
   const [selectMode, setSelectMode] = useState(false);
 
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
   const onAction = () => {
     setSelectMode((prev) => !prev);
-    onAuthMode();
+    onEditMode();
   };
 
   return (
     <>
       <button
-        disabled={!selectMode && authMode}
+        disabled={!selectMode && editMode}
         onClick={onAction}
         className={`   p-2 m-4  ${
-          !selectMode && authMode && isWalletsDisplayed
+          !selectMode && editMode && isWalletsDisplayed
             ? " opacity-50 text-gray-700 "
             : " opacity-100 hover:cursor-pointer"
         } transition-all duration-300 `}

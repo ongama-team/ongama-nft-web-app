@@ -15,7 +15,7 @@ type openMenuT = {
 };
 
 const ConnectWalletsModal = () => {
-  const [authMode, setAuthMode] = useState(false);
+  const [editMode, setEditMode] = useState(false);
   const [startProcess, setStartProcess] = useState(false);
 
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
@@ -28,8 +28,8 @@ const ConnectWalletsModal = () => {
     connectBrowserWallet,
   } = web3Actions;
 
-  const onAuthMode = () => {
-    setAuthMode((prev) => !prev);
+  const onEditMode = () => {
+    setEditMode((prev) => !prev);
   };
 
   const onConnectTrustOrConnectWallet = async () => {
@@ -37,7 +37,7 @@ const ConnectWalletsModal = () => {
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress(signer);
-    onAuthMode();
+    onEditMode();
   };
 
   const onConnectCoinBaseWallet = async () => {
@@ -45,7 +45,7 @@ const ConnectWalletsModal = () => {
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress(signer);
-    onAuthMode();
+    onEditMode();
   };
 
   const onConnectBrowserWallet = async () => {
@@ -53,7 +53,7 @@ const ConnectWalletsModal = () => {
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress(signer as string);
-    onAuthMode();
+    onEditMode();
   };
 
   return (
@@ -68,8 +68,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"coinBase"}
           processing={startProcess}
-          authMode={authMode}
-          onAuthMode={onAuthMode}
+          editMode={editMode}
+          onEditMode={onEditMode}
         >
           <div
             onClick={onConnectCoinBaseWallet}
@@ -82,8 +82,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"MetaMask"}
           processing={startProcess}
-          authMode={authMode}
-          onAuthMode={onAuthMode}
+          editMode={editMode}
+          onEditMode={onEditMode}
         >
           <div
             onClick={onConnectBrowserWallet}
@@ -96,8 +96,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"Trust Wallet"}
           processing={startProcess}
-          authMode={authMode}
-          onAuthMode={onAuthMode}
+          editMode={editMode}
+          onEditMode={onEditMode}
         >
           <div
             onClick={onConnectTrustOrConnectWallet}
@@ -110,8 +110,8 @@ const ConnectWalletsModal = () => {
         <SelectedItem
           key={"Wallet Connect"}
           processing={startProcess}
-          authMode={authMode}
-          onAuthMode={onAuthMode}
+          editMode={editMode}
+          onEditMode={onEditMode}
         >
           <div
             onClick={onConnectTrustOrConnectWallet}
@@ -127,5 +127,4 @@ const ConnectWalletsModal = () => {
     </div>
   );
 };
-
 export default ConnectWalletsModal;
