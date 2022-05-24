@@ -5,7 +5,7 @@ import {
   VChevronRight,
 } from "@components/modules/__modules__/_vectors";
 import StoryPresentation from "./StoryPresentation";
-import useSideScroll from "@lib/hooks/useSideScroll";
+import useSideScroll from "@components/hooks/useSideScroll";
 
 const Presentation = () => {
   const scrollContainer = useRef<HTMLDivElement>(null);

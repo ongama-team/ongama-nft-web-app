@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { classNameInterface, defaultVectorProps } from "../../../../types";
+import { classNameInterface, defaultVectorProps } from "@lib/@Types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",

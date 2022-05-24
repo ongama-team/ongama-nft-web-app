@@ -12,7 +12,7 @@ interface IProps {
   auction: string;
 }
 
-const Card: FC<IProps> = ({
+const NFTCard: FC<IProps> = ({
   nftUrl,
   nftName,
   nftPrice,
@@ -69,4 +69,4 @@ const Card: FC<IProps> = ({
   );
 };
 
-export default Card;
+export default NFTCard;

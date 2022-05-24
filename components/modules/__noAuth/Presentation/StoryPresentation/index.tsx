@@ -26,7 +26,7 @@ const StoryPresentation = () => {
   }, [story, storyIndex.current]);
 
   const redirectToNFtDropPage = (nftName: string) => {
-    router.push(`/${nftName}`);
+    router.push(`/drop/${nftName}`);
   };
 
   return (
