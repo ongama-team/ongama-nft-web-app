@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { dummy_data } from "@components/modules/_noAuth/Presentation/dummy_data";
+import { dummy_data } from "@components/modules/__noAuth/Presentation/dummy_data";
+import { truncateStrings } from "helpers/truncateStrings";
 import React from "react";
 
 const SubScribesContainer = () => {
@@ -22,7 +23,7 @@ const SubScribesContainer = () => {
                 </div>
                 <div className="w-full">
                   <p className="font-bold text-lg">
-                    {item.name.slice(0, 12)}...
+                    {truncateStrings(item.name, 14)}
                   </p>
                   <p className="font-medium text-stone-600">10 followers</p>
                 </div>

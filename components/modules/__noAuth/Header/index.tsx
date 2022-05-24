@@ -6,9 +6,9 @@ import {
   VSearch,
   VMenu,
 } from "@components/modules/__modules__/_vectors";
+import Link from "next/link";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
-import Link from "next/link";
 
 import { useRecoilState, useRecoilValue } from "recoil";
 import { walletAtom, walletAddressAtom } from "@lib/atoms";
@@ -50,9 +50,9 @@ const Header = () => {
 
   return (
     <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-20">
-      <div>
-        <Link passHref href="/">
-          <p className="flex items-center text-3xl font-ibmPlexSans hover:cursor-pointer">
+      <div className="cursor-pointer">
+        <Link href="/">
+          <p className="flex items-center text-3xl font-ibmPlexSans">
             <span className="text-blue-500">O</span>ngama
           </p>
         </Link>

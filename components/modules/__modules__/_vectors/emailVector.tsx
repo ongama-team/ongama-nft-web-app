@@ -1,11 +1,11 @@
+import { classNameInterface } from "@lib/@Types";
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const EmailVector: FC<classNameInterface> = ({ className }) => {
+const emailVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +17,6 @@ const EmailVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-EmailVector.defaultProps = defaultProps;
+emailVector.defaultProps = defaultProps;
 
-export default EmailVector;
+export default emailVector;

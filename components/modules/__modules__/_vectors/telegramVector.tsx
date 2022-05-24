@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
+import { classNameInterface } from "@lib/@Types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const TelegramVector: FC<classNameInterface> = ({ className }) => {
+const telegramVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -24,6 +24,6 @@ const TelegramVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-TelegramVector.defaultProps = defaultProps;
+telegramVector.defaultProps = defaultProps;
 
-export default TelegramVector;
+export default telegramVector;

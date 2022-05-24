@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
+import { classNameInterface } from "@lib/@Types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const Ethereum: FC<classNameInterface> = ({ className }) => {
+const ethereumVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -27,6 +27,6 @@ const Ethereum: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-Ethereum.defaultProps = defaultProps;
+ethereumVector.defaultProps = defaultProps;
 
-export default Ethereum;
+export default ethereumVector;

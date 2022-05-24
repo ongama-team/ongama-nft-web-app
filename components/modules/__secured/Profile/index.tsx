@@ -11,19 +11,20 @@ import {
 import { Tab } from "@headlessui/react";
 import { useState } from "react";
 import React from "react";
-import Header from "../../_noAuth/Header";
-import { dummy_data } from "../../_noAuth/Presentation/dummy_data";
-import OnSale from "pages/profile/sale";
+
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { subscribesAtom } from "@lib/atoms";
+import { dummy_data } from "@components/modules/__noAuth/Presentation/dummy_data";
+import Header from "@components/modules/__noAuth/Header";
+import OnSale from "pages/profile/sale";
 
 function ProfileContainer() {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
-  let [isShareOpen, setIsShareOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
 
   const { staticImages, coverImages } = dummy_data;
 
@@ -73,7 +74,6 @@ function ProfileContainer() {
             <VGlobe className="opacity-70 w-4 h-4" />
             <p>Twitter.com</p>
           </div>
-
           <div className="flex relative mt-4 justify-center">
             <p
               className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
@@ -85,7 +85,6 @@ function ProfileContainer() {
               className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
               onClick={() => setIsSubscribesDisplayed(!isSubscribesDisplayed)}
             >
-              {" "}
               <label className="font-bold">1</label> following
             </p>
             <div
@@ -99,7 +98,6 @@ function ProfileContainer() {
               <SubScribesContainer />
             </div>
           </div>
-
           <div className="flex relative justify-center space-x-2 mt-4">
             <button className="px-6 py-2 rounded-full font-bold border-gray-300 border ">
               Edit
@@ -169,12 +167,10 @@ function ProfileContainer() {
                     <Block className="w-6 h-6" />
                     <button className="font-bold">Blockchain</button>
                   </div>
-
                   <div className="flex px-10 space-x-3 py-4 border rounded-full justify-center items-center">
                     <Collections className="w-6 h-6" />
                     <button className="font-bold">Collections</button>
                   </div>
-
                   <div className="flex px-10 space-x-3 py-4 border rounded-full justify-center items-center">
                     <Block className="w-4 h-4" />
                     <button className="font-bold">Blockchain</button>

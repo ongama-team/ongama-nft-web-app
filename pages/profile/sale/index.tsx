@@ -1,4 +1,4 @@
-import { SaleContainer } from "@components/modules/__auth/Profile/saleContainer";
+import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
 import React from "react";
 
 const OnSale = () => {

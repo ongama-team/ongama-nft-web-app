@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
+import { classNameInterface } from "@lib/@Types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const MetaMaskVector: FC<classNameInterface> = ({ className }) => {
+const metaMaskVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -135,6 +135,6 @@ const MetaMaskVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-MetaMaskVector.defaultProps = defaultProps;
+metaMaskVector.defaultProps = defaultProps;
 
-export default MetaMaskVector;
+export default metaMaskVector;

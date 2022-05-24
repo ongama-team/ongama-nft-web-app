@@ -1,4 +1,4 @@
-import ProfileContainer from "@components/modules/__auth/Profile";
+import ProfileContainer from "@components/modules/__secured/Profile";
 import React from "react";
 
 function Profile() {

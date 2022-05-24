@@ -1,11 +1,11 @@
+import { classNameInterface } from "@lib/@Types";
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const ShareVector: FC<classNameInterface> = ({ className }) => {
+const shareVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       viewBox="0 0 15 16"
@@ -23,6 +23,6 @@ const ShareVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-ShareVector.defaultProps = defaultProps;
+shareVector.defaultProps = defaultProps;
 
-export default ShareVector;
+export default shareVector;

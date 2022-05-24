@@ -1,11 +1,11 @@
+import { classNameInterface } from "@lib/@Types";
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const ControlVector: FC<classNameInterface> = ({ className }) => {
+const controlVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +17,6 @@ const ControlVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-ControlVector.defaultProps = defaultProps;
+controlVector.defaultProps = defaultProps;
 
-export default ControlVector;
+export default controlVector;

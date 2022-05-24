@@ -1,8 +1,8 @@
 import React from "react";
 import DropPage from "@components/DropPage";
 
-const NftDropPage = () => {
+const DropDetailPage = () => {
   return <DropPage />;
 };
 
-export default NftDropPage;
+export default DropDetailPage;

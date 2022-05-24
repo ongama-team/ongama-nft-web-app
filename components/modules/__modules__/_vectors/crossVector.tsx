@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
+import { classNameInterface } from "@lib/@Types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const CrossVector: FC<classNameInterface> = ({ className }) => {
+const crossVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +17,6 @@ const CrossVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-CrossVector.defaultProps = defaultProps;
+crossVector.defaultProps = defaultProps;
 
-export default CrossVector;
+export default crossVector;

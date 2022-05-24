@@ -1,11 +1,11 @@
 import React, { FC } from "react";
-import { classNameInterface } from "../../../../types";
+import { classNameInterface } from "@lib/@Types";
 
 const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const TwitterVector: FC<classNameInterface> = ({ className }) => {
+const twitterVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +17,6 @@ const TwitterVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-TwitterVector.defaultProps = defaultProps;
+twitterVector.defaultProps = defaultProps;
 
-export default TwitterVector;
+export default twitterVector;
