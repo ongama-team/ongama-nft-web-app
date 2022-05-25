@@ -56,7 +56,8 @@ const Header = () => {
     <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-20">
       <div>
         <p className="flex items-center text-3xl font-ibmPlexSans">
-          <span className="text-blue-500">O</span>ngama
+          <span className="text-blue-500">O</span>
+          <span className="mobile:hidden">ngama</span>
         </p>
       </div>
       <div className="grid grid-cols-2 min-lg:flex min-lg:justify-start justify-center items-center w-full">

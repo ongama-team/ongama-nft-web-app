@@ -4,9 +4,11 @@ import {
   VTimeLapse,
 } from "@components/modules/__modules__/_vectors";
 import { Switch } from "antd";
-import React from "react";
+import React, { useState } from "react";
 
 const PutOnMarketMenu = () => {
+  const [isPutonMarketMenu, setIsPutonMarketMenu] = useState(true);
+
   return (
     <div className="flex flex-col">
       <div className="flex mt-3 justify-between">
@@ -18,14 +20,22 @@ const PutOnMarketMenu = () => {
             Enter price to allow users instantly purchase your NFT
           </span>
         </p>
-        <Switch className="bg-blue-500" />
+        <Switch
+          className={`${isPutonMarketMenu ? "bg-blue-500" : "bg-blue-200"}`}
+          defaultChecked={isPutonMarketMenu}
+          onClick={() => setIsPutonMarketMenu(!isPutonMarketMenu)}
+        />
       </div>
-      <div className="flex justify-between py-5">
-        <button className="py-8 px-8 border border-gray-300 rounded-2xl flex flex-col justify-center items-center">
+      <div
+        className={`flex min-md:flex-col justify-between py-5 ${
+          !isPutonMarketMenu && "hidden"
+        }`}
+      >
+        <button className="py-8 px-8 border rounded-2xl flex flex-col justify-center items-center border-blue-500">
           <VBookmark className="font-bold text-2xl my-2" />
           <p className="font-bold">fixed price</p>
         </button>
-        <button className="py-8 px-8 border border-gray-300 rounded-2xl flex flex-col justify-center items-center mx-2">
+        <button className="py-8 px-8 border border-gray-300 rounded-2xl flex flex-col justify-center items-center mobile:my-2">
           <VInfinite className="font-bold text-2xl my-2" />
           <p className="font-bold">Open for bids</p>
         </button>
@@ -34,7 +44,7 @@ const PutOnMarketMenu = () => {
           <p className="font-bold">Timed auction</p>
         </button>
       </div>
-      <div>
+      <div className="mt-10">
         <div>
           <label htmlFor="price" className="font-bold">
             Price

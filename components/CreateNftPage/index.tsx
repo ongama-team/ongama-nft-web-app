@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState } from "react";
 import {
   VEthereum,
   VQuestionMark,
@@ -16,6 +16,8 @@ import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";
 
 const CreateNftPage = () => {
+  const [isFreeMinting, setIsFreeMinting] = useState(true);
+  const [isAdvancedForm, setIsAdvancedForm] = useState(false);
   const walletAddress = useRecoilValue(walletAddressAtom);
   const minifiedWalletAddress = minifyAddress(walletAddress, 10, 4);
   const onChooseFile = () => {
@@ -24,23 +26,25 @@ const CreateNftPage = () => {
   return (
     <>
       <Header />
-      <div className="py-20 font-ibmPlexSans w-2/4 m-auto">
-        <h1 className="text-4xl font-bold">Create Single item on Ethereum</h1>
-        <div className="flex mt-10 relative">
-          <div>
-            <div>
-              <p className="font-bold">Choose wallet</p>
-              <div className="my-5 py-5 border border-gray-300 flex items-center rounded-xl hover:cursor-not-allowed">
-                <VEthereum className="mx-2 py-1 px-1 text-blue-500 text-4xl bg-blue-100 rounded-full" />
-                <div className="mx-5">
-                  <p>
-                    <span className="font-bold">{minifiedWalletAddress}</span>
-                    <span className="px-2 bg-green-100 mx-2 py-1 text-xs text-green-700 rounded-lg">
-                      Connected
-                    </span>
-                  </p>
-                  <p className="font-bold text-gray-500">Ethereum</p>
-                </div>
+      <div className="py-20 font-ibmPlexSans 2xl:w-2/4 lg:w-3/4 md:w-5/6 min-md:w-full min-lg:px-5 m-auto">
+        <h1 className="text-4xl font-bold min-md:w-full min-lg:w-full min-lg:text-3xl">
+          Create Single item on Ethereum
+        </h1>
+        <div className="flex mt-10 min-lg:w-full min-md:block">
+          <div className="flex flex-col">
+            <p className="font-bold">Choose wallet</p>
+            <div className="my-5 py-5 border border-gray-300 flex items-center rounded-xl hover:cursor-not-allowed">
+              <p className="mx-2 p-2 text-blue-500 text-xl bg-blue-100 rounded-full">
+                <VEthereum />
+              </p>
+              <div className="mx-5 mobile:mx-1">
+                <p>
+                  <span className="font-bold">{minifiedWalletAddress}</span>
+                  <span className="px-2 bg-green-100 mx-2 py-1 text-xs text-green-700 rounded-lg">
+                    Connected
+                  </span>
+                </p>
+                <p className="font-bold text-gray-500">Ethereum</p>
               </div>
             </div>
             <div>
@@ -69,21 +73,39 @@ const CreateNftPage = () => {
                   Buyer will pay gas fees for minting
                 </span>
               </p>
-              <Switch className="bg-blue-500" />
+              <Switch
+                className={`${isFreeMinting ? "bg-blue-500" : "bg-blue-200"}`}
+                checked={isFreeMinting}
+                onClick={() => setIsFreeMinting(!isFreeMinting)}
+              />
             </div>
             <DetailsForm />
-            <button className="my-5 w-full py-3 border border-gray-300 rounded-3xl font-bold hover:border-gray-400 transition-all">
-              Show advenced settings
+            <button
+              onClick={() => setIsAdvancedForm(!isAdvancedForm)}
+              className="my-5 w-full py-3 border border-gray-300 rounded-3xl font-bold hover:border-gray-400 transition-all"
+            >
+              {isAdvancedForm
+                ? "Hide advanced settings"
+                : "Show advanced settings"}
             </button>
-            <AdvancedSettingForm />
-            <p className="flex py-5 items-center text-gray-500 font-semibold">
-              Unsaved changes
-              <span className="px-3">
-                <VQuestionMark className="font-bold bg-gray-100 py-1 px-1 text-2xl rounded-full" />
-              </span>
-            </p>
+            <div className={`${!isAdvancedForm && "hidden"}`}>
+              <AdvancedSettingForm />
+            </div>
+            <div className="flex justify-between items-center">
+              <button className="bg-blue-600 px-8 py-3 rounded-full text-white font-bold hover:bg-blue-500 transition-all">
+                Create Item
+              </button>
+              <p className="flex py-5 items-center text-gray-500 font-semibold">
+                Unsaved changes
+                <span className="px-3">
+                  <VQuestionMark className="font-bold bg-gray-100 py-1 px-1 text-2xl rounded-full" />
+                </span>
+              </p>
+            </div>
           </div>
-          <NftPreview />
+          <div className="min-md:hidden">
+            <NftPreview previewUrl="" />
+          </div>
         </div>
       </div>
     </>
