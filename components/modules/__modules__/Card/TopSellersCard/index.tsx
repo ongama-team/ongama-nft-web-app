@@ -7,13 +7,13 @@ const TopSellersCard = () => {
   const { topSellersData } = dummy_data;
   return (
     <>
-      {topSellersData.map((seller, index) => {
+      {topSellersData.map((seller) => {
         return (
           <div
             className=" flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2"
-            key={index}
+            key={seller.id}
           >
-            <span className="text-gray-400">{index + +1}</span>
+            <span className="text-gray-400">{seller.id}</span>
             <div className="flex">
               <section className="relative">
                 <img

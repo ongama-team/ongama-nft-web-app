@@ -29,20 +29,6 @@ const TopSellers = () => {
             2 days
           </option>
         </select>
-        {/* <select
-          name="days"
-          className="bg-transparent font-bold border-none outline-none text-blue-500 px-0"
-        >
-          <option defaultChecked value="1" className="text-sm border-none py-2">
-            1 day
-          </option>
-          <option value="7" className="text-black text-sm  py-2">
-            7 days
-          </option>
-          <option value="30" className="text-black text-sm py-2">
-            30 days
-          </option>
-          </select> */}
       </div>
       <AllTopSellers />
     </div>
