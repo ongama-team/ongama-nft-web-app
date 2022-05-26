@@ -23,7 +23,7 @@ const ConnectWalletBox = () => {
       <div className="relative bottom-2 rounded-lg shadow-lg transition-all duration-300 ">
         <div className="absolute -top-5 -right-10 flex place-content-end mobile:-top-10 mobile:-right-0">
           <Button onClick={closeWalletConnect} className="rounded-full p-2 ">
-            <CrossVector className="h-4 w-4" />
+            <CrossVector className="h-4 w-4 rotate-45" />
           </Button>
         </div>
         <div className="bg-white pt-1 rounded-xl transform transition-all">

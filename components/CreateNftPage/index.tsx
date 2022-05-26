@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React, { ChangeEvent, FormEvent, useState } from "react";
 import {
+  CrossVector,
   VEthereum,
   VQuestionMark,
 } from "@components/modules/__modules__/_vectors";
@@ -18,16 +19,56 @@ import NftPreview from "./NftPreview";
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
+  const [nftPreviewUrl, setNftPreviewUrl] = useState("");
+  const [nftPreviewName, setNftPreviewName] = useState("");
+  const [nftRoyalties, setNftRoyalties] = useState("");
+  const [nftPreviewPrice, setNftPreviewPrice] = useState("");
+  const [NftDescription, setNftDescription] = useState("");
   const walletAddress = useRecoilValue(walletAddressAtom);
   const minifiedWalletAddress = minifyAddress(walletAddress, 10, 4);
   const onChooseFile = () => {
     document.getElementById("input-file")?.click();
   };
+  const onFileChange = (event: { target: any }) => {
+    const { target } = event;
+    const { files } = target;
+    const filePreviewwUrl = URL.createObjectURL(files[0]);
+    setNftPreviewUrl(filePreviewwUrl);
+  };
+
+  const onNftDescriptionChange = (event: { target: any }) => {
+    const { target } = event;
+    const { value } = target;
+    setNftDescription(value);
+  };
+
+  const onNftNameChange = (event: { target: any }) => {
+    const { target } = event;
+    const { value } = target;
+    setNftPreviewName(value);
+  };
+
+  const onNftRoyaltiesChange = (event: { target: any }) => {
+    const { target } = event;
+    const { value } = target;
+    setNftRoyalties(value);
+  };
+
+  const onNftPriceChange = (event: { target: any }) => {
+    const { target } = event;
+    const { value } = target;
+    setNftPreviewPrice(value);
+  };
+
+  const onCancel = () => {
+    setNftPreviewUrl("");
+  };
+
   return (
     <>
       <Header />
       <div className="py-20 font-ibmPlexSans 2xl:w-2/4 lg:w-3/4 md:w-5/6 min-md:w-full min-lg:px-5 m-auto">
-        <h1 className="text-4xl font-bold min-md:w-full min-lg:w-full min-lg:text-3xl">
+        <h1 className="text-4xlimport font-semibold text-4xl min-md:w-full min-lg:w-full min-lg:text-3xl">
           Create Single item on Ethereum
         </h1>
         <div className="flex mt-10 min-lg:w-full min-md:block">
@@ -50,23 +91,50 @@ const CreateNftPage = () => {
             <div>
               <p className="font-bold">Upload file</p>
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
-                <p className="text-gray-500 font-semibold">
-                  PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                </p>
-                <input type="file" className="hidden" id="input-file" />
-                <button
-                  onClick={onChooseFile}
-                  className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
+                <div
+                  className={`flex justify-center w-1/2 m-auto ${
+                    !nftPreviewUrl && "hidden"
+                  }`}
                 >
-                  Choose file
-                </button>
+                  <img
+                    src={nftPreviewUrl}
+                    alt="nft-preview"
+                    className="rounded-2xl"
+                  />
+                  <div>
+                    <CrossVector
+                      onClick={onCancel}
+                      className="text-gray-500 w-10 cursor-pointer h-10 p-2 ml-1 -mt-5 hover:border-gray-500 transition-all border border-gray-300 rotate-45 rounded-full"
+                    />
+                  </div>
+                </div>
+                <div className={`${nftPreviewUrl ? "hidden" : ""}`}>
+                  <p className="text-gray-500 font-semibold">
+                    PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                  </p>
+                  <input
+                    type="file"
+                    className="hidden"
+                    id="input-file"
+                    onChange={onFileChange}
+                  />
+                  <button
+                    onClick={onChooseFile}
+                    className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
+                  >
+                    Choose file
+                  </button>
+                </div>
               </div>
             </div>
-            <PutOnMarketMenu />
+            <PutOnMarketMenu
+              onNftPriceChange={onNftPriceChange}
+              nftPrice={nftPreviewPrice}
+            />
             <ChooseCollection />
             <div className="flex justify-between">
               <p className="flex flex-col">
-                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-800 text-[18px]">
+                <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-800 text-[18px]">
                   Free minting
                 </span>
                 <span className="text-gray-500 font-semibold">
@@ -79,7 +147,11 @@ const CreateNftPage = () => {
                 onClick={() => setIsFreeMinting(!isFreeMinting)}
               />
             </div>
-            <DetailsForm />
+            <DetailsForm
+              onNftDescriptionChange={onNftDescriptionChange}
+              onNftNameChage={onNftNameChange}
+              onNftRoyaliesChange={onNftRoyaltiesChange}
+            />
             <button
               onClick={() => setIsAdvancedForm(!isAdvancedForm)}
               className="my-5 w-full py-3 border border-gray-300 rounded-3xl font-bold hover:border-gray-400 transition-all"
@@ -104,7 +176,11 @@ const CreateNftPage = () => {
             </div>
           </div>
           <div className="min-md:hidden">
-            <NftPreview previewUrl="" />
+            <NftPreview
+              previewUrl={nftPreviewUrl}
+              previewName={nftPreviewName}
+              previewPrice={nftPreviewPrice}
+            />
           </div>
         </div>
       </div>

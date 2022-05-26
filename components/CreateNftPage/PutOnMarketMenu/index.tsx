@@ -1,12 +1,17 @@
+import React, { useState } from "react";
 import {
   VBookmark,
   VInfinite,
   VTimeLapse,
 } from "@components/modules/__modules__/_vectors";
 import { Switch } from "antd";
-import React, { useState } from "react";
 
-const PutOnMarketMenu = () => {
+interface IProps {
+  onNftPriceChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  nftPrice: string;
+}
+
+const PutOnMarketMenu = ({ onNftPriceChange, nftPrice = "0" }: IProps) => {
   const [isPutonMarketMenu, setIsPutonMarketMenu] = useState(true);
 
   return (
@@ -35,7 +40,7 @@ const PutOnMarketMenu = () => {
           <VBookmark className="font-bold text-2xl my-2" />
           <p className="font-bold">fixed price</p>
         </button>
-        <button className="py-8 px-8 border border-gray-300 rounded-2xl flex flex-col justify-center items-center mobile:my-2">
+        <button className="py-8 px-8 border border-gray-300 rounded-2xl flex flex-col justify-center items-center mobile:my-2 mx-2">
           <VInfinite className="font-bold text-2xl my-2" />
           <p className="font-bold">Open for bids</p>
         </button>
@@ -55,6 +60,7 @@ const PutOnMarketMenu = () => {
               type="number"
               name="price"
               placeholder="Enter price for one piece"
+              onChange={onNftPriceChange}
             />
             <p className="text-gray-400">ETH</p>
           </div>
@@ -65,7 +71,7 @@ const PutOnMarketMenu = () => {
           </p>
           <p className="text-gray-400 font-semibold">
             You will receive
-            <span className="text-black font-bold"> 0 ETH</span>
+            <span className="text-black font-bold"> {nftPrice} ETH</span>
           </p>
         </div>
       </div>

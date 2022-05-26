@@ -1,8 +1,19 @@
-import React, { ChangeEventHandler, useRef } from "react";
-import TextArea from "antd/lib/input/TextArea";
+import React from "react";
 import useAutoResize from "@lib/hooks/useAutoResize";
 
-const DetailsForm = () => {
+interface IProps {
+  onNftNameChage: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onNftDescriptionChange: (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
+  onNftRoyaliesChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+const DetailsForm = ({
+  onNftDescriptionChange,
+  onNftNameChage,
+  onNftRoyaliesChange,
+}: IProps) => {
   const { setTextAreaValue, textAreaRef } = useAutoResize();
 
   return (
@@ -15,15 +26,19 @@ const DetailsForm = () => {
         name="name"
         className="mt-2 py-2 outline-none w-full border-b border-gray-300"
         placeholder="e.g.'Redeemable T-Shirt with logo'"
+        onChange={onNftNameChage}
       />
       <div className="mt-5 flex flex-col">
         <label htmlFor="description" className="font-bold">
-          Description{" "}
-          <span className="text-gray-400 font-thin">(Optional)</span>
+          Description
+          <span className="text-gray-400 font-thin"> (Optional)</span>
         </label>
         <textarea
           ref={textAreaRef}
-          onChange={(e) => setTextAreaValue(e.target.value)}
+          onChange={(e) => {
+            setTextAreaValue(e.target.value);
+            onNftDescriptionChange(e);
+          }}
           name="description"
           placeholder="e.g.'After purchasing you'll be able to get the real T-Shirt'"
           className="border-b border-gray-300 outline-none py-3 resize-none overflow-hidden"
@@ -40,6 +55,7 @@ const DetailsForm = () => {
           type="number"
           placeholder="e.g. 10%"
           className="w-full my-3 outline-none"
+          onChange={onNftRoyaliesChange}
         />
         <p className="text-gray-400">%</p>
       </div>
