@@ -24,6 +24,7 @@ const CreateNftPage = () => {
   const [nftRoyalties, setNftRoyalties] = useState("");
   const [nftPreviewPrice, setNftPreviewPrice] = useState("");
   const [NftDescription, setNftDescription] = useState("");
+  const [isImage, setIsImage] = useState(true);
   const walletAddress = useRecoilValue(walletAddressAtom);
   const minifiedWalletAddress = minifyAddress(walletAddress, 10, 4);
   const onChooseFile = () => {
@@ -32,7 +33,12 @@ const CreateNftPage = () => {
   const onFileChange = (event: { target: any }) => {
     const { target } = event;
     const { files } = target;
+    console.log("file", files[0]);
+    (files[0].type as string).includes("image")
+      ? setIsImage(true)
+      : setIsImage(false);
     const filePreviewwUrl = URL.createObjectURL(files[0]);
+    console.log("file url", filePreviewwUrl);
     setNftPreviewUrl(filePreviewwUrl);
   };
 
@@ -92,15 +98,21 @@ const CreateNftPage = () => {
               <p className="font-bold">Upload file</p>
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
                 <div
-                  className={`flex justify-center w-1/2 m-auto ${
+                  className={`flex justify-center w-3/4 m-auto ${
                     !nftPreviewUrl && "hidden"
                   }`}
                 >
-                  <img
-                    src={nftPreviewUrl}
-                    alt="nft-preview"
-                    className="rounded-2xl"
-                  />
+                  {isImage ? (
+                    <img
+                      src={nftPreviewUrl}
+                      alt="nft-preview"
+                      className="rounded-2xl"
+                    />
+                  ) : (
+                    <audio controls>
+                      <source src={nftPreviewUrl} type="audio/mpeg" />
+                    </audio>
+                  )}
                   <div>
                     <CrossVector
                       onClick={onCancel}
@@ -180,6 +192,7 @@ const CreateNftPage = () => {
               previewUrl={nftPreviewUrl}
               previewName={nftPreviewName}
               previewPrice={nftPreviewPrice}
+              isImage={isImage}
             />
           </div>
         </div>

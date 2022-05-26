@@ -7,9 +7,15 @@ interface IProps {
   previewUrl: string;
   previewPrice: string;
   previewName: string;
+  isImage: boolean;
 }
 
-const NftPreview = ({ previewUrl, previewPrice, previewName }: IProps) => {
+const NftPreview = ({
+  previewUrl,
+  previewPrice,
+  previewName,
+  isImage,
+}: IProps) => {
   return (
     <div className="mx-5">
       <p className="font-bold">Preview</p>
@@ -21,7 +27,7 @@ const NftPreview = ({ previewUrl, previewPrice, previewName }: IProps) => {
         >
           Upload file to preview your brand new NFT
         </p>
-        <div className={`${previewUrl ? "block" : "hidden"}`}>
+        <div className={`${previewUrl && isImage ? "block" : "hidden"}`}>
           <Card
             nftUrl={previewUrl}
             nftPrice={previewPrice}
