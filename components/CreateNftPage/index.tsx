@@ -11,7 +11,7 @@ import minifyAddress from "@lib/helper/minifyAddress";
 import { Switch } from "antd";
 import DetailsForm from "./DetailsForm";
 import AdvancedSettingForm from "./AdvanceSettingForm";
-import Header from "@components/modules/_noAuth/Header";
+import Header from "@components/modules/__noAuth/Header";
 import PutOnMarketMenu from "./PutOnMarketMenu";
 import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";

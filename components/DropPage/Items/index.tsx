@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "@components/modules/__modules__/Card/NftCard";
-import { dummy_data } from "../../modules/_noAuth/Presentation/dummy_data";
+import NFTCard from "@components/modules/__modules__/Card/NftCard";
+import { dummy_data } from "../../modules/__noAuth/Presentation/dummy_data";
 
 const Items = () => {
   const { staticImages } = dummy_data;
@@ -13,7 +13,7 @@ const Items = () => {
               key={index}
               className="flex flex-wrap border border-gray-200 rounded-xl m-2 w-64 mobile:w-full"
             >
-              <Card
+              <NFTCard
                 key={index}
                 nftUrl={staticImages[1].url}
                 nftName="Monkey King"

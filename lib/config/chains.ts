@@ -1,4 +1,4 @@
-import { TNetworks } from "../../types/chains";
+import { TNetworks } from "../@Types/chains";
 
 export const SUPPORTED_CHAINS: TNetworks = {
   testnet: {

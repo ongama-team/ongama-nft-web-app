@@ -1,6 +1,6 @@
-import ConnectWalletBox from "@components/modules/_noAuth/ConnectWalletsBox";
-import Header from "@components/modules/_noAuth/Header";
 import React, { useState } from "react";
+import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
+import Header from "@components/modules/__noAuth/Header";
 import Activity from "./Activity";
 import AvatarAndCover from "./AvatarAndCover";
 import dummy_profile from "./AvatarAndCover/dummy_profile";
