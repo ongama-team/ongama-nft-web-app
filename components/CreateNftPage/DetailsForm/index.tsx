@@ -22,7 +22,7 @@ const DetailsForm = ({
         Name
       </label>
       <input
-        type="text/"
+        type="text"
         name="name"
         className="mt-2 py-2 outline-none w-full border-b border-gray-300"
         placeholder="e.g.'Redeemable T-Shirt with logo'"

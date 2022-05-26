@@ -1,6 +1,5 @@
 import React from "react";
 import { VPlusCircleFill } from "@components/modules/__modules__/_vectors";
-import { Switch } from "antd";
 
 const ChooseCollection = () => {
   return (

@@ -26,7 +26,7 @@ const PutOnMarketMenu = ({ onNftPriceChange, nftPrice = "0" }: IProps) => {
           </span>
         </p>
         <Switch
-          className={`${isPutonMarketMenu ? "bg-blue-500" : "bg-blue-200"}`}
+          className={isPutonMarketMenu ? "bg-blue-500" : "bg-blue-200"}
           defaultChecked={isPutonMarketMenu}
           onClick={() => setIsPutonMarketMenu(!isPutonMarketMenu)}
         />

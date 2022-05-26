@@ -27,15 +27,12 @@ const NftPreview = ({
         >
           Upload file to preview your brand new NFT
         </p>
-        <div className={`${previewUrl && isImage ? "block" : "hidden"}`}>
+        <div className={previewUrl && isImage ? "block" : "hidden"}>
           <Card
             nftUrl={previewUrl}
             nftPrice={previewPrice}
             nftName={previewName}
             ownerProfile={dummy_profile.profileImage}
-            ownerName={""}
-            likes={0}
-            auction={""}
           />
         </div>
       </div>

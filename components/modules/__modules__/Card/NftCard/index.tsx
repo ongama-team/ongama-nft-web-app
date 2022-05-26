@@ -7,9 +7,9 @@ interface IProps {
   nftPrice: string;
   nftName: string;
   ownerProfile: string;
-  ownerName: string;
-  likes: number;
-  auction: string;
+  ownerName?: string;
+  likes?: number;
+  auction?: string;
 }
 
 const NFTCard: FC<IProps> = ({

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
 import {
   CrossVector,
   VEthereum,
@@ -19,55 +19,33 @@ import NftPreview from "./NftPreview";
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
-  const [nftPreviewUrl, setNftPreviewUrl] = useState("");
-  const [nftPreviewName, setNftPreviewName] = useState("");
-  const [nftRoyalties, setNftRoyalties] = useState("");
-  const [nftPreviewPrice, setNftPreviewPrice] = useState("");
-  const [NftDescription, setNftDescription] = useState("");
+  const [nftDetails, setNftDetails] = useState({
+    previewUrl: "",
+    previewName: "",
+    royalties: "",
+    price: "",
+    description: "",
+  });
+  const [inputFile, setInputFile] = useState();
   const [isImage, setIsImage] = useState(true);
   const walletAddress = useRecoilValue(walletAddressAtom);
   const minifiedWalletAddress = minifyAddress(walletAddress, 10, 4);
+  const inputFileRef = useRef<HTMLInputElement>(null);
+
   const onChooseFile = () => {
-    document.getElementById("input-file")?.click();
+    inputFileRef.current?.click();
   };
+
   const onFileChange = (event: { target: any }) => {
-    const { target } = event;
-    const { files } = target;
-    console.log("file", files[0]);
-    (files[0].type as string).includes("image")
-      ? setIsImage(true)
-      : setIsImage(false);
-    const filePreviewwUrl = URL.createObjectURL(files[0]);
-    console.log("file url", filePreviewwUrl);
-    setNftPreviewUrl(filePreviewwUrl);
-  };
-
-  const onNftDescriptionChange = (event: { target: any }) => {
-    const { target } = event;
-    const { value } = target;
-    setNftDescription(value);
-  };
-
-  const onNftNameChange = (event: { target: any }) => {
-    const { target } = event;
-    const { value } = target;
-    setNftPreviewName(value);
-  };
-
-  const onNftRoyaltiesChange = (event: { target: any }) => {
-    const { target } = event;
-    const { value } = target;
-    setNftRoyalties(value);
-  };
-
-  const onNftPriceChange = (event: { target: any }) => {
-    const { target } = event;
-    const { value } = target;
-    setNftPreviewPrice(value);
+    const { files } = event.target;
+    setIsImage((files[0].type as string).includes("image"));
+    setInputFile(files[0]);
+    const filePreviewUrl = URL.createObjectURL(files[0]);
+    setNftDetails({ ...nftDetails, previewUrl: filePreviewUrl });
   };
 
   const onCancel = () => {
-    setNftPreviewUrl("");
+    setNftDetails({ ...nftDetails, previewUrl: "" });
   };
 
   return (
@@ -99,18 +77,18 @@ const CreateNftPage = () => {
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
                 <div
                   className={`flex justify-center w-3/4 m-auto ${
-                    !nftPreviewUrl && "hidden"
+                    !nftDetails.previewUrl && "hidden"
                   }`}
                 >
                   {isImage ? (
                     <img
-                      src={nftPreviewUrl}
+                      src={nftDetails.previewUrl}
                       alt="nft-preview"
                       className="rounded-2xl"
                     />
                   ) : (
                     <audio controls>
-                      <source src={nftPreviewUrl} type="audio/mpeg" />
+                      <source src={nftDetails.previewUrl} type="audio/mpeg" />
                     </audio>
                   )}
                   <div>
@@ -120,11 +98,12 @@ const CreateNftPage = () => {
                     />
                   </div>
                 </div>
-                <div className={`${nftPreviewUrl ? "hidden" : ""}`}>
+                <div className={`${nftDetails.previewUrl ? "hidden" : ""}`}>
                   <p className="text-gray-500 font-semibold">
                     PNG, GIF, WEBP, MP4 or MP3. Max 100mb
                   </p>
                   <input
+                    ref={inputFileRef}
                     type="file"
                     className="hidden"
                     id="input-file"
@@ -140,8 +119,10 @@ const CreateNftPage = () => {
               </div>
             </div>
             <PutOnMarketMenu
-              onNftPriceChange={onNftPriceChange}
-              nftPrice={nftPreviewPrice}
+              onNftPriceChange={(e) =>
+                setNftDetails({ ...nftDetails, price: e.target.value })
+              }
+              nftPrice={nftDetails.price}
             />
             <ChooseCollection />
             <div className="flex justify-between">
@@ -160,9 +141,15 @@ const CreateNftPage = () => {
               />
             </div>
             <DetailsForm
-              onNftDescriptionChange={onNftDescriptionChange}
-              onNftNameChage={onNftNameChange}
-              onNftRoyaliesChange={onNftRoyaltiesChange}
+              onNftDescriptionChange={(e) =>
+                setNftDetails({ ...nftDetails, description: e.target.value })
+              }
+              onNftNameChage={(e) =>
+                setNftDetails({ ...nftDetails, previewName: e.target.value })
+              }
+              onNftRoyaliesChange={(e) =>
+                setNftDetails({ ...nftDetails, royalties: e.target.value })
+              }
             />
             <button
               onClick={() => setIsAdvancedForm(!isAdvancedForm)}
@@ -189,9 +176,9 @@ const CreateNftPage = () => {
           </div>
           <div className="min-md:hidden">
             <NftPreview
-              previewUrl={nftPreviewUrl}
-              previewName={nftPreviewName}
-              previewPrice={nftPreviewPrice}
+              previewUrl={nftDetails.previewUrl}
+              previewName={nftDetails.previewName}
+              previewPrice={nftDetails.price}
               isImage={isImage}
             />
           </div>
