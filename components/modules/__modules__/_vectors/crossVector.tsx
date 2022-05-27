@@ -10,7 +10,7 @@ const defaultProps: IProps = {
   onClick: () => null,
 };
 
-const CrossVector: FC<IProps> = ({ className, onClick }: IProps) => {
+const crossVector: FC<IProps> = ({ className, onClick }: IProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,6 +26,6 @@ const CrossVector: FC<IProps> = ({ className, onClick }: IProps) => {
   );
 };
 
-CrossVector.defaultProps = defaultProps;
+crossVector.defaultProps = defaultProps;
 
-export default CrossVector;
+export default crossVector;

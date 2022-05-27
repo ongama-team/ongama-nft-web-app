@@ -5,7 +5,7 @@ const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const MoonVector: FC<classNameInterface> = ({ className }) => {
+const moonVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       width="700pt"
@@ -20,6 +20,6 @@ const MoonVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-MoonVector.defaultProps = defaultProps;
+moonVector.defaultProps = defaultProps;
 
-export default MoonVector;
+export default moonVector;

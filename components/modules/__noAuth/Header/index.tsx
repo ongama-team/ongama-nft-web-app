@@ -9,6 +9,7 @@ import {
 import Link from "next/link";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
+
 import { useRecoilState, useRecoilValue } from "recoil";
 import { walletAtom, walletAddressAtom } from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
