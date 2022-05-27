@@ -5,7 +5,7 @@ const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const dotsVector: FC<classNameInterface> = ({ className }) => {
+const DotsVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +24,6 @@ const dotsVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-dotsVector.defaultProps = defaultProps;
+DotsVector.defaultProps = defaultProps;
 
-export default dotsVector;
+export default DotsVector;
