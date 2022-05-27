@@ -22,11 +22,11 @@ const errorHandler = (err: any) => {
 
 export const successHandler = (response: AxiosResponse<any, any>) => response;
 
-http.interceptors.request.use((request) => requestHandler(request));
+http.interceptors.request.use((request: any) => requestHandler(request));
 
 http.interceptors.response.use(
-  (response) => successHandler(response),
-  (error) => errorHandler(error)
+  (response: any) => successHandler(response),
+  (error: any) => errorHandler(error)
 );
 
 export default http;

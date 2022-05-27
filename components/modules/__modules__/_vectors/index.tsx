@@ -19,6 +19,14 @@ import {
 import { FaEthereum as VEthereum } from "react-icons/fa";
 import { AiOutlineMail as VEmail } from "react-icons/ai";
 import { IoShareOutline as VShare } from "react-icons/io5";
+import { FaRegBookmark as VBookmark } from "react-icons/fa";
+import { ImInfinite as VInfinite } from "react-icons/im";
+import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
+import {
+  BsPlusCircleFill as VPlusCircleFill,
+  BsQuestion as VQuestionMark,
+} from "react-icons/bs";
+
 import DotsVector from "./dotsVector";
 import Ethereum from "./ethereumVector";
 import HeartVector from "./heartVector";
@@ -53,4 +61,9 @@ export {
   VEthereum,
   VGlobe,
   VEmail,
+  VBookmark,
+  VInfinite,
+  VTimeLapse,
+  VPlusCircleFill,
+  VQuestionMark,
 };

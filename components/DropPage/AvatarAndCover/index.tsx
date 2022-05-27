@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { FC } from "react";
-import minifyAddress from "@lib/helper/minifyAddress";
+import truncateAddress from "@lib/helper/truncateAddress";
 import { VEthereum } from "@components/modules/__modules__/_vectors";
 
 interface IProps {
@@ -14,7 +14,7 @@ interface IProps {
 
 const AvatarAndCover: FC<IProps> = ({ profile }) => {
   const { avatar, profileImage, name, address } = profile;
-  const minifiedAddress = minifyAddress(address, 6, 3);
+  const minifiedAddress = truncateAddress(address, 6, 3);
 
   return (
     <div className="flex flex-col">
