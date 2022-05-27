@@ -51,7 +51,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-20">
       <div className="cursor-pointer">
-        <Link href="/">
+        <Link href="/" passHref>
           <p className="flex items-center text-3xl font-ibmPlexSans">
             <span className="text-blue-500">O</span>ngama
           </p>
