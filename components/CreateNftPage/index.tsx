@@ -7,7 +7,7 @@ import {
 } from "@components/modules/__modules__/_vectors";
 import { useRecoilValue } from "recoil";
 import { walletAddressAtom } from "@lib/atoms";
-import minifyAddress from "@lib/helper/minifyAddress";
+import truncateAddress from "@lib/helper/truncateAddress";
 import { Switch } from "antd";
 import DetailsForm from "./DetailsForm";
 import AdvancedSettingForm from "./AdvanceSettingForm";
@@ -29,7 +29,7 @@ const CreateNftPage = () => {
   const [inputFile, setInputFile] = useState();
   const [isImage, setIsImage] = useState(true);
   const walletAddress = useRecoilValue(walletAddressAtom);
-  const minifiedWalletAddress = minifyAddress(walletAddress, 10, 4);
+  const minifiedWalletAddress = truncateAddress(walletAddress, 10, 4);
   const inputFileRef = useRef<HTMLInputElement>(null);
 
   const onChooseFile = () => {
