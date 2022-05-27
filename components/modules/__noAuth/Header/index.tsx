@@ -13,8 +13,10 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { walletAtom, walletAddressAtom } from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
 import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const routes = useRouter();
   const [isLightTheme, setIsLightTheme] = useState(true);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
@@ -27,6 +29,10 @@ const Header = () => {
 
   const toggleWallets = () => {
     setIsWalletsDisplayed(!isWalletsDisplayed);
+  };
+
+  const onCreateNft = () => {
+    routes.push("/create");
   };
 
   // --- detect when browser wallet is deconnected
@@ -52,7 +58,8 @@ const Header = () => {
       <div className="cursor-pointer">
         <Link href="/" passHref>
           <p className="flex items-center text-3xl font-ibmPlexSans">
-            <span className="text-blue-500">O</span>ngama
+            <span className="text-blue-500">O</span>{" "}
+            <span className="mobile:hidden">ngama</span>
           </p>
         </Link>
       </div>
@@ -64,13 +71,16 @@ const Header = () => {
         <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-lg:block hidden">
           <VSearch className="w-6 h-6" />
         </button>
-        <button className="border-none px-2 py-3 mx-1 w-20 rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-ibmPlexSans min-md:hidden">
+        <button
+          onClick={onCreateNft}
+          className="border-none px-2 py-3 mx-1 w-20 font-bold rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-ibmPlexSans min-md:hidden"
+        >
           Create
         </button>
         <button
           onClick={toggleWallets}
           className={`${walletAddress && "hidden"}
-           border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden`}
+           border border-gray-300 transition-all duration-300 font-bold ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden`}
         >
           Sign in
         </button>

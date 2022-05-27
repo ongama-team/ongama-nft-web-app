@@ -12,7 +12,16 @@ import {
   HiChevronRight as VChevronRight,
   HiChevronLeft as VChevronLeft,
 } from "react-icons/hi";
-import { FaEthereum as VEthereum } from "react-icons/fa";
+import {
+  FaEthereum as VEthereum,
+  FaRegBookmark as VBookmark,
+} from "react-icons/fa";
+import { ImInfinite as VInfinite } from "react-icons/im";
+import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
+import {
+  BsPlusCircleFill as VPlusCircleFill,
+  BsQuestion as VQuestionMark,
+} from "react-icons/bs";
 
 import DotsVector from "./dotsVector";
 import Ethereum from "./ethereumVector";
@@ -35,4 +44,9 @@ export {
   VSearch,
   VSun,
   VEthereum,
+  VBookmark,
+  VInfinite,
+  VTimeLapse,
+  VPlusCircleFill,
+  VQuestionMark,
 };

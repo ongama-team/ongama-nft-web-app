@@ -42,7 +42,7 @@ const SearchInputBar = () => {
       />
       {inputValue && (
         <div onClick={cleanInputVlaue}>
-          <CrossVector className="h-4 w-4 cursor-pointer text-gray-600" />
+          <CrossVector className="h-4 w-4 cursor-pointer text-gray-600 rotate-45" />
         </div>
       )}
     </div>
