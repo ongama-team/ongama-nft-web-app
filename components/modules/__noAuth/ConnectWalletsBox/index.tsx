@@ -16,6 +16,7 @@ const ConnectWalletBox = () => {
 
   return (
     <div
+      onClick={closeWalletConnect}
       className={`${
         isWalletConnect && "hidden"
       } z-10 h-full flex flex-col justify-center bg-white bg-opacity-40 items-center fixed top-0 left-0 right-0 bottom-0 backdrop-filter backdrop-blur-lg`}
