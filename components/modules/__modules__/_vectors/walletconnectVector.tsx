@@ -5,7 +5,7 @@ const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const WalletConnectVector: FC<classNameInterface> = ({ className }) => {
+const walletConnectVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       className={className}
@@ -24,6 +24,6 @@ const WalletConnectVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-WalletConnectVector.defaultProps = defaultProps;
+walletConnectVector.defaultProps = defaultProps;
 
-export default WalletConnectVector;
+export default walletConnectVector;

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 import { VDotHorizontal } from "../../../__modules__/_vectors";
 
@@ -8,18 +9,28 @@ const Menu = () => {
 
   return (
     <div className="min-md:hidden block">
-      <ul className="flex justify-between font-ibmPlexSans mr-2 min-lg:mx-5 items-center text-gray-400">
-        <li className="min-lg:pr-3">Explore</li>
-        <li className="min-lg:px-3">My Profile</li>
-        <li className="min-lg:px-3">Following</li>
-        <li className="min-lg:px-3">Activity</li>
+      <ul className="flex justify-between font-ibmPlexSans font-bold mr-2 min-lg:mx-5 items-center text-gray-400">
+        <li className="min-lg:pr-3 hover:text-black transition-all">Explore</li>
+        <li className="min-lg:px-3 hover:text-black transition-all">
+          My Profile
+        </li>
+        <li className="min-lg:px-3 hover:text-black transition-all">
+          Following
+        </li>
+        <li className="min-lg:px-3 hover:text-black transition-all">
+          Activity
+        </li>
         <li className="hidden min-xl:block mx-3">
           <button onClick={onDotVectorClick}>
-            <VDotHorizontal className="h-6 w-6" />
+            <VDotHorizontal className="h-6 w-6 hover:text-black transition-all" />
           </button>
         </li>
-        <li className="min-xl:hidden">How it works</li>
-        <li className="min-xl:hidden">Community</li>
+        <li className="min-xl:hidden hover:text-black transition-all">
+          How it works
+        </li>
+        <li className="min-xl:hidden hover:text-black transition-all">
+          Community
+        </li>
       </ul>
     </div>
   );

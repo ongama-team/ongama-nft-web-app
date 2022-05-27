@@ -5,7 +5,7 @@ const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const HeartVector: FC<classNameInterface> = ({ className }) => {
+const heartVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +24,6 @@ const HeartVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-HeartVector.defaultProps = defaultProps;
+heartVector.defaultProps = defaultProps;
 
-export default HeartVector;
+export default heartVector;

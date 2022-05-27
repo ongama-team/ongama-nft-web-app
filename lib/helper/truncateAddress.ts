@@ -1,4 +1,4 @@
-const minifyAddress = (
+const truncateAddress = (
   address: string,
   startingCharacters = 6,
   endingCharacters = 3
@@ -8,4 +8,4 @@ const minifyAddress = (
   )}`;
 };
 
-export default minifyAddress;
+export default truncateAddress;

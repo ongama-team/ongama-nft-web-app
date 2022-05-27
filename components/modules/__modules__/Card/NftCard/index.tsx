@@ -7,9 +7,9 @@ interface IProps {
   nftPrice: string;
   nftName: string;
   ownerProfile: string;
-  ownerName: string;
-  likes: number;
-  auction: string;
+  ownerName?: string;
+  likes?: number;
+  auction?: string;
 }
 
 const NFTCard: FC<IProps> = ({
@@ -24,11 +24,11 @@ const NFTCard: FC<IProps> = ({
   return (
     <div className="flex w-full shadow-lg mx-auto p-5 rounded-xl flex-col bg-white">
       <div className="flex mx-1 items-center justify-between">
-        <div className="rounded-full overflow-hidden w-7 h-7">
+        <div className="rounded-full w-7 h-7">
           <img
             src={ownerProfile}
             alt={ownerName}
-            className="w-full object-cover"
+            className="object-cover w-7 h-7 rounded-full"
           />
         </div>
         <DotsVector className="w-4 h-4 opacity-70" />

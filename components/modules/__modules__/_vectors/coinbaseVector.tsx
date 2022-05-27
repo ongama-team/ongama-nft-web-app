@@ -5,7 +5,7 @@ const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const CoinBaseVector: FC<classNameInterface> = ({ className }) => {
+const coinBaseVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       version="1.2"
@@ -32,6 +32,6 @@ const CoinBaseVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-CoinBaseVector.defaultProps = defaultProps;
+coinBaseVector.defaultProps = defaultProps;
 
-export default CoinBaseVector;
+export default coinBaseVector;

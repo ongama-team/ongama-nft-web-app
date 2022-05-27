@@ -5,7 +5,7 @@ const defaultProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-const TrustWalletVector: FC<classNameInterface> = ({ className }) => {
+const trustWalletVector: FC<classNameInterface> = ({ className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,6 +21,6 @@ const TrustWalletVector: FC<classNameInterface> = ({ className }) => {
   );
 };
 
-TrustWalletVector.defaultProps = defaultProps;
+trustWalletVector.defaultProps = defaultProps;
 
-export default TrustWalletVector;
+export default trustWalletVector;

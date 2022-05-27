@@ -127,5 +127,4 @@ const ConnectWalletsModal = () => {
     </div>
   );
 };
-
 export default ConnectWalletsModal;
