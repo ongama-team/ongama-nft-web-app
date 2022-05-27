@@ -12,7 +12,7 @@ const HotBids = () => {
   return (
     <>
       <div className="flex  2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-6">
-        <h1 className="mb-6 font-bold text-xl text-black font-ibmPleSans md:text-2xl lg:text-3xl ml-2">
+        <h1 className="mb-6 font-bold text-xl text-black font-ibmPleSans md:text-2xl lg:text-3xl ">
           Hot Bids 🔥
         </h1>
       </div>
