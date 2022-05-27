@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { ChangeEvent, FormEvent, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   CrossVector,
   VEthereum,
@@ -21,7 +21,7 @@ const CreateNftPage = () => {
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
   const [nftDetails, setNftDetails] = useState({
     previewUrl: "",
-    previewName: "",
+    name: "",
     royalties: "",
     price: "",
     description: "",
@@ -42,6 +42,13 @@ const CreateNftPage = () => {
     setInputFile(files[0]);
     const filePreviewUrl = URL.createObjectURL(files[0]);
     setNftDetails({ ...nftDetails, previewUrl: filePreviewUrl });
+  };
+
+  const onNftDetailsChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { value, name } = event.target;
+    setNftDetails({ ...nftDetails, [name]: value });
   };
 
   const onCancel = () => {
@@ -140,17 +147,7 @@ const CreateNftPage = () => {
                 onClick={() => setIsFreeMinting(!isFreeMinting)}
               />
             </div>
-            <DetailsForm
-              onNftDescriptionChange={(e) =>
-                setNftDetails({ ...nftDetails, description: e.target.value })
-              }
-              onNftNameChage={(e) =>
-                setNftDetails({ ...nftDetails, previewName: e.target.value })
-              }
-              onNftRoyaliesChange={(e) =>
-                setNftDetails({ ...nftDetails, royalties: e.target.value })
-              }
-            />
+            <DetailsForm onNftDetailsChange={onNftDetailsChange} />
             <button
               onClick={() => setIsAdvancedForm(!isAdvancedForm)}
               className="my-5 w-full py-3 border border-gray-300 rounded-3xl font-bold hover:border-gray-400 transition-all"
@@ -177,7 +174,7 @@ const CreateNftPage = () => {
           <div className="min-md:hidden">
             <NftPreview
               previewUrl={nftDetails.previewUrl}
-              previewName={nftDetails.previewName}
+              previewName={nftDetails.name}
               previewPrice={nftDetails.price}
               isImage={isImage}
             />

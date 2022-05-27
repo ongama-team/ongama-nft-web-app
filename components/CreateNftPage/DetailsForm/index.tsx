@@ -2,18 +2,12 @@ import React from "react";
 import useAutoResize from "@lib/hooks/useAutoResize";
 
 interface IProps {
-  onNftNameChage: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onNftDescriptionChange: (
-    event: React.ChangeEvent<HTMLTextAreaElement>
+  onNftDetailsChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onNftRoyaliesChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const DetailsForm = ({
-  onNftDescriptionChange,
-  onNftNameChage,
-  onNftRoyaliesChange,
-}: IProps) => {
+const DetailsForm = ({ onNftDetailsChange }: IProps) => {
   const { setTextAreaValue, textAreaRef } = useAutoResize();
 
   return (
@@ -26,7 +20,7 @@ const DetailsForm = ({
         name="name"
         className="mt-2 py-2 outline-none w-full border-b border-gray-300"
         placeholder="e.g.'Redeemable T-Shirt with logo'"
-        onChange={onNftNameChage}
+        onChange={onNftDetailsChange}
       />
       <div className="mt-5 flex flex-col">
         <label htmlFor="description" className="font-bold">
@@ -35,9 +29,9 @@ const DetailsForm = ({
         </label>
         <textarea
           ref={textAreaRef}
-          onChange={(e) => {
-            setTextAreaValue(e.target.value);
-            onNftDescriptionChange(e);
+          onChange={(event) => {
+            setTextAreaValue(event.target.value);
+            onNftDetailsChange(event);
           }}
           name="description"
           placeholder="e.g.'After purchasing you'll be able to get the real T-Shirt'"
@@ -47,15 +41,16 @@ const DetailsForm = ({
           With preserved line-breaks
         </p>
       </div>
-      <label htmlFor="royalites" className="font-bold mt-4">
+      <label htmlFor="royalties" className="font-bold mt-4">
         Royalties
       </label>
       <div className="flex border-b border-gray-300">
         <input
+          name="royalties"
           type="number"
           placeholder="e.g. 10%"
           className="w-full my-3 outline-none"
-          onChange={onNftRoyaliesChange}
+          onChange={onNftDetailsChange}
         />
         <p className="text-gray-400">%</p>
       </div>
