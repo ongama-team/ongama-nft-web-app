@@ -9,18 +9,14 @@ import {
 import { VerifiedImg } from "@lib/Resources";
 
 const HotBidsCard = () => {
-  const { liveAuctionsData } = dummy_data;
-  const today = new Date();
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-
+  const { hotBidsData } = dummy_data;
   return (
-    <div className="md:grid md:grid-rows-1 gap-x-3 gap-y-4 md:grid-flow-col grid-flow-col-dense grid grid-rows-1 ">
-      {liveAuctionsData &&
-        liveAuctionsData.map((item) => {
+    <div className="md:grid md:grid-rows-1 gap-x-5 gap-y-4 md:grid-flow-col grid-flow-col-dense grid grid-rows-1 ">
+      {hotBidsData &&
+        hotBidsData.map((item) => {
           return (
             <div
-              className="w-80  md:w-60 p-3 m-3  border-2 bg-white rounded-xl relative"
+              className="w-80   md:w-60 p-4 m-1 border-2 bg-white rounded-xl relative "
               key={item.id}
             >
               <div className=" flex justify-between  items-center ">
@@ -50,14 +46,14 @@ const HotBidsCard = () => {
               </div>
               <img
                 src={item.url}
-                alt={item.name}
+                alt={item.title}
                 className="rounded-2xl mt-6 object-fill h-auto w-30"
               />
               <div className="flex justify-between items-center mt-6 mb-2">
                 <h2 className="font-bold text-sm text-gray-700">
                   {item.title}
                 </h2>
-                <Ethereum />
+                <Ethereum className="w-5 h-5text-blue-400" />
               </div>
               <h2 className="font-bold text-sm m-2-0 text-gray-500">
                 {item.subTitle}

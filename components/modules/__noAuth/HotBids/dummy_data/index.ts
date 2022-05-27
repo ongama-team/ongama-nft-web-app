@@ -1,5 +1,5 @@
 export const dummy_data = {
-  liveAuctionsData: [
+  hotBidsData: [
     {
       id: 1,
       buyers: [

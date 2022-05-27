@@ -4,30 +4,11 @@ import {
   VChevronRight,
 } from "@components/modules/__modules__/_vectors";
 
-import AllLiveAuctions from "./AllHotBids";
+import AllHotBids from "./AllHotBids";
 import useSideScroll from "@components/hooks/useSideScroll";
+import Carousel from "@components/modules/__modules__/Carousel/Carousel";
 
 const HotBids = () => {
-  const scrollContainer = useRef<HTMLDivElement>(null);
-  const sideScroll = useSideScroll();
-
-  const onScrollLeft = () => {
-    sideScroll(
-      scrollContainer.current as HTMLDivElement,
-      40,
-      200,
-      -(scrollContainer.current?.offsetWidth as number)
-    );
-  };
-
-  const onScrollRight = () => {
-    sideScroll(
-      scrollContainer.current as HTMLDivElement,
-      40,
-      200,
-      scrollContainer.current?.offsetWidth as number
-    );
-  };
   return (
     <>
       <div className="flex  2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-6">
@@ -37,27 +18,11 @@ const HotBids = () => {
       </div>
 
       <div className="flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit">
-        <button
-          className="z-10 w-fit h-fit rounded-full -mr-4 "
-          onClick={onScrollLeft}
-        >
-          <VChevronLeft className="bg-white px-2 py-2 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
-        </button>
-
-        <div
-          className="overflow-x-auto scrollbar-hide  scroll-smooth"
-          ref={scrollContainer}
-        >
-          <div className=" md:w-max sm:w-full">
-            <AllLiveAuctions />
+        <Carousel>
+          <div className="md:w-max sm:w-full m-0">
+            <AllHotBids />
           </div>
-        </div>
-        <button
-          className="z-10 w-fit h-fit rounded-full -ml-5 "
-          onClick={onScrollRight}
-        >
-          <VChevronRight className="bg-white px-2 py-2 border border-gray-300 rounded-full w-10 h-10 cursor-pointer" />
-        </button>
+        </Carousel>
       </div>
     </>
   );
