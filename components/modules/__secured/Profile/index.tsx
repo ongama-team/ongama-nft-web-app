@@ -64,7 +64,7 @@ function ProfileContainer() {
                 {staticImages[11].nft?.slice(37)}
               </p>
             </div>
-            <button className="h-5 w-20 text-xs rounded-full border border-gray-600">
+            <button className="w-[80px] p-1 font-bold text-xs rounded-full border-2 border-gray-300">
               +1 more
             </button>
           </div>
@@ -74,18 +74,18 @@ function ProfileContainer() {
             <VGlobe className="opacity-70 w-4 h-4" />
             <p>Twitter.com</p>
           </div>
-          <div className="flex relative mt-4 justify-center">
+          <div className="flex relative space-x-4 mt-4 justify-center">
             <p
               className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
               onClick={() => setIsSubscribesDisplayed(!isSubscribesDisplayed)}
             >
-              <label className="font-bold">20</label> followers
+              <label className="font-bold">20</label> Followers
             </p>
             <p
               className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
               onClick={() => setIsSubscribesDisplayed(!isSubscribesDisplayed)}
             >
-              <label className="font-bold">1</label> following
+              <label className="font-bold">1</label> Following
             </p>
             <div
               onClick={() => {
@@ -162,7 +162,7 @@ function ProfileContainer() {
           <Tab.Panels>
             <div className="mx-auto border-t-2">
               <div className="flex items-center justify-around w-full">
-                <div className="flex py-4 space-x-2 overflow-x-scroll">
+                <div className="flex  py-4 space-x-2 lg:overflow-x-hidden overflow-x-scroll">
                   <div className="flex px-10 space-x-3 py-4 border rounded-full justify-center items-center">
                     <Block className="w-6 h-6" />
                     <button className="font-bold">Blockchain</button>
