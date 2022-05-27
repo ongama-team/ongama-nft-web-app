@@ -5,7 +5,7 @@ import {
   ControlVector,
   DotsVector,
   Ethereum,
-  ShareVector,
+  VShare,
   VGlobe,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
@@ -108,7 +108,7 @@ function ProfileContainer() {
               }}
               className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border"
             >
-              <ShareVector className="w-4 h-4 opacity-75" />
+              <VShare className="w-4 h-4 opacity-75" />
             </button>
             <button className="px-4 py-2 rounded-full border-gray-300 border">
               <DotsVector className="w-4 h-4" />

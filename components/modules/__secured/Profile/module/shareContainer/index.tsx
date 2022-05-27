@@ -1,8 +1,8 @@
 import {
-  FacebookVector,
-  LinkVector,
-  TelegramVector,
-  TwitterVector,
+  VFacebook,
+  VLink,
+  VTelegram,
+  VTwitter,
 } from "@components/modules/__modules__/_vectors";
 import React, { FC } from "react";
 
@@ -23,25 +23,25 @@ const ShareContainer: FC<openModel> = ({ isShareOpen }) => {
       <div className="flex p-4 space-x-5">
         <div className="flex flex-col justify-center items-center">
           <div className="border-2 p-3 rounded-full">
-            <FacebookVector className="w-6 h-6 opacity-75" />
+            <VFacebook className="w-6 h-6 opacity-75" />
           </div>
           <label className="md:text-lg text-sm text-gray-500">facebook</label>
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="border-2 p-3 rounded-full">
-            <TwitterVector className="w-6 h-6 opacity-75" />
+            <VTwitter className="w-6 h-6 opacity-75" />
           </div>
           <label className="md:text-lg text-sm text-gray-500">twitter</label>
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="border-2 p-3 rounded-full">
-            <TelegramVector className="w-6 h-6 opacity-75" />
+            <VTelegram className="w-6 h-6 opacity-75" />
           </div>
           <label className="md:text-lg text-sm text-gray-500">telegram</label>
         </div>
         <div className="flex flex-col justify-center items-center">
           <div className="border-2 p-3 rounded-full">
-            <LinkVector className="w-6 h-6 opacity-75" />
+            <VLink className="w-6 h-6 opacity-75" />
           </div>
           <label className="md:text-lg text-sm text-gray-500">copy</label>
         </div>
