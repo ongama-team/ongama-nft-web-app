@@ -80,4 +80,15 @@ export const dummy_data = {
       url: "https://lh3.googleusercontent.com/O0XkiR_Z2--OPa_RA6FhXrR16yBOgIJqSLdHTGA0-LAhyzjSYcb3WEPaCYZHeh19JIUEAUazofVKXcY2qOylWCdoeBN6IfGZLJ3I4A=s2500",
     },
   ],
+  hotCollections: [
+    {
+      name: "CryptoPunks",
+      profileUrl:
+        "https://pbs.twimg.com/ext_tw_video_thumb/1461468037610196993/pu/img/Ft9yd8denGYgucvk?format=jpg&name=4096x4096",
+      bannerUrl:
+        "https://pbs.twimg.com/ext_tw_video_thumb/1461468037610196993/pu/img/Ft9yd8denGYgucvk?format=jpg&name=4096x4096",
+      volumeTraded: 400,
+      isVerified: false,
+    },
+  ],
 };
