@@ -5,10 +5,11 @@ const web3Instance = new Web3Service();
 
 class Web3Actions {
   public async connectBrowserWallet() {
-    let signer;
+    let signer: any;
+
     try {
       signer = await web3Instance.connect();
-      LocalStorage.setItem("ongama_signer_address", signer as string);
+      LocalStorage.setItem("ongama_signer_address", signer.signerWalletAddress);
       return signer;
     } catch {
       return signer;
@@ -20,7 +21,6 @@ class Web3Actions {
     try {
       const connector = await web3Instance.walletConnectConnector();
       const signer = await connector?.getAddress();
-
       return signer;
     } catch {
       return signer;

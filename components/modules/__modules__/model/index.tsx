@@ -36,7 +36,7 @@ const ConnectWalletsModal = () => {
     const signer = await connectTrustOrConnectWallet();
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
-    setWalletAddress(signer);
+    setWalletAddress({ address: signer, balance: "" });
     onEditMode();
   };
 
@@ -44,15 +44,19 @@ const ConnectWalletsModal = () => {
     const signer = await connectCoinBaseWallet();
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
-    setWalletAddress(signer);
+    setWalletAddress({ address: signer, balance: "" });
     onEditMode();
   };
 
   const onConnectBrowserWallet = async () => {
     const signer = await connectBrowserWallet();
+    const { signerWalletAddress, formatedBalance } = signer;
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
-    setWalletAddress(signer as string);
+    setWalletAddress({
+      balance: formatedBalance,
+      address: signerWalletAddress,
+    });
     onEditMode();
   };
 
@@ -117,7 +121,7 @@ const ConnectWalletsModal = () => {
             onClick={onConnectTrustOrConnectWallet}
             className="flex space-y-3 hover:bg-gray-200 p-4 rounded-lg justify-center flex-col items-center"
           >
-            <div className=" flex justify-center self-center flex-col">
+            <div className="flex justify-center self-center flex-col">
               <WalletConnectVector className="h-12 w-12 flex self-center" />
             </div>
             <label className="font-ibmPlexSans font-thin">Wallet Connect</label>
