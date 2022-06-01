@@ -88,6 +88,42 @@ export const dummy_data = {
       bannerUrl:
         "https://pbs.twimg.com/ext_tw_video_thumb/1461468037610196993/pu/img/Ft9yd8denGYgucvk?format=jpg&name=4096x4096",
       volumeTraded: 400,
+      isVerified: true,
+    },
+    {
+      name: "CryptoKitties",
+      profileUrl:
+        "https://helios-i.mashable.com/imagery/articles/04tfuZxwA56wQUFcHkkCFWD/hero-image.fill.size_1200x1200.v1623367746.png",
+      bannerUrl:
+        "https://cdn.cnn.com/cnnnext/dam/assets/180302141853-cryptokitties-top-full-169.jpg",
+      volumeTraded: 890,
+      isVerified: false,
+    },
+    {
+      name: "CryptoZees",
+      profileUrl:
+        "https://i.pinimg.com/originals/b3/00/90/b30090df009fde335b56f736e04998ab.jpg",
+      bannerUrl:
+        "https://cdnb.artstation.com/p/assets/images/images/044/563/051/large/huy-dinh-if-cyclops.jpg?1640405640",
+      volumeTraded: 8987650,
+      isVerified: false,
+    },
+    {
+      name: "CryptoKitties",
+      profileUrl:
+        "https://helios-i.mashable.com/imagery/articles/04tfuZxwA56wQUFcHkkCFWD/hero-image.fill.size_1200x1200.v1623367746.png",
+      bannerUrl:
+        "https://cdn.cnn.com/cnnnext/dam/assets/180302141853-cryptokitties-top-full-169.jpg",
+      volumeTraded: 890,
+      isVerified: true,
+    },
+    {
+      name: "BoredApeYatchClub",
+      profileUrl:
+        "https://i.pinimg.com/originals/b3/00/90/b30090df009fde335b56f736e04998ab.jpg",
+      bannerUrl:
+        "https://cdnb.artstation.com/p/assets/images/images/044/563/051/large/huy-dinh-if-cyclops.jpg?1640405640",
+      volumeTraded: 890,
       isVerified: false,
     },
   ],

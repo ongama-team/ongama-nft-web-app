@@ -19,16 +19,20 @@ const CollectionCard: FC<Props> = ({
   isVerified,
 }) => {
   return (
-    <div className="h-52 w-72 border-2 border-slate-200 relative p-2 rounded-xl">
+    <div className="h-52 w-72 flex-none border-2 border-slate-200 relative p-2 mr-4 rounded-xl">
       <section className="h-[45%]">
-        <img src={bannerUrl} alt={name} className="w-full h-full rounded-xl" />
+        <img
+          src={bannerUrl}
+          alt={name}
+          className="w-full h-full rounded-xl border-solid border-[1px] border-gray-400"
+        />
       </section>
       <section className="absolute top-[25%] left-[6rem]">
         <div className="relative">
           <img
             src={profileUrl}
             alt={name}
-            className="h-16 w-16 rounded-full ml-4 mr-4 border-2 border-white"
+            className="h-16 w-16 rounded-full ml-4 mr-4 border-solid border-2 border-white"
           />
           {isVerified && (
             <img
