@@ -21,10 +21,8 @@ const Header = () => {
   const [isLightTheme, setIsLightTheme] = useState(true);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
-  const [_, setWalletAddress] = useRecoilState(walletAddressAtom);
+  const [walletData, setWalletData] = useRecoilState(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
-
-  const walletData = useRecoilValue(walletAddressAtom);
   const { address } = walletData;
   const toggleTheme = () => {
     setIsLightTheme(!isLightTheme);
@@ -44,20 +42,21 @@ const Header = () => {
     window.ethereum.on("accountsChanged", (accounts: string[]) => {
       if (!accounts.length) {
         LocalStorage.removeItem("ongama_signer_address");
-        setWalletAddress({ ...walletData, address: "" });
+        setWalletData({ ...walletData, address: "" });
       }
     });
-  }, [setWalletAddress, walletData]);
+  }, [setWalletData, walletData]);
 
   useEffect(() => {
     const memorizedWalletAddress = LocalStorage.getItem(
       "ongama_signer_address"
     );
-    setWalletAddress({
+    setWalletData({
       ...walletData,
       address: memorizedWalletAddress || "",
     });
-  }, [setWalletAddress]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setWalletData]);
 
   const openProfileMenu = () => {
     setIsProfileMenu(!isProfileMenu);
