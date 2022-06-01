@@ -43,12 +43,12 @@ const ProfileMenu = () => {
             />
             <div className="px-3">
               <p className="font-ibmPlexSans font-bold">{name}</p>
-              <p
+              <button
                 onClick={() => router.push("/profile")}
                 className="text-gray-400 hover:text-gray-600 cursor-pointer transition-all font-ibmPlexSans"
               >
                 View profile
-              </p>
+              </button>
             </div>
           </div>
           <div className="my-5">

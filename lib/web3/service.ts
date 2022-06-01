@@ -1,4 +1,3 @@
-import LocalStorage from "@lib/helper/LocalStorage";
 import { ethers } from "ethers";
 import { TChain } from "../@Types/chains";
 import { CHAINS_ENV } from "../config/chains";
