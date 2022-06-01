@@ -19,6 +19,11 @@ const ProfileMenu = () => {
     setIsProfileMenu(!isProfileMenu);
   };
 
+  const onRedirectToProfile = () => {
+    router.push("/profile");
+    setIsProfileMenu(!isProfileMenu);
+  };
+
   return (
     <div
       className={`${
@@ -43,12 +48,15 @@ const ProfileMenu = () => {
             />
             <div className="px-3">
               <p className="font-ibmPlexSans font-bold">{name}</p>
-              <button
-                onClick={() => router.push("/profile")}
+              <div
+                tabIndex={0}
+                role="button"
+                onKeyDown={() => null}
+                onClick={onRedirectToProfile}
                 className="text-gray-400 hover:text-gray-600 cursor-pointer transition-all font-ibmPlexSans"
               >
                 View profile
-              </button>
+              </div>
             </div>
           </div>
           <div className="my-5">
