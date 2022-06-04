@@ -19,6 +19,7 @@ import { subscribesAtom } from "@lib/atoms";
 import { dummy_data } from "@components/modules/__noAuth/Presentation/dummy_data";
 import Header from "@components/modules/__noAuth/Header";
 import OnSale from "pages/profile/sale";
+import ProfileMenu from "../ProfileMenu";
 
 function ProfileContainer() {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
@@ -31,6 +32,7 @@ function ProfileContainer() {
   return (
     <>
       <Header />
+      <ProfileMenu />
       <div
         onClick={() => {
           isShareOpen && setIsShareOpen(false);

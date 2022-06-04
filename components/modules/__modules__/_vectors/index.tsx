@@ -7,6 +7,9 @@ import MoonVector from "./moonVector";
 import Collections from "./collectionVector";
 import Block from "./blockVector";
 import ControlVector from "./controlVector";
+import DotsVector from "./dotsVector";
+import Ethereum from "./ethereumVector";
+import HeartVector from "./heartVector";
 import {
   HiOutlineMenuAlt4 as VMenu,
   HiGlobeAlt as VGlobe,
@@ -15,25 +18,25 @@ import {
   HiOutlineDotsHorizontal as VDotHorizontal,
   HiChevronRight as VChevronRight,
   HiChevronLeft as VChevronLeft,
+  HiOutlineLink as VLink,
 } from "react-icons/hi";
-import { FaEthereum as VEthereum } from "react-icons/fa";
-import { AiOutlineMail as VEmail } from "react-icons/ai";
-import { IoShareOutline as VShare } from "react-icons/io5";
-import { FaRegBookmark as VBookmark } from "react-icons/fa";
-import { ImInfinite as VInfinite } from "react-icons/im";
-import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
+import {
+  FaEthereum as VEthereum,
+  FaRegBookmark as VBookmark,
+} from "react-icons/fa";
 import {
   BsPlusCircleFill as VPlusCircleFill,
   BsQuestion as VQuestionMark,
+  BsTelegram as VTelegram,
+  BsTwitter as VTwitter,
+  BsFacebook as VFacebook,
 } from "react-icons/bs";
+import { AiOutlineMail as VEmail } from "react-icons/ai";
+import { IoShareOutline as VShare } from "react-icons/io5";
+import { ImInfinite as VInfinite } from "react-icons/im";
+import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
+import { RiUserLine as VUser } from "react-icons/ri";
 
-import DotsVector from "./dotsVector";
-import Ethereum from "./ethereumVector";
-import HeartVector from "./heartVector";
-import { BsFacebook as VFacebook } from "react-icons/bs";
-import { HiOutlineLink as VLink } from "react-icons/hi";
-import { BsTwitter as VTwitter } from "react-icons/bs";
-import { BsTelegram as VTelegram } from "react-icons/bs";
 export {
   CoinBaseVector,
   CrossVector,
@@ -66,4 +69,5 @@ export {
   VTimeLapse,
   VPlusCircleFill,
   VQuestionMark,
+  VUser,
 };
