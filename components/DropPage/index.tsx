@@ -6,6 +6,7 @@ import AvatarAndCover from "./AvatarAndCover";
 import dummy_profile from "./AvatarAndCover/dummy_profile";
 import Items from "./Items";
 import StatisticTable from "./StatisticTable";
+import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 
 const DropPage = () => {
   const [activeMenu, setActiveMenu] = useState("items");
@@ -42,6 +43,7 @@ const DropPage = () => {
         {activeMenu === "activity" && <Activity />}
       </div>
       <ConnectWalletBox />
+      <ProfileMenu />
     </>
   );
 };

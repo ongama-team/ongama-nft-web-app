@@ -1,5 +1,5 @@
 import React from "react";
-import useAutoResize from "@lib/hooks/useAutoResize";
+import useAutoResize from "@components/hooks/useAutoResize";
 
 const AdvancedSettingForm = () => {
   const { setTextAreaValue, textAreaRef } = useAutoResize();

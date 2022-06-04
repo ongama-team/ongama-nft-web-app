@@ -1,5 +1,11 @@
 import walletAtom from "./walletAtom";
 import subscribesAtom from "./subscribesAtom";
 import walletAddressAtom from "./walletAddressAtom";
+import { atom } from "recoil";
 
-export { walletAtom, walletAddressAtom, subscribesAtom };
+const profileMenuAtom = atom({
+  key: "profileMenu",
+  default: false,
+});
+
+export { walletAtom, walletAddressAtom, subscribesAtom, profileMenuAtom };

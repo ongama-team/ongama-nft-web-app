@@ -5,6 +5,7 @@ import TopCollection from "@components/modules/__noAuth/TopCollection";
 import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
 import TopSellers from "@components/modules/__noAuth/TopSellers";
 import HotCollections from "@components/modules/__noAuth/HotCollections";
+import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 
 const LandingPage = () => {
   return (
@@ -15,6 +16,7 @@ const LandingPage = () => {
       <ConnectWalletBox />
       <TopSellers />
       <HotCollections />
+      <ProfileMenu />
     </>
   );
 };
