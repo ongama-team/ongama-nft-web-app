@@ -15,6 +15,8 @@ import Header from "@components/modules/__noAuth/Header";
 import PutOnMarketMenu from "./PutOnMarketMenu";
 import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";
+import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
+import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
@@ -28,8 +30,8 @@ const CreateNftPage = () => {
   });
   const [inputFile, setInputFile] = useState();
   const [isImage, setIsImage] = useState(true);
-  const walletAddress = useRecoilValue(walletAddressAtom);
-  const minifiedWalletAddress = truncateAddress(walletAddress, 10, 4);
+  const { address } = useRecoilValue(walletAddressAtom);
+  const truncatedWalletAddress = truncateAddress(address, 10, 4);
   const inputFileRef = useRef<HTMLInputElement>(null);
 
   const onChooseFile = () => {
@@ -65,20 +67,7 @@ const CreateNftPage = () => {
         <div className="flex mt-10 min-lg:w-full min-md:block">
           <div className="flex flex-col">
             <p className="font-bold">Choose wallet</p>
-            <div className="my-5 py-5 border border-gray-300 flex items-center rounded-xl hover:cursor-not-allowed">
-              <p className="mx-2 p-2 text-blue-500 text-xl bg-blue-100 rounded-full">
-                <VEthereum />
-              </p>
-              <div className="mx-5 mobile:mx-1">
-                <p>
-                  <span className="font-bold">{minifiedWalletAddress}</span>
-                  <span className="px-2 bg-green-100 mx-2 py-1 text-xs text-green-700 rounded-lg">
-                    Connected
-                  </span>
-                </p>
-                <p className="font-bold text-gray-500">Ethereum</p>
-              </div>
-            </div>
+            <WalletInfoCard truncatedWalletAddress={truncatedWalletAddress} />
             <div>
               <p className="font-bold">Upload file</p>
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
@@ -181,6 +170,7 @@ const CreateNftPage = () => {
           </div>
         </div>
       </div>
+      <ProfileMenu />
     </>
   );
 };

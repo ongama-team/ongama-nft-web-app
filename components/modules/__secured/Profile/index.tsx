@@ -22,6 +22,7 @@ import { SaleContainer } from "@components/modules/__secured/Profile/saleContain
 import { UserAccount } from "@lib/models/UserAccount";
 import { middleEllipsis } from "../../../../helpers/truncateStrings";
 import { NoCoverImg } from "@lib/Resources";
+import ProfileMenu from "../ProfileMenu";
 
 function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
@@ -34,6 +35,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   return (
     <>
       <Header />
+      <ProfileMenu />
       <div
         onClick={() => {
           isShareOpen && setIsShareOpen(false);
