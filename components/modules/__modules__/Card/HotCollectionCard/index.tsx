@@ -24,7 +24,7 @@ const CollectionCard: FC<Props> = ({
         <img
           src={bannerUrl}
           alt={name}
-          className="w-full h-full rounded-xl border-solid border-[1px] border-gray-400"
+          className="w-full h-full object-cover rounded-xl border-solid border-[1px] border-gray-400"
         />
       </section>
       <section className="absolute top-[25%] left-[6rem]">
