@@ -20,7 +20,7 @@ const ProfileMenu = () => {
   };
 
   const onRedirectToProfile = () => {
-    router.push("/profile");
+    router.push(`/profile/${address}`);
     setIsProfileMenu(!isProfileMenu);
   };
 

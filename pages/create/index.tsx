@@ -7,7 +7,7 @@ const create = () => {
   return (
     <>
       <Head>
-        <title>Ongama | Create NFT</title>
+        <title>Create NFT | Ongama</title>
         <meta name="description" content="NFT marketplace create NFT" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

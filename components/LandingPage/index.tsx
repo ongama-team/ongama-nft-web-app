@@ -6,7 +6,6 @@ import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
 import TopSellers from "@components/modules/__noAuth/TopSellers";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 
-
 const LandingPage = () => {
   return (
     <>
