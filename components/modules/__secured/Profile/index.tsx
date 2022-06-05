@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import React, { useState } from "react";
 import {
   Block,
   Collections,
@@ -9,28 +10,25 @@ import {
   VGlobe,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
-import { useState } from "react";
-import React from "react";
-
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { subscribesAtom, walletAddressAtom } from "@lib/atoms";
-import { dummy_data } from "@components/modules/__noAuth/Presentation/dummy_data";
 import Header from "@components/modules/__noAuth/Header";
-import OnSale from "pages/profile/sale";
+import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
+import { UserAccount } from "@lib/models/UserAccount";
+import { middleEllipsis } from "../../../../helpers/truncateStrings";
+import { NoCoverImg } from "@lib/Resources";
 import ProfileMenu from "../ProfileMenu";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 
-function ProfileContainer() {
+function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useState(false);
   const walletData = useRecoilValue(walletAddressAtom);
   const { address } = walletData;
-
-  const { staticImages, coverImages } = dummy_data;
 
   return (
     <>
@@ -44,7 +42,11 @@ function ProfileContainer() {
       >
         <div className="z-10 lg:h-[15rem] h-[10rem] mt-[79px] border rounded-2xl overflow-hidden">
           <img
-            src={coverImages[2].url}
+            src={
+              currentUser?.coverUrl ||
+              currentUser?.coverThumbnailUrl ||
+              NoCoverImg
+            }
             alt="cover image"
             className="object-cover w-full h-full"
           />
@@ -63,21 +65,18 @@ function ProfileContainer() {
         </div>
         <div className="mx-auto max-w-xs mt-4">
           <p className="text-center text-3xl font-bold">
-            {staticImages[11].name}
+            {currentUser?.username}
           </p>
           <div className="flex justify-center mt-4 items-center space-x-6">
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
-              <p>
-                {staticImages[11].nft?.slice(0, 8)}...{" "}
-                {staticImages[11].nft?.slice(37)}
-              </p>
+              <p>{middleEllipsis(currentUser?.walletAddress, 8)}</p>
             </div>
             <button className="w-[80px] p-1 font-bold text-xs rounded-full border-2 border-gray-300">
               +1 more
             </button>
           </div>
-          <p className="text-center mt-4">{staticImages[11].bio}</p>
+          <p className="text-center mt-4">{currentUser?.userBio}</p>
 
           <div className="flex justify-center items-center space-x-1 mt-4">
             <VGlobe className="opacity-70 w-4 h-4" />
@@ -192,16 +191,16 @@ function ProfileContainer() {
                 </div>
               </div>
               <Tab.Panel>
-                <OnSale />
+                <SaleContainer />
               </Tab.Panel>
               <Tab.Panel>
-                <OnSale />
+                <SaleContainer />
               </Tab.Panel>
               <Tab.Panel>
-                <OnSale />
+                <SaleContainer />
               </Tab.Panel>
               <Tab.Panel>
-                <OnSale />
+                <SaleContainer />
               </Tab.Panel>
             </div>
           </Tab.Panels>

@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from "react";
+import React from "react";
 import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import { CrossVector, VUser } from "@components/modules/__modules__/_vectors";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
@@ -21,7 +21,7 @@ const ProfileMenu = () => {
   };
 
   const onRedirectToProfile = () => {
-    router.push("/profile");
+    router.push(`/profile/${address}`);
     setIsProfileMenu(!isProfileMenu);
   };
 
