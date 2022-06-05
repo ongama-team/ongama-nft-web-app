@@ -15,17 +15,20 @@ import React from "react";
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { subscribesAtom } from "@lib/atoms";
+import { subscribesAtom, walletAddressAtom } from "@lib/atoms";
 import { dummy_data } from "@components/modules/__noAuth/Presentation/dummy_data";
 import Header from "@components/modules/__noAuth/Header";
 import OnSale from "pages/profile/sale";
 import ProfileMenu from "../ProfileMenu";
+import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 
 function ProfileContainer() {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useState(false);
+  const walletData = useRecoilValue(walletAddressAtom);
+  const { address } = walletData;
 
   const { staticImages, coverImages } = dummy_data;
 
@@ -48,10 +51,14 @@ function ProfileContainer() {
         </div>
 
         <div className="relative lg:w-[8rem] w-[7rem] h-[7rem] lg:h-[8rem] ring-4 mx-auto overflow-hidden rounded-full shadow-lg -mt-[5rem] lg:-mt-[6rem]">
-          <img
-            src={staticImages[11].url}
-            alt="profile cover"
-            className="object-cover w-full h-full"
+          <UserAvatarCard
+            identiconSize={100}
+            userWalletAddress={address}
+            onUserAvatarClicked={() => null}
+            userAvatarClassName={
+              "w-full h-full object-cover rounded-full cursor-pointer"
+            }
+            identiconContainerClassName={"w-full bg-white p-3 rounded-full"}
           />
         </div>
         <div className="mx-auto max-w-xs mt-4">

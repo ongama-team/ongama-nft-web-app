@@ -7,9 +7,10 @@ import { useRecoilValue, useRecoilState } from "recoil";
 import { profileMenuAtom, walletAddressAtom } from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { useRouter } from "next/router";
+import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 
 const ProfileMenu = () => {
-  const { name, profileImage } = dummy_profile;
+  const { name } = dummy_profile;
   const { address, balance } = useRecoilValue(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const truncatedWalletAddress = truncateAddress(address, 10, 4);
@@ -41,10 +42,13 @@ const ProfileMenu = () => {
             <CrossVector className="rotate-45 text-gray-500 w-6 h-6" />
           </button>
           <div className="flex items-center mt-10">
-            <img
-              src={profileImage}
-              alt={name}
-              className="w-12 h-12 rounded-full object-cover"
+            <UserAvatarCard
+              userWalletAddress={address}
+              identiconSize={20}
+              userAvatarClassName={"w-12 h-12 rounded-full object-cover"}
+              identiconContainerClassName={
+                "border border-gray-300 p-3 rounded-full"
+              }
             />
             <div className="px-3">
               <p className="font-ibmPlexSans font-bold">{name}</p>

@@ -2,6 +2,8 @@
 import React, { FC } from "react";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { VEthereum } from "@components/modules/__modules__/_vectors";
+import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
+import { useRouter } from "next/router";
 
 interface IProps {
   profile: {
@@ -13,8 +15,9 @@ interface IProps {
 }
 
 const AvatarAndCover: FC<IProps> = ({ profile }) => {
-  const { avatar, profileImage, name, address } = profile;
+  const { avatar, name, address } = profile;
   const minifiedAddress = truncateAddress(address, 6, 3);
+  const router = useRouter();
 
   return (
     <div className="flex flex-col">
@@ -25,10 +28,16 @@ const AvatarAndCover: FC<IProps> = ({ profile }) => {
           className="h-[260px] w-full object-cover rounded-2xl"
         />
         <div className="w-full flex justify-center">
-          <img
-            src={profileImage}
-            alt={name}
-            className="h-[120px] w-[120px] object-cover -mt-20 border-4 border-white border-solid rounded-full"
+          <UserAvatarCard
+            identiconSize={100}
+            onUserAvatarClicked={() => router.push(`/profile/${address}`)}
+            userWalletAddress={address}
+            identiconContainerClassName={
+              "bg-white -mt-20 p-5 rounded-full border-1 border-gray-400"
+            }
+            userAvatarClassName={
+              "h-[120px] w-[120px] object-cover -mt-20 border-4 border-white border-solid rounded-full"
+            }
           />
         </div>
       </div>
