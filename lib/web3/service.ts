@@ -19,7 +19,7 @@ class Web3Service {
     const network = this.getChainByName(chain);
     return new ethers.Contract(
       network.mintContractAddress,
-      NFTABI,
+      NFTABI.abi,
       this.provider
     );
   }
