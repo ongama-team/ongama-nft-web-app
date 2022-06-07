@@ -30,7 +30,7 @@ const HotBidsCard = () => {
                           className="inline-block h-8 w-8 rounded-full ring-2 ring-white "
                         />
                         <img
-                          src={VerifiedImg}
+                          src={VerifiedImg.src}
                           alt="checkmark"
                           className="h-8 absolute bottom-[-10px] left-3"
                         />

@@ -20,7 +20,7 @@ const Items = () => {
                 nftPrice="3.03"
                 likes={10}
                 auction="1/1"
-                ownerProfile={staticImages[3].url}
+                ownerAvatarUrl={staticImages[3].url}
                 ownerName="Jozzy #2020"
               />
             </div>

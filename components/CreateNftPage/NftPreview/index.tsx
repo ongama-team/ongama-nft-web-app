@@ -16,6 +16,7 @@ const NftPreview = ({
   previewName,
   isImage,
 }: IProps) => {
+  const { avatarUrl } = dummy_profile.user;
   return (
     <div className="mx-5">
       <p className="font-bold">Preview</p>
@@ -32,7 +33,7 @@ const NftPreview = ({
             nftUrl={previewUrl}
             nftPrice={previewPrice}
             nftName={previewName}
-            ownerProfile={dummy_profile.profileImage}
+            ownerAvatarUrl={avatarUrl}
           />
         </div>
       </div>
