@@ -3,16 +3,14 @@ import React from "react";
 import {
   Block,
   Collections,
-  ControlVector,
   DotsVector,
   Ethereum,
   VShare,
-  VGlobe,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { shareProfileLinkAtom, subscribesAtom } from "@lib/atoms";
 import Header from "@components/modules/__noAuth/Header";
 import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
@@ -21,12 +19,16 @@ import { middleEllipsis } from "../../../../helpers/truncateStrings";
 import ProfileMenu from "../ProfileMenu";
 import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import AvatarAndCoverCard from "@components/modules/__modules__/Card/AvatartAndCoverCard";
+import TabList from "./module/TabList";
+import OwnedContainer from "./OwnedContainer";
+import CreatedContainer from "./CreatedContainer";
+import ActivityContainer from "./ActivityContainer";
 
 function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
-  const setIsShareOpen = useSetRecoilState(shareProfileLinkAtom);
+  const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
 
   const { user } = dummy_profile;
 
@@ -83,66 +85,24 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
               Edit
             </button>
             <button
-              onClick={() => {
-                setIsShareOpen(true);
-              }}
-              className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border"
+              onClick={() => setIsShareOpen(!isShareOpen)}
+              disabled={isShareOpen ? false : true}
+              className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border disabled:opacity-50"
             >
               <VShare className="w-4 h-4 opacity-75" />
             </button>
             <button className="px-4 py-2 rounded-full border-gray-300 border">
               <DotsVector className="w-4 h-4" />
             </button>
-            <ShareContainer />
+            <ShareContainer isShareOpen={isShareOpen} />
           </div>
         </div>
         <Tab.Group defaultIndex={1}>
-          <Tab.List
-            className={
-              "p-2 mb-2 text-gray-600 flex justify-around space-x-6 mx-auto max-w-md mt-3"
-            }
-          >
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              On Sale
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              Owned by
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              Created
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              Activity
-            </Tab>
-          </Tab.List>
+          <TabList />
           <Tab.Panels>
-            <div className="mx-auto border-t-2">
+            <div className="mx-auto">
               <div className="flex items-center justify-around w-full">
-                <div className="flex  py-4 space-x-2 lg:overflow-x-hidden overflow-x-scroll">
+                <div className="flex  py-4 space-x-2 lg:overflow-x-hidden overflow-x-scroll scrollbar-hide ">
                   <div className="flex px-10 space-x-3 py-4 border rounded-full justify-center items-center">
                     <Block className="w-6 h-6" />
                     <button className="font-bold">Blockchain</button>
@@ -156,23 +116,18 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
                     <button className="font-bold">Blockchain</button>
                   </div>
                 </div>
-                <div className=" rounded-xl hover:bg-gray-200 shadow-2xl bg-white p-4">
-                  <button className="">
-                    <ControlVector className="w-6 h-6 rotate-90" />
-                  </button>
-                </div>
               </div>
-              <Tab.Panel>
+              <Tab.Panel className="pb-10">
                 <SaleContainer />
               </Tab.Panel>
-              <Tab.Panel>
-                <SaleContainer />
+              <Tab.Panel className="pb-10">
+                <OwnedContainer />
               </Tab.Panel>
-              <Tab.Panel>
-                <SaleContainer />
+              <Tab.Panel className="pb-10">
+                <CreatedContainer />
               </Tab.Panel>
-              <Tab.Panel>
-                <SaleContainer />
+              <Tab.Panel className="pb-10">
+                <ActivityContainer />
               </Tab.Panel>
             </div>
           </Tab.Panels>

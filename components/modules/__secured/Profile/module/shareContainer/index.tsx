@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import {
   VFacebook,
   VLink,
@@ -6,22 +6,22 @@ import {
   VTwitter,
 } from "@components/modules/__modules__/_vectors";
 import useClickOutside from "@components/hooks/useClickOutside";
-import { shareProfileLinkAtom } from "@lib/atoms";
 import { useRecoilState } from "recoil";
+import { shareProfileLinkAtom } from "@lib/atoms";
 
-const ShareContainer = () => {
+type openModel = {
+  isShareOpen: boolean;
+};
+
+const ShareContainer: FC<openModel> = () => {
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
-  const clickOutsideCallback = () => {
-    setIsShareOpen(!isShareOpen);
-  };
-
-  const ref = useClickOutside(clickOutsideCallback);
+  const ref = useClickOutside(() => setIsShareOpen(true));
   return (
     <div
       ref={ref}
-      className={` ${
+      className={`${
         isShareOpen ? "scale-0 transition-all" : "scale-100 transition-all"
-      } absolute z-10 border border-gray-100 shadow-xl top-12 transform transition-all bg-white rounded-xl p-2`}
+      } absolute z-10 border border-gray-100 shadow-xl top-12 transform transition-all bg-white rounded-xl p-2 `}
     >
       <p className="text-center font-extrabold text-xl">
         Share link to this page

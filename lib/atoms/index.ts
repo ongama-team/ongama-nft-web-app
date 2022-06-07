@@ -5,7 +5,7 @@ import { atom } from "recoil";
 
 const profileMenuAtom = atom({
   key: "profileMenu",
-  default: false,
+  default: true,
 });
 
 const shareProfileLinkAtom = atom({
