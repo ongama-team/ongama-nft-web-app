@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { FC } from "react";
 import Identicon from "react-identicons";
-import { useRouter } from "next/router";
 
 interface IProps {
   userWalletAddress: string;
