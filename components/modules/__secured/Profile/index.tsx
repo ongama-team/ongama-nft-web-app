@@ -13,22 +13,21 @@ import { Tab } from "@headlessui/react";
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { subscribesAtom, walletAddressAtom } from "@lib/atoms";
+import { subscribesAtom } from "@lib/atoms";
 import Header from "@components/modules/__noAuth/Header";
 import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
 import { UserAccount } from "@lib/models/UserAccount";
 import { middleEllipsis } from "../../../../helpers/truncateStrings";
-import { NoCoverImg } from "@lib/Resources";
 import ProfileMenu from "../ProfileMenu";
-import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
+import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
+import AvatarAndCoverCard from "@components/modules/__modules__/Card/AvatartAndCoverCard";
 
 function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useState(false);
-  const walletData = useRecoilValue(walletAddressAtom);
-  const { address } = walletData;
+  const { user } = dummy_profile;
 
   return (
     <>
@@ -40,28 +39,8 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
         }}
         className="lg:mx-[12rem] mx-[1rem] rounded-lg"
       >
-        <div className="z-10 lg:h-[15rem] h-[10rem] mt-[79px] border rounded-2xl overflow-hidden">
-          <img
-            src={
-              currentUser?.coverUrl ||
-              currentUser?.coverThumbnailUrl ||
-              NoCoverImg
-            }
-            alt="cover image"
-            className="object-cover w-full h-full"
-          />
-        </div>
-
-        <div className="relative lg:w-[8rem] w-[7rem] h-[7rem] lg:h-[8rem] ring-4 mx-auto overflow-hidden rounded-full shadow-lg -mt-[5rem] lg:-mt-[6rem]">
-          <UserAvatarCard
-            identiconSize={100}
-            userWalletAddress={address}
-            onUserAvatarClicked={() => null}
-            userAvatarClassName={
-              "w-full h-full object-cover rounded-full cursor-pointer"
-            }
-            identiconContainerClassName={"w-full bg-white p-3 rounded-full"}
-          />
+        <div className="mt-24">
+          <AvatarAndCoverCard user={user} />
         </div>
         <div className="mx-auto max-w-xs mt-4">
           <p className="text-center text-3xl font-bold">

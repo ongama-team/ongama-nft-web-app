@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 
 const ProfileMenu = () => {
-  const { name } = dummy_profile;
+  const { user } = dummy_profile;
   const { address, balance } = useRecoilValue(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const truncatedWalletAddress = truncateAddress(address, 10, 4);
@@ -43,7 +43,7 @@ const ProfileMenu = () => {
           </button>
           <div className="flex items-center mt-10">
             <UserAvatarCard
-              userWalletAddress={address}
+              user={user}
               identiconSize={20}
               userAvatarClassName={"w-12 h-12 rounded-full object-cover"}
               identiconContainerClassName={
@@ -51,7 +51,7 @@ const ProfileMenu = () => {
               }
             />
             <div className="px-3">
-              <p className="font-ibmPlexSans font-bold">{name}</p>
+              <p className="font-ibmPlexSans font-bold">{user.username}</p>
               <div
                 tabIndex={0}
                 role="button"

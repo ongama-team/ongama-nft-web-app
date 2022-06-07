@@ -1,29 +1,29 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { FC } from "react";
 import Identicon from "react-identicons";
+import { UserAccount } from "@lib/models/UserAccount";
+import { VerifiedImg } from "@lib/Resources";
 
 interface IProps {
-  userWalletAddress: string;
-  userAvatarUrl?: string;
-  userAvatarThumbnailUrl?: string;
+  user: UserAccount;
   identiconSize: number;
-  username?: string;
   userAvatarClassName: string;
   identiconContainerClassName: string;
+  allowVerifiedIcon?: boolean;
   onUserAvatarClicked?: () => void;
 }
 
 const UserAvatarCard: FC<IProps> = ({
+  user,
   identiconSize,
-  userWalletAddress,
-  userAvatarThumbnailUrl,
-  userAvatarUrl,
-  username,
   userAvatarClassName,
   identiconContainerClassName,
+  allowVerifiedIcon = false,
   onUserAvatarClicked,
 }) => {
-  if (!userAvatarUrl && !userAvatarThumbnailUrl)
+  const { avatarUrlThumbnail, avatarUrl, walletAddress, username, verified } =
+    user;
+  if (!avatarUrl && !avatarUrlThumbnail)
     return (
       <div
         tabIndex={0}
@@ -32,16 +32,25 @@ const UserAvatarCard: FC<IProps> = ({
         onClick={() => onUserAvatarClicked}
         className={identiconContainerClassName}
       >
-        <Identicon string={userWalletAddress} size={identiconSize} />
+        <Identicon string={walletAddress} size={identiconSize} />
       </div>
     );
   return (
-    <img
-      src={userAvatarUrl || userAvatarThumbnailUrl}
-      alt={username || userWalletAddress}
-      className={userAvatarClassName}
-      onClick={() => onUserAvatarClicked}
-    />
+    <div className="flex relative">
+      <img
+        src={avatarUrl || avatarUrlThumbnail}
+        alt={username || walletAddress}
+        className={userAvatarClassName}
+        onClick={() => onUserAvatarClicked}
+      />
+      {verified && allowVerifiedIcon && (
+        <img
+          src={VerifiedImg.src}
+          alt="verifiedIcon"
+          className="w-10 absolute bottom-0 right-0"
+        />
+      )}
+    </div>
   );
 };
 

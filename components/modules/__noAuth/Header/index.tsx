@@ -10,14 +10,16 @@ import Link from "next/link";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
 
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { walletAtom, walletAddressAtom, profileMenuAtom } from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
 import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
+import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 
 const Header = () => {
   const routes = useRouter();
+  const { user } = dummy_profile;
   const [isLightTheme, setIsLightTheme] = useState(true);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
@@ -111,8 +113,8 @@ const Header = () => {
           className={`${!address && "hidden"} w-12 h-12 ml-1`}
         >
           <UserAvatarCard
+            user={user}
             identiconSize={20}
-            userWalletAddress={address}
             onUserAvatarClicked={() => null}
             userAvatarClassName={
               "w-12 h-12 object-cover rounded-full cursor-pointer"
