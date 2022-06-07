@@ -5,8 +5,8 @@ const EditProfile = () => {
   const profilePlaceholder =
     "https://lh3.googleusercontent.com/9KIL56q19B9i8BasJfTcVZFn7QOcvdtBqww5dgK5Zk5Mi5w4Ljekw0ibITpf6TBtGnyqcLTDNEEG9OpUC98aLukfcM9yXhSltJoe=w600";
 
-  const chooseFile = (e: { target: any }) => {
-    const { files } = e.target;
+  const chooseFile = (e: Event) => {
+    const { files } = e.target as HTMLInputElement;
     if (files[0] == null) {
       return;
     }
