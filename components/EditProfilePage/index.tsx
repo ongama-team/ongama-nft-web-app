@@ -1,16 +1,15 @@
 import { useState, ChangeEvent } from "react";
 const EditProfile = () => {
-  const [img, setImg] = useState();
+  const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState("");
   const profilePlaceholder =
     "https://lh3.googleusercontent.com/9KIL56q19B9i8BasJfTcVZFn7QOcvdtBqww5dgK5Zk5Mi5w4Ljekw0ibITpf6TBtGnyqcLTDNEEG9OpUC98aLukfcM9yXhSltJoe=w600";
 
-  const chooseFile = (e: Event) => {
-    const { files } = e.target as HTMLInputElement;
-    if (files[0] == null) {
-      return;
-    }
+  const chooseFile = (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+    const { files } = e.target;
     setImg(files[0]);
+    if (files.length === 0) return;
     const previewUrl = URL.createObjectURL(files[0]);
     setPreviewImgLink(previewUrl);
   };
