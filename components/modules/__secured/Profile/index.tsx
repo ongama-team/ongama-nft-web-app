@@ -12,8 +12,8 @@ import {
 import { Tab } from "@headlessui/react";
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { subscribesAtom } from "@lib/atoms";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { shareProfileLinkAtom, subscribesAtom } from "@lib/atoms";
 import Header from "@components/modules/__noAuth/Header";
 import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
 import { UserAccount } from "@lib/models/UserAccount";
@@ -26,19 +26,15 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
-  const [isShareOpen, setIsShareOpen] = useState(false);
+  const setIsShareOpen = useSetRecoilState(shareProfileLinkAtom);
+
   const { user } = dummy_profile;
 
   return (
     <>
       <Header />
       <ProfileMenu />
-      <div
-        onClick={() => {
-          isShareOpen && setIsShareOpen(false);
-        }}
-        className="lg:mx-[12rem] mx-[1rem] rounded-lg"
-      >
+      <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
         <div className="mt-24">
           <AvatarAndCoverCard user={user} />
         </div>
@@ -49,27 +45,24 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
           <div className="flex justify-center mt-4 items-center space-x-6">
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
-              <p>{middleEllipsis(currentUser?.walletAddress, 8)}</p>
+              <p className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all">
+                {middleEllipsis(user.walletAddress, 8)}
+              </p>
             </div>
             <button className="w-[80px] p-1 font-bold text-xs rounded-full border-2 border-gray-300">
               +1 more
             </button>
           </div>
           <p className="text-center mt-4">{currentUser?.userBio}</p>
-
-          <div className="flex justify-center items-center space-x-1 mt-4">
-            <VGlobe className="opacity-70 w-4 h-4" />
-            <p>Twitter.com</p>
-          </div>
           <div className="flex relative space-x-4 mt-4 justify-center">
             <p
-              className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
+              className="hover:cursor-pointer text-gray-600 hover:text-gray-900 font-semibold transition-all"
               onClick={() => setIsSubscribesDisplayed(!isSubscribesDisplayed)}
             >
               <label className="font-bold">20</label> Followers
             </p>
             <p
-              className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
+              className="hover:cursor-pointer text-gray-600 hover:text-gray-900 font-semibold transition-all"
               onClick={() => setIsSubscribesDisplayed(!isSubscribesDisplayed)}
             >
               <label className="font-bold">1</label> Following
@@ -80,7 +73,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
               }}
               className={`${
                 isSubscribesOpen && "hidden"
-              } border z-20 h-full flex justify-center bg-black bg-opacity-60 items-center fixed inset-0 backdrop-filter backdrop-blur-md`}
+              } border z-20 h-full flex transition-all justify-center bg-black bg-opacity-60 items-center fixed inset-0 backdrop-filter backdrop-blur-md`}
             >
               <SubScribesContainer />
             </div>
@@ -91,7 +84,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             </button>
             <button
               onClick={() => {
-                setIsShareOpen((prev) => !prev);
+                setIsShareOpen(true);
               }}
               className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border"
             >
@@ -100,7 +93,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             <button className="px-4 py-2 rounded-full border-gray-300 border">
               <DotsVector className="w-4 h-4" />
             </button>
-            <ShareContainer isShareOpen={isShareOpen} />
+            <ShareContainer />
           </div>
         </div>
         <Tab.Group defaultIndex={1}>

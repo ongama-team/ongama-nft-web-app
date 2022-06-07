@@ -8,4 +8,15 @@ const profileMenuAtom = atom({
   default: false,
 });
 
-export { walletAtom, walletAddressAtom, subscribesAtom, profileMenuAtom };
+const shareProfileLinkAtom = atom({
+  key: "shareProfileLinkAtom",
+  default: false,
+});
+
+export {
+  walletAtom,
+  walletAddressAtom,
+  subscribesAtom,
+  profileMenuAtom,
+  shareProfileLinkAtom,
+};
