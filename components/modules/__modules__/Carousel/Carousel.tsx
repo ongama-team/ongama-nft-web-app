@@ -17,7 +17,6 @@ const Carousel: FC<Props> = ({ children }: Props) => {
       200,
       -(scrollContainer.current?.offsetWidth as number)
     );
-    console.log("left");
   };
 
   const onScrollRight = () => {
