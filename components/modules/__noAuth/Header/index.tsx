@@ -15,6 +15,7 @@ import { walletAtom, walletAddressAtom, profileMenuAtom } from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
 import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import { useRouter } from "next/router";
+import { route } from "next/dist/server/router";
 
 const Header = () => {
   const routes = useRouter();
@@ -33,7 +34,11 @@ const Header = () => {
   };
 
   const onCreateNft = () => {
-    routes.push("/create");
+    if (address) {
+      routes.push("/create");
+    } else {
+      routes.push("/");
+    }
   };
 
   // --- detect when browser wallet is deconnected

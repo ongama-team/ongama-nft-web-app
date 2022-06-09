@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   CrossVector,
   VEthereum,
@@ -9,6 +9,7 @@ import { useRecoilValue } from "recoil";
 import { walletAddressAtom } from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { Switch } from "antd";
+import { useRouter } from "next/router";
 import DetailsForm from "./DetailsForm";
 import AdvancedSettingForm from "./AdvanceSettingForm";
 import Header from "@components/modules/__noAuth/Header";
@@ -21,6 +22,7 @@ import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
+  const routes = useRouter();
   const [nftDetails, setNftDetails] = useState({
     previewUrl: "",
     name: "",
@@ -57,6 +59,11 @@ const CreateNftPage = () => {
     setNftDetails({ ...nftDetails, previewUrl: "" });
   };
 
+  useEffect(() => {
+    if (!address) {
+      routes.push("/");
+    }
+  }, [address]);
   return (
     <>
       <Header />
