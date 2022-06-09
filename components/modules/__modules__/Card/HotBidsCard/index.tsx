@@ -29,7 +29,7 @@ const HotBidsCard = () => {
                           alt="buyer"
                           className="inline-block h-8 w-8 rounded-full ring-2 ring-white "
                         />
-                        <CheckmarkCard />
+                        <CheckmarkCard className="h-8 absolute bottom-[-8px] right-0" />
                       </div>
                     );
                   })}
