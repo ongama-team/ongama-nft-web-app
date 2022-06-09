@@ -2,46 +2,30 @@
 import React, { FC } from "react";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { VEthereum } from "@components/modules/__modules__/_vectors";
+import { UserAccount } from "@lib/models/UserAccount";
+import AvatarAndCoverCard from "@components/modules/__modules__/Card/AvatartAndCoverCard";
 
 interface IProps {
-  profile: {
-    avatar: string;
-    profileImage: string;
-    name: string;
-    address: string;
-  };
+  user: UserAccount;
 }
 
-const AvatarAndCover: FC<IProps> = ({ profile }) => {
-  const { avatar, profileImage, name, address } = profile;
-  const minifiedAddress = truncateAddress(address, 6, 3);
+const AvatarAndCover: FC<IProps> = ({ user }) => {
+  const { username, walletAddress } = user;
+  const minifiedAddress = truncateAddress(walletAddress, 6, 3);
 
   return (
     <div className="flex flex-col">
-      <div className="relative">
-        <img
-          src={avatar}
-          alt={name}
-          className="h-[260px] w-full object-cover rounded-2xl"
-        />
-        <div className="w-full flex justify-center">
-          <img
-            src={profileImage}
-            alt={name}
-            className="h-[120px] w-[120px] object-cover -mt-20 border-4 border-white border-solid rounded-full"
-          />
-        </div>
-      </div>
+      <AvatarAndCoverCard user={user} />
       <div className="w-full">
         <p className="text-center py-5 text-2xl font-ibmPlexSans font-semibold">
-          {name}
+          {username}
         </p>
         <div
           className="flex justify-center items-center
          font-ibmPlexSans mobile:flex-col"
         >
           <p className="text-base text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 font-semibold">
-            {name} collection
+            {username} collection
           </p>
           <p className="flex items-center mx-5 bg-gray-200 text-gray-500 px-1 py-1 rounded-2xl mobile:my-4">
             <span>

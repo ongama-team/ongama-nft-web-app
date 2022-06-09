@@ -22,7 +22,7 @@ const TopSellersCard = () => {
                   className="h-12 w-12 rounded-full ml-4 mr-4"
                 />
                 <img
-                  src={VerifiedImg}
+                  src={VerifiedImg.src}
                   alt="checkmark"
                   className="h-8 absolute bottom-[-7px] right-2"
                 />

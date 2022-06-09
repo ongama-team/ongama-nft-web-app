@@ -36,8 +36,6 @@ const Header = () => {
   const onCreateNft = () => {
     if (address) {
       routes.push("/create");
-    } else {
-      routes.push("/");
     }
   };
 
@@ -116,8 +114,8 @@ const Header = () => {
           className={`${!address && "hidden"} w-12 h-12 ml-1`}
         >
           <img
-            src={dummy_profile.profileImage}
-            alt={dummy_profile.name}
+            src={dummy_profile.user.avatarUrl}
+            alt={dummy_profile.user.username}
             className="w-12 h-12 object-cover rounded-full cursor-pointer"
           />
         </div>

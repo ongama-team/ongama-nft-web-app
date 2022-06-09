@@ -15,7 +15,7 @@ const DropPage = () => {
     <>
       <Header />
       <div className="flex flex-col justify-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto px-5 mt-24 pb-10">
-        <AvatarAndCover profile={dummy_profile} />
+        <AvatarAndCover user={dummy_profile.user} />
         <StatisticTable statisticDtata={dummy_profile.stat} />
         <div className="mt-10">
           <ul className="flex border-b border-gray-200 justify-center font-ibmPlexSans">

@@ -1,2 +1,4 @@
-export const VerifiedImg = "static/images/rarible-checkmark.png";
-export const NoCoverImg = "static/images/noCover.png";
+import VerifiedImg from "/public/static/images/rarible-checkmark.png";
+import NoCoverImg from "/public/static/images/noCover.png";
+
+export { VerifiedImg, NoCoverImg };

@@ -26,7 +26,7 @@ const SearchInputBar = () => {
 
   return (
     <div
-      className={`w-[95%] pr-5 pl-3 mx-auto flex items-center bg-gray-200 rounded-full transition-all ease-in-out duration-300 hover:border px-5 border-gray-300 ${
+      className={`w-[95%] pr-5 pl-3 mx-auto flex items-center bg-gray-100 rounded-full transition-all ease-in-out duration-300 hover:border px-5 border-gray-300 ${
         isInputFocused && "bg-white shadow-md"
       } min-lg:hidden`}
     >

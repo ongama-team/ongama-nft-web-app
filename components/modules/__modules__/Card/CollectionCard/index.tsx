@@ -27,7 +27,7 @@ const CollectionCard: FC<Props> = ({
             className="h-12 w-12 rounded-full ml-4 mr-4"
           />
           <img
-            src={VerifiedImg}
+            src={VerifiedImg.src}
             alt="checkmark"
             className="h-8 absolute bottom-[-8px] right-0"
           />
