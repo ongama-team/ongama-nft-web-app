@@ -10,13 +10,13 @@ interface IProps {
 }
 
 const AvatarAndCoverCard = ({ user }: IProps) => {
-  const { avatarUrl, username, walletAddress } = user;
+  const { coverUrl, coverThumbnailUrl, username, walletAddress } = user;
   const router = useRouter();
 
   return (
     <div className="relative">
       <img
-        src={avatarUrl || NoCoverImg.src}
+        src={coverUrl || coverThumbnailUrl}
         alt={username}
         className="h-[260px] w-full object-cover rounded-2xl"
       />

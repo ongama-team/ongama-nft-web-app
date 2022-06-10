@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { formatToDollars } from "helpers/numberFormatter";
 import { dummy_data } from "../../../__noAuth/TopSellers/dummy_data";
-import { VerifiedImg } from "@lib/Resources";
+import CheckmarkCard from "../CheckmarkCard";
 
 const TopSellersCard = () => {
   const { topSellersData } = dummy_data;
@@ -21,13 +21,8 @@ const TopSellersCard = () => {
                   alt="profile"
                   className="h-12 w-12 rounded-full ml-4 mr-4"
                 />
-                <img
-                  src={VerifiedImg.src}
-                  alt="checkmark"
-                  className="h-8 absolute bottom-[-7px] right-2"
-                />
+                <CheckmarkCard className="h-8 absolute bottom-[-7px] right-2" />
               </section>
-
               <section>
                 <h4 className="text-black text-sm font-bold">{seller.title}</h4>
                 <span className="text-sm font-semibold text-gray-400">
