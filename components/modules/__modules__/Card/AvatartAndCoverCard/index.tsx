@@ -26,7 +26,9 @@ const AvatarAndCoverCard = ({ user }: IProps) => {
           onUserAvatarClicked={() =>
             router.push(`/profile/${user?.walletAddress}`)
           }
-          identiconContainerClassName="rounded-full overflow-hidden -mt-20 border-2 shadow-xl bg-white border-gray-100"
+          identiconContainerClassName={
+            "rounded-full overflow-hidden -mt-20 border-2 shadow-xl bg-white border-gray-100"
+          }
           userAvatarClassName={
             "h-[120px] w-[120px] -mt-20 object-cover border-4 border-white border-solid rounded-full relative"
           }
