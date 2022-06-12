@@ -30,6 +30,11 @@ const ProfileMenu = () => {
     setIsProfileMenu(!isProfileMenu);
   };
 
+  const onRedirectToEditProfile = () => {
+    router.push("edith/profile");
+    setIsProfileMenu(!isProfileMenu);
+  };
+
   return (
     <div
       className={`${
@@ -76,7 +81,10 @@ const ProfileMenu = () => {
               walletBalance={balance + "ETH"}
             />
           </div>
-          <button className="flex items-center hover:bg-gray-100 py-3 rounded-xl px-3 transition-all w-full">
+          <button
+            onClick={onRedirectToEditProfile}
+            className="flex items-center hover:bg-gray-100 py-3 rounded-xl px-3 transition-all w-full"
+          >
             <VUser className="text-2xl" />
             <span className="px-3 font-ibmPlexSans font-bold">
               Edit profile

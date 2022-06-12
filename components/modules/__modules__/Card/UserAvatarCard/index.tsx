@@ -15,9 +15,9 @@ interface IProps {
 
 const UserAvatarCard: FC<IProps> = ({
   user,
-  identiconSize,
+  identiconSize = 20,
   userAvatarClassName,
-  identiconContainerClassName,
+  identiconContainerClassName = "bg-white rounded-full overflow-hidden border border-gray-300 p-3",
   allowVerifiedIcon = false,
   onUserAvatarClicked,
 }) => {

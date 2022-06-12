@@ -15,7 +15,7 @@ const AvatarAndCoverCard = ({ user }: IProps) => {
   return (
     <div className="relative">
       <img
-        src={user?.coverUrl || user?.coverThumbnailUrl}
+        src={user?.coverUrl || user?.coverThumbnailUrl || NoCoverImg.src}
         alt={user?.username}
         className="h-[260px] w-full object-cover rounded-2xl"
       />
@@ -26,9 +26,7 @@ const AvatarAndCoverCard = ({ user }: IProps) => {
           onUserAvatarClicked={() =>
             router.push(`/profile/${user?.walletAddress}`)
           }
-          identiconContainerClassName={
-            "bg-red rounded-full overflow-hidden -mt-20 p-5 border-1 border-gray-400"
-          }
+          identiconContainerClassName="rounded-full overflow-hidden -mt-20 p-5 border-2 shadow-xl bg-white border-gray-100"
           userAvatarClassName={
             "h-[120px] w-[120px] -mt-20 object-cover border-4 border-white border-solid rounded-full relative"
           }
