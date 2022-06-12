@@ -21,7 +21,7 @@ const WalletInfoCard = ({ truncatedWalletAddress, walletBalance }: IProps) => {
         </p>
         <p className="font-bold text-gray-500">
           Ethereum
-          <span> {walletBalance}</span>
+          <span className="px-2">{walletBalance}</span>
         </p>
       </div>
     </div>
