@@ -11,7 +11,11 @@ import { Tab } from "@headlessui/react";
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { shareProfileLinkAtom, subscribesAtom } from "@lib/atoms";
+import {
+  shareProfileLinkAtom,
+  subscribesAtom,
+  walletAddressAtom,
+} from "@lib/atoms";
 import Header from "@components/modules/__noAuth/Header";
 import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
 import { UserAccount } from "@lib/models/UserAccount";
@@ -25,6 +29,7 @@ import ActivityContainer from "./ActivityContainer";
 
 function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
+  const connectedWallet = useRecoilValue(walletAddressAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
@@ -45,7 +50,10 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
               <p className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all">
-                {middleEllipsis(currentUser?.walletAddress, 8)}
+                {middleEllipsis(
+                  currentUser?.walletAddress || connectedWallet.address,
+                  8
+                )}
               </p>
             </div>
             <button className="w-[80px] p-1 font-bold text-xs rounded-full border-2 border-gray-300">
