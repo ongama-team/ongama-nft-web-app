@@ -10,23 +10,24 @@ interface IProps {
 }
 
 const AvatarAndCoverCard = ({ user }: IProps) => {
-  const { coverUrl, coverThumbnailUrl, username, walletAddress } = user;
   const router = useRouter();
 
   return (
     <div className="relative">
       <img
-        src={coverUrl || coverThumbnailUrl}
-        alt={username}
+        src={user?.coverUrl || user?.coverThumbnailUrl}
+        alt={user?.username}
         className="h-[260px] w-full object-cover rounded-2xl"
       />
       <div className="w-full flex justify-center">
         <UserAvatarCard
           identiconSize={100}
           allowVerifiedIcon={true}
-          onUserAvatarClicked={() => router.push(`/profile/${walletAddress}`)}
+          onUserAvatarClicked={() =>
+            router.push(`/profile/${user?.walletAddress}`)
+          }
           identiconContainerClassName={
-            "bg-white -mt-20 p-5 rounded-full border-1 border-gray-400"
+            "bg-red rounded-full overflow-hidden -mt-20 p-5 border-1 border-gray-400"
           }
           userAvatarClassName={
             "h-[120px] w-[120px] -mt-20 object-cover border-4 border-white border-solid rounded-full relative"
