@@ -17,7 +17,6 @@ import { SaleContainer } from "@components/modules/__secured/Profile/saleContain
 import { UserAccount } from "@lib/models/UserAccount";
 import { middleEllipsis } from "../../../../helpers/truncateStrings";
 import ProfileMenu from "../ProfileMenu";
-import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import AvatarAndCoverCard from "@components/modules/__modules__/Card/AvatartAndCoverCard";
 import TabList from "./module/TabList";
 import OwnedContainer from "./OwnedContainer";
