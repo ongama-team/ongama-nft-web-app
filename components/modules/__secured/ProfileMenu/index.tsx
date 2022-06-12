@@ -56,9 +56,6 @@ const ProfileMenu = () => {
               user={currentAccount as UserAccount}
               identiconSize={20}
               userAvatarClassName={"w-12 h-12 rounded-full object-cover"}
-              // identiconContainerClassName={
-              //   "border border-gray-300 p-3 rounded-full"
-              // }
             />
             <div className="px-3">
               <p className="font-ibmPlexSans font-bold">

@@ -139,9 +139,6 @@ const Header = () => {
             userAvatarClassName={
               "w-12 h-12 object-cover rounded-full cursor-pointer"
             }
-            identiconContainerClassName={
-              "w-fit bg-white border border-gray-300 p-3 rounded-full"
-            }
           />
         </div>
       </div>
