@@ -3,12 +3,14 @@ import React, { FC } from "react";
 import Identicon from "react-identicons";
 import { UserAccount } from "@lib/models/UserAccount";
 import CheckmarkCard from "../CheckmarkCard";
+import { useRecoilValue } from "recoil";
+import { walletAddressAtom } from "@lib/atoms";
 
 interface IProps {
   user: UserAccount;
   identiconSize: number;
   userAvatarClassName: string;
-  identiconContainerClassName: string;
+  identiconContainerClassName?: string;
   allowVerifiedIcon?: boolean;
   onUserAvatarClicked?: () => void;
 }
@@ -21,6 +23,7 @@ const UserAvatarCard: FC<IProps> = ({
   allowVerifiedIcon = false,
   onUserAvatarClicked,
 }) => {
+  const connectedWallet = useRecoilValue(walletAddressAtom);
   if (!user?.avatarUrl && !user?.avatarUrlThumbnail)
     return (
       <div
@@ -30,7 +33,10 @@ const UserAvatarCard: FC<IProps> = ({
         onClick={() => onUserAvatarClicked}
         className={identiconContainerClassName}
       >
-        <Identicon string={user?.walletAddress} size={identiconSize} />
+        <Identicon
+          string={user?.walletAddress || connectedWallet.address}
+          size={identiconSize}
+        />
       </div>
     );
   return (
@@ -47,9 +53,5 @@ const UserAvatarCard: FC<IProps> = ({
     </div>
   );
 };
-
-// UserAvatarCard.defaultProps = {
-//   identiconContainerClassName: 'bg-white rounded-full overflow-hidden'
-// }
 
 export default UserAvatarCard;

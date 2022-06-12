@@ -21,12 +21,12 @@ const AvatarAndCoverCard = ({ user }: IProps) => {
       />
       <div className="w-full flex justify-center">
         <UserAvatarCard
-          identiconSize={100}
+          identiconSize={150}
           allowVerifiedIcon={true}
           onUserAvatarClicked={() =>
             router.push(`/profile/${user?.walletAddress}`)
           }
-          identiconContainerClassName="rounded-full overflow-hidden -mt-20 p-5 border-2 shadow-xl bg-white border-gray-100"
+          identiconContainerClassName="rounded-full overflow-hidden -mt-20 border-2 shadow-xl bg-white border-gray-100"
           userAvatarClassName={
             "h-[120px] w-[120px] -mt-20 object-cover border-4 border-white border-solid rounded-full relative"
           }
