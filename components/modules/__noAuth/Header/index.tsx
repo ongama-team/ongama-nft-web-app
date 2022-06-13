@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 import { backendApiService } from "@lib/services/BackendApiService";
 import { UserAccount } from "@lib/models/UserAccount";
+import balanceFormater from "@lib/helper/walletBalanceFormater";
 
 const Header = () => {
   const routes = useRouter();
@@ -64,16 +65,22 @@ const Header = () => {
   }, [setWalletData, walletData]);
 
   useEffect(() => {
-    const memorizedWalletAddress = LocalStorage.getItem(
-      "ongama_signer_address"
-    );
-    setWalletData({
-      ...walletData,
-      address: memorizedWalletAddress || "",
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    (async () => {
+      const signer = LocalStorage.getItem("ongama_signer_address");
+      if (signer) {
+        const formatedSinger = JSON.parse(signer);
+        const signerWalletAddress = await formatedSinger?.getAddress();
+        const signerWalletBalance = await formatedSinger?.getBalance();
+        const formatedBalance = balanceFormater(signerWalletBalance);
+        setWalletData({
+          balance: formatedBalance,
+          address: signerWalletAddress || "",
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
 
-    fetchUser(memorizedWalletAddress);
+        fetchUser(signerWalletAddress);
+      }
+    })();
   }, [setWalletData]);
 
   const openProfileMenu = () => {
