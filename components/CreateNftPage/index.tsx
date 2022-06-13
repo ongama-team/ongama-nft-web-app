@@ -6,7 +6,7 @@ import {
   VQuestionMark,
 } from "@components/modules/__modules__/_vectors";
 import { useRecoilValue } from "recoil";
-import { walletAddressAtom } from "@lib/atoms";
+import { walletAddressAtom, walletAtom } from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { Switch } from "antd";
 import { useRouter } from "next/router";
@@ -18,10 +18,14 @@ import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
+import { useRecoilState } from "recoil";
+import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
 
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
+  const [isWalletsDisplayed, setIsWalletsDisplayed] =
+    useRecoilState(walletAtom);
   const routes = useRouter();
   const [nftDetails, setNftDetails] = useState({
     previewUrl: "",
@@ -62,6 +66,7 @@ const CreateNftPage = () => {
   useEffect(() => {
     if (!address) {
       routes.push("/");
+      setIsWalletsDisplayed(!isWalletsDisplayed);
     }
   }, [address]);
   return (
@@ -177,6 +182,7 @@ const CreateNftPage = () => {
           </div>
         </div>
       </div>
+      <ConnectWalletBox />
       <ProfileMenu />
     </>
   );

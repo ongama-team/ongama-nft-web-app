@@ -36,6 +36,8 @@ const Header = () => {
   const onCreateNft = () => {
     if (address) {
       routes.push("/create");
+    } else {
+      setIsWalletsDisplayed(!isWalletsDisplayed);
     }
   };
 
