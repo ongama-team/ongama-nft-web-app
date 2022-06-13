@@ -42,11 +42,7 @@ class Web3Service {
     await provider.send("eth_requestAccounts", []);
 
     const signer = provider.getSigner();
-    const signerWalletAddress = await signer.getAddress();
-    const balance = await provider.getBalance(signerWalletAddress);
-    const formatedBalance = ethers.utils.formatEther(balance);
-
-    return { signerWalletAddress, formatedBalance };
+    return signer;
   }
 
   public async coinBaseConnect() {
