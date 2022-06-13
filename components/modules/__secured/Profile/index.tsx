@@ -1,19 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
+import React from "react";
 import {
   Block,
   Collections,
-  ControlVector,
   DotsVector,
   Ethereum,
   VShare,
-  VGlobe,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
 import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { subscribesAtom } from "@lib/atoms";
+import { shareProfileLinkAtom, subscribesAtom } from "@lib/atoms";
 import Header from "@components/modules/__noAuth/Header";
 import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
 import { UserAccount } from "@lib/models/UserAccount";
@@ -21,24 +19,24 @@ import { middleEllipsis } from "../../../../helpers/truncateStrings";
 import ProfileMenu from "../ProfileMenu";
 import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import AvatarAndCoverCard from "@components/modules/__modules__/Card/AvatartAndCoverCard";
+import TabList from "./module/TabList";
+import OwnedContainer from "./OwnedContainer";
+import CreatedContainer from "./CreatedContainer";
+import ActivityContainer from "./ActivityContainer";
 
 function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
-  const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+
   const { user } = dummy_profile;
 
   return (
     <>
       <Header />
       <ProfileMenu />
-      <div
-        onClick={() => {
-          isShareOpen && setIsShareOpen(false);
-        }}
-        className="lg:mx-[12rem] mx-[1rem] rounded-lg"
-      >
+      <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
         <div className="mt-24">
           <AvatarAndCoverCard user={user} />
         </div>
@@ -49,27 +47,24 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
           <div className="flex justify-center mt-4 items-center space-x-6">
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
-              <p>{middleEllipsis(currentUser?.walletAddress, 8)}</p>
+              <p className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all">
+                {middleEllipsis(user.walletAddress, 8)}
+              </p>
             </div>
             <button className="w-[80px] p-1 font-bold text-xs rounded-full border-2 border-gray-300">
               +1 more
             </button>
           </div>
           <p className="text-center mt-4">{currentUser?.userBio}</p>
-
-          <div className="flex justify-center items-center space-x-1 mt-4">
-            <VGlobe className="opacity-70 w-4 h-4" />
-            <p>Twitter.com</p>
-          </div>
           <div className="flex relative space-x-4 mt-4 justify-center">
             <p
-              className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
+              className="hover:cursor-pointer text-gray-600 hover:text-gray-900 font-semibold transition-all"
               onClick={() => setIsSubscribesDisplayed(!isSubscribesDisplayed)}
             >
               <label className="font-bold">20</label> Followers
             </p>
             <p
-              className="hover:cursor-pointer text-gray-600 hover:text-gray-900"
+              className="hover:cursor-pointer text-gray-600 hover:text-gray-900 font-semibold transition-all"
               onClick={() => setIsSubscribesDisplayed(!isSubscribesDisplayed)}
             >
               <label className="font-bold">1</label> Following
@@ -80,7 +75,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
               }}
               className={`${
                 isSubscribesOpen && "hidden"
-              } border z-20 h-full flex justify-center bg-black bg-opacity-60 items-center fixed inset-0 backdrop-filter backdrop-blur-md`}
+              } border z-20 h-full flex transition-all justify-center bg-black bg-opacity-60 items-center fixed inset-0 backdrop-filter backdrop-blur-md`}
             >
               <SubScribesContainer />
             </div>
@@ -90,10 +85,9 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
               Edit
             </button>
             <button
-              onClick={() => {
-                setIsShareOpen((prev) => !prev);
-              }}
-              className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border"
+              onClick={() => setIsShareOpen(!isShareOpen)}
+              disabled={isShareOpen ? false : true}
+              className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border disabled:opacity-50"
             >
               <VShare className="w-4 h-4 opacity-75" />
             </button>
@@ -104,52 +98,11 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
           </div>
         </div>
         <Tab.Group defaultIndex={1}>
-          <Tab.List
-            className={
-              "p-2 mb-2 text-gray-600 flex justify-around space-x-6 mx-auto max-w-md mt-3"
-            }
-          >
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              On Sale
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              Owned by
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              Created
-            </Tab>
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "border-b-2 border-gray-800 font-extrabold text-gray-900"
-                  : "bg-white text-black"
-              }
-            >
-              Activity
-            </Tab>
-          </Tab.List>
+          <TabList />
           <Tab.Panels>
-            <div className="mx-auto border-t-2">
+            <div className="mx-auto">
               <div className="flex items-center justify-around w-full">
-                <div className="flex  py-4 space-x-2 lg:overflow-x-hidden overflow-x-scroll">
+                <div className="flex  py-4 space-x-2 lg:overflow-x-hidden overflow-x-scroll scrollbar-hide ">
                   <div className="flex px-10 space-x-3 py-4 border rounded-full justify-center items-center">
                     <Block className="w-6 h-6" />
                     <button className="font-bold">Blockchain</button>
@@ -163,23 +116,18 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
                     <button className="font-bold">Blockchain</button>
                   </div>
                 </div>
-                <div className=" rounded-xl hover:bg-gray-200 shadow-2xl bg-white p-4">
-                  <button className="">
-                    <ControlVector className="w-6 h-6 rotate-90" />
-                  </button>
-                </div>
               </div>
-              <Tab.Panel>
+              <Tab.Panel className="pb-10">
                 <SaleContainer />
               </Tab.Panel>
-              <Tab.Panel>
-                <SaleContainer />
+              <Tab.Panel className="pb-10">
+                <OwnedContainer />
               </Tab.Panel>
-              <Tab.Panel>
-                <SaleContainer />
+              <Tab.Panel className="pb-10">
+                <CreatedContainer />
               </Tab.Panel>
-              <Tab.Panel>
-                <SaleContainer />
+              <Tab.Panel className="pb-10">
+                <ActivityContainer />
               </Tab.Panel>
             </div>
           </Tab.Panels>

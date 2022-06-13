@@ -2,7 +2,7 @@
 import React, { FC } from "react";
 import Identicon from "react-identicons";
 import { UserAccount } from "@lib/models/UserAccount";
-import { VerifiedImg } from "@lib/Resources";
+import CheckmarkCard from "../CheckmarkCard";
 
 interface IProps {
   user: UserAccount;
@@ -44,11 +44,7 @@ const UserAvatarCard: FC<IProps> = ({
         onClick={() => onUserAvatarClicked}
       />
       {verified && allowVerifiedIcon && (
-        <img
-          src={VerifiedImg.src}
-          alt="verifiedIcon"
-          className="w-10 absolute bottom-0 right-0"
-        />
+        <CheckmarkCard className="h-8 absolute bottom-[5px] right-1" />
       )}
     </div>
   );

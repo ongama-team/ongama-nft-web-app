@@ -6,7 +6,7 @@ import {
   Ethereum,
   DotsVector,
 } from "@components/modules/__modules__/_vectors";
-import { VerifiedImg } from "@lib/Resources";
+import CheckmarkCard from "../CheckmarkCard";
 
 const HotBidsCard = () => {
   const { hotBidsData } = dummy_data;
@@ -29,11 +29,7 @@ const HotBidsCard = () => {
                           alt="buyer"
                           className="inline-block h-8 w-8 rounded-full ring-2 ring-white "
                         />
-                        <img
-                          src={VerifiedImg.src}
-                          alt="checkmark"
-                          className="h-8 absolute bottom-[-10px] left-3"
-                        />
+                        <CheckmarkCard className="h-8 absolute bottom-[-8px] right-0" />
                       </div>
                     );
                   })}

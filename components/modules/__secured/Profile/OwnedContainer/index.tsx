@@ -1,12 +1,12 @@
-import NFTCard from "@components/modules/__modules__/Card/NftCard";
 import React from "react";
+import NFTCard from "@components/modules/__modules__/Card/NftCard";
 import { dummy_data } from "@components/modules/__noAuth/Presentation/dummy_data";
 
-export const SaleContainer = () => {
+const OwnedContainer = () => {
   const { staticImages } = dummy_data;
   return (
     <div className="flex flex-wrap justify-start my-5">
-      {Array.from({ length: 4 }).map((_, index) => {
+      {Array.from({ length: 6 }).map((_, index) => {
         return (
           <div
             key={index}
@@ -26,3 +26,5 @@ export const SaleContainer = () => {
     </div>
   );
 };
+
+export default OwnedContainer;

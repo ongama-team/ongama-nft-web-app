@@ -6,10 +6,11 @@ interface IProps {
   nftUrl: string;
   nftPrice: string;
   nftName: string;
-  ownerAvatarUrl: string;
+  ownerAvatarUrl?: string;
   ownerName?: string;
   likes?: number;
   auction?: string;
+  isBuyAvailable?: boolean;
 }
 
 const NFTCard: FC<IProps> = ({
@@ -20,10 +21,15 @@ const NFTCard: FC<IProps> = ({
   auction,
   ownerName,
   ownerAvatarUrl,
+  isBuyAvailable = true,
 }) => {
   return (
     <div className="flex w-full shadow-lg mx-auto p-5 rounded-xl flex-col bg-white">
-      <div className="flex mx-1 items-center justify-between">
+      <div
+        className={`flex mx-1 items-center justify-between ${
+          !ownerAvatarUrl && "hidden"
+        }`}
+      >
         <div className="rounded-full w-7 h-7">
           <img
             src={ownerAvatarUrl}
@@ -34,7 +40,7 @@ const NFTCard: FC<IProps> = ({
         <DotsVector className="w-4 h-4 opacity-70" />
       </div>
 
-      <div className="rounded-3xl mt-4 overflow-hidden">
+      <div className="rounded-xl mt-4 overflow-hidden">
         <img
           width={500}
           height={500}
@@ -44,7 +50,7 @@ const NFTCard: FC<IProps> = ({
         />
       </div>
 
-      <div className="mt-3 flex justify-between">
+      <div className="mt-3 flex justify-between pt-2">
         <p className="text-sm font-bold">{nftName}</p>
         <Ethereum className="h-6 w-6" />
       </div>
@@ -56,11 +62,15 @@ const NFTCard: FC<IProps> = ({
               {auction}
             </span>
           </p>
-          <button className="text-blue-500 font-bold text-sm pt-1">
+          <button
+            className={`text-blue-500 font-bold text-sm pt-1 ${
+              !isBuyAvailable && "hidden"
+            }`}
+          >
             Buy now
           </button>
         </div>
-        <div className="flex opacity-80">
+        <div className={`${likes && "flex"} opacity-80`}>
           <HeartVector className="h-6 w-6" />
           <p className="text-xl ml-2 font-bold">{likes}</p>
         </div>
