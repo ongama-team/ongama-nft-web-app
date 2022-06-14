@@ -11,9 +11,6 @@ class Web3Actions {
       signer = await web3Instance.connect();
 
       console.log("==>", signer);
-
-      // ------ wallet signer failed to be converted to string in order to store it in
-      // localStorage **JSON.stringify(signer)** returns noting
       LocalStorage.setItem("ongama_signer_address", signer);
       return signer;
     } catch {
@@ -27,8 +24,6 @@ class Web3Actions {
       signer = await web3Instance.walletConnectConnector();
       console.log("trust wallet Signer", signer);
 
-      // ------ wallet signer failed to be converted to string in order to store it in
-      // localStorage **JSON.stringify(signer)** returns noting
       LocalStorage.setItem("ongama_signer_address", signer);
       return signer;
     } catch {
