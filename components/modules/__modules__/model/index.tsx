@@ -9,7 +9,6 @@ import {
 import { web3Actions } from "@lib/web3";
 import { walletAddressAtom, walletAtom } from "@lib/atoms";
 import { useRecoilState } from "recoil";
-import balanceFormater from "@lib/helper/walletBalanceFormater";
 
 type openMenuT = {
   openWalletMenu: boolean;
@@ -41,34 +40,25 @@ const ConnectWalletsModal = () => {
     onEditMode();
   };
 
-  // ------- get wallet balance from trust wallet throw an error after wallet
-  // being connected.
   const onConnectTrustOrConnectWallet = async () => {
     const signer = await connectTrustOrConnectWallet();
-    const signerWalletAddress = await signer?.getAddress();
-    const signerWalletBalance = await signer?.getBalance();
-    const formatedBalance = balanceFormater(signerWalletBalance);
-    console.log("formated wallet data", signerWalletAddress, formatedBalance);
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress({
-      address: signerWalletAddress,
-      balance: signerWalletBalance,
+      address: signer,
+      balance: "",
     });
     onEditMode();
   };
 
-  //---- get wallet balance from metamask , works fine actually
   const onConnectBrowserWallet = async () => {
     const signer = await connectBrowserWallet();
-    const signerWalletAddress = await signer?.getAddress();
-    const signerWalletBalance = await signer?.getBalance();
-    const formatedBalance = balanceFormater(signerWalletBalance);
+
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress({
-      balance: formatedBalance,
-      address: signerWalletAddress,
+      balance: "",
+      address: signer,
     });
     onEditMode();
   };

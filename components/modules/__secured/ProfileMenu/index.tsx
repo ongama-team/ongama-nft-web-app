@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import { CrossVector, VUser } from "@components/modules/__modules__/_vectors";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import { useRecoilValue, useRecoilState } from "recoil";
@@ -31,7 +30,7 @@ const ProfileMenu = () => {
   };
 
   const onRedirectToEditProfile = () => {
-    router.push("edith/profile");
+    router.push("/profile/edit");
     setIsProfileMenu(!isProfileMenu);
   };
 
@@ -75,7 +74,7 @@ const ProfileMenu = () => {
           <div className="my-5">
             <WalletInfoCard
               truncatedWalletAddress={truncatedWalletAddress}
-              walletBalance={balance + "ETH"}
+              walletBalance={balance && balance + "ETH"}
             />
           </div>
           <button

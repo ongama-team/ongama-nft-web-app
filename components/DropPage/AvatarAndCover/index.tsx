@@ -31,7 +31,7 @@ const AvatarAndCover: FC<IProps> = ({ user }) => {
             <span>
               <VEthereum className="text-blue-500 ml-1" />
             </span>
-            <span className="px-3">{minifiedAddress}</span>
+            <span className="px-3 font-bold">{minifiedAddress}</span>
           </p>
         </div>
       </div>
