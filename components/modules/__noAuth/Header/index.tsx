@@ -11,18 +11,25 @@ import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
 
 import { useRecoilState } from "recoil";
-import { walletAtom, walletAddressAtom, profileMenuAtom } from "@lib/atoms";
+import {
+  walletAtom,
+  profileMenuAtom,
+  currentAccountState,
+  walletAddressAtom,
+} from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
 import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
-import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
+import { backendApiService } from "@lib/services/BackendApiService";
+import { UserAccount } from "@lib/models/UserAccount";
 
 const Header = () => {
   const routes = useRouter();
-  const { user } = dummy_profile;
   const [isLightTheme, setIsLightTheme] = useState(true);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
+  const [currentAccount, setCurrentAccount] =
+    useRecoilState(currentAccountState);
   const [walletData, setWalletData] = useRecoilState(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const { address } = walletData;
@@ -36,6 +43,13 @@ const Header = () => {
 
   const onCreateNft = () => {
     routes.push("/create");
+  };
+
+  const fetchUser = async (walletAddress) => {
+    const [user] = await Promise.all([
+      backendApiService.findAccountWhereAddressOrUsername(walletAddress),
+    ]);
+    return setCurrentAccount(user);
   };
 
   // --- detect when browser wallet is deconnected
@@ -58,6 +72,8 @@ const Header = () => {
       address: memorizedWalletAddress || "",
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    fetchUser(memorizedWalletAddress);
   }, [setWalletData]);
 
   const openProfileMenu = () => {
@@ -113,14 +129,11 @@ const Header = () => {
           className={`${!address && "hidden"} w-12 h-12 ml-1`}
         >
           <UserAvatarCard
-            user={user}
+            user={currentAccount as UserAccount}
             identiconSize={20}
             onUserAvatarClicked={() => null}
             userAvatarClassName={
               "w-12 h-12 object-cover rounded-full cursor-pointer"
-            }
-            identiconContainerClassName={
-              "w-fit bg-white border border-gray-300 p-3 rounded-full"
             }
           />
         </div>

@@ -9,6 +9,9 @@ class Web3Actions {
 
     try {
       signer = await web3Instance.connect();
+
+      console.log("==>", signer);
+
       LocalStorage.setItem("ongama_signer_address", signer.signerWalletAddress);
       return signer;
     } catch {

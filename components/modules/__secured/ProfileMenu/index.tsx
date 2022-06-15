@@ -4,13 +4,18 @@ import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import { CrossVector, VUser } from "@components/modules/__modules__/_vectors";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { profileMenuAtom, walletAddressAtom } from "@lib/atoms";
+import {
+  currentAccountState,
+  profileMenuAtom,
+  walletAddressAtom,
+} from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
+import { UserAccount } from "@lib/models/UserAccount";
 
 const ProfileMenu = () => {
-  const { user } = dummy_profile;
+  const currentAccount = useRecoilValue(currentAccountState);
   const { address, balance } = useRecoilValue(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const truncatedWalletAddress = truncateAddress(address, 10, 4);
@@ -22,6 +27,11 @@ const ProfileMenu = () => {
 
   const onRedirectToProfile = () => {
     router.push(`/profile/${address}`);
+    setIsProfileMenu(!isProfileMenu);
+  };
+
+  const onRedirectToEditProfile = () => {
+    router.push("/profile/edit");
     setIsProfileMenu(!isProfileMenu);
   };
 
@@ -43,15 +53,14 @@ const ProfileMenu = () => {
           </button>
           <div className="flex items-center mt-10">
             <UserAvatarCard
-              user={user}
+              user={currentAccount as UserAccount}
               identiconSize={20}
               userAvatarClassName={"w-12 h-12 rounded-full object-cover"}
-              identiconContainerClassName={
-                "border border-gray-300 p-3 rounded-full"
-              }
             />
             <div className="px-3">
-              <p className="font-ibmPlexSans font-bold">{user.username}</p>
+              <p className="font-ibmPlexSans font-bold">
+                {currentAccount?.username}
+              </p>
               <div
                 tabIndex={0}
                 role="button"
@@ -66,10 +75,13 @@ const ProfileMenu = () => {
           <div className="my-5">
             <WalletInfoCard
               truncatedWalletAddress={truncatedWalletAddress}
-              walletBalance={balance + "ETH"}
+              walletBalance={balance.toFixed(2) + " ETH"}
             />
           </div>
-          <button className="flex items-center hover:bg-gray-100 py-3 rounded-xl px-3 transition-all w-full">
+          <button
+            onClick={onRedirectToEditProfile}
+            className="flex items-center hover:bg-gray-100 py-3 rounded-xl px-3 transition-all w-full"
+          >
             <VUser className="text-2xl" />
             <span className="px-3 font-ibmPlexSans font-bold">
               Edit profile

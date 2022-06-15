@@ -3,27 +3,28 @@ import React, { FC } from "react";
 import Identicon from "react-identicons";
 import { UserAccount } from "@lib/models/UserAccount";
 import CheckmarkCard from "../CheckmarkCard";
+import { useRecoilValue } from "recoil";
+import { walletAddressAtom } from "@lib/atoms";
 
 interface IProps {
   user: UserAccount;
   identiconSize: number;
   userAvatarClassName: string;
-  identiconContainerClassName: string;
+  identiconContainerClassName?: string;
   allowVerifiedIcon?: boolean;
   onUserAvatarClicked?: () => void;
 }
 
 const UserAvatarCard: FC<IProps> = ({
   user,
-  identiconSize,
+  identiconSize = 20,
   userAvatarClassName,
-  identiconContainerClassName,
+  identiconContainerClassName = "bg-white rounded-full overflow-hidden border border-gray-300 p-3",
   allowVerifiedIcon = false,
   onUserAvatarClicked,
 }) => {
-  const { avatarUrlThumbnail, avatarUrl, walletAddress, username, verified } =
-    user;
-  if (!avatarUrl && !avatarUrlThumbnail)
+  const connectedWallet = useRecoilValue(walletAddressAtom);
+  if (!user?.avatarUrl && !user?.avatarUrlThumbnail)
     return (
       <div
         tabIndex={0}
@@ -32,18 +33,21 @@ const UserAvatarCard: FC<IProps> = ({
         onClick={() => onUserAvatarClicked}
         className={identiconContainerClassName}
       >
-        <Identicon string={walletAddress} size={identiconSize} />
+        <Identicon
+          string={user?.walletAddress || connectedWallet.address}
+          size={identiconSize}
+        />
       </div>
     );
   return (
     <div className="flex relative">
       <img
-        src={avatarUrl || avatarUrlThumbnail}
-        alt={username || walletAddress}
+        src={user?.avatarUrl || user?.avatarUrlThumbnail}
+        alt={user?.username || user?.walletAddress}
         className={userAvatarClassName}
         onClick={() => onUserAvatarClicked}
       />
-      {verified && allowVerifiedIcon && (
+      {user?.verified && allowVerifiedIcon && (
         <CheckmarkCard className="h-8 absolute bottom-[5px] right-1" />
       )}
     </div>
