@@ -31,7 +31,7 @@ const ProfileMenu = () => {
   };
 
   const onRedirectToEditProfile = () => {
-    router.push("edith/profile");
+    router.push("/profile/edit");
     setIsProfileMenu(!isProfileMenu);
   };
 
@@ -75,7 +75,7 @@ const ProfileMenu = () => {
           <div className="my-5">
             <WalletInfoCard
               truncatedWalletAddress={truncatedWalletAddress}
-              walletBalance={balance + "ETH"}
+              walletBalance={balance.toFixed(2) + " ETH"}
             />
           </div>
           <button
