@@ -32,22 +32,19 @@ const ConnectWalletsModal = () => {
     setEditMode((prev) => !prev);
   };
 
-  const onConnectCoinBaseWallet = async () => {
-    const signer = await connectCoinBaseWallet();
-    if (!signer) return;
-    setIsWalletsDisplayed(!isWalletsDisplayed);
-    setWalletAddress({ address: signer, balance: "" });
-    onEditMode();
-  };
-
   const onConnectTrustOrConnectWallet = async () => {
     const signer = await connectTrustOrConnectWallet();
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
-    setWalletAddress({
-      address: signer,
-      balance: "",
-    });
+    setWalletAddress({ address: signer, balance: 0 });
+    onEditMode();
+  };
+
+  const onConnectCoinBaseWallet = async () => {
+    const signer = await connectCoinBaseWallet();
+    if (!signer) return;
+    setIsWalletsDisplayed(!isWalletsDisplayed);
+    setWalletAddress({ address: signer, balance: 0 });
     onEditMode();
   };
 
@@ -57,7 +54,7 @@ const ConnectWalletsModal = () => {
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress({
-      balance: "",
+      balance: 0,
       address: signer,
     });
     onEditMode();
