@@ -5,6 +5,8 @@ import Header from "@components/modules/__noAuth/Header";
 import { useState, ChangeEvent, useEffect } from "react";
 import UpdateStatusModal from "./updateStatusModal";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
+import ipfsClient from "@lib/ipfsClient";
+import { VSpinner } from "@components/modules/__modules__/_vectors";
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState("");
@@ -23,6 +25,7 @@ const EditProfile = () => {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [isStatusModal, setIsStatusModal] = useState(false);
   const [isWrongFileSize, setIsWrongFileSize] = useState(false);
+  const [isUserAvaterUploading, setIsUserAvatarUploading] = useState(false);
   const profilePlaceholder =
     "https://lh3.googleusercontent.com/9KIL56q19B9i8BasJfTcVZFn7QOcvdtBqww5dgK5Zk5Mi5w4Ljekw0ibITpf6TBtGnyqcLTDNEEG9OpUC98aLukfcM9yXhSltJoe=w600";
 
@@ -32,13 +35,19 @@ const EditProfile = () => {
     setIsWrongFileSize(false);
   };
 
-  const chooseFile = (e: ChangeEvent<HTMLInputElement>) => {
+  const chooseFile = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const { files } = e.target;
     checkFileSize(files);
     setImg(files[0]);
     if (files.length === 0) return;
     const previewUrl = URL.createObjectURL(files[0]);
+    setIsUserAvatarUploading(true);
+    const file = await ipfsClient.add(files[0]);
+    const fileUrl = `https://ipfs.infura.io/ipfs/${file.path}`;
+    console.log("file url", fileUrl);
+    setIsUserAvatarUploading(false);
+    setProfile({ ...profile, avatarUrl: fileUrl });
     setPreviewImgLink(previewUrl);
   };
 
@@ -144,11 +153,18 @@ const EditProfile = () => {
             />
           </div>
           <div className="sm:block sm:w-[30%]">
-            <img
-              src={previewImgLink ? previewImgLink : profilePlaceholder}
-              alt="profile"
-              className=" h-24 w-24 rounded-full object-cover"
-            />
+            <div className="relative w-fit h-fit">
+              <img
+                src={previewImgLink ? previewImgLink : profilePlaceholder}
+                alt="profile"
+                className=" h-24 w-24 rounded-full object-cover"
+              />
+              {isUserAvaterUploading && (
+                <div className="absolute w-full h-full top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-white bg-opacity-70 rounded-full">
+                  <VSpinner className="animate-spin text-blue-500 text-3xl" />
+                </div>
+              )}
+            </div>
             <p className="my-3 text-xs text-slate-500">
               We recommend an image <br />
               of at least 300 x 300. Gifs work too.
