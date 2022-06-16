@@ -67,7 +67,7 @@ const Header = () => {
       const signer = LocalStorage.getItem("ongama_signer_address");
       if (signer) {
         setWalletData({
-          balance: "",
+          balance: 0,
           address: signer || "",
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
