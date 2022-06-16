@@ -53,7 +53,7 @@ const ProfileMenu = () => {
           <div className="flex items-center mt-10">
             <UserAvatarCard
               user={currentAccount as UserAccount}
-              identiconSize={20}
+              identiconSize={40}
               userAvatarClassName={"w-12 h-12 rounded-full object-cover"}
             />
             <div className="px-3">

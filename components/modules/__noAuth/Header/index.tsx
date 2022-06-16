@@ -127,11 +127,11 @@ const Header = () => {
         </button>
         <div
           onClick={openProfileMenu}
-          className={`${!address && "hidden"} w-12 h-12 ml-1`}
+          className={`${!address && "hidden"} w-12 h-12 ml-1 flex items-center`}
         >
           <UserAvatarCard
             user={currentAccount as UserAccount}
-            identiconSize={20}
+            identiconSize={40}
             onUserAvatarClicked={() => null}
             userAvatarClassName={
               "w-12 h-12 object-cover rounded-full cursor-pointer"
