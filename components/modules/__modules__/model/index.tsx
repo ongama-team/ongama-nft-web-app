@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useState } from "react";
 import SelectedItem from "../../__secured/SelectedItem";
 import {
   WalletConnectVector,
@@ -32,14 +32,6 @@ const ConnectWalletsModal = () => {
     setEditMode((prev) => !prev);
   };
 
-  const onConnectTrustOrConnectWallet = async () => {
-    const signer = await connectTrustOrConnectWallet();
-    if (!signer) return;
-    setIsWalletsDisplayed(!isWalletsDisplayed);
-    setWalletAddress({ address: signer, balance: 0 });
-    onEditMode();
-  };
-
   const onConnectCoinBaseWallet = async () => {
     const signer = await connectCoinBaseWallet();
     if (!signer) return;
@@ -48,14 +40,22 @@ const ConnectWalletsModal = () => {
     onEditMode();
   };
 
+  const onConnectTrustOrConnectWallet = async () => {
+    const signer = await connectTrustOrConnectWallet();
+    if (!signer) return;
+    setIsWalletsDisplayed(!isWalletsDisplayed);
+    setWalletAddress({ address: signer, balance: 0 });
+    onEditMode();
+  };
+
   const onConnectBrowserWallet = async () => {
     const signer = await connectBrowserWallet();
-    const { signerWalletAddress, formatedBalance } = signer;
+
     if (!signer) return;
     setIsWalletsDisplayed(!isWalletsDisplayed);
     setWalletAddress({
-      balance: formatedBalance,
-      address: signerWalletAddress,
+      balance: 0,
+      address: signer,
     });
     onEditMode();
   };

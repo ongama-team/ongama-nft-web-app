@@ -11,8 +11,7 @@ class Web3Actions {
       signer = await web3Instance.connect();
 
       console.log("==>", signer);
-
-      LocalStorage.setItem("ongama_signer_address", signer.signerWalletAddress);
+      LocalStorage.setItem("ongama_signer_address", signer);
       return signer;
     } catch {
       return signer;
@@ -22,8 +21,10 @@ class Web3Actions {
   public async connectTrustOrConnectWallet() {
     let signer;
     try {
-      const connector = await web3Instance.walletConnectConnector();
-      const signer = await connector?.getAddress();
+      signer = await web3Instance.walletConnectConnector();
+      console.log("trust wallet Signer", signer);
+
+      LocalStorage.setItem("ongama_signer_address", signer);
       return signer;
     } catch {
       return signer;

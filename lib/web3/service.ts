@@ -42,11 +42,10 @@ class Web3Service {
     await provider.send("eth_requestAccounts", []);
 
     const signer = provider.getSigner();
-    const signerWalletAddress = await signer.getAddress();
-    const balance = await provider.getBalance(signerWalletAddress);
-    const formatedBalance = ethers.utils.formatEther(balance);
 
-    return { signerWalletAddress, formatedBalance };
+    const walletAddress = await signer.getAddress();
+
+    return walletAddress;
   }
 
   public async coinBaseConnect() {
@@ -59,7 +58,10 @@ class Web3Service {
       await connector.enable();
       const provider = new ethers.providers.Web3Provider(connector);
       const signer = provider.getSigner();
-      return signer;
+
+      const walletAddress = await signer.getAddress();
+
+      return walletAddress;
     } catch (error) {
       console.log("Trust wallet error", error);
     }

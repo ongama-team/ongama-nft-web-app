@@ -46,13 +46,12 @@ const Header = () => {
   };
 
   const fetchUser = async (walletAddress) => {
-    const [user] = await Promise.all([
-      backendApiService.findAccountWhereAddressOrUsername(walletAddress),
-    ]);
+    const user = await backendApiService.findAccountWhereAddressOrUsername(
+      walletAddress
+    );
     return setCurrentAccount(user);
   };
 
-  // --- detect when browser wallet is deconnected
   useEffect(() => {
     if (window && !window?.ethereum) return;
     window.ethereum.on("accountsChanged", (accounts: string[]) => {
@@ -64,16 +63,18 @@ const Header = () => {
   }, [setWalletData, walletData]);
 
   useEffect(() => {
-    const memorizedWalletAddress = LocalStorage.getItem(
-      "ongama_signer_address"
-    );
-    setWalletData({
-      ...walletData,
-      address: memorizedWalletAddress || "",
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    (async () => {
+      const signer = LocalStorage.getItem("ongama_signer_address");
+      if (signer) {
+        setWalletData({
+          balance: 0,
+          address: signer || "",
+        });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
 
-    fetchUser(memorizedWalletAddress);
+        fetchUser(signer);
+      }
+    })();
   }, [setWalletData]);
 
   const openProfileMenu = () => {
