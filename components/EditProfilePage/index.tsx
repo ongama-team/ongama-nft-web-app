@@ -1,15 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import { walletAddressAtom } from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
 import { backendApiService } from "@lib/services/BackendApiService";
-import { useRouter } from "next/router";
 import { useState, ChangeEvent, useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
 import UpdateStatusModal from "./updateStatusModal";
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState("");
-  const walletData = useRecoilValue(walletAddressAtom);
   const [profile, setProfile] = useState({
     walletAddress: "",
     username: "",
@@ -24,12 +20,20 @@ const EditProfile = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [isStatusModal, setIsStatusModal] = useState(false);
+  const [isWrongFileSize, setIsWrongFileSize] = useState(false);
   const profilePlaceholder =
     "https://lh3.googleusercontent.com/9KIL56q19B9i8BasJfTcVZFn7QOcvdtBqww5dgK5Zk5Mi5w4Ljekw0ibITpf6TBtGnyqcLTDNEEG9OpUC98aLukfcM9yXhSltJoe=w600";
+
+  const checkFileSize = (file: FileList) => {
+    const fileSize = file[0].size;
+    if (fileSize > Math.pow(5, 6)) setIsWrongFileSize(true);
+    setIsWrongFileSize(false);
+  };
 
   const chooseFile = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const { files } = e.target;
+    checkFileSize(files);
     setImg(files[0]);
     if (files.length === 0) return;
     const previewUrl = URL.createObjectURL(files[0]);
@@ -45,7 +49,6 @@ const EditProfile = () => {
   }, []);
 
   const onUpdateProfile = async () => {
-    console.log("update payload", profile);
     const {
       walletAddress,
       userBio,
@@ -172,7 +175,8 @@ const EditProfile = () => {
       </div>
       <button
         onClick={onUpdateProfile}
-        className="w-[60%] py-3 text-white rounded-3xl bg-blue-600 ml-[20%] mt-6 sm:ml-0"
+        disabled={isWrongFileSize}
+        className="w-[60%] py-3 text-white rounded-3xl bg-blue-600 ml-[20%] mt-6 sm:ml-0 disabled:bg-blue-400 disabled:cursor-not-allowed"
       >
         Update profile
       </button>
