@@ -26,13 +26,19 @@ import TabList from "./module/TabList";
 import OwnedContainer from "./OwnedContainer";
 import CreatedContainer from "./CreatedContainer";
 import ActivityContainer from "./ActivityContainer";
+import { useRouter } from "next/router";
 
 function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
+  const router = useRouter();
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const connectedWallet = useRecoilValue(walletAddressAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+
+  const onEditProfile = () => {
+    router.push("/profile/edit");
+  };
 
   return (
     <>
@@ -86,7 +92,10 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             </div>
           </div>
           <div className="flex relative justify-center space-x-2 mt-4">
-            <button className="px-6 py-2 rounded-full font-bold border-gray-300 border ">
+            <button
+              onClick={onEditProfile}
+              className="px-6 py-2 rounded-full font-bold border-gray-300 border "
+            >
               Edit
             </button>
             <button

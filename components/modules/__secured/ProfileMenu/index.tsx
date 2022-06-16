@@ -74,7 +74,7 @@ const ProfileMenu = () => {
           <div className="my-5">
             <WalletInfoCard
               truncatedWalletAddress={truncatedWalletAddress}
-              walletBalance={balance && balance + "ETH"}
+              walletBalance={balance.toFixed(2) + " ETH"}
             />
           </div>
           <button

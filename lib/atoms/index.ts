@@ -10,7 +10,7 @@ export const walletAddressAtom = atom({
   key: "walletAddress",
   default: {
     address: "",
-    balance: "",
+    balance: 0,
   },
 });
 
