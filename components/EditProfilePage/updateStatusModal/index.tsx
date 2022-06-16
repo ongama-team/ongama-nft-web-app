@@ -63,7 +63,7 @@ const UpdateStatusModal = ({
           </p>
           <button
             onClick={onTryAgain}
-            className="w-full bg-black text-white font-bold py-2 my-2 rounded-lg"
+            className="w-full bg-blue-600 text-white font-bold py-2 my-2 rounded-lg"
           >
             Try again
           </button>

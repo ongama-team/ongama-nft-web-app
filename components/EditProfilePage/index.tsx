@@ -1,8 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import LocalStorage from "@lib/helper/LocalStorage";
 import { backendApiService } from "@lib/services/BackendApiService";
+import Header from "@components/modules/__noAuth/Header";
 import { useState, ChangeEvent, useEffect } from "react";
 import UpdateStatusModal from "./updateStatusModal";
+import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState("");
@@ -90,106 +92,114 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="px-4 py-6 sm:px-28 md:py-12 lg:px-44 xl:px-56 ">
-      <h2 className=" text-lg md:text-2xl lg:text-3xl font-bold ">
-        Edit profile
-      </h2>
-      <p className=" text-gray-500 text-sm w-[80%] md:text-lg lg:w-[55%] my-6 ">
-        You can set preferred display name create your branded profile URL and
-        manage other personal settings
-      </p>
-      <div className="flex flex-col justify-center  w-full sm:flex-row">
-        <div className=" w-full flex flex-col sm:w-[70%]  sm:pr-12">
-          <label htmlFor="name" className="label">
-            Display name
-          </label>
-          <input
-            id="name"
-            className="input"
-            placeholder="The Dev bro"
-            onChange={(e) =>
-              setProfile({ ...profile, username: e.target.value })
-            }
-          />
-          <label htmlFor="bio" className="label">
-            Bio
-          </label>
-          <input
-            id="bio"
-            className="input"
-            placeholder="The big boy doing wonders"
-            onChange={(e) =>
-              setProfile({ ...profile, userBio: e.target.value })
-            }
-          />
-          <label htmlFor="portfolio" className="label">
-            Personal site or portfolio
-          </label>
-          <input
-            id="portfolio"
-            className="input"
-            placeholder="https://www.dev.to/web3"
-          />
-          <label htmlFor="email" className="label">
-            Email
-          </label>
-          <input id="email" className="input" placeholder="Enter your email" />
-        </div>
-        <div className="sm:block sm:w-[30%]">
-          <img
-            src={previewImgLink ? previewImgLink : profilePlaceholder}
-            alt="profile"
-            className=" h-24 w-24 rounded-full object-cover"
-          />
-          <p className="my-3 text-xs text-slate-500">
-            We recommend an image <br />
-            of at least 300 x 300. Gifs work too.
-            <br />
-            Max 5mb
-          </p>
-          <input
-            onChange={chooseFile}
-            type="file"
-            accept="image/*"
-            className="text-sm
+    <>
+      <Header />
+      <div className="px-4 py-6 sm:px-28 md:py-12 lg:px-44 xl:px-56 mt-20">
+        <h2 className=" text-lg md:text-2xl lg:text-3xl font-bold ">
+          Edit profile
+        </h2>
+        <p className=" text-gray-500 text-sm w-[80%] md:text-lg lg:w-[55%] my-6 ">
+          You can set preferred display name create your branded profile URL and
+          manage other personal settings
+        </p>
+        <div className="flex flex-col justify-center  w-full sm:flex-row">
+          <div className=" w-full flex flex-col sm:w-[70%]  sm:pr-12">
+            <label htmlFor="name" className="label">
+              Display name
+            </label>
+            <input
+              id="name"
+              className="input"
+              placeholder="The Dev bro"
+              onChange={(e) =>
+                setProfile({ ...profile, username: e.target.value })
+              }
+            />
+            <label htmlFor="bio" className="label">
+              Bio
+            </label>
+            <input
+              id="bio"
+              className="input"
+              placeholder="The big boy doing wonders"
+              onChange={(e) =>
+                setProfile({ ...profile, userBio: e.target.value })
+              }
+            />
+            <label htmlFor="portfolio" className="label">
+              Personal site or portfolio
+            </label>
+            <input
+              id="portfolio"
+              className="input"
+              placeholder="https://www.dev.to/web3"
+            />
+            <label htmlFor="email" className="label">
+              Email
+            </label>
+            <input
+              id="email"
+              className="input"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="sm:block sm:w-[30%]">
+            <img
+              src={previewImgLink ? previewImgLink : profilePlaceholder}
+              alt="profile"
+              className=" h-24 w-24 rounded-full object-cover"
+            />
+            <p className="my-3 text-xs text-slate-500">
+              We recommend an image <br />
+              of at least 300 x 300. Gifs work too.
+              <br />
+              Max 5mb
+            </p>
+            <input
+              onChange={chooseFile}
+              type="file"
+              accept="image/*"
+              className="text-sm
                    file:px-5 file:py-2 file:my-3
                    file:rounded-3xl file:border-0
                    file:font-bold  file:text-blue-600
                    file:bg-blue-100 text-white
                    hover:file:cursor-pointer hover:file:bg-blue-200"
-          />
+            />
+          </div>
         </div>
-      </div>
-      <div className="w-full my-8 sm:w-[70%] sm:pr-12">
-        <h3 className="label">Verification</h3>
-        <section className="flex flex-col md:flex-row">
-          <p className="my-3 text-xs text-slate-500">
-            Proceed with verification process to get more visibility and gain
-            trust on Ongama Marketplace. Please allow up to several weeks for
-            the process
-          </p>
-          <button className="text-xs w-40 py-2 font-bold bg-blue-100 text-blue-600 rounded-3xl hover:bg-blue-200 md:ml-1">
-            Get verified
-          </button>
-        </section>
-      </div>
-      <button
-        onClick={onUpdateProfile}
-        disabled={isWrongFileSize}
-        className="w-[60%] py-3 text-white rounded-3xl bg-blue-600 ml-[20%] mt-6 sm:ml-0 disabled:bg-blue-400 disabled:cursor-not-allowed"
-      >
-        Update profile
-      </button>
+        <div className="w-full my-8 sm:w-[70%] sm:pr-12">
+          <h3 className="label">Verification</h3>
+          <section className="flex flex-col md:flex-row">
+            <p className="my-3 text-xs text-slate-500">
+              Proceed with verification process to get more visibility and gain
+              trust on Ongama Marketplace. Please allow up to several weeks for
+              the process
+            </p>
+            <button className="text-xs w-40 py-2 font-bold bg-blue-100 text-blue-600 rounded-3xl hover:bg-blue-200 md:ml-1">
+              Get verified
+            </button>
+          </section>
+        </div>
+        <button
+          onClick={onUpdateProfile}
+          disabled={isWrongFileSize}
+          className="w-[60%] py-3 text-white rounded-3xl bg-blue-600 ml-[20%] mt-6 sm:ml-0 disabled:bg-blue-400 disabled:cursor-not-allowed"
+        >
+          Update profile
+        </button>
 
-      {isStatusModal && (
-        <UpdateStatusModal
-          onCloseStatusModal={onCloseStatusModal}
-          onTryAgain={() => onUpdateProfile()}
-          updateSuccess={updateSuccess}
-          isProcessing={isProcessing}
-        />
-      )}
-    </div>
+        {isStatusModal && (
+          <UpdateStatusModal
+            onCloseStatusModal={onCloseStatusModal}
+            onTryAgain={() => onUpdateProfile()}
+            updateSuccess={updateSuccess}
+            isProcessing={isProcessing}
+          />
+        )}
+      </div>
+      <ProfileMenu />
+    </>
   );
 };
 
