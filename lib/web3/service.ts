@@ -1,18 +1,22 @@
+import Web3 from "web3";
 import { ethers } from "ethers";
 import { TChain } from "../@Types/chains";
 import { CHAINS_ENV } from "../config/chains";
 import NFTABI from "./abis/NFT.json";
 import { connectCoinbase } from "./helpers/connecters";
 import { connector } from "./walletConnect";
+import { SignResult } from "@lib/models/GeneralModel";
 
 class Web3Service {
   public provider;
+  public web3Instance: Web3;
 
-  constructor() {
+  constructor(web3Instance: Web3) {
     //  Initial implementation of connecting to the blockchain with an hardcoded chain
     this.provider = new ethers.providers.JsonRpcProvider(
       CHAINS_ENV.polygon.nodeRPC
     );
+    this.web3Instance = web3Instance;
   }
 
   public contract(chain: TChain = "polygon") {
@@ -64,6 +68,25 @@ class Web3Service {
       return walletAddress;
     } catch (error) {
       console.log("Trust wallet error", error);
+    }
+  }
+
+  public async signPersonalMessage(
+    data: string,
+    address: string
+  ): Promise<SignResult | null> {
+    try {
+      const web3 = this.web3Instance;
+      const hashedData = web3.utils.sha3(data);
+      const signature = await web3.eth.personal.sign(hashedData, address, "");
+
+      return {
+        signature,
+        data,
+      };
+    } catch (e) {
+      console.log("error :", e);
+      return null;
     }
   }
 }
