@@ -7,6 +7,9 @@ import UpdateStatusModal from "./updateStatusModal";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 import ipfsClient from "@lib/ipfsClient";
 import { VSpinner } from "@components/modules/__modules__/_vectors";
+import { Web3Service } from "@lib/web3";
+import Web3 from "web3";
+import { UserAccount } from "@lib/models/UserAccount";
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState("");
@@ -69,10 +72,31 @@ const EditProfile = () => {
       avatarUrlThumbnail,
       coverUrl,
       coverThumbnailUrl,
+      signature,
     } = profile;
+
+    const web3Service = new Web3Service();
+    const userSignature = await web3Service.signPersonalMessage(
+      JSON.stringify({
+        walletAddress,
+        userBio,
+        username,
+        avatarUrl,
+        avatarUrlCompressed,
+        avatarUrlThumbnail,
+        coverUrl,
+        coverThumbnailUrl,
+      }),
+      walletAddress
+    );
+    if (userSignature?.signature)
+      setProfile({ ...profile, signature: userSignature.signature });
+    console.log("user signature", userSignature);
+
     setIsStatusModal(true);
     setIsProcessing(true);
     setUpdateSuccess(false);
+
     const updateStatus = await backendApiService.updateProfile(
       walletAddress,
       userBio,
@@ -81,7 +105,8 @@ const EditProfile = () => {
       avatarUrlCompressed,
       avatarUrlThumbnail,
       coverUrl,
-      coverThumbnailUrl
+      coverThumbnailUrl,
+      signature
     );
 
     console.log("update response", updateStatus);
