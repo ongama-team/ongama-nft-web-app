@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { DotsVector, Ethereum, HeartVector } from "../../_vectors";
 import { FC } from "react";
+import TimeLeft from "helpers/TimeLeft";
 
 interface IProps {
   nftUrl: string;
@@ -49,6 +50,10 @@ const NFTCard: FC<IProps> = ({
           className="object-cover"
         />
       </div>
+      <button className="py-1 px-3  rounded-xl  bg-white border-2 border-purple-500 absolute mt-48 text-gray-700 font-bold">
+        <TimeLeft />
+        <span className="text-gray-400 mx-2 font-sans">left</span> 🔥
+      </button>
 
       <div className="mt-3 flex justify-between pt-2">
         <p className="text-sm font-bold">{nftName}</p>

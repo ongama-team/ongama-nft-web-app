@@ -6,8 +6,11 @@ import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
 import TopSellers from "@components/modules/__noAuth/TopSellers";
 import HotCollections from "@components/modules/__noAuth/HotCollections";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
+import LiveAuctions from "../modules/__noAuth/LiveAuctions";
 
 const LandingPage = () => {
+  console.log("hello");
+
   return (
     <>
       <Header />
@@ -17,6 +20,7 @@ const LandingPage = () => {
       <TopSellers />
       <HotCollections />
       <ProfileMenu />
+      <LiveAuctions />
     </>
   );
 };
