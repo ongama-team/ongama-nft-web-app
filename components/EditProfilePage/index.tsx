@@ -19,14 +19,10 @@ const EditProfile = () => {
     username: "",
     userBio: "",
     avatarUrl: "",
-    avatarUrlCompressed:
-      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
-    avatarUrlThumbnail:
-      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
-    coverThumbnailUrl:
-      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
-    coverUrl:
-      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
+    avatarUrlCompressed: "",
+    avatarUrlThumbnail: "",
+    coverThumbnailUrl: "",
+    coverUrl: "",
     signature: "",
   });
   const [isProcessing, setIsProcessing] = useState(false);
