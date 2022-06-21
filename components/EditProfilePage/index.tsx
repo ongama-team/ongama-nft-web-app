@@ -10,6 +10,7 @@ import { VSpinner } from "@components/modules/__modules__/_vectors";
 import { Web3Service } from "@lib/web3";
 import Web3 from "web3";
 import { UserAccount } from "@lib/models/UserAccount";
+import { orderObject } from "@lib/Utils";
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState("");
@@ -18,10 +19,14 @@ const EditProfile = () => {
     username: "",
     userBio: "",
     avatarUrl: "",
-    avatarUrlCompressed: "",
-    avatarUrlThumbnail: "",
-    coverThumbnailUrl: "",
-    coverUrl: "",
+    avatarUrlCompressed:
+      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
+    avatarUrlThumbnail:
+      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
+    coverThumbnailUrl:
+      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
+    coverUrl:
+      "https://ipfs.infura.io/ipfs/QmTLUb4KDWuk3JZqUBB8Xgrp4pAUMy6uFDsftLsLLkf1xX",
     signature: "",
   });
   const [isProcessing, setIsProcessing] = useState(false);
@@ -77,16 +82,18 @@ const EditProfile = () => {
 
     const web3Service = new Web3Service();
     const userSignature = await web3Service.signPersonalMessage(
-      JSON.stringify({
-        walletAddress,
-        userBio,
-        username,
-        avatarUrl,
-        avatarUrlCompressed,
-        avatarUrlThumbnail,
-        coverUrl,
-        coverThumbnailUrl,
-      }),
+      JSON.stringify(
+        orderObject({
+          walletAddress,
+          userBio,
+          username,
+          avatarUrl,
+          avatarUrlCompressed,
+          avatarUrlThumbnail,
+          coverUrl,
+          coverThumbnailUrl,
+        })
+      ),
       walletAddress
     );
     if (userSignature?.signature)
