@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState, ChangeEvent } from "react";
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);

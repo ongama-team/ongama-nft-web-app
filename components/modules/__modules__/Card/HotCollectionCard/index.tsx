@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import React, { FC } from "react";
 import { formatToDollars } from "helpers/numberFormatter";
 import { dummy_data } from "../../../__noAuth/TopSellers/dummy_data";
