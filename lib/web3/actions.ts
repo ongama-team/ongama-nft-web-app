@@ -1,7 +1,10 @@
 import Web3Service from "./service";
 import LocalStorage from "@lib/helper/LocalStorage";
+import Web3 from "web3";
 
-const web3Instance = new Web3Service();
+const web3Instance = new Web3Service(
+  Web3.givenProvider || "http://localhost:8545"
+);
 
 class Web3Actions {
   public async connectBrowserWallet() {
