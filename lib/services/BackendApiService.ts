@@ -33,7 +33,8 @@ class BackendApiService {
     signature?: string
   ): Promise<any | null> {
     try {
-      const response = await http.put("/users/profile", {
+      const profileEndpoint = "/users/profile";
+      const response = await http.put(profileEndpoint, {
         walletAddress,
         username,
         userBio,
