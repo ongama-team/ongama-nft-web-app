@@ -8,6 +8,7 @@ import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 import ipfsClient from "@lib/ipfsClient";
 import { VSpinner } from "@components/modules/__modules__/_vectors";
 import { Web3Service } from "@lib/web3";
+import { orderObject } from "@lib/Utils";
 
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);
@@ -71,21 +72,22 @@ const EditProfile = () => {
       avatarUrlThumbnail,
       coverUrl,
       coverThumbnailUrl,
-      signature,
     } = profile;
+
     const web3Service = new Web3Service();
     const userSignature = await web3Service.signPersonalMessage(
-      JSON.stringify({
-        walletAddress,
-        userBio,
-        username,
-        avatarUrl,
-        avatarUrlCompressed,
-        avatarUrlThumbnail,
-        coverUrl,
-        coverThumbnailUrl,
-        signature,
-      }),
+      JSON.stringify(
+        orderObject({
+          walletAddress,
+          userBio,
+          username,
+          avatarUrl,
+          avatarUrlCompressed,
+          avatarUrlThumbnail,
+          coverUrl,
+          coverThumbnailUrl,
+        })
+      ),
       walletAddress
     );
 
