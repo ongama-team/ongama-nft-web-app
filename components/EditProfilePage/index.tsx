@@ -91,8 +91,6 @@ const EditProfile = () => {
       walletAddress
     );
 
-    console.log("user signature", userSignature);
-
     setIsStatusModal(true);
     setIsProcessing(true);
     setUpdateSuccess(false);
@@ -108,8 +106,6 @@ const EditProfile = () => {
       coverUrl && coverUrl,
       userSignature?.signature
     );
-
-    console.log("update response", updateStatus);
 
     if (!updateStatus) {
       setIsProcessing(false);
