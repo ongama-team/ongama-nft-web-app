@@ -1,6 +1,7 @@
 import { UserAccount } from "@lib/models/UserAccount";
 import http from "@lib/http";
 import * as Sentry from "@sentry/nextjs";
+import { orderObject } from "@lib/Utils";
 
 class BackendApiService {
   async findAccountWhereAddressOrUsername(
@@ -34,17 +35,20 @@ class BackendApiService {
   ): Promise<any | null> {
     try {
       const profileEndpoint = "/users/profile";
-      const response = await http.put(profileEndpoint, {
-        walletAddress,
-        username,
-        userBio,
-        avatarUrl,
-        avatarUrlCompressed,
-        avatarUrlThumbnail,
-        coverThumbnailUrl,
-        coverUrl,
-        signature,
-      });
+      const response = await http.put(
+        profileEndpoint,
+        orderObject({
+          walletAddress,
+          username,
+          userBio,
+          avatarUrl,
+          avatarUrlCompressed,
+          avatarUrlThumbnail,
+          coverThumbnailUrl,
+          coverUrl,
+          signature,
+        })
+      );
 
       return response;
     } catch (e) {
