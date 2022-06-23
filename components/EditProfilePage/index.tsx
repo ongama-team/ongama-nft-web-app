@@ -48,7 +48,6 @@ const EditProfile = () => {
     setIsUserAvatarUploading(true);
     const file = await ipfsClient.add(files[0]);
     const fileUrl = `https://ipfs.infura.io/ipfs/${file.path}`;
-    console.log("file url", fileUrl);
     setIsUserAvatarUploading(false);
     setProfile({ ...profile, avatarUrl: fileUrl });
     setPreviewImgLink(previewUrl);
