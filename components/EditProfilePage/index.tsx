@@ -99,11 +99,11 @@ const EditProfile = () => {
       walletAddress,
       username,
       userBio,
-      avatarUrl && avatarUrl,
-      avatarUrlCompressed && avatarUrlCompressed,
-      avatarUrlThumbnail && avatarUrlThumbnail,
-      coverThumbnailUrl && coverThumbnailUrl,
-      coverUrl && coverUrl,
+      avatarUrl,
+      avatarUrlCompressed,
+      avatarUrlThumbnail,
+      coverThumbnailUrl,
+      coverUrl,
       userSignature?.signature
     );
 
