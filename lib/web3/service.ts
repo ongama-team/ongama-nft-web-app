@@ -78,7 +78,7 @@ class Web3Service {
     try {
       const web3 = this.web3Instance;
       const hashedData = web3.utils.sha3(data);
-      const signature = await web3.eth.personal.sign(hashedData!, address, "");
+      const signature = await web3.eth.personal.sign(hashedData!, signer, "");
 
       return {
         signature,
