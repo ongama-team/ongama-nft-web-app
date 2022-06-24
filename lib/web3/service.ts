@@ -76,10 +76,11 @@ class Web3Service {
     data: string,
     address: string
   ): Promise<SignResult | null> {
+    let signer: any;
     try {
       const web3 = this.web3Instance;
       const hashedData = web3.utils.sha3(data);
-      const signer = LocalStorage.getItem("ongama_signer_address");
+      signer = LocalStorage.getItem("ongama_signer_address");
       const signature = await web3.eth.personal.sign(hashedData!, signer, "");
 
       return {
