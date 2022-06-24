@@ -6,6 +6,7 @@ import NFTABI from "./abis/NFT.json";
 import { connectCoinbase } from "./helpers/connecters";
 import { connector } from "./walletConnect";
 import { SignResult } from "@lib/models/GeneralModel";
+import LocalStorage from "@lib/helper/LocalStorage";
 
 class Web3Service {
   public provider;
@@ -78,6 +79,7 @@ class Web3Service {
     try {
       const web3 = this.web3Instance;
       const hashedData = web3.utils.sha3(data);
+      const signer = LocalStorage.getItem("ongama_signer_address");
       const signature = await web3.eth.personal.sign(hashedData!, signer, "");
 
       return {

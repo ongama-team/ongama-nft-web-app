@@ -56,7 +56,7 @@ const TrendingNFTCard: FC<Props> = ({
         </div>
       </section>
       <div className="w-full my-3">
-        <button className="w-full py-1 px-2 bg-black text-gray-200 rounded-lg font-medium text-xl">
+        <button className="w-full py-1 px-2 bg-black text-gray-200 rounded-lg font-medium text-lg">
           Buy Now
         </button>
       </div>
