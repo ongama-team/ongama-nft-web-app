@@ -11,12 +11,13 @@ class Web3Service {
   public provider;
   public web3Instance: Web3;
 
-  constructor(web3Instance: Web3) {
+  constructor() {
     //  Initial implementation of connecting to the blockchain with an hardcoded chain
     this.provider = new ethers.providers.JsonRpcProvider(
       CHAINS_ENV.polygon.nodeRPC
     );
-    this.web3Instance = web3Instance;
+    this.web3Instance = new Web3(Web3.givenProvider || "http://localhost:8545");
+    // web3Instance: Web3
   }
 
   public contract(chain: TChain = "polygon") {
@@ -78,7 +79,7 @@ class Web3Service {
     try {
       const web3 = this.web3Instance;
       const hashedData = web3.utils.sha3(data);
-      const signature = await web3.eth.personal.sign(hashedData, address, "");
+      const signature = await web3.eth.personal.sign(hashedData!, address, "");
 
       return {
         signature,

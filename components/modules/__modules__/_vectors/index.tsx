@@ -39,6 +39,7 @@ import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
 import { RiUserLine as VUser } from "react-icons/ri";
 import { TiFlash as Vflash } from "react-icons/ti";
 import { BiTransfer as VTransaction } from "react-icons/bi";
+import { CgSpinnerTwo as VSpinner } from "react-icons/cg";
 
 export {
   CoinBaseVector,
@@ -76,4 +77,5 @@ export {
   Vflash,
   VTransaction,
   VFillHeart,
+  VSpinner,
 };
