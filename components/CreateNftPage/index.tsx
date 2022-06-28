@@ -2,10 +2,9 @@
 import React, { useRef, useState } from "react";
 import {
   CrossVector,
-  VEthereum,
   VQuestionMark,
 } from "@components/modules/__modules__/_vectors";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue } from "recoil";
 import { walletAddressAtom } from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { Switch } from "antd";
@@ -18,6 +17,7 @@ import NftPreview from "./NftPreview";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 import { NFT } from "@lib/models/GeneralModel";
+import { saveFileWithIpfs } from "@lib/ipfsClient";
 
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
@@ -48,11 +48,13 @@ const CreateNftPage = () => {
     inputFileRef.current?.click();
   };
 
-  const onFileChange = (event: { target: any }) => {
+  const onFileChange = async (event: { target: any }) => {
     const { files } = event.target;
     setIsImage((files[0].type as string).includes("image"));
     setInputFile(files[0]);
+    const fileUrl = await saveFileWithIpfs(files);
     const filePreviewUrl = URL.createObjectURL(files[0]);
+    if (fileUrl) setNftDetails({ ...nftDetails, url: fileUrl });
     setPreviewUrl(filePreviewUrl);
   };
 
