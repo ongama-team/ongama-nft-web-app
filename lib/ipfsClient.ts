@@ -9,4 +9,15 @@ const ipfsClient = ipfsHttpClient({
   },
 });
 
+export const saveFileWithIpfs = async (files: FileList) => {
+  try {
+    const file = await ipfsClient.add(files[0]);
+    const fileUrl = `https://ipfs.infura.io/ipfs/${file.path}`;
+    return fileUrl;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
+
 export default ipfsClient;

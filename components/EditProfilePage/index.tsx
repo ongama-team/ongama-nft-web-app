@@ -5,7 +5,7 @@ import Header from "@components/modules/__noAuth/Header";
 import { useState, ChangeEvent, useEffect } from "react";
 import UpdateStatusModal from "./updateStatusModal";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
-import ipfsClient from "@lib/ipfsClient";
+import ipfsClient, { saveFileWithIpfs } from "@lib/ipfsClient";
 import { VSpinner } from "@components/modules/__modules__/_vectors";
 import { Web3Service } from "@lib/web3";
 import { orderObject } from "@lib/Utils";
@@ -46,10 +46,9 @@ const EditProfile = () => {
     if (files.length === 0) return;
     const previewUrl = URL.createObjectURL(files[0]);
     setIsUserAvatarUploading(true);
-    const file = await ipfsClient.add(files[0]);
-    const fileUrl = `https://ipfs.infura.io/ipfs/${file.path}`;
+    const fileUrl = await saveFileWithIpfs(files);
     setIsUserAvatarUploading(false);
-    setProfile({ ...profile, avatarUrl: fileUrl });
+    if (fileUrl) setProfile({ ...profile, avatarUrl: fileUrl });
     setPreviewImgLink(previewUrl);
   };
 

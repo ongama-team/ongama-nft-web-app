@@ -8,10 +8,10 @@ export const removeEmpty = (obj: any) => {
   return obj;
 };
 
-export function orderObject(object: any) {
+export const orderObject = (object: any) => {
   const newObject = removeEmpty(object);
   // eslint-disable-next-line no-return-assign,no-param-reassign,no-sequences
   return Object.entries(newObject)
     .sort()
     .reduce((o: any, [k, v]) => ((o[k] = v), o), {});
-}
+};

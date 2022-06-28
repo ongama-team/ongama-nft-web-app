@@ -5,7 +5,7 @@ import {
   VEthereum,
   VQuestionMark,
 } from "@components/modules/__modules__/_vectors";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { walletAddressAtom } from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { Switch } from "antd";
@@ -17,17 +17,27 @@ import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
+import { NFT } from "@lib/models/GeneralModel";
 
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
-  const [nftDetails, setNftDetails] = useState({
-    previewUrl: "",
-    name: "",
-    royalties: "",
-    price: "",
+  const [nftDetails, setNftDetails] = useState<NFT>({
+    category: "",
+    oldDropID: "",
+    dropId: 0,
+    tokenUri: "",
     description: "",
+    fileSize: 0,
+    fileType: "",
+    name: "",
+    ownerAddress: "",
+    price: 0,
+    storageFee: 0,
+    storageFeeTransaction: "",
+    url: "",
   });
+  const [previewUrl, setPreviewUrl] = useState("");
   const [inputFile, setInputFile] = useState();
   const [isImage, setIsImage] = useState(true);
   const { address } = useRecoilValue(walletAddressAtom);
@@ -43,7 +53,7 @@ const CreateNftPage = () => {
     setIsImage((files[0].type as string).includes("image"));
     setInputFile(files[0]);
     const filePreviewUrl = URL.createObjectURL(files[0]);
-    setNftDetails({ ...nftDetails, previewUrl: filePreviewUrl });
+    setPreviewUrl(filePreviewUrl);
   };
 
   const onNftDetailsChange = (
@@ -54,7 +64,7 @@ const CreateNftPage = () => {
   };
 
   const onCancel = () => {
-    setNftDetails({ ...nftDetails, previewUrl: "" });
+    setPreviewUrl("");
   };
 
   return (
@@ -73,18 +83,18 @@ const CreateNftPage = () => {
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
                 <div
                   className={`flex justify-center w-3/4 m-auto ${
-                    !nftDetails.previewUrl && "hidden"
+                    !nftDetails.url && "hidden"
                   }`}
                 >
                   {isImage ? (
                     <img
-                      src={nftDetails.previewUrl}
+                      src={previewUrl}
                       alt="nft-preview"
                       className="rounded-2xl"
                     />
                   ) : (
                     <audio controls>
-                      <source src={nftDetails.previewUrl} type="audio/mpeg" />
+                      <source src={previewUrl} type="audio/mpeg" />
                     </audio>
                   )}
                   <div>
@@ -94,7 +104,7 @@ const CreateNftPage = () => {
                     />
                   </div>
                 </div>
-                <div className={`${nftDetails.previewUrl ? "hidden" : ""}`}>
+                <div className={`${nftDetails.url ? "hidden" : ""}`}>
                   <p className="text-gray-500 font-semibold">
                     PNG, GIF, WEBP, MP4 or MP3. Max 100mb
                   </p>
@@ -116,9 +126,9 @@ const CreateNftPage = () => {
             </div>
             <PutOnMarketMenu
               onNftPriceChange={(e) =>
-                setNftDetails({ ...nftDetails, price: e.target.value })
+                setNftDetails({ ...nftDetails, price: Number(e.target.value) })
               }
-              nftPrice={nftDetails.price}
+              nftPrice={nftDetails.price.toString()}
             />
             <ChooseCollection />
             <div className="flex justify-between">
@@ -162,9 +172,9 @@ const CreateNftPage = () => {
           </div>
           <div className="min-md:hidden">
             <NftPreview
-              previewUrl={nftDetails.previewUrl}
+              previewUrl={previewUrl}
               previewName={nftDetails.name}
-              previewPrice={nftDetails.price}
+              previewPrice={nftDetails.price.toString()}
               isImage={isImage}
             />
           </div>
