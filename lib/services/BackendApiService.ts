@@ -2,6 +2,7 @@ import { UserAccount } from "@lib/models/UserAccount";
 import http from "@lib/http";
 import * as Sentry from "@sentry/nextjs";
 import { orderObject } from "@lib/Utils";
+import { NFT } from "@lib/models/GeneralModel";
 
 class BackendApiService {
   async findAccountWhereAddressOrUsername(
@@ -48,6 +49,21 @@ class BackendApiService {
           coverUrl,
           signature,
         })
+      );
+
+      return response;
+    } catch (e) {
+      Sentry.captureException(e);
+      return null;
+    }
+  }
+
+  async mintNft(nftData: NFT) {
+    try {
+      const mintNFtEndpoint = "/nfts";
+      const response = await http.post(
+        mintNFtEndpoint,
+        orderObject({ ...nftData })
       );
 
       return response;
