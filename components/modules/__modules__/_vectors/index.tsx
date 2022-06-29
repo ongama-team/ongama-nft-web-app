@@ -31,6 +31,7 @@ import {
   BsTwitter as VTwitter,
   BsFacebook as VFacebook,
   BsFillHeartFill as VFillHeart,
+  BsFillCheckCircleFill as VCheckFill,
 } from "react-icons/bs";
 import { AiOutlineMail as VEmail } from "react-icons/ai";
 import { IoShareOutline as VShare } from "react-icons/io5";
@@ -78,4 +79,5 @@ export {
   VTransaction,
   VFillHeart,
   VSpinner,
+  VCheckFill,
 };

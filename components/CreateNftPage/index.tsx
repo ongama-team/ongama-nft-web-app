@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   CrossVector,
+  VPlusCircleFill,
   VQuestionMark,
+  VSpinner,
 } from "@components/modules/__modules__/_vectors";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { walletAddressAtom } from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { Switch } from "antd";
@@ -19,11 +21,15 @@ import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 import { NFT } from "@lib/models/GeneralModel";
 import { saveFileWithIpfs } from "@lib/ipfsClient";
 import { generateTokenUri } from "@lib/Utils";
+import { web3Actions, Web3Service } from "@lib/web3";
+import MintingProcessModal from "./MintingProcessModal";
+import { backendApiService } from "@lib/services/BackendApiService";
+import LocalStorage from "@lib/helper/LocalStorage";
 
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
-  const [nftDetails, setNftDetails] = useState<NFT>({
+  const [nftData, setNftData] = useState<NFT>({
     category: "",
     oldDropID: "",
     dropId: 0,
@@ -37,13 +43,49 @@ const CreateNftPage = () => {
     storageFee: 0,
     storageFeeTransaction: "",
     url: "",
+    urlCompressed: "",
+    urlMedium: "",
+    urlThumbnail: "",
   });
   const [previewUrl, setPreviewUrl] = useState("");
-  const [inputFile, setInputFile] = useState();
   const [isImage, setIsImage] = useState(true);
+  const [mintProcess, setMintProcess] = useState({
+    isUploading: false,
+    isUploadingSucceed: false,
+    isWaitingForStorageFee: false,
+    isWaitingForStorageSucceed: false,
+    isMinting: false,
+    isProcessFailed: false,
+    isMintingSucceed: false,
+  });
+  const {
+    isUploading,
+    isUploadingSucceed,
+    isWaitingForStorageFee,
+    isWaitingForStorageSucceed,
+    isMinting,
+    isMintingSucceed,
+    isProcessFailed,
+  } = mintProcess;
+  const [isMintProcessModal, setIsMintProcessModal] = useState(false);
+  const [fileUploadProcessing, setFileUploadProcessing] = useState(false);
+  const [fileUploadingError, setFileUploadingError] = useState(false);
   const { address } = useRecoilValue(walletAddressAtom);
   const truncatedWalletAddress = truncateAddress(address, 10, 4);
   const inputFileRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const tokenUri = generateTokenUri();
+    setNftData({
+      ...nftData,
+      ownerAddress: LocalStorage.getItem("ongama_signer_address")!,
+      tokenUri: tokenUri,
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log("track nft data", nftData);
+  }, [nftData]);
 
   const onChooseFile = () => {
     inputFileRef.current?.click();
@@ -52,27 +94,126 @@ const CreateNftPage = () => {
   const onFileChange = async (event: { target: any }) => {
     const { files } = event.target;
     setIsImage((files[0].type as string).includes("image"));
-    setInputFile(files[0]);
+
+    setMintProcess({
+      ...mintProcess,
+      isUploading: true,
+      isUploadingSucceed: false,
+    });
+    setFileUploadProcessing(true);
     const fileUrl = await saveFileWithIpfs(files);
     const filePreviewUrl = URL.createObjectURL(files[0]);
-    if (fileUrl) setNftDetails({ ...nftDetails, url: fileUrl });
     setPreviewUrl(filePreviewUrl);
+    console.log("file url", fileUrl);
+    setMintProcess({
+      ...mintProcess,
+      isUploading: false,
+      isUploadingSucceed: true,
+    });
+
+    if (fileUrl) {
+      setNftData({
+        ...nftData,
+        fileSize: files[0].size,
+        fileType: files[0].type,
+        url: fileUrl,
+        urlCompressed: fileUrl,
+        urlMedium: fileUrl,
+        urlThumbnail: fileUrl,
+      });
+    } else {
+      setFileUploadProcessing(false);
+      setFileUploadingError(true);
+    }
   };
 
   const onNftDetailsChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { value, name } = event.target;
-    setNftDetails({ ...nftDetails, [name]: value });
+    setNftData({ ...nftData, [name]: value });
   };
 
   const onCancel = () => {
     setPreviewUrl("");
   };
 
-  const onMintNft = () => {
-    const tokenUri = generateTokenUri();
-    console.log("NFT token URI", tokenUri);
+  const sendStorageFee = async () => {
+    try {
+      setMintProcess({
+        ...mintProcess,
+        isWaitingForStorageFee: true,
+        isWaitingForStorageSucceed: false,
+      });
+      const web3Service = new Web3Service();
+      const transaction = await web3Service.sendStorageFee();
+      setNftData({
+        ...nftData,
+        storageFeeTransaction: transaction.transactionHash,
+        storageFee: 0.001,
+      });
+      setMintProcess({
+        ...mintProcess,
+        isWaitingForStorageFee: false,
+        isWaitingForStorageSucceed: true,
+      });
+    } catch (err) {
+      setMintProcess({
+        ...mintProcess,
+        isWaitingForStorageFee: true,
+        isWaitingForStorageSucceed: false,
+      });
+    }
+  };
+
+  const mintNft = async () => {
+    try {
+      setMintProcess({
+        ...mintProcess,
+        isMinting: true,
+        isMintingSucceed: false,
+      });
+      console.log("nft data on minting event", nftData);
+      const uploadedonBd = await backendApiService.mintNft(nftData);
+      console.log("nft uploaded on Bd", uploadedonBd);
+
+      const mintedNft = await web3Actions.mintNft(
+        nftData.tokenUri,
+        nftData.ownerAddress,
+        nftData.price
+      );
+      console.log("minted nft", mintedNft);
+      setMintProcess({
+        ...mintProcess,
+        isMinting: false,
+        isMintingSucceed: true,
+      });
+    } catch (err) {
+      throw err;
+    }
+  };
+
+  const onCreateNft = async (e) => {
+    e.preventDefault();
+    if (
+      !nftData.url ||
+      !nftData.name ||
+      !nftData.ownerAddress ||
+      !nftData.description ||
+      !nftData.price ||
+      !nftData.tokenUri ||
+      !nftData.storageFee ||
+      !nftData.storageFeeTransaction
+    )
+      return;
+    setIsMintProcessModal(!isMintProcessModal);
+    try {
+      await sendStorageFee();
+      await mintNft();
+    } catch {
+      return;
+    }
+    setIsMintProcessModal(!isMintProcessModal);
   };
 
   return (
@@ -91,7 +232,7 @@ const CreateNftPage = () => {
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
                 <div
                   className={`flex justify-center w-3/4 m-auto ${
-                    !nftDetails.url && "hidden"
+                    !previewUrl && "hidden"
                   }`}
                 >
                   {isImage ? (
@@ -112,31 +253,55 @@ const CreateNftPage = () => {
                     />
                   </div>
                 </div>
-                <div className={`${nftDetails.url ? "hidden" : ""}`}>
-                  <p className="text-gray-500 font-semibold">
-                    PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                  </p>
-                  <input
-                    ref={inputFileRef}
-                    type="file"
-                    className="hidden"
-                    id="input-file"
-                    onChange={onFileChange}
-                  />
-                  <button
-                    onClick={onChooseFile}
-                    className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
+                <div
+                  className={`${
+                    previewUrl ? "hidden" : ""
+                  } flex flex-col items-center justify-center relative`}
+                >
+                  <div
+                    className={
+                      fileUploadProcessing
+                        ? "absolute bg-white bg-opacity-40 backdrop-blur-2xl w-full h-full flex flex-col gap-7 justify-center items-center"
+                        : "hidden"
+                    }
                   >
-                    Choose file
-                  </button>
+                    <VSpinner className="text-3xl animate-spin text-blue-600" />
+                  </div>
+                  {fileUploadingError ? (
+                    <div>
+                      <VPlusCircleFill className="float-right text-2xl mx-3" />
+                      <p className="text-red-600 text-sm text-center px-3">
+                        Error accured when trying to upload file
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="text-gray-500 font-semibold">
+                        PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                      </p>
+                      <input
+                        ref={inputFileRef}
+                        type="file"
+                        className="hidden"
+                        id="input-file"
+                        onChange={onFileChange}
+                      />
+                      <button
+                        onClick={onChooseFile}
+                        className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
+                      >
+                        Choose file
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
             <PutOnMarketMenu
               onNftPriceChange={(e) =>
-                setNftDetails({ ...nftDetails, price: Number(e.target.value) })
+                setNftData({ ...nftData, price: Number(e.target.value) })
               }
-              nftPrice={nftDetails.price.toString()}
+              nftPrice={nftData.price.toString()}
             />
             <ChooseCollection />
             <div className="flex justify-between">
@@ -168,7 +333,7 @@ const CreateNftPage = () => {
             </div>
             <div className="flex justify-between items-center">
               <button
-                onClick={onMintNft}
+                onClick={onCreateNft}
                 className="bg-blue-600 px-8 py-3 rounded-full text-white font-bold hover:bg-blue-500 transition-all"
               >
                 Create Item
@@ -184,14 +349,25 @@ const CreateNftPage = () => {
           <div className="min-md:hidden">
             <NftPreview
               previewUrl={previewUrl}
-              previewName={nftDetails.name}
-              previewPrice={nftDetails.price.toString()}
+              previewName={nftData.name}
+              previewPrice={nftData.price.toString()}
               isImage={isImage}
             />
           </div>
         </div>
       </div>
       <ProfileMenu />
+      {isMintProcessModal && (
+        <MintingProcessModal
+          isUploading={isUploading}
+          isUploadingSucceed={isUploadingSucceed}
+          isWaitingForStorageFee={isWaitingForStorageFee}
+          isWaitingForStorageSucceed={isWaitingForStorageSucceed}
+          isMinting={isMinting}
+          isProcessFailed={isProcessFailed}
+          isMintingSucceed={isMintingSucceed}
+        />
+      )}
     </>
   );
 };

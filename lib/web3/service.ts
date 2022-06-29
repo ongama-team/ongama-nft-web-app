@@ -6,6 +6,7 @@ import NFTABI from "./abis/NFT.json";
 import { connectCoinbase } from "./helpers/connecters";
 import { connector } from "./walletConnect";
 import { SignResult } from "@lib/models/GeneralModel";
+import LocalStorage from "@lib/helper/LocalStorage";
 
 class Web3Service {
   public provider;
@@ -89,6 +90,26 @@ class Web3Service {
       console.log("error :", e);
       return null;
     }
+  }
+
+  public async sendStorageFee() {
+    const transaction = await this.web3Instance.eth.sendTransaction(
+      {
+        from: LocalStorage.getItem("ongama_signer_address")!,
+        to: process.env.STORAGE_FEE_RECEIVER_ADRESS!,
+        value: this.web3Instance.utils.toWei("0.001", "ether"),
+        data: this.web3Instance.utils.toHex(""),
+        gas: 210000,
+      },
+      (err) => {
+        if (err) {
+          console.log(err);
+          return null;
+        }
+      }
+    );
+
+    return transaction;
   }
 }
 export default Web3Service;

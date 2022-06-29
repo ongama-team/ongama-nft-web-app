@@ -59,6 +59,7 @@ class BackendApiService {
   }
 
   async mintNft(nftData: NFT) {
+    console.log("nft data on endpoin", nftData);
     try {
       const mintNFtEndpoint = "/nfts";
       const response = await http.post(

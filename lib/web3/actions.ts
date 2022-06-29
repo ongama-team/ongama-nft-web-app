@@ -41,6 +41,10 @@ class Web3Actions {
       return signer;
     }
   }
+
+  public async mintNft(tokenUri: string, address: string, price: number) {
+    await web3Instance.contract("polygon").mint(tokenUri, address, price);
+  }
 }
 
 const web3Actions = new Web3Actions();
