@@ -18,6 +18,7 @@ import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard"
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
 import { NFT } from "@lib/models/GeneralModel";
 import { saveFileWithIpfs } from "@lib/ipfsClient";
+import { generateTokenUri } from "@lib/Utils";
 
 const CreateNftPage = () => {
   const [isFreeMinting, setIsFreeMinting] = useState(true);
@@ -67,6 +68,11 @@ const CreateNftPage = () => {
 
   const onCancel = () => {
     setPreviewUrl("");
+  };
+
+  const onMintNft = () => {
+    const tokenUri = generateTokenUri();
+    console.log("NFT token URI", tokenUri);
   };
 
   return (
@@ -161,7 +167,10 @@ const CreateNftPage = () => {
               <AdvancedSettingForm />
             </div>
             <div className="flex justify-between items-center">
-              <button className="bg-blue-600 px-8 py-3 rounded-full text-white font-bold hover:bg-blue-500 transition-all">
+              <button
+                onClick={onMintNft}
+                className="bg-blue-600 px-8 py-3 rounded-full text-white font-bold hover:bg-blue-500 transition-all"
+              >
                 Create Item
               </button>
               <p className="flex py-5 items-center text-gray-500 font-semibold">

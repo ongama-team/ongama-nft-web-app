@@ -15,3 +15,13 @@ export const orderObject = (object: any) => {
     .sort()
     .reduce((o: any, [k, v]) => ((o[k] = v), o), {});
 };
+
+const randomNumber = () => {
+  return Math.random().toString(36).substr(2);
+};
+
+export const generateTokenUri = () => {
+  const token = randomNumber() + randomNumber();
+
+  return token;
+};

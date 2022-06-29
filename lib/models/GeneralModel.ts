@@ -4,9 +4,9 @@ export interface SignResult {
 }
 
 export interface NFT {
-  category: string;
-  oldDropID: string;
-  dropId: number;
+  category?: string;
+  oldDropID?: string;
+  dropId?: number;
   tokenUri: string;
   description: string;
   fileSize: number;
