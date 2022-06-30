@@ -1,5 +1,6 @@
 import Web3Service from "./service";
 import LocalStorage from "@lib/helper/LocalStorage";
+import { ethers } from "ethers";
 
 const web3Instance = new Web3Service();
 
@@ -44,7 +45,16 @@ class Web3Actions {
 
   //--------------------- this's the function that handles the mint nft from smart contract ------//
   public async mintNft(tokenUri: string, address: string, price: number) {
-    await web3Instance.contract("polygon").mint(tokenUri, address, price);
+    const provider = web3Instance.provider;
+    const signer = await provider.getSigner(
+      LocalStorage.getItem("ongama_signer_address")
+    );
+    const formatedPrice = ethers.utils.parseUnits(price.toString(), "ether");
+    console.log("polygon signer", signer, "formated price ", formatedPrice);
+
+    await web3Instance
+      .contract("polygon", signer)
+      .mint(tokenUri, address, formatedPrice);
   }
 }
 

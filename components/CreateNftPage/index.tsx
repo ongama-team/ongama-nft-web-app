@@ -158,8 +158,8 @@ const CreateNftPage = () => {
         mintNftStatus: PENDING_STATUS,
       });
       console.log("nft data on minting event", nftData);
-      const uploadedonBd = await backendApiService.mintNft(nftData);
-      console.log("nft uploaded on Bd", uploadedonBd);
+      // const uploadedonBd = await backendApiService.mintNft(nftData);
+      // console.log("nft uploaded on Bd", uploadedonBd);
 
       const mintedNft = await web3Actions.mintNft(
         nftData.tokenUri,
@@ -185,7 +185,7 @@ const CreateNftPage = () => {
     setIsCreateNftProcessModal(!isCreateNftProcessModal);
     try {
       await uploadFileOnIPFS();
-      await sendStorageFee();
+      // await sendStorageFee();
       await mintNft();
     } catch (err) {
       throw err;

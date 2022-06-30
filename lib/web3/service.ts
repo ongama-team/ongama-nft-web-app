@@ -21,12 +21,18 @@ class Web3Service {
     // web3Instance: Web3
   }
 
-  public contract(chain: TChain = "polygon") {
+  public contract(chain: TChain = "polygon", signer: any) {
     const network = this.getChainByName(chain);
+    console.log(
+      "nft contract address",
+      process.env.NEXT_PUBLIC_MINT_CONTRACT_ADDRESS!
+    );
+    console.log("mint contract address", network.mintContractAddress);
     return new ethers.Contract(
       network.mintContractAddress,
       NFTABI.abi,
-      this.provider
+      // this.provider
+      signer
     );
   }
 
