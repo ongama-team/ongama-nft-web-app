@@ -32,19 +32,19 @@ const PutOnMarketMenu = ({ onNftPriceChange, nftPrice = "0" }: IProps) => {
         />
       </div>
       <div
-        className={`flex min-md:flex-col justify-between py-5 ${
+        className={`flex min-md:flex-col gap-3 justify-between py-5 ${
           !isPutonMarketMenu && "hidden"
         }`}
       >
-        <button className="py-8 px-8 border rounded-2xl flex flex-col justify-center items-center border-blue-500">
+        <button className="py-8 px-8 w-full border rounded-2xl flex flex-col justify-center items-center border-blue-500">
           <VBookmark className="font-bold text-2xl my-2" />
           <p className="font-bold">fixed price</p>
         </button>
-        <button className="py-8 px-8 border border-gray-300 rounded-2xl flex flex-col justify-center items-center mobile:my-2 mx-2">
+        <button className="py-8 px-8 w-full border border-gray-300 rounded-2xl flex flex-col justify-center items-center mobile:my-2">
           <VInfinite className="font-bold text-2xl my-2" />
           <p className="font-bold">Open for bids</p>
         </button>
-        <button className="py-8 px-8 border border-gray-300 rounded-2xl flex flex-col justify-center items-center">
+        <button className="py-8 px-8 w-full border border-gray-300 rounded-2xl flex flex-col justify-center items-center">
           <VTimeLapse className="font-bold text-2xl my-2" />
           <p className="font-bold">Timed auction</p>
         </button>

@@ -225,7 +225,7 @@ const CreateNftPage = () => {
               <p className="font-bold">Upload file</p>
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
                 <div
-                  className={`flex justify-center w-3/4 m-auto ${
+                  className={`flex justify-center max-w-3/4 max-h-96 m-auto relative ${
                     !previewUrl && "hidden"
                   }`}
                 >
@@ -233,17 +233,17 @@ const CreateNftPage = () => {
                     <img
                       src={previewUrl}
                       alt="nft-preview"
-                      className="rounded-2xl"
+                      className="rounded-2xl h-96 w-3/4 object-cover"
                     />
                   ) : (
                     <audio controls>
                       <source src={previewUrl} type="audio/mpeg" />
                     </audio>
                   )}
-                  <div>
+                  <div className="absolute right-2 p-1 -mt-8 hover:border-gray-500 transition-all border border-gray-300 rotate-45 rounded-full">
                     <CrossVector
                       onClick={onCancel}
-                      className="text-gray-500 w-10 cursor-pointer h-10 p-2 ml-1 -mt-5 hover:border-gray-500 transition-all border border-gray-300 rotate-45 rounded-full"
+                      className="text-gray-500 w-6 cursor-pointer h-6"
                     />
                   </div>
                 </div>
@@ -251,24 +251,25 @@ const CreateNftPage = () => {
                   className={`${
                     previewUrl ? "hidden" : ""
                   } flex flex-col items-center justify-center relative`}
-                ></div>
-                <div>
-                  <p className="text-gray-500 font-semibold">
-                    PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                  </p>
-                  <input
-                    ref={inputFileRef}
-                    type="file"
-                    className="hidden"
-                    id="input-file"
-                    onChange={onFileChange}
-                  />
-                  <button
-                    onClick={onChooseFile}
-                    className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
-                  >
-                    Choose file
-                  </button>
+                >
+                  <div>
+                    <p className="text-gray-500 font-semibold">
+                      PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                    </p>
+                    <input
+                      ref={inputFileRef}
+                      type="file"
+                      className="hidden"
+                      id="input-file"
+                      onChange={onFileChange}
+                    />
+                    <button
+                      onClick={onChooseFile}
+                      className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
+                    >
+                      Choose file
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -278,7 +279,9 @@ const CreateNftPage = () => {
               }
               nftPrice={nftData.price.toString()}
             />
-            <ChooseCollection />
+            <div className="w-full">
+              <ChooseCollection />
+            </div>
             <div className="flex justify-between">
               <p className="flex flex-col">
                 <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-800 text-[18px]">
