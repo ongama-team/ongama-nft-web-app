@@ -22,14 +22,13 @@ import { NFT } from "@lib/models/GeneralModel";
 import { saveFileWithIpfs } from "@lib/ipfsClient";
 import { generateTokenUri } from "@lib/Utils";
 import { web3Actions, Web3Service } from "@lib/web3";
-import MintingProcessModal, {
+import CreateNftProcessModal, {
   ERROR_STATUS,
   PENDING_STATUS,
   SUCCED_STATUS,
 } from "./CreateNftProcessModal";
 import { backendApiService } from "@lib/services/BackendApiService";
 import LocalStorage from "@lib/helper/LocalStorage";
-import CreateNftProcessModal from "./CreateNftProcessModal";
 
 const CreateNftPage = () => {
   const [nftData, setNftData] = useState<NFT>({
