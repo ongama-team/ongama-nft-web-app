@@ -5,6 +5,7 @@ import {
   VTimeLapse,
 } from "@components/modules/__modules__/_vectors";
 import { Switch } from "antd";
+import NftPreview from "../NftPreview";
 
 interface IProps {
   onNftPriceChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -15,7 +16,7 @@ const PutOnMarketMenu = ({ onNftPriceChange, nftPrice = "0" }: IProps) => {
   const [isPutonMarketMenu, setIsPutonMarketMenu] = useState(true);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       <div className="flex mt-3 justify-between">
         <p className="flex flex-col">
           <span className="font-bold text-blue-500 text-[18px]">
@@ -32,22 +33,22 @@ const PutOnMarketMenu = ({ onNftPriceChange, nftPrice = "0" }: IProps) => {
         />
       </div>
       <div
-        className={`flex min-md:flex-col gap-3 justify-between py-5 ${
+        className={`flex min-md:flex-col gap-3 py-5 w-full ${
           !isPutonMarketMenu && "hidden"
         }`}
       >
-        <button className="py-8 px-8 w-full border rounded-2xl flex flex-col justify-center items-center border-blue-500">
+        <div className="w-full h-28 border rounded-2xl flex flex-col justify-center items-center border-blue-500">
           <VBookmark className="font-bold text-2xl my-2" />
           <p className="font-bold">fixed price</p>
-        </button>
-        <button className="py-8 px-8 w-full border border-gray-300 rounded-2xl flex flex-col justify-center items-center mobile:my-2">
+        </div>
+        <div className="w-full h-28 border border-gray-300 rounded-2xl flex flex-col justify-center items-center mobile:my-2">
           <VInfinite className="font-bold text-2xl my-2" />
           <p className="font-bold">Open for bids</p>
-        </button>
-        <button className="py-8 px-8 w-full border border-gray-300 rounded-2xl flex flex-col justify-center items-center">
+        </div>
+        <div className="w-full h-28 border border-gray-300 rounded-2xl flex flex-col justify-center items-center">
           <VTimeLapse className="font-bold text-2xl my-2" />
           <p className="font-bold">Timed auction</p>
-        </button>
+        </div>
       </div>
       <div className="mt-10">
         <div>
@@ -71,7 +72,7 @@ const PutOnMarketMenu = ({ onNftPriceChange, nftPrice = "0" }: IProps) => {
           </p>
           <p className="text-gray-400 font-semibold">
             You will receive
-            <span className="text-black font-bold"> {nftPrice} ETH</span>
+            <span className="text-black font-bold px-2">{nftPrice} ETH</span>
           </p>
         </div>
       </div>

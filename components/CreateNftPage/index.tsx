@@ -78,10 +78,6 @@ const CreateNftPage = () => {
     });
   }, []);
 
-  useEffect(() => {
-    console.log("track nft data", nftData);
-  }, [nftData]);
-
   const onChooseFile = () => {
     inputFileRef.current?.click();
   };
@@ -187,18 +183,6 @@ const CreateNftPage = () => {
 
   const onCreateNft = async (e) => {
     e.preventDefault();
-    if (
-      !inputFiles ||
-      !nftData.url ||
-      !nftData.name ||
-      !nftData.ownerAddress ||
-      !nftData.description ||
-      !nftData.price ||
-      !nftData.tokenUri ||
-      !nftData.storageFee ||
-      !nftData.storageFeeTransaction
-    )
-      return;
     setIsCreateNftProcessModal(!isCreateNftProcessModal);
     try {
       await uploadFileOnIPFS();
@@ -213,11 +197,11 @@ const CreateNftPage = () => {
   return (
     <>
       <Header />
-      <div className="py-20 font-ibmPlexSans 2xl:w-2/4 lg:w-3/4 md:w-5/6 min-md:w-full min-lg:px-5 m-auto">
+      <div className="py-20 font-ibmPlexSans 2xl:w-1/2 lg:w-3/4 md:w-5/6 min-md:w-full min-lg:px-5 m-auto relative">
         <h1 className="text-4xlimport font-semibold text-4xl min-md:w-full min-lg:w-full min-lg:text-3xl">
           Create Single item on Ethereum
         </h1>
-        <div className="flex mt-10 min-lg:w-full min-md:block">
+        <div className="flex mt-10 min-lg:w-full min-md:block relative">
           <div className="flex flex-col">
             <p className="font-bold">Choose wallet</p>
             <WalletInfoCard truncatedWalletAddress={truncatedWalletAddress} />
@@ -225,7 +209,7 @@ const CreateNftPage = () => {
               <p className="font-bold">Upload file</p>
               <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
                 <div
-                  className={`flex justify-center max-w-3/4 max-h-96 m-auto relative ${
+                  className={`flex justify-center w-full p-5 h-96 m-auto relative ${
                     !previewUrl && "hidden"
                   }`}
                 >
@@ -233,14 +217,14 @@ const CreateNftPage = () => {
                     <img
                       src={previewUrl}
                       alt="nft-preview"
-                      className="rounded-2xl h-96 w-3/4 object-cover"
+                      className="rounded-2xl h-full w-96 object-cover"
                     />
                   ) : (
                     <audio controls>
                       <source src={previewUrl} type="audio/mpeg" />
                     </audio>
                   )}
-                  <div className="absolute right-2 p-1 -mt-8 hover:border-gray-500 transition-all border border-gray-300 rotate-45 rounded-full">
+                  <div className="absolute right-2 p-1 -mt-10 hover:border-gray-500 transition-all border border-gray-300 rotate-45 rounded-full">
                     <CrossVector
                       onClick={onCancel}
                       className="text-gray-500 w-6 cursor-pointer h-6"
@@ -279,9 +263,7 @@ const CreateNftPage = () => {
               }
               nftPrice={nftData.price.toString()}
             />
-            <div className="w-full">
-              <ChooseCollection />
-            </div>
+            <ChooseCollection />
             <div className="flex justify-between">
               <p className="flex flex-col">
                 <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-800 text-[18px]">

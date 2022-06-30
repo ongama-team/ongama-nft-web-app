@@ -42,6 +42,7 @@ class Web3Actions {
     }
   }
 
+  //--------------------- this's the function that handles the mint nft from smart contract ------//
   public async mintNft(tokenUri: string, address: string, price: number) {
     await web3Instance.contract("polygon").mint(tokenUri, address, price);
   }
