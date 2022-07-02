@@ -2,9 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   CrossVector,
-  VPlusCircleFill,
   VQuestionMark,
-  VSpinner,
 } from "@components/modules/__modules__/_vectors";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { walletAddressAtom } from "@lib/atoms";
@@ -18,7 +16,6 @@ import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
-import { NFT } from "@lib/models/GeneralModel";
 import { saveFileWithIpfs } from "@lib/ipfsClient";
 import { generateTokenUri } from "@lib/Utils";
 import { web3Actions, Web3Service } from "@lib/web3";
@@ -29,6 +26,8 @@ import CreateNftProcessModal, {
 } from "./CreateNftProcessModal";
 import { backendApiService } from "@lib/services/BackendApiService";
 import LocalStorage from "@lib/helper/LocalStorage";
+import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
+import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFileErrorCard";
 
 const CreateNftPage = () => {
   const [nftData, setNftData] = useState({
@@ -54,15 +53,16 @@ const CreateNftPage = () => {
     sendStorageFeeStatus: "",
     mintNftStatus: "",
   });
-  const { uploadFileOnIpfsStatus, sendStorageFeeStatus, mintNftStatus } =
-    mintProcess;
+  const { sendStorageFeeStatus, mintNftStatus } = mintProcess;
 
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
   const [previewUrl, setPreviewUrl] = useState("");
   const [isImage, setIsImage] = useState(true);
   const [isCreateNftProcessModal, setIsCreateNftProcessModal] = useState(false);
-  const [inputFiles, setInputFiles] = useState<FileList>();
+  const [uploadFileProcessing, setUploadFileProcessing] = useState(false);
+  const [fileUploadingError, setFileUploadingError] = useState(false);
+  const [mintEroor, setMintError] = useState(false);
 
   const { address } = useRecoilValue(walletAddressAtom);
   const truncatedWalletAddress = truncateAddress(address, 10, 4);
@@ -74,6 +74,7 @@ const CreateNftPage = () => {
       ...nftData,
       ownerAddress: LocalStorage.getItem("ongama_signer_address")!,
       tokenUri,
+      storageFee: Number(`${process.env.NEXT_PUBLIC_STORAGE_FEE}`),
     });
   }, []);
 
@@ -81,56 +82,55 @@ const CreateNftPage = () => {
     inputFileRef.current?.click();
   };
 
+  const uploadFileOnIPFS = async (inputFiles) => {
+    if (inputFiles) {
+      setUploadFileProcessing(true);
+
+      const fileUrl = await saveFileWithIpfs(inputFiles);
+
+      setUploadFileProcessing(false);
+      if (fileUrl) {
+        setNftData({
+          ...nftData,
+          url: fileUrl,
+          urlCompressed: fileUrl,
+          urlMedium: fileUrl,
+          urlThumbnail: fileUrl,
+          fileSize: inputFiles[0].size,
+          fileType: inputFiles[0].type,
+        });
+        setFileUploadingError(false);
+        return fileUrl;
+      } else {
+        setFileUploadingError(true);
+        return null;
+      }
+    }
+  };
+
   const onFileChange = async (event: { target: any }) => {
     const { files } = event.target;
-    setInputFiles(files);
     setIsImage((files[0].type as string).includes("image"));
     const filePreviewUrl = URL.createObjectURL(files[0]);
-    setPreviewUrl(filePreviewUrl);
+    try {
+      const uploadResult = await uploadFileOnIPFS(files);
+
+      if (uploadResult) setPreviewUrl(filePreviewUrl);
+    } catch (err) {
+      setFileUploadingError(true);
+      throw err;
+    }
   };
 
   const onNftDetailsChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { value, name } = event.target;
-    setNftData((prevState) => ({ ...prevState, [name]: value }));
+    setNftData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const onCancel = () => {
     setPreviewUrl("");
-  };
-
-  const uploadFileOnIPFS = async () => {
-    if (inputFiles) {
-      setMintProcess({
-        ...mintProcess,
-        uploadFileOnIpfsStatus: PENDING_STATUS,
-      });
-      console.log("input file", inputFiles);
-      const fileUrl = await saveFileWithIpfs(inputFiles);
-      console.log("file url", fileUrl);
-      if (fileUrl) {
-        setNftData((prevState) => ({
-          ...prevState,
-          url: fileUrl,
-          fileSize: inputFiles[0].size,
-          urlCompressed: fileUrl,
-          urlMedium: fileUrl,
-          urlThumbnail: fileUrl,
-          fileType: inputFiles[0].type,
-        }));
-        setMintProcess({
-          ...mintProcess,
-          uploadFileOnIpfsStatus: SUCCED_STATUS,
-        });
-      } else {
-        setMintProcess({
-          ...mintProcess,
-          uploadFileOnIpfsStatus: ERROR_STATUS,
-        });
-        return;
-      }
-    }
   };
 
   const sendStorageFee = async () => {
@@ -141,26 +141,20 @@ const CreateNftPage = () => {
       });
       const web3Service = new Web3Service();
       const transaction = await web3Service.sendStorageFee();
-      setNftData((prevState) => ({
-        ...prevState,
-        storageFeeTransaction: transaction.transactionHash,
-        storageFee: Number(process.env.NEXT_PUBLIC_STORAGE_FEE),
-      }));
       setMintProcess({
         ...mintProcess,
         sendStorageFeeStatus: SUCCED_STATUS,
       });
+      return transaction;
     } catch (err) {
       setMintProcess({
         ...mintProcess,
         sendStorageFeeStatus: ERROR_STATUS,
       });
+      setIsCreateNftProcessModal(false);
+      throw err;
     }
   };
-
-  // useEffect(() => {
-  //   console.log("nft data", nftData);
-  // }, [nftData]);
 
   const mintNft = async () => {
     try {
@@ -168,41 +162,55 @@ const CreateNftPage = () => {
         ...mintProcess,
         mintNftStatus: PENDING_STATUS,
       });
-      await uploadFileOnIPFS();
-      console.log("nft data on minting event", nftData);
-      // const uploadedonBd = await backendApiService.mintNft(nftData);
-      // console.log("nft uploaded on Bd", uploadedonBd);
 
-      const mintedNft = await web3Actions.mintNft(
-        nftData.tokenUri,
-        nftData.ownerAddress,
-        nftData.price
-      );
-      console.log("minted nft", mintedNft);
-      setMintProcess({
-        ...mintProcess,
-        mintNftStatus: SUCCED_STATUS,
-      });
+      const uploadResponse = await backendApiService.mintNft(nftData);
+
+      if (uploadResponse) {
+        const mintedNft = await web3Actions.mintNft(
+          nftData.tokenUri,
+          nftData.ownerAddress,
+          nftData.price
+        );
+
+        setMintProcess({
+          ...mintProcess,
+          mintNftStatus: SUCCED_STATUS,
+        });
+      } else {
+        setMintProcess({
+          ...mintProcess,
+          mintNftStatus: ERROR_STATUS,
+        });
+      }
     } catch (err) {
       setMintProcess({
         ...mintProcess,
         mintNftStatus: ERROR_STATUS,
       });
+      setMintError(true);
       throw err;
     }
   };
 
-  const onCreateNft = async (e) => {
-    e.preventDefault();
+  const onPayStorageFee = async () => {
     setIsCreateNftProcessModal(!isCreateNftProcessModal);
+    const transaction = await sendStorageFee();
+    if (transaction) {
+      setNftData({
+        ...nftData,
+        storageFeeTransaction: transaction.transactionHash,
+      });
+    }
+  };
+
+  const onPutOnMarket = async () => {
     try {
-      // await uploadFileOnIPFS();
-      // await sendStorageFee();
       await mintNft();
+      setIsCreateNftProcessModal(!isCreateNftProcessModal);
+      setPreviewUrl("");
     } catch (err) {
       throw err;
     }
-    setIsCreateNftProcessModal(!isCreateNftProcessModal);
   };
 
   return (
@@ -247,24 +255,33 @@ const CreateNftPage = () => {
                     previewUrl ? "hidden" : ""
                   } flex flex-col items-center justify-center relative`}
                 >
-                  <div>
-                    <p className="text-gray-500 font-semibold">
-                      PNG, GIF, WEBP, MP4 or MP3. Max 100mb
-                    </p>
-                    <input
-                      ref={inputFileRef}
-                      type="file"
-                      className="hidden"
-                      id="input-file"
-                      onChange={onFileChange}
-                    />
-                    <button
-                      onClick={onChooseFile}
-                      className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
-                    >
-                      Choose file
-                    </button>
-                  </div>
+                  <UploadFileProcessing isProcessing={uploadFileProcessing}>
+                    {!fileUploadingError ? (
+                      <div>
+                        <p className="text-gray-500 font-semibold">
+                          PNG, GIF, WEBP, MP4 or MP3. Max 100mb
+                        </p>
+                        <input
+                          ref={inputFileRef}
+                          type="file"
+                          className="hidden"
+                          id="input-file"
+                          onChange={onFileChange}
+                        />
+                        <button
+                          onClick={onChooseFile}
+                          className="font-bold bg-blue-100 text-blue-600 py-2 px-5 my-3 rounded-3xl hover:bg-blue-200 transition-all"
+                        >
+                          Choose file
+                        </button>
+                      </div>
+                    ) : (
+                      <UploadFileErrorCard
+                        onTryToReuploadFile={() => setFileUploadingError(false)}
+                        className="w-full h-full flex flex-col gap-3 items-center px-5"
+                      />
+                    )}
+                  </UploadFileProcessing>
                 </div>
               </div>
             </div>
@@ -304,8 +321,9 @@ const CreateNftPage = () => {
             </div>
             <div className="flex justify-between items-center">
               <button
-                onClick={onCreateNft}
-                className="bg-blue-600 px-8 py-3 rounded-full text-white font-bold hover:bg-blue-500 transition-all"
+                onClick={onPayStorageFee}
+                className="bg-blue-600 px-8 py-3 rounded-full text-white font-bold hover:bg-blue-500 transition-all disabled:bg-opacity-50 disabled:cursor-not-allowed"
+                disabled={!nftData.name || !nftData.price}
               >
                 Create Item
               </button>
@@ -330,9 +348,12 @@ const CreateNftPage = () => {
       <ProfileMenu />
       {isCreateNftProcessModal && (
         <CreateNftProcessModal
-          uploadFileOnIpfsStatus={uploadFileOnIpfsStatus}
           sendStorageFeeStatus={sendStorageFeeStatus}
           mintNftStatus={mintNftStatus}
+          onPutOnMarket={onPutOnMarket}
+          onCancel={() => setIsCreateNftProcessModal(false)}
+          onMintAgain={onPutOnMarket}
+          mintError={mintEroor}
         />
       )}
     </>

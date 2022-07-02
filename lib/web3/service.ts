@@ -18,16 +18,16 @@ class Web3Service {
       CHAINS_ENV.polygon.nodeRPC
     );
     this.web3Instance = new Web3(Web3.givenProvider || "http://localhost:8545");
-    // web3Instance: Web3
   }
 
   public contract(chain: TChain = "polygon") {
     const network = this.getChainByName(chain);
-    return new ethers.Contract(
-      network.mintContractAddress,
-      NFTABI.abi,
-      this.provider.getSigner(LocalStorage.getItem("ongama_signer_address"))
-    );
+
+    const signer = new ethers.providers.Web3Provider(
+      this.web3Instance.givenProvider
+    ).getSigner(LocalStorage.getItem("ongama_signer_address")!);
+
+    return new ethers.Contract(network.mintContractAddress, NFTABI.abi, signer);
   }
 
   public getChainByName(chain: TChain = "polygon") {
@@ -101,12 +101,10 @@ class Web3Service {
           `${process.env.NEXT_PUBLIC_STORAGE_FEE}`,
           "ether"
         ),
-        data: this.web3Instance.utils.toHex(""),
-        gas: 210000,
       },
       (err) => {
         if (err) {
-          console.log(err);
+          console.log("send storage fee error", err);
           return null;
         }
       }

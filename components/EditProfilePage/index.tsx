@@ -9,6 +9,8 @@ import ipfsClient, { saveFileWithIpfs } from "@lib/ipfsClient";
 import { VSpinner } from "@components/modules/__modules__/_vectors";
 import { Web3Service } from "@lib/web3";
 import { orderObject } from "@lib/Utils";
+import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
+import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFileErrorCard";
 
 const EditProfile = () => {
   const [img, setImg] = useState<File | null>(null);
@@ -29,6 +31,7 @@ const EditProfile = () => {
   const [isStatusModal, setIsStatusModal] = useState(false);
   const [isWrongFileSize, setIsWrongFileSize] = useState(false);
   const [isUserAvaterUploading, setIsUserAvatarUploading] = useState(false);
+  const [fileUploadingError, setFileUploadingError] = useState(false);
   const profilePlaceholder =
     "https://lh3.googleusercontent.com/9KIL56q19B9i8BasJfTcVZFn7QOcvdtBqww5dgK5Zk5Mi5w4Ljekw0ibITpf6TBtGnyqcLTDNEEG9OpUC98aLukfcM9yXhSltJoe=w600";
 
@@ -48,8 +51,17 @@ const EditProfile = () => {
     setIsUserAvatarUploading(true);
     const fileUrl = await saveFileWithIpfs(files);
     setIsUserAvatarUploading(false);
-    if (fileUrl) setProfile({ ...profile, avatarUrl: fileUrl });
-    setPreviewImgLink(previewUrl);
+    if (fileUrl) {
+      setProfile({ ...profile, avatarUrl: fileUrl });
+      setPreviewImgLink(previewUrl);
+      setFileUploadingError(false);
+    } else {
+      setFileUploadingError(true);
+    }
+  };
+
+  const onTryToReuploadFile = (e) => {
+    setFileUploadingError(false);
   };
 
   useEffect(() => {
@@ -172,18 +184,21 @@ const EditProfile = () => {
             />
           </div>
           <div className="sm:block sm:w-[30%]">
-            <div className="relative w-fit h-fit">
-              <img
-                src={previewImgLink ? previewImgLink : profilePlaceholder}
-                alt="profile"
-                className=" h-24 w-24 rounded-full object-cover"
+            {!fileUploadingError ? (
+              <div className="relative h-24 w-24">
+                <img
+                  src={previewImgLink ? previewImgLink : profilePlaceholder}
+                  alt="profile"
+                  className="rounded-full object-cover h-full w-full"
+                />
+                <UploadFileProcessing isProcessing={isUserAvaterUploading} />
+              </div>
+            ) : (
+              <UploadFileErrorCard
+                onTryToReuploadFile={onTryToReuploadFile}
+                className="w-full px-1 flex flex-col gap-5"
               />
-              {isUserAvaterUploading && (
-                <div className="absolute w-full h-full top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-white bg-opacity-70 rounded-full">
-                  <VSpinner className="animate-spin text-blue-500 text-3xl" />
-                </div>
-              )}
-            </div>
+            )}
             <p className="my-3 text-xs text-slate-500">
               We recommend an image <br />
               of at least 300 x 300. Gifs work too.

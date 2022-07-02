@@ -10,37 +10,25 @@ export const SUCCED_STATUS = "succeed";
 export const ERROR_STATUS = "error";
 
 interface IProps {
-  uploadFileOnIpfsStatus: string;
   sendStorageFeeStatus: string;
   mintNftStatus: string;
+  mintError: boolean;
+  onPutOnMarket: () => Promise<void>;
+  onMintAgain: () => Promise<void>;
+  onCancel: () => void;
 }
 
 const CreateNftProcessModal = ({
-  uploadFileOnIpfsStatus,
   sendStorageFeeStatus,
   mintNftStatus,
+  onPutOnMarket,
+  mintError,
+  onMintAgain,
+  onCancel,
 }: IProps) => {
   return (
     <div className="fixed bg-black bg-opacity-40 top-0 lef-0 bottom-0 right-0 w-full h-full z-30 flex justify-center items-center">
       <div className="bg-white w-fit p-5 rounded-lg flex flex-col gap-5 mx-5">
-        <div className="flex gap-3 items-center">
-          {uploadFileOnIpfsStatus === PENDING_STATUS ? (
-            <VSpinner className="animate-spin text-blue-500 text-4xl" />
-          ) : uploadFileOnIpfsStatus === SUCCED_STATUS ? (
-            <VCheckFill className="text-green-600 text-4xl" />
-          ) : (
-            uploadFileOnIpfsStatus === ERROR_STATUS && (
-              <VPlusCircleFill className="text-red-600 text-4xl -rotate-45" />
-            )
-          )}
-
-          <div>
-            <p className="font-bold text-2xl">Upload</p>
-            <p className="text-gray-500 font-semibold py-1">
-              Uploading of all media assets and metadata to IPFS
-            </p>
-          </div>
-        </div>
         <div className="flex gap-3 items-center">
           {sendStorageFeeStatus === PENDING_STATUS ? (
             <VSpinner className="animate-spin text-blue-500 text-4xl" />
@@ -70,6 +58,35 @@ const CreateNftProcessModal = ({
             </p>
           </div>
         </div>
+        {!mintError ? (
+          <button
+            className="bg-blue-600 px-8 py-3 rounded-lg text-white font-bold hover:bg-blue-500 transition-all disabled:bg-opacity-50"
+            onClick={onPutOnMarket}
+            disabled={
+              sendStorageFeeStatus === ERROR_STATUS ||
+              mintNftStatus === ERROR_STATUS ||
+              sendStorageFeeStatus === PENDING_STATUS ||
+              mintNftStatus === PENDING_STATUS
+            }
+          >
+            Put on Market
+          </button>
+        ) : (
+          <div className="flex flex-col gap-3">
+            <button
+              className="bg-red-600 px-8 py-3 rounded-lg text-white font-bold hover:bg-red-700 transition-all"
+              onClick={onMintAgain}
+            >
+              Try again
+            </button>
+            <button
+              className="border border-red-600 px-8 py-3 rounded-lg text-white font-bold hover:border-red-700 transition-all"
+              onClick={onCancel}
+            >
+              Cancel
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
