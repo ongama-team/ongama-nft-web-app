@@ -21,18 +21,12 @@ class Web3Service {
     // web3Instance: Web3
   }
 
-  public contract(chain: TChain = "polygon", signer: any) {
+  public contract(chain: TChain = "polygon") {
     const network = this.getChainByName(chain);
-    console.log(
-      "nft contract address",
-      process.env.NEXT_PUBLIC_MINT_CONTRACT_ADDRESS!
-    );
-    console.log("mint contract address", network.mintContractAddress);
     return new ethers.Contract(
       network.mintContractAddress,
       NFTABI.abi,
-      // this.provider
-      signer
+      this.provider.getSigner(LocalStorage.getItem("ongama_signer_address"))
     );
   }
 
@@ -102,8 +96,11 @@ class Web3Service {
     const transaction = await this.web3Instance.eth.sendTransaction(
       {
         from: LocalStorage.getItem("ongama_signer_address")!,
-        to: process.env.STORAGE_FEE_RECEIVER_ADRESS!,
-        value: this.web3Instance.utils.toWei("0.001", "ether"),
+        to: process.env.NEXT_PUBLIC_STORAGE_FEE_RECEIVER_ADRESS!,
+        value: this.web3Instance.utils.toWei(
+          `${process.env.NEXT_PUBLIC_STORAGE_FEE}`,
+          "ether"
+        ),
         data: this.web3Instance.utils.toHex(""),
         gas: 210000,
       },

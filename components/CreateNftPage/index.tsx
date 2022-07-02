@@ -31,7 +31,7 @@ import { backendApiService } from "@lib/services/BackendApiService";
 import LocalStorage from "@lib/helper/LocalStorage";
 
 const CreateNftPage = () => {
-  const [nftData, setNftData] = useState<NFT>({
+  const [nftData, setNftData] = useState({
     category: "",
     oldDropID: "",
     dropId: 0,
@@ -73,7 +73,7 @@ const CreateNftPage = () => {
     setNftData({
       ...nftData,
       ownerAddress: LocalStorage.getItem("ongama_signer_address")!,
-      tokenUri: tokenUri,
+      tokenUri,
     });
   }, []);
 
@@ -93,7 +93,7 @@ const CreateNftPage = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { value, name } = event.target;
-    setNftData({ ...nftData, [name]: value });
+    setNftData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const onCancel = () => {
@@ -106,23 +106,30 @@ const CreateNftPage = () => {
         ...mintProcess,
         uploadFileOnIpfsStatus: PENDING_STATUS,
       });
+      console.log("input file", inputFiles);
       const fileUrl = await saveFileWithIpfs(inputFiles);
+      console.log("file url", fileUrl);
       if (fileUrl) {
-        setNftData({
-          ...nftData,
-          fileSize: inputFiles[0].size,
-          fileType: inputFiles[0].type,
+        setNftData((prevState) => ({
+          ...prevState,
           url: fileUrl,
+          fileSize: inputFiles[0].size,
           urlCompressed: fileUrl,
           urlMedium: fileUrl,
           urlThumbnail: fileUrl,
-        });
+          fileType: inputFiles[0].type,
+        }));
         setMintProcess({
           ...mintProcess,
           uploadFileOnIpfsStatus: SUCCED_STATUS,
         });
+      } else {
+        setMintProcess({
+          ...mintProcess,
+          uploadFileOnIpfsStatus: ERROR_STATUS,
+        });
+        return;
       }
-      setMintProcess({ ...mintProcess, uploadFileOnIpfsStatus: ERROR_STATUS });
     }
   };
 
@@ -134,11 +141,11 @@ const CreateNftPage = () => {
       });
       const web3Service = new Web3Service();
       const transaction = await web3Service.sendStorageFee();
-      setNftData({
-        ...nftData,
+      setNftData((prevState) => ({
+        ...prevState,
         storageFeeTransaction: transaction.transactionHash,
-        storageFee: Number(process.env.STORAGE_FEE),
-      });
+        storageFee: Number(process.env.NEXT_PUBLIC_STORAGE_FEE),
+      }));
       setMintProcess({
         ...mintProcess,
         sendStorageFeeStatus: SUCCED_STATUS,
@@ -151,12 +158,17 @@ const CreateNftPage = () => {
     }
   };
 
+  // useEffect(() => {
+  //   console.log("nft data", nftData);
+  // }, [nftData]);
+
   const mintNft = async () => {
     try {
       setMintProcess({
         ...mintProcess,
         mintNftStatus: PENDING_STATUS,
       });
+      await uploadFileOnIPFS();
       console.log("nft data on minting event", nftData);
       // const uploadedonBd = await backendApiService.mintNft(nftData);
       // console.log("nft uploaded on Bd", uploadedonBd);
@@ -184,7 +196,7 @@ const CreateNftPage = () => {
     e.preventDefault();
     setIsCreateNftProcessModal(!isCreateNftProcessModal);
     try {
-      await uploadFileOnIPFS();
+      // await uploadFileOnIPFS();
       // await sendStorageFee();
       await mintNft();
     } catch (err) {
