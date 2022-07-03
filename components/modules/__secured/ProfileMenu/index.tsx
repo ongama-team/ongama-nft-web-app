@@ -4,13 +4,18 @@ import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import { CrossVector, VUser } from "@components/modules/__modules__/_vectors";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { profileMenuAtom, walletAddressAtom } from "@lib/atoms";
+import {
+  currentAccountState,
+  profileMenuAtom,
+  walletAddressAtom,
+} from "@lib/atoms";
 import truncateAddress from "@lib/helper/truncateAddress";
 import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
+import { UserAccount } from "@lib/models/UserAccount";
 
 const ProfileMenu = () => {
-  const { user } = dummy_profile;
+  const currentAccount = useRecoilValue(currentAccountState);
   const { address, balance } = useRecoilValue(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const truncatedWalletAddress = truncateAddress(address, 10, 4);
@@ -43,7 +48,7 @@ const ProfileMenu = () => {
           </button>
           <div className="flex items-center mt-10">
             <UserAvatarCard
-              user={user}
+              user={currentAccount as UserAccount}
               identiconSize={20}
               userAvatarClassName={"w-12 h-12 rounded-full object-cover"}
               identiconContainerClassName={
@@ -51,7 +56,9 @@ const ProfileMenu = () => {
               }
             />
             <div className="px-3">
-              <p className="font-ibmPlexSans font-bold">{user.username}</p>
+              <p className="font-ibmPlexSans font-bold">
+                {currentAccount?.username}
+              </p>
               <div
                 tabIndex={0}
                 role="button"

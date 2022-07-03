@@ -10,18 +10,26 @@ import Link from "next/link";
 import Menu from "./Menu";
 import SearchInputBar from "./SearchInputBar";
 
-import { useRecoilState, useRecoilValue } from "recoil";
-import { walletAtom, walletAddressAtom, profileMenuAtom } from "@lib/atoms";
+import { useRecoilState } from "recoil";
+import {
+  walletAtom,
+  profileMenuAtom,
+  currentAccountState,
+  walletAddressAtom,
+} from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
-import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import { useRouter } from "next/router";
-import { route } from "next/dist/server/router";
+import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
+import { backendApiService } from "@lib/services/BackendApiService";
+import { UserAccount } from "@lib/models/UserAccount";
 
 const Header = () => {
   const routes = useRouter();
   const [isLightTheme, setIsLightTheme] = useState(true);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
+  const [currentAccount, setCurrentAccount] =
+    useRecoilState(currentAccountState);
   const [walletData, setWalletData] = useRecoilState(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const { address } = walletData;
@@ -39,6 +47,13 @@ const Header = () => {
     } else {
       setIsWalletsDisplayed(!isWalletsDisplayed);
     }
+  };
+
+  const fetchUser = async (walletAddress) => {
+    const [user] = await Promise.all([
+      backendApiService.findAccountWhereAddressOrUsername(walletAddress),
+    ]);
+    return setCurrentAccount(user);
   };
 
   // --- detect when browser wallet is deconnected
@@ -61,6 +76,8 @@ const Header = () => {
       address: memorizedWalletAddress || "",
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    fetchUser(memorizedWalletAddress);
   }, [setWalletData]);
 
   const openProfileMenu = () => {
@@ -115,10 +132,16 @@ const Header = () => {
           onClick={openProfileMenu}
           className={`${!address && "hidden"} w-12 h-12 ml-1`}
         >
-          <img
-            src={dummy_profile.user.avatarUrl}
-            alt={dummy_profile.user.username}
-            className="w-12 h-12 object-cover rounded-full cursor-pointer"
+          <UserAvatarCard
+            user={currentAccount as UserAccount}
+            identiconSize={20}
+            onUserAvatarClicked={() => null}
+            userAvatarClassName={
+              "w-12 h-12 object-cover rounded-full cursor-pointer"
+            }
+            identiconContainerClassName={
+              "w-fit bg-white border border-gray-300 p-3 rounded-full"
+            }
           />
         </div>
       </div>

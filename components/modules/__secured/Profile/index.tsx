@@ -30,15 +30,13 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
 
-  const { user } = dummy_profile;
-
   return (
     <>
       <Header />
       <ProfileMenu />
       <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
         <div className="mt-24">
-          <AvatarAndCoverCard user={user} />
+          <AvatarAndCoverCard user={currentUser} />
         </div>
         <div className="mx-auto max-w-xs mt-4">
           <p className="text-center text-3xl font-bold">
@@ -48,7 +46,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
               <p className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all">
-                {middleEllipsis(user.walletAddress, 8)}
+                {middleEllipsis(currentUser?.walletAddress, 8)}
               </p>
             </div>
             <button className="w-[80px] p-1 font-bold text-xs rounded-full border-2 border-gray-300">

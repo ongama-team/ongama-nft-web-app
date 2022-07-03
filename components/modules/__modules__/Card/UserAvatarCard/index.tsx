@@ -21,9 +21,7 @@ const UserAvatarCard: FC<IProps> = ({
   allowVerifiedIcon = false,
   onUserAvatarClicked,
 }) => {
-  const { avatarUrlThumbnail, avatarUrl, walletAddress, username, verified } =
-    user;
-  if (!avatarUrl && !avatarUrlThumbnail)
+  if (!user?.avatarUrl && !user?.avatarUrlThumbnail)
     return (
       <div
         tabIndex={0}
@@ -32,22 +30,26 @@ const UserAvatarCard: FC<IProps> = ({
         onClick={() => onUserAvatarClicked}
         className={identiconContainerClassName}
       >
-        <Identicon string={walletAddress} size={identiconSize} />
+        <Identicon string={user?.walletAddress} size={identiconSize} />
       </div>
     );
   return (
     <div className="flex relative">
       <img
-        src={avatarUrl || avatarUrlThumbnail}
-        alt={username || walletAddress}
+        src={user?.avatarUrl || user?.avatarUrlThumbnail}
+        alt={user?.username || user?.walletAddress}
         className={userAvatarClassName}
         onClick={() => onUserAvatarClicked}
       />
-      {verified && allowVerifiedIcon && (
+      {user?.verified && allowVerifiedIcon && (
         <CheckmarkCard className="h-8 absolute bottom-[5px] right-1" />
       )}
     </div>
   );
 };
+
+// UserAvatarCard.defaultProps = {
+//   identiconContainerClassName: 'bg-white rounded-full overflow-hidden'
+// }
 
 export default UserAvatarCard;
