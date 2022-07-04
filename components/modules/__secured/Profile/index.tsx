@@ -48,7 +48,7 @@ function ProfileContainer() {
       <ProfileMenu />
       <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
         <div className="mt-24">
-          <AvatarAndCoverCard user={currentUser!} />
+          <AvatarAndCoverCard />
         </div>
         <div className="mx-auto max-w-xs mt-4">
           <p className="text-center text-3xl font-bold">
