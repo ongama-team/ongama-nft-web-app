@@ -70,6 +70,7 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
   const onCoverChange = async (e) => {
     const { files } = e.target;
     console.log("cover file", files);
+    setIsAddCover(false);
     setIsUpdateModal(!isUpdateModal);
     setIsUpdatePending(true);
     const fileUrl = await saveFileWithIpfs(files);
@@ -106,9 +107,12 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
         }
         alt={currentAccount?.username}
         className="h-[260px] w-full object-cover rounded-2xl"
-        onMouseOver={() => setIsAddCover(!isAddCover)}
+        onMouseOver={() => setIsAddCover(true)}
+        onMouseOut={() => setIsAddCover(false)}
       />
       <div
+        onMouseOver={() => setIsAddCover(true)}
+        onMouseOut={() => setIsAddCover(false)}
         className={`absolute top-0 right-0 m-5 ${
           isAddCover && isEditable
             ? "translate-y-0 transition-all"

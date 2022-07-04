@@ -9,7 +9,6 @@ import {
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
 import ShareContainer from "./module/shareContainer";
-import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   currentAccountState,
@@ -19,8 +18,6 @@ import {
 } from "@lib/atoms";
 import Header from "@components/modules/__noAuth/Header";
 import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
-import { UserAccount } from "@lib/models/UserAccount";
-import { middleEllipsis } from "../../../../helpers/truncateStrings";
 import ProfileMenu from "../ProfileMenu";
 import AvatarAndCoverCard from "@components/modules/__modules__/Card/AvatartAndCoverCard";
 import TabList from "./module/TabList";
@@ -28,6 +25,7 @@ import OwnedContainer from "./OwnedContainer";
 import CreatedContainer from "./CreatedContainer";
 import ActivityContainer from "./ActivityContainer";
 import { useRouter } from "next/router";
+import truncateAddress from "@lib/helper/truncateAddress";
 
 function ProfileContainer() {
   const router = useRouter();
@@ -58,9 +56,9 @@ function ProfileContainer() {
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
               <p className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all">
-                {middleEllipsis(
+                {truncateAddress(
                   currentUser?.walletAddress || connectedWallet.address,
-                  8
+                  10
                 )}
               </p>
             </div>
@@ -68,7 +66,7 @@ function ProfileContainer() {
               +1 more
             </button>
           </div>
-          <p className="text-center mt-4">{currentUser?.userBio}</p>
+          <p className="text-center mt-4 font-bold">{currentUser?.userBio}</p>
           <div className="flex relative space-x-4 mt-4 justify-center">
             <p
               className="hover:cursor-pointer text-gray-600 hover:text-gray-900 font-semibold transition-all"
@@ -82,16 +80,6 @@ function ProfileContainer() {
             >
               <label className="font-bold">1</label> Following
             </p>
-            <div
-              onClick={() => {
-                setIsSubscribesDisplayed(!isSubscribesDisplayed);
-              }}
-              className={`${
-                isSubscribesOpen && "hidden"
-              } border z-20 h-full flex transition-all justify-center bg-black bg-opacity-60 items-center fixed inset-0 backdrop-filter backdrop-blur-md`}
-            >
-              <SubScribesContainer />
-            </div>
           </div>
           <div className="flex relative justify-center space-x-2 mt-4">
             <button
