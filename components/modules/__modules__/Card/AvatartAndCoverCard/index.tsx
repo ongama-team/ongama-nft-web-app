@@ -2,16 +2,23 @@
 import UpdateStatusModal from "@components/EditProfilePage/updateStatusModal";
 import { currentAccountState, walletAddressAtom } from "@lib/atoms";
 import { saveFileWithIpfs } from "@lib/ipfsClient";
+import { UserAccount } from "@lib/models/UserAccount";
 import { NoCoverImg } from "@lib/Resources";
 import { backendApiService } from "@lib/services/BackendApiService";
 import { orderObject } from "@lib/Utils";
 import { Web3Service } from "@lib/web3";
 import { useRouter } from "next/router";
+import { userInfo } from "os";
 import React, { useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import UserAvatarCard from "../UserAvatarCard";
 
-const AvatarAndCoverCard = () => {
+interface IProps {
+  isEditable: boolean;
+  user?: UserAccount;
+}
+
+const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
   const [isAddCover, setIsAddCover] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [currentAccount, setCurrentAccount] =
@@ -91,9 +98,11 @@ const AvatarAndCoverCard = () => {
     <div className="relative">
       <img
         src={
-          currentAccount?.coverUrl ||
-          currentAccount?.coverThumbnailUrl ||
-          NoCoverImg.src
+          isEditable
+            ? currentAccount?.coverUrl ||
+              currentAccount?.coverThumbnailUrl ||
+              NoCoverImg.src
+            : user?.coverUrl || user?.coverThumbnailUrl || NoCoverImg.src
         }
         alt={currentAccount?.username}
         className="h-[260px] w-full object-cover rounded-2xl"
@@ -101,7 +110,7 @@ const AvatarAndCoverCard = () => {
       />
       <div
         className={`absolute top-0 right-0 m-5 ${
-          isAddCover
+          isAddCover && isEditable
             ? "translate-y-0 transition-all"
             : "-translate-y-[2000px] transition-all"
         }`}
@@ -125,6 +134,7 @@ const AvatarAndCoverCard = () => {
           identiconSize={150}
           allowVerifiedIcon={true}
           onUserAvatarClicked={() =>
+            isEditable &&
             router.push(`/profile/${currentAccount?.walletAddress}`)
           }
           identiconContainerClassName={
@@ -133,7 +143,7 @@ const AvatarAndCoverCard = () => {
           userAvatarClassName={
             "h-[120px] w-[120px] -mt-20 object-cover border-4 border-white border-solid rounded-full relative"
           }
-          user={currentAccount!}
+          user={isEditable ? currentAccount! : user!}
         />
       </div>
       {isUpdateModal && (
