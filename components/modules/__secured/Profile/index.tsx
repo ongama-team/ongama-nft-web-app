@@ -12,6 +12,7 @@ import ShareContainer from "./module/shareContainer";
 import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  currentAccountState,
   shareProfileLinkAtom,
   subscribesAtom,
   walletAddressAtom,
@@ -28,13 +29,14 @@ import CreatedContainer from "./CreatedContainer";
 import ActivityContainer from "./ActivityContainer";
 import { useRouter } from "next/router";
 
-function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
+function ProfileContainer() {
   const router = useRouter();
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const connectedWallet = useRecoilValue(walletAddressAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+  const currentUser = useRecoilValue(currentAccountState);
 
   const onEditProfile = () => {
     router.push("/profile/edit");
@@ -46,7 +48,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
       <ProfileMenu />
       <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
         <div className="mt-24">
-          <AvatarAndCoverCard user={currentUser} />
+          <AvatarAndCoverCard user={currentUser!} />
         </div>
         <div className="mx-auto max-w-xs mt-4">
           <p className="text-center text-3xl font-bold">
