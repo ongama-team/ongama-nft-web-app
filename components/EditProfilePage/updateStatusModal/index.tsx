@@ -15,7 +15,7 @@ const StatusContainer = ({
   isProcessing,
 }: IProps) => {
   return (
-    <div className="fixed h-full w-full bg-black bg-opacity-40 top-0 left-0 bottom-0 right-0 flex justify-center items-center backdrop-blur-sm">
+    <div className="fixed h-full w-full bg-black bg-opacity-40 top-0 left-0 bottom-0 right-0 flex justify-center items-center backdrop-blur-sm z-20">
       <div className="flex flex-col bg-white p-10 items-center justify-center rounded-lg mobile:w-full mobile:mx-5">
         {isProcessing ? (
           <VSpinner className="text-4xl text-blue-500 animate-spin" />
@@ -24,7 +24,7 @@ const StatusContainer = ({
         )}
         <button
           onClick={onCloseStatusModal}
-          className={`w-full border border-gray-200 font-bold py-2 my-2 rounded-lg ${
+          className={`w-full border border-gray-200 hover:border-gray-400 transition-all hover:scale-105 font-bold py-2 my-2 rounded-lg ${
             isProcessing && "hidden"
           }`}
         >
@@ -63,7 +63,7 @@ const UpdateStatusModal = ({
           </p>
           <button
             onClick={onTryAgain}
-            className="w-full bg-blue-600 text-white font-bold py-2 my-2 rounded-lg"
+            className="w-full bg-blue-500 text-white font-bold py-2 my-2 rounded-lg hover:scale-105 hover:bg-blue-600 transition-all"
           >
             Try again
           </button>

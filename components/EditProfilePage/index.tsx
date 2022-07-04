@@ -94,7 +94,7 @@ const EditProfile = () => {
     setIsProcessing(true);
     setUpdateSuccess(false);
 
-    const updateStatus = await backendApiService.updateProfile({
+    const updateResponse = await backendApiService.updateProfile({
       walletAddress,
       username,
       userBio,
@@ -106,7 +106,7 @@ const EditProfile = () => {
       signature: `${userSignature?.signature}`,
     });
 
-    if (!updateStatus) {
+    if (!updateResponse) {
       setIsProcessing(false);
       setUpdateSuccess(false);
       return;

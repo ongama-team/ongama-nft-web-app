@@ -54,6 +54,7 @@ class BackendApiService {
       return response;
     } catch (e) {
       Sentry.captureException(e);
+      console.log(e);
       return null;
     }
   }

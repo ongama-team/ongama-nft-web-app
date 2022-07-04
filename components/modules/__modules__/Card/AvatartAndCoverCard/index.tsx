@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
+import UpdateStatusModal from "@components/EditProfilePage/updateStatusModal";
 import { currentAccountState, walletAddressAtom } from "@lib/atoms";
 import { saveFileWithIpfs } from "@lib/ipfsClient";
-import { UserAccount } from "@lib/models/UserAccount";
 import { NoCoverImg } from "@lib/Resources";
 import { backendApiService } from "@lib/services/BackendApiService";
 import { orderObject } from "@lib/Utils";
@@ -11,16 +11,15 @@ import React, { useRef, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import UserAvatarCard from "../UserAvatarCard";
 
-interface IProps {
-  user: UserAccount;
-}
-
 const AvatarAndCoverCard = () => {
   const [isAddCover, setIsAddCover] = useState(false);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [currentAccount, setCurrentAccount] =
     useRecoilState(currentAccountState);
   const currentSigner = useRecoilValue(walletAddressAtom);
+  const [isUpdateSucceed, setIsUpdateSucceed] = useState(false);
+  const [isUpdatePending, setIsUpdatePending] = useState(false);
+  const [isUpdateModal, setIsUpdateModal] = useState(false);
   const router = useRouter();
 
   const onSelectNewCover = () => {
@@ -30,14 +29,12 @@ const AvatarAndCoverCard = () => {
   const updateCover = async (coverUrl: string, signature: string) => {
     const updateCoverResponse = await backendApiService.updateProfile({
       walletAddress: currentSigner.address,
-      coverUrl: coverUrl,
       coverThumbnailUrl: coverUrl,
+      coverUrl: coverUrl,
       signature,
     });
 
-    console.log("update cover response", updateCoverResponse);
-    if (!updateCoverResponse) {
-    }
+    console.log("update cover response in update", updateCoverResponse);
 
     return updateCoverResponse;
   };
@@ -47,7 +44,14 @@ const AvatarAndCoverCard = () => {
     const userSignature = await web3Services.signPersonalMessage(
       JSON.stringify(
         orderObject({
-          ...currentAccount,
+          walletAddress: currentSigner.address,
+          username: currentAccount?.username,
+          userBio: currentAccount?.userBio,
+          avatarUrl: currentAccount?.avatarUrl,
+          avatarUrlCompressed: currentAccount?.avatarUrlCompressed,
+          avatarUrlThumbnail: currentAccount?.avatarUrlThumbnail,
+          coverThumbnailUrl: currentAccount?.coverThumbnailUrl,
+          coverUrl: currentAccount?.coverUrl,
         })
       ),
       `${currentSigner.address}`
@@ -58,13 +62,27 @@ const AvatarAndCoverCard = () => {
 
   const onCoverChange = async (e) => {
     const { files } = e.target;
+    console.log("cover file", files);
+    setIsUpdateModal(!isUpdateModal);
+    setIsUpdatePending(true);
     const fileUrl = await saveFileWithIpfs(files);
     console.log("file url", fileUrl);
 
     if (fileUrl) {
       const signature = await getSignature();
+
       if (signature) {
-        await updateCover(fileUrl, signature);
+        const updateCoverResponse = await updateCover(fileUrl, signature);
+        console.log("update cover response", updateCoverResponse);
+
+        if (!updateCoverResponse) {
+          setIsUpdateSucceed(false);
+          setIsUpdatePending(false);
+          return;
+        } else {
+          setIsUpdatePending(false);
+          setIsUpdateSucceed(true);
+        }
       }
     }
   };
@@ -118,7 +136,17 @@ const AvatarAndCoverCard = () => {
           user={currentAccount!}
         />
       </div>
-      <div></div>
+      {isUpdateModal && (
+        <UpdateStatusModal
+          onCloseStatusModal={() => setIsUpdateModal(false)}
+          onTryAgain={async () => {
+            setIsUpdateModal(false);
+            onSelectNewCover();
+          }}
+          isProcessing={isUpdatePending}
+          updateSuccess={isUpdateSucceed}
+        />
+      )}
     </div>
   );
 };
