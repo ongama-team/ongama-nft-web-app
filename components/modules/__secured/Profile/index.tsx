@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Block,
   Collections,
@@ -26,18 +26,26 @@ import CreatedContainer from "./CreatedContainer";
 import ActivityContainer from "./ActivityContainer";
 import { useRouter } from "next/router";
 import truncateAddress from "@lib/helper/truncateAddress";
+import SubScribesContainer from "./module/Subscribes";
 
 function ProfileContainer() {
   const router = useRouter();
-  const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const connectedWallet = useRecoilValue(walletAddressAtom);
+  const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+  const [addressCopied, setAddressCopied] = useState(false);
   const currentUser = useRecoilValue(currentAccountState);
 
   const onEditProfile = () => {
     router.push("/profile/edit");
+  };
+
+  const onCopyAddress = () => {
+    navigator.clipboard.writeText(connectedWallet.address);
+    setAddressCopied(true);
+    setTimeout(() => setAddressCopied(false), 2000);
   };
 
   return (
@@ -55,10 +63,19 @@ function ProfileContainer() {
           <div className="flex justify-center mt-4 items-center space-x-6">
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
-              <p className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all">
-                {truncateAddress(
-                  currentUser?.walletAddress || connectedWallet.address,
-                  10
+              <p
+                onClick={onCopyAddress}
+                className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all"
+              >
+                {!addressCopied ? (
+                  <span>
+                    {truncateAddress(
+                      currentUser?.walletAddress || connectedWallet.address,
+                      10
+                    )}
+                  </span>
+                ) : (
+                  <span className="text-green-600 font-bold">copied</span>
                 )}
               </p>
             </div>
@@ -81,10 +98,10 @@ function ProfileContainer() {
               <label className="font-bold">1</label> Following
             </p>
           </div>
-          <div className="flex relative justify-center space-x-2 mt-4">
+          <div className="flex relative justify-center gap-3 mt-4">
             <button
               onClick={onEditProfile}
-              className="px-6 py-2 rounded-full font-bold border-gray-300 border "
+              className="px-6 py-2 rounded-full font-bold border-gray-300 border hover:bg-gray-200"
             >
               Edit
             </button>
@@ -95,7 +112,7 @@ function ProfileContainer() {
             >
               <VShare className="w-4 h-4 opacity-75" />
             </button>
-            <button className="px-4 py-2 rounded-full border-gray-300 border">
+            <button className="px-4 py-2 rounded-full border-gray-300 border hover:bg-gray-200 ">
               <DotsVector className="w-4 h-4" />
             </button>
             <ShareContainer isShareOpen={isShareOpen} />
@@ -136,6 +153,18 @@ function ProfileContainer() {
             </div>
           </Tab.Panels>
         </Tab.Group>
+      </div>
+      <div
+        onClick={() => {
+          setIsSubscribesDisplayed(!isSubscribesDisplayed);
+        }}
+        className={`${
+          isSubscribesOpen
+            ? "hidden"
+            : "z-30 h-full flex transition-all justify-center bg-black bg-opacity-60 items-center fixed top-0 left-0 right-0 bottom-0 backdrop-filter backdrop-blur-md"
+        }`}
+      >
+        <SubScribesContainer />
       </div>
     </>
   );

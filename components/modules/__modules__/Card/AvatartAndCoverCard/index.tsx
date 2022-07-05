@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import UpdateStatusModal from "@components/EditProfilePage/updateStatusModal";
-import { currentAccountState, walletAddressAtom } from "@lib/atoms";
+import { currentAccountState } from "@lib/atoms";
+import LocalStorage from "@lib/helper/LocalStorage";
 import { saveFileWithIpfs } from "@lib/ipfsClient";
 import { UserAccount } from "@lib/models/UserAccount";
 import { NoCoverImg } from "@lib/Resources";
@@ -8,9 +9,8 @@ import { backendApiService } from "@lib/services/BackendApiService";
 import { orderObject } from "@lib/Utils";
 import { Web3Service } from "@lib/web3";
 import { useRouter } from "next/router";
-import { userInfo } from "os";
-import React, { useRef, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import React, { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
 import UserAvatarCard from "../UserAvatarCard";
 
 interface IProps {
@@ -23,11 +23,15 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [currentAccount, setCurrentAccount] =
     useRecoilState(currentAccountState);
-  const currentSigner = useRecoilValue(walletAddressAtom);
   const [isUpdateSucceed, setIsUpdateSucceed] = useState(false);
   const [isUpdatePending, setIsUpdatePending] = useState(false);
   const [isUpdateModal, setIsUpdateModal] = useState(false);
+  const [memorizedWalletAddress, setMemorizedWalletAddress] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    setMemorizedWalletAddress(LocalStorage.getItem("ongama_signer_address")!);
+  }, []);
 
   const onSelectNewCover = () => {
     inputFileRef.current?.click();
@@ -35,53 +39,51 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
 
   const updateCover = async (coverUrl: string, signature: string) => {
     const updateCoverResponse = await backendApiService.updateProfile({
-      walletAddress: currentSigner.address,
+      walletAddress: memorizedWalletAddress,
       coverThumbnailUrl: coverUrl,
       coverUrl: coverUrl,
       signature,
     });
 
-    console.log("update cover response in update", updateCoverResponse);
-
     return updateCoverResponse;
   };
 
-  const getSignature = async () => {
+  const getSignature = async (coverUrl: string) => {
     const web3Services = new Web3Service();
     const userSignature = await web3Services.signPersonalMessage(
       JSON.stringify(
         orderObject({
-          walletAddress: currentSigner.address,
-          username: currentAccount?.username,
-          userBio: currentAccount?.userBio,
-          avatarUrl: currentAccount?.avatarUrl,
-          avatarUrlCompressed: currentAccount?.avatarUrlCompressed,
-          avatarUrlThumbnail: currentAccount?.avatarUrlThumbnail,
-          coverThumbnailUrl: currentAccount?.coverThumbnailUrl,
-          coverUrl: currentAccount?.coverUrl,
+          walletAddress: memorizedWalletAddress,
+          coverThumbnailUrl: coverUrl,
+          coverUrl,
         })
       ),
-      `${currentSigner.address}`
+      memorizedWalletAddress
     );
 
     return userSignature?.signature;
   };
 
+  const fetchUser = async () => {
+    const user = await backendApiService.findAccountWhereAddressOrUsername(
+      memorizedWalletAddress
+    );
+    return setCurrentAccount(user);
+  };
+
   const onCoverChange = async (e) => {
     const { files } = e.target;
-    console.log("cover file", files);
+
     setIsAddCover(false);
     setIsUpdateModal(!isUpdateModal);
     setIsUpdatePending(true);
     const fileUrl = await saveFileWithIpfs(files);
-    console.log("file url", fileUrl);
 
     if (fileUrl) {
-      const signature = await getSignature();
+      const signature = await getSignature(fileUrl);
 
       if (signature) {
         const updateCoverResponse = await updateCover(fileUrl, signature);
-        console.log("update cover response", updateCoverResponse);
 
         if (!updateCoverResponse) {
           setIsUpdateSucceed(false);
@@ -90,8 +92,13 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
         } else {
           setIsUpdatePending(false);
           setIsUpdateSucceed(true);
+          await fetchUser();
         }
       }
+    } else {
+      setIsUpdateSucceed(false);
+      setIsUpdatePending(false);
+      return;
     }
   };
 
@@ -145,7 +152,7 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
             "rounded-full overflow-hidden -mt-20 border-2 shadow-xl bg-white border-gray-100"
           }
           userAvatarClassName={
-            "h-[120px] w-[120px] -mt-20 object-cover border-4 border-white border-solid rounded-full relative"
+            "h-[160px] w-[160px] -mt-28 object-cover border-2 border-white border-solid rounded-full relative"
           }
           user={isEditable ? currentAccount! : user!}
         />
