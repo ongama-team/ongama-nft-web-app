@@ -41,6 +41,25 @@ class Web3Actions {
       return signer;
     }
   }
+
+  //--------------------- this's the function that handles the mint nft from smart contract ------//
+  public async mintNft(tokenUri: string, address: string, price: number) {
+    const formatedPrice = web3Instance.web3Instance.utils.toWei(
+      `${price}`,
+      "ether"
+    );
+
+    try {
+      const mintResult = await web3Instance
+        .contract()
+        .mint(tokenUri, address, formatedPrice, { from: address });
+
+      return mintResult;
+    } catch (err) {
+      console.log("error in minting =>", err);
+      return null;
+    }
+  }
 }
 
 const web3Actions = new Web3Actions();

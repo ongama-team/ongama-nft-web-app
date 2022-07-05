@@ -6,6 +6,7 @@ import NFTABI from "./abis/NFT.json";
 import { connectCoinbase } from "./helpers/connecters";
 import { connector } from "./walletConnect";
 import { SignResult } from "@lib/models/GeneralModel";
+import LocalStorage from "@lib/helper/LocalStorage";
 
 class Web3Service {
   public provider;
@@ -17,16 +18,16 @@ class Web3Service {
       CHAINS_ENV.polygon.nodeRPC
     );
     this.web3Instance = new Web3(Web3.givenProvider || "http://localhost:8545");
-    // web3Instance: Web3
   }
 
   public contract(chain: TChain = "polygon") {
     const network = this.getChainByName(chain);
-    return new ethers.Contract(
-      network.mintContractAddress,
-      NFTABI.abi,
-      this.provider
-    );
+
+    const signer = new ethers.providers.Web3Provider(
+      this.web3Instance.givenProvider
+    ).getSigner(LocalStorage.getItem("ongama_signer_address")!);
+
+    return new ethers.Contract(network.mintContractAddress, NFTABI.abi, signer);
   }
 
   public getChainByName(chain: TChain = "polygon") {
@@ -89,6 +90,27 @@ class Web3Service {
       console.log("error :", e);
       return null;
     }
+  }
+
+  public async sendStorageFee() {
+    const transaction = await this.web3Instance.eth.sendTransaction(
+      {
+        from: LocalStorage.getItem("ongama_signer_address")!,
+        to: process.env.NEXT_PUBLIC_STORAGE_FEE_RECEIVER_ADRESS!,
+        value: this.web3Instance.utils.toWei(
+          `${process.env.NEXT_PUBLIC_STORAGE_FEE}`,
+          "ether"
+        ),
+      },
+      (err) => {
+        if (err) {
+          console.log("send storage fee error", err);
+          return null;
+        }
+      }
+    );
+
+    return transaction;
   }
 }
 export default Web3Service;
