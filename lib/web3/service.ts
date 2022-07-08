@@ -17,7 +17,7 @@ class Web3Service {
     this.provider = new ethers.providers.JsonRpcProvider(
       CHAINS_ENV.polygon.nodeRPC
     );
-    this.web3Instance = new Web3();
+    this.web3Instance = new Web3(Web3.givenProvider || "http://localhost:8545");
   }
 
   public contract(chain: TChain = "polygon") {
