@@ -5,7 +5,7 @@ const ipfsClient = ipfsHttpClient({
   port: 5001,
   protocol: "https",
   headers: {
-    authorization: process.env.IPFS_AUTH as string,
+    authorization: process.env.NEXT_PUBLIC_IPFS_AUTH as string,
   },
 });
 
