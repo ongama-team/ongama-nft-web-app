@@ -12,21 +12,22 @@ class Web3Service {
   public provider;
   public web3Instance: Web3;
 
-  constructor(web3Instance: Web3) {
+  constructor() {
     //  Initial implementation of connecting to the blockchain with an hardcoded chain
     this.provider = new ethers.providers.JsonRpcProvider(
       CHAINS_ENV.polygon.nodeRPC
     );
-    this.web3Instance = web3Instance;
+    this.web3Instance = new Web3(Web3.givenProvider || "http://localhost:8545");
   }
 
   public contract(chain: TChain = "polygon") {
     const network = this.getChainByName(chain);
-    return new ethers.Contract(
-      network.mintContractAddress,
-      NFTABI.abi,
-      this.provider
-    );
+
+    const signer = new ethers.providers.Web3Provider(
+      this.web3Instance.givenProvider
+    ).getSigner(LocalStorage.getItem("ongama_signer_address")!);
+
+    return new ethers.Contract(network.mintContractAddress, NFTABI.abi, signer);
   }
 
   public getChainByName(chain: TChain = "polygon") {
@@ -80,9 +81,7 @@ class Web3Service {
     try {
       const web3 = this.web3Instance;
       const hashedData = web3.utils.sha3(data);
-      signer = LocalStorage.getItem("ongama_signer_address");
-      const signature = await web3.eth.personal.sign(hashedData!, signer, "");
-
+      const signature = await web3.eth.personal.sign(hashedData!, address, "");
       return {
         signature,
         data,
@@ -91,6 +90,27 @@ class Web3Service {
       console.log("error :", e);
       return null;
     }
+  }
+
+  public async sendStorageFee() {
+    const transaction = await this.web3Instance.eth.sendTransaction(
+      {
+        from: LocalStorage.getItem("ongama_signer_address")!,
+        to: process.env.NEXT_PUBLIC_STORAGE_FEE_RECEIVER_ADRESS!,
+        value: this.web3Instance.utils.toWei(
+          `${process.env.NEXT_PUBLIC_STORAGE_FEE}`,
+          "ether"
+        ),
+      },
+      (err) => {
+        if (err) {
+          console.log("send storage fee error", err);
+          return null;
+        }
+      }
+    );
+
+    return transaction;
   }
 }
 export default Web3Service;

@@ -19,7 +19,7 @@ const UserAvatarCard: FC<IProps> = ({
   user,
   identiconSize = 20,
   userAvatarClassName,
-  identiconContainerClassName = "bg-white rounded-full overflow-hidden border border-gray-300 p-3",
+  identiconContainerClassName = "bg-white rounded-full overflow-hidden border border-gray-300 w-fit shadow-xl",
   allowVerifiedIcon = false,
   onUserAvatarClicked,
 }) => {
