@@ -11,13 +11,13 @@ const Menu = () => {
     <div className="min-md:hidden block">
       <ul className="flex justify-between font-ibmPlexSans font-bold mr-2 min-lg:mx-5 items-center text-gray-400">
         <li className="min-lg:pr-3 hover:text-black transition-all">Explore</li>
-        <li className="min-lg:px-3 hover:text-black transition-all">
+        <li className="min-lg:px-3 hover:text-black transition-all cursor-pointer">
           My Profile
         </li>
-        <li className="min-lg:px-3 hover:text-black transition-all">
+        <li className="min-lg:px-3 hover:text-black transition-all cursor-pointer">
           Following
         </li>
-        <li className="min-lg:px-3 hover:text-black transition-all">
+        <li className="min-lg:px-3 hover:text-black transition-all cursor-pointer">
           Activity
         </li>
         <li className="hidden min-xl:block mx-3">
@@ -25,10 +25,10 @@ const Menu = () => {
             <VDotHorizontal className="h-6 w-6 hover:text-black transition-all" />
           </button>
         </li>
-        <li className="min-xl:hidden hover:text-black transition-all">
+        <li className="min-xl:hidden hover:text-black transition-all cursor-pointer">
           How it works
         </li>
-        <li className="min-xl:hidden hover:text-black transition-all">
+        <li className="min-xl:hidden hover:text-black transition-all cursor-pointer">
           Community
         </li>
       </ul>

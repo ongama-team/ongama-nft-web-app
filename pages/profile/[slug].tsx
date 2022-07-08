@@ -2,10 +2,9 @@ import ProfileContainer from "@components/modules/__secured/Profile";
 import React from "react";
 import cookieParser from "@lib/cookieParser";
 import { backendApiService } from "@lib/services/BackendApiService";
-import { UserAccount } from "@lib/models/UserAccount";
 
-function Profile(user: { currentUser: UserAccount }) {
-  return <ProfileContainer currentUser={user.currentUser} />;
+function Profile() {
+  return <ProfileContainer />;
 }
 
 export async function getServerSideProps(context: {

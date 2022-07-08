@@ -15,7 +15,7 @@ const AvatarAndCover: FC<IProps> = ({ user }) => {
 
   return (
     <div className="flex flex-col">
-      <AvatarAndCoverCard user={user} />
+      <AvatarAndCoverCard isEditable={false} user={user} />
       <div className="w-full">
         <p className="text-center py-5 text-2xl font-ibmPlexSans font-semibold">
           {username}

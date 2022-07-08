@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   Block,
   Collections,
@@ -9,17 +9,15 @@ import {
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
 import ShareContainer from "./module/shareContainer";
-import SubScribesContainer from "./module/subscribes";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
+  currentAccountState,
   shareProfileLinkAtom,
   subscribesAtom,
   walletAddressAtom,
 } from "@lib/atoms";
 import Header from "@components/modules/__noAuth/Header";
 import { SaleContainer } from "@components/modules/__secured/Profile/saleContainer";
-import { UserAccount } from "@lib/models/UserAccount";
-import { middleEllipsis } from "../../../../helpers/truncateStrings";
 import ProfileMenu from "../ProfileMenu";
 import AvatarAndCoverCard from "@components/modules/__modules__/Card/AvatartAndCoverCard";
 import TabList from "./module/TabList";
@@ -27,17 +25,27 @@ import OwnedContainer from "./OwnedContainer";
 import CreatedContainer from "./CreatedContainer";
 import ActivityContainer from "./ActivityContainer";
 import { useRouter } from "next/router";
+import truncateAddress from "@lib/helper/truncateAddress";
+import SubScribesContainer from "./module/Subscribes";
 
-function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
+function ProfileContainer() {
   const router = useRouter();
-  const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const connectedWallet = useRecoilValue(walletAddressAtom);
+  const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+  const [addressCopied, setAddressCopied] = useState(false);
+  const currentUser = useRecoilValue(currentAccountState);
 
   const onEditProfile = () => {
     router.push("/profile/edit");
+  };
+
+  const onCopyAddress = () => {
+    navigator.clipboard.writeText(connectedWallet.address);
+    setAddressCopied(true);
+    setTimeout(() => setAddressCopied(false), 2000);
   };
 
   return (
@@ -46,7 +54,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
       <ProfileMenu />
       <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
         <div className="mt-24">
-          <AvatarAndCoverCard user={currentUser} />
+          <AvatarAndCoverCard isEditable={true} />
         </div>
         <div className="mx-auto max-w-xs mt-4">
           <p className="text-center text-3xl font-bold">
@@ -55,10 +63,19 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
           <div className="flex justify-center mt-4 items-center space-x-6">
             <div className="flex justify-center items-center space-x-2 bg-opacity-30 bg-gray-300 p-2 rounded-full">
               <Ethereum className="w-4 h-4" />
-              <p className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all">
-                {middleEllipsis(
-                  currentUser?.walletAddress || connectedWallet.address,
-                  8
+              <p
+                onClick={onCopyAddress}
+                className="font-ibmPlexSans font-semibold text-gray-500 px-1 text-xs cursor-pointer hover:text-gray-700 transition-all"
+              >
+                {!addressCopied ? (
+                  <span>
+                    {truncateAddress(
+                      currentUser?.walletAddress || connectedWallet.address,
+                      10
+                    )}
+                  </span>
+                ) : (
+                  <span className="text-green-600 font-bold">copied</span>
                 )}
               </p>
             </div>
@@ -66,7 +83,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
               +1 more
             </button>
           </div>
-          <p className="text-center mt-4">{currentUser?.userBio}</p>
+          <p className="text-center mt-4 font-bold">{currentUser?.userBio}</p>
           <div className="flex relative space-x-4 mt-4 justify-center">
             <p
               className="hover:cursor-pointer text-gray-600 hover:text-gray-900 font-semibold transition-all"
@@ -80,21 +97,11 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             >
               <label className="font-bold">1</label> Following
             </p>
-            <div
-              onClick={() => {
-                setIsSubscribesDisplayed(!isSubscribesDisplayed);
-              }}
-              className={`${
-                isSubscribesOpen && "hidden"
-              } border z-20 h-full flex transition-all justify-center bg-black bg-opacity-60 items-center fixed inset-0 backdrop-filter backdrop-blur-md`}
-            >
-              <SubScribesContainer />
-            </div>
           </div>
-          <div className="flex relative justify-center space-x-2 mt-4">
+          <div className="flex relative justify-center gap-3 mt-4">
             <button
               onClick={onEditProfile}
-              className="px-6 py-2 rounded-full font-bold border-gray-300 border "
+              className="px-6 py-2 rounded-full font-bold border-gray-300 border hover:bg-gray-200"
             >
               Edit
             </button>
@@ -105,7 +112,7 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             >
               <VShare className="w-4 h-4 opacity-75" />
             </button>
-            <button className="px-4 py-2 rounded-full border-gray-300 border">
+            <button className="px-4 py-2 rounded-full border-gray-300 border hover:bg-gray-200 ">
               <DotsVector className="w-4 h-4" />
             </button>
             <ShareContainer isShareOpen={isShareOpen} />
@@ -146,6 +153,18 @@ function ProfileContainer({ currentUser }: { currentUser: UserAccount }) {
             </div>
           </Tab.Panels>
         </Tab.Group>
+      </div>
+      <div
+        onClick={() => {
+          setIsSubscribesDisplayed(!isSubscribesDisplayed);
+        }}
+        className={`${
+          isSubscribesOpen
+            ? "hidden"
+            : "z-30 h-full flex transition-all justify-center bg-black bg-opacity-60 items-center fixed top-0 left-0 right-0 bottom-0 backdrop-filter backdrop-blur-md"
+        }`}
+      >
+        <SubScribesContainer />
       </div>
     </>
   );
