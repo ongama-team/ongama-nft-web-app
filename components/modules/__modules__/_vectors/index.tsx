@@ -31,6 +31,7 @@ import {
   BsTwitter as VTwitter,
   BsFacebook as VFacebook,
   BsFillHeartFill as VFillHeart,
+  BsFillCheckCircleFill as VCheckFill,
 } from "react-icons/bs";
 import { AiOutlineMail as VEmail } from "react-icons/ai";
 import { IoShareOutline as VShare } from "react-icons/io5";
@@ -39,6 +40,7 @@ import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
 import { RiUserLine as VUser } from "react-icons/ri";
 import { TiFlash as Vflash } from "react-icons/ti";
 import { BiTransfer as VTransaction } from "react-icons/bi";
+import { CgSpinnerTwo as VSpinner } from "react-icons/cg";
 
 export {
   CoinBaseVector,
@@ -76,4 +78,6 @@ export {
   Vflash,
   VTransaction,
   VFillHeart,
+  VSpinner,
+  VCheckFill,
 };

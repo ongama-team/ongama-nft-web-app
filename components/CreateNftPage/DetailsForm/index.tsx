@@ -25,7 +25,7 @@ const DetailsForm = ({ onNftDetailsChange }: IProps) => {
       <div className="mt-5 flex flex-col">
         <label htmlFor="description" className="font-bold">
           Description
-          <span className="text-gray-400 font-thin"> (Optional)</span>
+          <span className="text-gray-400 font-thin px-2">(Optional)</span>
         </label>
         <textarea
           ref={textAreaRef}

@@ -6,6 +6,7 @@ import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
 import TopSellers from "@components/modules/__noAuth/TopSellers";
 import HotCollections from "@components/modules/__noAuth/HotCollections";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
+import TrendingNFTs from "@components/modules/__noAuth/TrendingNFTs";
 import LiveAuctions from "../modules/__noAuth/LiveAuctions";
 
 const LandingPage = () => {
@@ -20,6 +21,7 @@ const LandingPage = () => {
       <TopSellers />
       <HotCollections />
       <ProfileMenu />
+      <TrendingNFTs />
       <LiveAuctions />
     </>
   );
