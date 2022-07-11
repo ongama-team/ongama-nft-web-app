@@ -18,7 +18,7 @@ const DetailsForm = ({ onNftDetailsChange }: IProps) => {
       <input
         type="text"
         name="name"
-        className="mt-2 py-2 outline-none w-full border-b border-gray-300"
+        className="mt-2 py-2 outline-none w-full border-b border-gray-300 bg-transparent"
         placeholder="e.g.'Redeemable T-Shirt with logo'"
         onChange={onNftDetailsChange}
       />
@@ -35,7 +35,7 @@ const DetailsForm = ({ onNftDetailsChange }: IProps) => {
           }}
           name="description"
           placeholder="e.g.'After purchasing you'll be able to get the real T-Shirt'"
-          className="border-b border-gray-300 outline-none py-3 resize-none overflow-hidden"
+          className="border-b border-gray-300 outline-none py-3 resize-none overflow-hidden bg-transparent"
         />
         <p className="py-2 text-gray-500 font-bold">
           With preserved line-breaks
@@ -44,12 +44,12 @@ const DetailsForm = ({ onNftDetailsChange }: IProps) => {
       <label htmlFor="royalties" className="font-bold mt-4">
         Royalties
       </label>
-      <div className="flex border-b border-gray-300">
+      <div className="flex border-b border-gray-300 items-center">
         <input
           name="royalties"
           type="number"
           placeholder="e.g. 10%"
-          className="w-full my-3 outline-none"
+          className="w-full my-3 outline-none bg-transparent"
           onChange={onNftDetailsChange}
         />
         <p className="text-gray-400">%</p>

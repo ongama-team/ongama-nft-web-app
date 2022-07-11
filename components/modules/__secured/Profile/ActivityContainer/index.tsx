@@ -1,13 +1,6 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
-import {
-  VBookmark,
-  VEthereum,
-  VFillHeart,
-  Vflash,
-  VTransaction,
-} from "@components/modules/__modules__/_vectors";
-import ByLising from "./ByListing";
+import ActivityByLising from "./ActivityByListing";
 import NotFound from "../module/NotFound";
 import ActivityFilters from "./ActivityFilters";
 
@@ -19,7 +12,7 @@ const ActivityContainer = () => {
           <div className="w-full">
             <Tab.Panels>
               <Tab.Panel>
-                <ByLising />
+                <ActivityByLising />
               </Tab.Panel>
               <Tab.Panel>
                 <NotFound content={"Purchases"} />

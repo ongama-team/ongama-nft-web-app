@@ -11,7 +11,7 @@ const Items = () => {
           return (
             <div
               key={index}
-              className="flex flex-wrap border border-gray-200 rounded-xl m-2 w-64 mobile:w-full"
+              className="flex flex-wrap border border-gray-200 dark:border-darkPrimary rounded-xl m-2 w-64 mobile:w-full"
             >
               <NFTCard
                 key={index}
@@ -28,7 +28,7 @@ const Items = () => {
         })}
       </div>
       <div className="w-full bg-gradient-to-r p-[3px] from-[#7928ca] to-pink-600 rounded-3xl">
-        <button className="w-full py-2 bg-white rounded-3xl">
+        <button className="w-full py-2 bg-white rounded-3xl dark:bg-darkPrimary">
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7928ca] to-pink-600 font-semibold">
             Load More
           </span>

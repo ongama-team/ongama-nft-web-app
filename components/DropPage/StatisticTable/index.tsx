@@ -17,10 +17,10 @@ const StatisticTable: FC<IProps> = ({ statisticDtata }) => {
           return (
             <div
               key={index}
-              className="py-3 flex  flex-col justify-center items-center w-32 border borde-gray-300"
+              className="py-3 flex  flex-col justify-center items-center w-32 border borde-gray-300 dark:border-gray-500"
             >
               <p className="text-gray-400">{stat.title}</p>
-              <p className="font-semibold">
+              <p className="font-semibold dark:text-white">
                 {stat.type === "price"
                   ? `$${convertNumber(stat.value)}`
                   : `${convertNumber(stat.value)}`}

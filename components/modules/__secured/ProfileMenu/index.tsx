@@ -42,13 +42,13 @@ const ProfileMenu = () => {
           : "fixed mobile:translate-y-full md:translate-x-full transition-all"
       } top-0 left-0 right-0 bottom-0 z-20 py-5 mobile:py-0 mobile:pt-32`}
     >
-      <div className="flex flex-col relative h-full justify-between w-96 bg-white float-right mx-5 px-5 py-5 mobile:w-full mobile:rounded-t-2xl mobile:rounded-none mobile:mx-0 shadow-xl rounded-2xl border border-gray-50">
+      <div className="flex flex-col relative h-full justify-between w-96 bg-white dark:bg-darkPrimary float-right mx-5 px-5 py-5 mobile:w-full mobile:rounded-t-2xl mobile:rounded-none mobile:mx-0 shadow-xl rounded-2xl border border-gray-50 dark:border-darkLight">
         <div>
           <button
             onClick={closeProfileMenu}
             className="rounded-full transition-all cursor-pointer p-2 float-right hover:bg-gray-300 mobile:bg-gray-300"
           >
-            <CrossVector className="rotate-45 text-gray-500 w-6 h-6" />
+            <CrossVector className="rotate-45 text-gray-500 dark:text-gray-400 dark:hover:text-darkPrimary w-6 h-6" />
           </button>
           <div className="flex items-center mt-10">
             <UserAvatarCard
@@ -57,7 +57,7 @@ const ProfileMenu = () => {
               userAvatarClassName={"w-12 h-12 rounded-full object-cover"}
             />
             <div className="px-3">
-              <p className="font-ibmPlexSans font-bold">
+              <p className="font-ibmPlexSans font-bold dark:text-white">
                 {currentAccount?.username}
               </p>
               <div
@@ -79,7 +79,7 @@ const ProfileMenu = () => {
           </div>
           <button
             onClick={onRedirectToEditProfile}
-            className="flex items-center hover:bg-gray-100 py-3 rounded-xl px-3 transition-all w-full"
+            className="flex items-center hover:bg-gray-100 dark:text-white dark:hover:text-darkPrimary dark:hover:bg-gray-300 dark:hover:bg-opacity-80 py-3 rounded-xl px-3 transition-all w-full"
           >
             <VUser className="text-2xl" />
             <span className="px-3 font-ibmPlexSans font-bold">
@@ -87,9 +87,6 @@ const ProfileMenu = () => {
             </span>
           </button>
         </div>
-        <button className="border border-gray-400 hover:border-gray-500 transition-all py-3 rounded-full font-ibmPlexSans font-bold">
-          Sign out
-        </button>
       </div>
     </div>
   );

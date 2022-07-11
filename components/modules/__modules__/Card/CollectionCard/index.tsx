@@ -17,7 +17,7 @@ const CollectionCard: FC<Props> = ({
   volumeTraded,
 }) => {
   return (
-    <div className=" flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2">
+    <div className="h-14 w-[250px] bg-none flex items-center mx-1 my-2">
       <span className="text-gray-400">{rank}</span>
       <div className="flex">
         <section className="relative">
@@ -29,7 +29,9 @@ const CollectionCard: FC<Props> = ({
           <CheckmarkCard className="h-8 absolute bottom-[-7px] right-2" />
         </section>
         <section>
-          <h4 className="text-black text-sm font-bold">{collectionName}</h4>
+          <h4 className="text-black text-sm font-bold dark:text-white">
+            {collectionName}
+          </h4>
           <span className="text-sm font-semibold text-gray-400">
             {formatToDollars(volumeTraded)}
           </span>

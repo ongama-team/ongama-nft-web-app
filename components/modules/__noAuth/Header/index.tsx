@@ -22,6 +22,7 @@ import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 import { backendApiService } from "@lib/services/BackendApiService";
 import { UserAccount } from "@lib/models/UserAccount";
+import { useTheme } from "@components/context/ThemeProvider";
 
 const Header = () => {
   const routes = useRouter();
@@ -33,8 +34,11 @@ const Header = () => {
   const [walletData, setWalletData] = useRecoilState(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const { address } = walletData;
+  const { setTheme, theme } = useTheme();
+
   const toggleTheme = () => {
     setIsLightTheme(!isLightTheme);
+    theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
   const toggleWallets = () => {
@@ -82,12 +86,12 @@ const Header = () => {
   };
 
   return (
-    <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-20">
+    <div className="flex justify-between items-center px-5 py-3 fixed top-0 left-0 right-0 backdrop-blur-lg z-20 dark:bg-darkPrimary dark:bg-opacity-80 transition-all">
       <div className="cursor-pointer">
         <Link href="/" passHref>
           <p className="flex items-center text-3xl font-ibmPlexSans">
-            <span className="text-blue-500">O</span>{" "}
-            <span className="mobile:hidden">ngama</span>
+            <span className="text-blue-500">O</span>
+            <span className="mobile:hidden dark:text-white">ngama</span>
           </p>
         </Link>
       </div>
@@ -96,7 +100,7 @@ const Header = () => {
         <Menu />
       </div>
       <div className="flex items-center">
-        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-lg:block hidden">
+        <button className="border dark:text-white border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-lg:block hidden">
           <VSearch className="w-6 h-6" />
         </button>
         <button
@@ -113,16 +117,16 @@ const Header = () => {
           Sign in
         </button>
         <button
-          className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full"
+          className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full dark:text-white"
           onClick={toggleTheme}
         >
-          {isLightTheme ? (
+          {!isLightTheme ? (
             <MoonVector className="w-5 h-5" />
           ) : (
             <VSun className="w-5 h-5" />
           )}
         </button>
-        <button className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block hidden">
+        <button className="border border-gray-300 transition-all dark:text-white duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block hidden">
           <VMenu className="w-6 h-6" />
         </button>
         <div

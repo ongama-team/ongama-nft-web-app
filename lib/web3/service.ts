@@ -101,6 +101,7 @@ class Web3Service {
           `${process.env.NEXT_PUBLIC_STORAGE_FEE}`,
           "ether"
         ),
+        gas: 21000,
       },
       (err) => {
         if (err) {

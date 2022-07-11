@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { FC } from "react";
 import { formatToDollars } from "helpers/numberFormatter";
-import { dummy_data } from "../../../__noAuth/TopSellers/dummy_data";
 import { VerifiedImg } from "@lib/Resources";
 
 interface Props {
@@ -20,12 +19,12 @@ const CollectionCard: FC<Props> = ({
   isVerified,
 }) => {
   return (
-    <div className="h-52 w-72 flex-none border-2 border-slate-200 relative p-2 mr-4 rounded-xl">
+    <div className="h-52 w-72 mobile:w-full flex-none border-2 border-slate-200 dark:border-gray-500 relative p-2 mr-4 mobile:mr-0 rounded-xl snap-center">
       <section className="h-[45%]">
         <img
           src={bannerUrl}
           alt={name}
-          className="w-full h-full object-cover rounded-xl border-solid border-[1px] border-gray-400"
+          className="w-full h-full object-cover rounded-xl border-solid border-[1px] border-gray-400 dark:border-none"
         />
       </section>
       <section className="absolute top-[25%] left-[6rem]">
@@ -33,7 +32,7 @@ const CollectionCard: FC<Props> = ({
           <img
             src={profileUrl}
             alt={name}
-            className="h-16 w-16 rounded-full ml-4 mr-4 border-solid border-2 border-white"
+            className="h-16 w-16 rounded-full ml-4 mr-4 border-solid border-2 border-white dark:border-darkPrimary"
           />
           {isVerified && (
             <img
@@ -45,7 +44,7 @@ const CollectionCard: FC<Props> = ({
         </div>
       </section>
       <section className=" h-[55%] flex items-center justify-center flex-col ">
-        <h4 className="text-black text-sm font-bold">{name}</h4>
+        <h4 className="text-black text-sm font-bold dark:text-white">{name}</h4>
         <span className="text-sm font-semibold text-gray-400 pt-2">
           {formatToDollars(volumeTraded)}
         </span>

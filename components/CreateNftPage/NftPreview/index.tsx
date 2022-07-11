@@ -22,8 +22,8 @@ const NftPreview = ({
       <p className="font-bold">Preview</p>
       <div
         className={`w-60 ${
-          previewUrl ? "h-fit" : "h-96"
-        } border border-gray-300 mt-5 rounded-xl flex flex-col justify-center items-center`}
+          previewUrl ? "h-fit dark:border-darkPrimary" : "h-96"
+        } border border-gray-300 dark:border-gray-500 mt-5 rounded-xl flex flex-col justify-center items-center`}
       >
         <p
           className={`text-center px-6 font-semibold text-gray-500 ${

@@ -10,7 +10,7 @@ const CreatedContainer = () => {
         return (
           <div
             key={index}
-            className="border border-gray-200 rounded-xl m-2 w-64 mobile:w-full"
+            className="border border-gray-200 dark:border-darkPrimary rounded-xl m-2 w-64 mobile:w-full"
           >
             <NFTCard
               key={index}

@@ -10,7 +10,7 @@ const Activity = () => {
         return (
           <div
             key={index}
-            className="flex my-3 border border-gray-200 p-5 rounded-3xl"
+            className="flex my-3 border border-gray-200 dark:border-gray-500 dark:text-white p-5 rounded-3xl"
           >
             <div>
               <img

@@ -5,7 +5,7 @@ import LandingPage from "../components/LandingPage";
 
 const Home: NextPage = () => {
   return (
-    <div className="h-screen">
+    <div className="h-fit dark:bg-darkPrimary transition-all">
       <Head>
         <title>Ongama | Best NFT Market</title>
         <meta name="description" content="NFT marketplace" />

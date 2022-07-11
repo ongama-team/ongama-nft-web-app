@@ -132,10 +132,10 @@ const EditProfile = () => {
   };
 
   return (
-    <>
+    <div className="pt-24">
       <Header />
-      <div className="px-4 py-6 sm:px-28 md:py-12 lg:px-44 xl:px-56 mt-20">
-        <h2 className=" text-lg md:text-2xl lg:text-3xl font-bold ">
+      <div className="px-4 py-6 sm:px-28 md:py-12 lg:px-44 xl:px-56">
+        <h2 className=" text-lg md:text-2xl lg:text-3xl font-bold dark:text-white">
           Edit profile
         </h2>
         <p className=" text-gray-500 text-sm w-[80%] md:text-lg lg:w-[55%] my-6 ">
@@ -144,42 +144,54 @@ const EditProfile = () => {
         </p>
         <div className="flex flex-col justify-center  w-full sm:flex-row">
           <div className=" w-full flex flex-col sm:w-[70%]  sm:pr-12">
-            <label htmlFor="name" className="label">
+            <label
+              htmlFor="name"
+              className="dark:text-white font-semibold py-3"
+            >
               Display name
             </label>
             <input
               id="name"
-              className="input"
+              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
               placeholder="The Dev bro"
               onChange={(e) =>
                 setProfile({ ...profile, username: e.target.value })
               }
             />
-            <label htmlFor="bio" className="label">
+            <label
+              htmlFor="bio"
+              className="dark:text-white font-semibold pt-4 pb-2"
+            >
               Bio
             </label>
             <input
               id="bio"
-              className="input"
+              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
               placeholder="The big boy doing wonders"
               onChange={(e) =>
                 setProfile({ ...profile, userBio: e.target.value })
               }
             />
-            <label htmlFor="portfolio" className="label">
+            <label
+              htmlFor="portfolio"
+              className="dark:text-white font-semibold pt-4 pb-2"
+            >
               Personal site or portfolio
             </label>
             <input
               id="portfolio"
-              className="input"
+              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
               placeholder="https://www.dev.to/web3"
             />
-            <label htmlFor="email" className="label">
+            <label
+              htmlFor="email"
+              className="dark:text-white font-semibold pt-4 pb-2"
+            >
               Email
             </label>
             <input
               id="email"
-              className="input"
+              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
               placeholder="Enter your email"
             />
           </div>
@@ -219,9 +231,9 @@ const EditProfile = () => {
           </div>
         </div>
         <div className="w-full my-8 sm:w-[70%] sm:pr-12">
-          <h3 className="label">Verification</h3>
+          <h3 className="dark:text-white font-semibold">Verification</h3>
           <section className="flex flex-col md:flex-row">
-            <p className="my-3 text-xs text-slate-500">
+            <p className="my-3 text-xs text-slate-500 pr-5">
               Proceed with verification process to get more visibility and gain
               trust on Ongama Marketplace. Please allow up to several weeks for
               the process
@@ -234,7 +246,7 @@ const EditProfile = () => {
         <button
           onClick={onUpdateProfile}
           disabled={isWrongFileSize}
-          className="w-[60%] py-3 text-white rounded-3xl bg-blue-600 ml-[20%] mt-6 sm:ml-0 disabled:bg-blue-400 disabled:cursor-not-allowed"
+          className="w-[60%] py-3 text-white font-semibold hover:bg-blue-700 transition-all rounded-3xl bg-blue-600 ml-[20%] mt-6 sm:ml-0 disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
           Update profile
         </button>
@@ -249,7 +261,7 @@ const EditProfile = () => {
         )}
       </div>
       <ProfileMenu />
-    </>
+    </div>
   );
 };
 

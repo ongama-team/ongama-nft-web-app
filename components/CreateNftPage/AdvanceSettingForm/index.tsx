@@ -12,12 +12,12 @@ const AdvancedSettingForm = () => {
         <input
           type="text"
           placeholder="e.g. Size"
-          className="border-b border-gray-300 py-2 outline-none"
+          className="border-b border-gray-300 py-2 outline-none bg-transparent"
         />
         <input
           type="text"
           placeholder="e.g. Size"
-          className="border-b border-gray-300 py-2 outline-none"
+          className="border-b border-gray-300 py-2 outline-none bg-transparent"
         />
       </div>
       <p className="font-bold mt-5">
@@ -27,7 +27,7 @@ const AdvancedSettingForm = () => {
         ref={textAreaRef}
         onChange={(e) => setTextAreaValue(e.target.value)}
         placeholder="Image description in details"
-        className="border-b border-gray-300 outline-none resize-none overflow-hidden w-full py-3"
+        className="border-b border-gray-300 outline-none resize-none overflow-hidden w-full py-3 bg-transparent"
       />
       <p className="text-xs font-bold text-gray-500">
         Text what will be used in VoiceOver for people with desabilites

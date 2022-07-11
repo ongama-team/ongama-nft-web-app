@@ -24,7 +24,7 @@ const NFTCard: FC<IProps> = ({
   isBuyAvailable = true,
 }) => {
   return (
-    <div className="flex w-full shadow-lg mx-auto p-5 rounded-xl flex-col bg-white">
+    <div className="flex w-full shadow-lg mx-auto p-5 rounded-xl flex-col bg-white dark:bg-darkLight dark:text-white">
       <div
         className={`flex mx-1 items-center justify-between ${
           !ownerAvatarUrl && "hidden"

@@ -1,9 +1,17 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
+    colors: {
+      ...colors,
+      darkPrimary: "#041C32",
+      darkLight: "#04293A",
+    },
     extend: {
       screens: {
         sm: "649px",
@@ -14,7 +22,7 @@ module.exports = {
         "min-md": { max: "838px" },
       },
       fontFamily: {
-        ibmPlexSans: ['"IBM Plex Sans"', "sans-serif"],
+        ibmPlexSans: ["IBM Plex Sans", "sans-serif"],
       },
     },
   },

@@ -135,7 +135,7 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
         />
         <button
           onClick={onSelectNewCover}
-          className="bg-white px-5 py-2 rounded-md font-bold hover:scale-105 transition-all"
+          className="bg-white dark:bg-darkPrimary dark:text-white px-5 py-2 rounded-md font-bold hover:scale-105 transition-all"
         >
           Add Cover
         </button>
@@ -149,10 +149,10 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
             router.push(`/profile/${currentAccount?.walletAddress}`)
           }
           identiconContainerClassName={
-            "rounded-full overflow-hidden -mt-20 border-2 shadow-xl bg-white border-gray-100"
+            "rounded-full overflow-hidden -mt-20 border-2 shadow-xl bg-white dark:border-darkPrimary border-gray-100"
           }
           userAvatarClassName={
-            "h-[160px] w-[160px] -mt-28 object-cover border-2 border-white border-solid rounded-full relative"
+            "h-[160px] w-[160px] -mt-28 object-cover border-2 border-white dark:border-darkPrimary border-solid rounded-full relative"
           }
           user={isEditable ? currentAccount! : user!}
         />

@@ -21,7 +21,7 @@ const ShareContainer: FC<openModel> = () => {
       ref={ref}
       className={`${
         isShareOpen ? "scale-0 transition-all" : "scale-100 transition-all"
-      } absolute z-10 border border-gray-100 shadow-xl top-12 transform transition-all bg-white rounded-xl p-2 `}
+      } absolute z-10 border border-gray-100 dark:border-darkLight dark:bg-darkPrimary shadow-xl top-12 transform transition-all bg-white rounded-xl p-2 `}
     >
       <p className="text-center font-extrabold text-xl">
         Share link to this page
