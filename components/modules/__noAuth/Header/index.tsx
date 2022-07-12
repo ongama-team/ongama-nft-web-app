@@ -45,7 +45,8 @@ const Header = () => {
     routes.push("/create");
   };
 
-  const fetchUser = async (walletAddress) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchUser = async (walletAddress: string) => {
     const user = await backendApiService.findAccountWhereAddressOrUsername(
       walletAddress
     );
@@ -75,7 +76,7 @@ const Header = () => {
         fetchUser(signer);
       }
     })();
-  }, [setWalletData]);
+  }, [fetchUser, setWalletData]);
 
   const openProfileMenu = () => {
     setIsProfileMenu(!isProfileMenu);
