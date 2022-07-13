@@ -5,7 +5,7 @@ import Carousel from "@components/modules/__modules__/Carousel/Carousel";
 
 const Presentation = () => {
   return (
-    <div className="pt-24 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5">
+    <div className="pt-24 flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-5 mobile:px-0">
       <Carousel canBeDisabled={true}>
         <div className="presentation-grid md:w-max sm:w-full">
           <StoryPresentation />

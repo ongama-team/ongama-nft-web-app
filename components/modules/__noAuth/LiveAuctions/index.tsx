@@ -1,20 +1,29 @@
 import React from "react";
-import AllLiveAuctions from "./allLiveAuctions";
 import Carousel from "@components/modules/__modules__/Carousel/Carousel";
+import { dummy_data } from "./dummy_data";
+import NFTCard from "@components/modules/__modules__/Card/NFTCard";
+import { useRecoilValue } from "recoil";
+import { nftsState } from "@lib/atoms";
+import { NFTData } from "@lib/models/GeneralModel";
 
 const LiveAuctions = () => {
+  const currentNfts = useRecoilValue(nftsState);
+  const { nfts, metadata, isLoading } = currentNfts;
   return (
-    <section>
-      <div className="flex  2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit px-6">
-        <h1 className="pt-0 mb-6 font-bold text-xl text-black font-ibmPlexSans md:text-2xl lg:text-3xl ">
-          Live auction 🔥
-        </h1>
-      </div>
+    <section className=" 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit mt-12">
+      <h2 className="font-bold text-xl text-black font-ibmPlexSans md:text-2xl lg:text-3xl dark:text-white px-6 pb-3">
+        Live auction 🔥
+      </h2>
 
-      <div className="flex justify-center items-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit">
-        <Carousel>
-          <div className=" md:w-max sm:w-full">
-            <AllLiveAuctions />
+      <div className="flex items-center mx-auto h-fit">
+        <Carousel canBeDisabled={true}>
+          <div className="flex font-ibmPlexSans gap-3">
+            {!isLoading &&
+              nfts.map((nft: NFTData, index: React.Key | null | undefined) => {
+                return (
+                  <NFTCard key={index} nft={nft} likes={0} isAuction={true} />
+                );
+              })}
           </div>
         </Carousel>
       </div>

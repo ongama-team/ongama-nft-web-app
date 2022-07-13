@@ -65,7 +65,7 @@ const Header = () => {
         setWalletData({ ...walletData, address: "" });
       }
     });
-  }, [setWalletData, walletData]);
+  }, [walletData]);
 
   useEffect(() => {
     (async () => {
@@ -80,7 +80,7 @@ const Header = () => {
         fetchUser(signer);
       }
     })();
-  }, [fetchUser, setWalletData]);
+  }, []);
 
   const openProfileMenu = () => {
     setIsProfileMenu(!isProfileMenu);

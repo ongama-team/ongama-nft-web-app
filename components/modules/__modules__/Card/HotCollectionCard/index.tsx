@@ -19,15 +19,15 @@ const CollectionCard: FC<Props> = ({
   isVerified,
 }) => {
   return (
-    <div className="h-52 w-72 mobile:w-full flex-none border-2 border-slate-200 dark:border-gray-500 relative p-2 mr-4 mobile:mr-0 rounded-xl snap-center">
-      <section className="h-[45%]">
+    <div className="h-200 w-72 mobile:w-full flex-none border hover:border-2 border-slate-200 dark:border-gray-500 relative p-2 mr-4 mobile:mr-0 rounded-xl snap-center cursor-pointer">
+      <section className="h-[60%]">
         <img
           src={bannerUrl}
           alt={name}
-          className="w-full h-full object-cover rounded-xl border-solid border-[1px] border-gray-400 dark:border-none"
+          className="w-full h-full object-cover rounded-xl border-solid border-[1px] shadow-md dark:border-none"
         />
       </section>
-      <section className="absolute top-[25%] left-[6rem]">
+      <section className="absolute top-[50%] left-[6rem]">
         <div className="relative">
           <img
             src={profileUrl}

@@ -3,7 +3,12 @@ import http from "@lib/http";
 import * as Sentry from "@sentry/nextjs";
 import { orderObject } from "@lib/Utils";
 import { updateProfileInterface } from "@lib/@Types";
-import { NFT } from "@lib/models/GeneralModel";
+import {
+  IGetRequestNFTsParams,
+  NFT,
+  NFTData,
+  NFTMetaData,
+} from "@lib/models/GeneralModel";
 
 class BackendApiService {
   async findAccountWhereAddressOrUsername(
@@ -22,6 +27,20 @@ class BackendApiService {
       Sentry.captureException(e);
       return null;
     }
+  }
+
+  async findNFts(
+    params?: IGetRequestNFTsParams
+  ): Promise<{ nfts: NFTData[] | []; meta: NFTMetaData }> {
+    const { data } = await http.get("nfts", {
+      params,
+    });
+
+    console.log("reponse in services", data);
+    return {
+      nfts: data.nfts as NFTData[],
+      meta: data.meta as NFTMetaData,
+    };
   }
 
   async updateProfile({

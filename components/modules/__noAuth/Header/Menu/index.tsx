@@ -1,8 +1,13 @@
+/* eslint-disable @next/next/link-passhref */
+import { walletAddressAtom } from "@lib/atoms";
 import Link from "next/link";
 import React from "react";
+import { useRecoilValue } from "recoil";
 import { VDotHorizontal } from "../../../__modules__/_vectors";
 
 const Menu = () => {
+  const walletAddress = useRecoilValue(walletAddressAtom);
+
   const onDotVectorClick = () => {
     console.log("dot vector click");
   };
@@ -13,9 +18,11 @@ const Menu = () => {
         <li className="min-lg:pr-3 hover:text-black dark:hover:text-white transition-all cursor-pointer">
           Explore
         </li>
-        <li className="min-lg:px-3 hover:text-black dark:hover:text-white transition-all cursor-pointer">
-          My Profile
-        </li>
+        <Link href={`/profile/${walletAddress.address}`}>
+          <li className="min-lg:px-3 hover:text-black dark:hover:text-white transition-all cursor-pointer">
+            My Profile
+          </li>
+        </Link>
         <li className="min-lg:px-3 hover:text-black dark:hover:text-white transition-all cursor-pointer">
           Following
         </li>
