@@ -35,7 +35,7 @@ const ExploreNFTs = () => {
           Explore NFTs
         </h2>
         <ShowWidget condition={!isLoading}>
-          <div className="flex justify-between items-center mx-5 dark:text-white font-bold relative md:w-[95%] overflow-x-auto">
+          <div className="flex justify-between items-center mx-5 dark:text-white font-bold relative mobile:w-[95%] overflow-x-auto">
             <div className="flex gap-5 relative">
               <button
                 onClick={toggleBlockchainModal}
