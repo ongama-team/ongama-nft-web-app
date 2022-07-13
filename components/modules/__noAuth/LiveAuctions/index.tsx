@@ -5,6 +5,8 @@ import NFTCard from "@components/modules/__modules__/Card/NFTCard";
 import { useRecoilValue } from "recoil";
 import { nftsState } from "@lib/atoms";
 import { NFTData } from "@lib/models/GeneralModel";
+import NFTCardFallback from "@components/modules/__modules__/NFTCardFallback";
+import ShowWidget from "@components/modules/__modules__/ShowWidget";
 
 const LiveAuctions = () => {
   const currentNfts = useRecoilValue(nftsState);
@@ -18,12 +20,13 @@ const LiveAuctions = () => {
       <div className="flex items-center mx-auto h-fit">
         <Carousel canBeDisabled={true}>
           <div className="flex font-ibmPlexSans gap-3">
-            {!isLoading &&
-              nfts.map((nft: NFTData, index: React.Key | null | undefined) => {
+            <ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>
+              {nfts.map((nft: NFTData, index: React.Key | null | undefined) => {
                 return (
                   <NFTCard key={index} nft={nft} likes={0} isAuction={true} />
                 );
               })}
+            </ShowWidget>
           </div>
         </Carousel>
       </div>

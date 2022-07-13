@@ -2,7 +2,7 @@ import React, { FC, ReactNode } from "react";
 
 interface IProps {
   condition: boolean;
-  fallback?: ReactNode | null;
+  fallback?: any | null;
   children: any;
 }
 

@@ -9,7 +9,7 @@ const ActivityContainer = () => {
     <div>
       <Tab.Group>
         <div className="flex justify-between min-md:flex-col">
-          <div className="w-full">
+          <div className="w-full pb-10">
             <Tab.Panels>
               <Tab.Panel>
                 <ActivityByLising />

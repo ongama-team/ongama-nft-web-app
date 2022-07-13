@@ -3,6 +3,8 @@ import Carousel from "@components/modules/__modules__/Carousel/Carousel";
 import NFTCard from "@components/modules/__modules__/Card/NFTCard";
 import { useRecoilValue } from "recoil";
 import { nftsState } from "@lib/atoms";
+import ShowWidget from "@components/modules/__modules__/ShowWidget";
+import NFTCardFallback from "@components/modules/__modules__/NFTCardFallback";
 
 const TrendingNFTs = () => {
   const currentNfts = useRecoilValue(nftsState);
@@ -15,10 +17,11 @@ const TrendingNFTs = () => {
       <div className="flex items-center mx-auto h-fit">
         <Carousel canBeDisabled={true}>
           <div className="flex font-ibmPlexSans gap-3">
-            {!isLoading &&
-              nfts.map((nft, index) => {
+            <ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>
+              {nfts.map((nft, index) => {
                 return <NFTCard key={index} nft={nft} isAuction={false} />;
               })}
+            </ShowWidget>
           </div>
         </Carousel>
       </div>
