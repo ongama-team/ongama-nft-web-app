@@ -10,7 +10,7 @@ const TopSellersCard = () => {
       {topSellersData.map((seller) => {
         return (
           <div
-            className=" flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2"
+            className="flex-none h-14 w-[250px] bg-none flex items-center mx-1 my-2"
             key={seller.id}
           >
             <span className="text-gray-400">{seller.id}</span>
@@ -24,7 +24,9 @@ const TopSellersCard = () => {
                 <CheckmarkCard className="h-8 absolute bottom-[-7px] right-2" />
               </section>
               <section>
-                <h4 className="text-black text-sm font-bold">{seller.title}</h4>
+                <h4 className="text-black text-sm font-bold dark:text-white">
+                  {seller.title}
+                </h4>
                 <span className="text-sm font-semibold text-gray-400">
                   {formatToDollars(seller.price)}
                 </span>

@@ -141,6 +141,7 @@ const CreateNftPage = () => {
       });
       const web3Service = new Web3Service();
       const transaction = await web3Service.sendStorageFee();
+      console.log("transaction", transaction);
       setMintProcess({
         ...mintProcess,
         sendStorageFeeStatus: SUCCED_STATUS,
@@ -208,16 +209,22 @@ const CreateNftPage = () => {
       await mintNft();
       setIsCreateNftProcessModal(!isCreateNftProcessModal);
       setPreviewUrl("");
+      setMintProcess({
+        ...mintProcess,
+        uploadFileOnIpfsStatus: "",
+        sendStorageFeeStatus: "",
+        mintNftStatus: "",
+      });
     } catch (err) {
       throw err;
     }
   };
 
   return (
-    <>
+    <div className="dark:bg-darkPrimary">
       <Header />
-      <div className="py-20 font-ibmPlexSans 2xl:w-1/2 lg:w-3/4 md:w-5/6 min-md:w-full min-lg:px-5 m-auto relative">
-        <h1 className="text-4xlimport font-semibold text-4xl min-md:w-full min-lg:w-full min-lg:text-3xl">
+      <div className="py-20 font-ibmPlexSans 2xl:w-1/2 lg:w-3/4 md:w-5/6 min-md:w-full min-lg:px-5 m-auto relative  dark:text-white ">
+        <h1 className="text-4xl font-semibold min-md:w-full min-lg:w-full min-lg:text-3xl dark:text-white">
           Create Single item on Ethereum
         </h1>
         <div className="flex mt-10 min-lg:w-full min-md:block relative">
@@ -226,7 +233,7 @@ const CreateNftPage = () => {
             <WalletInfoCard truncatedWalletAddress={truncatedWalletAddress} />
             <div>
               <p className="font-bold">Upload file</p>
-              <div className="border-2 border-dashed border-gray-300 my-5 py-10 rounded-xl text-center">
+              <div className="border-2 border-dashed border-gray-300 dark:border-gray-500 my-5 py-10 rounded-xl text-center">
                 <div
                   className={`flex justify-center w-full p-5 h-96 m-auto relative ${
                     !previewUrl && "hidden"
@@ -356,7 +363,7 @@ const CreateNftPage = () => {
           mintError={mintEroor}
         />
       )}
-    </>
+    </div>
   );
 };
 

@@ -41,6 +41,7 @@ import { RiUserLine as VUser } from "react-icons/ri";
 import { TiFlash as Vflash } from "react-icons/ti";
 import { BiTransfer as VTransaction } from "react-icons/bi";
 import { CgSpinnerTwo as VSpinner } from "react-icons/cg";
+import { GoPrimitiveDot as VSingleDot } from "react-icons/go";
 
 export {
   CoinBaseVector,
@@ -80,4 +81,5 @@ export {
   VFillHeart,
   VSpinner,
   VCheckFill,
+  VSingleDot,
 };

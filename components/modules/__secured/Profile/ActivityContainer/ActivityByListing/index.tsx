@@ -2,7 +2,7 @@
 import React from "react";
 import { dummy_data } from "@components/modules/__noAuth/Presentation/dummy_data";
 
-const ByLising = () => {
+const ActivityByListing = () => {
   const { staticImages } = dummy_data;
   return (
     <div className="flex flex-col mt-2">
@@ -10,7 +10,7 @@ const ByLising = () => {
         return (
           <div
             key={index}
-            className="flex my-3 border border-gray-200 p-5 rounded-3xl"
+            className="flex my-3 border border-gray-200 dark:border-gray-500 p-5 rounded-3xl"
           >
             <div>
               <img
@@ -35,4 +35,4 @@ const ByLising = () => {
   );
 };
 
-export default ByLising;
+export default ActivityByListing;

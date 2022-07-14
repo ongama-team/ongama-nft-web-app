@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
-const TimeLeft = () => {
+
+const TimeLeftCard = () => {
   const [timeUp, setTimeUp] = useState(true);
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
@@ -26,20 +27,20 @@ const TimeLeft = () => {
     if (days >= 0 && hours >= 0 && minutes >= 0 && seconds >= 0) {
       setTimeUp(false);
     }
-    console.log(timeUp);
-
     return () => clearInterval(interval);
   }, [days, hours, minutes, seconds, timeUp]);
   return (
     <>
       {timeUp ? (
-        <span className="text-gray-700 font-sans">Expired</span>
+        <span className="text-gray-700 font-sans font-bold dark:text-white">
+          Expired
+        </span>
       ) : (
-        <span className="text-gray-700 font-sans">
+        <span className="text-gray-700 font-sans font-bold dark:text-white">
           {hours}:{minutes}:{seconds}
         </span>
       )}
     </>
   );
 };
-export default TimeLeft;
+export default TimeLeftCard;

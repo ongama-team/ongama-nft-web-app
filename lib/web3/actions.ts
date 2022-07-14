@@ -53,7 +53,7 @@ class Web3Actions {
     try {
       const mintResult = await web3Instance
         .contract()
-        .mint(tokenUri, address, formatedPrice, { from: address });
+        .mint(tokenUri, address, formatedPrice);
 
       return mintResult;
     } catch (err) {

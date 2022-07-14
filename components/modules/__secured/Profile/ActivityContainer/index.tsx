@@ -1,13 +1,6 @@
 import React from "react";
 import { Tab } from "@headlessui/react";
-import {
-  VBookmark,
-  VEthereum,
-  VFillHeart,
-  Vflash,
-  VTransaction,
-} from "@components/modules/__modules__/_vectors";
-import ByLising from "./ByListing";
+import ActivityByLising from "./ActivityByListing";
 import NotFound from "../module/NotFound";
 import ActivityFilters from "./ActivityFilters";
 
@@ -16,10 +9,10 @@ const ActivityContainer = () => {
     <div>
       <Tab.Group>
         <div className="flex justify-between min-md:flex-col">
-          <div className="w-full">
+          <div className="w-full pb-10">
             <Tab.Panels>
               <Tab.Panel>
-                <ByLising />
+                <ActivityByLising />
               </Tab.Panel>
               <Tab.Panel>
                 <NotFound content={"Purchases"} />

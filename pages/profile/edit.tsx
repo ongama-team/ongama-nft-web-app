@@ -1,7 +1,11 @@
 import EditProfile from "@components/EditProfilePage";
 
 const EditProfilePage = () => {
-  return <EditProfile />;
+  return (
+    <div className="dark:bg-darkPrimary h-screen mobile:h-fit">
+      <EditProfile />
+    </div>
+  );
 };
 
 export default EditProfilePage;

@@ -1,9 +1,23 @@
 import { atom } from "recoil";
 import { UserAccount } from "@lib/models/UserAccount";
+import { NFT, NFTData, NFTMetaData } from "@lib/models/GeneralModel";
 
 export const currentAccountState = atom<UserAccount | null>({
   key: "currentAccountState",
   default: null,
+});
+
+export const nftsState = atom<{
+  isLoading: boolean;
+  nfts: NFTData[] | [];
+  metadata?: NFTMetaData | null;
+}>({
+  key: "nftsState",
+  default: {
+    isLoading: true,
+    nfts: [],
+    metadata: null,
+  },
 });
 
 export const walletAddressAtom = atom({

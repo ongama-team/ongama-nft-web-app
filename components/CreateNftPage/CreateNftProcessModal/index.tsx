@@ -28,7 +28,7 @@ const CreateNftProcessModal = ({
 }: IProps) => {
   return (
     <div className="fixed bg-black bg-opacity-40 top-0 lef-0 bottom-0 right-0 w-full h-full z-30 flex justify-center items-center">
-      <div className="bg-white w-fit p-5 rounded-lg flex flex-col gap-5 mx-5">
+      <div className="bg-white w-fit p-5 rounded-lg flex flex-col gap-5 mx-5 dark:bg-darkPrimary dark:text-white">
         <div className="flex gap-3 items-center">
           {sendStorageFeeStatus === PENDING_STATUS ? (
             <VSpinner className="animate-spin text-blue-500 text-4xl" />
