@@ -19,7 +19,7 @@ const ConnectWalletBox = () => {
       onClick={closeWalletConnect}
       className={`${
         isWalletConnect && "hidden"
-      } z-10 h-full flex flex-col justify-center bg-white bg-opacity-40 items-center fixed top-0 left-0 right-0 bottom-0 backdrop-filter backdrop-blur-lg`}
+      } z-10 h-full flex flex-col justify-center bg-white dark:bg-darkPrimary bg-opacity-40 items-center fixed top-0 left-0 right-0 bottom-0 backdrop-filter backdrop-blur-lg`}
     >
       <div className="relative bottom-2 rounded-lg shadow-lg transition-all duration-300 ">
         <div className="absolute -top-5 -right-10 flex place-content-end mobile:-top-10 mobile:-right-0">
@@ -27,7 +27,7 @@ const ConnectWalletBox = () => {
             <CrossVector className="h-4 w-4 rotate-45" />
           </Button>
         </div>
-        <div className="bg-white pt-1 rounded-xl transform transition-all">
+        <div className="bg-white dark:bg-darkPrimary border dark:border-darkLight pt-1 rounded-xl transform transition-all">
           <ConnectWallets openWalletMenu />
         </div>
       </div>

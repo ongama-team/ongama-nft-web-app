@@ -22,14 +22,12 @@ import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 import { backendApiService } from "@lib/services/BackendApiService";
 import { UserAccount } from "@lib/models/UserAccount";
-import { useTheme } from "@components/context/ThemeProvider";
 import ShowWidget from "@components/modules/__modules__/ShowWidget";
 import useClickOutside from "@components/hooks/useClickOutside";
 import SwitchThemeButton from "./SwitchThemeButton";
 
 const Header = () => {
   const routes = useRouter();
-  const [isLightTheme, setIsLightTheme] = useState(true);
   const [isMenuModal, setIsMenuModal] = useState(false);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
@@ -38,22 +36,16 @@ const Header = () => {
   const [walletData, setWalletData] = useRecoilState(walletAddressAtom);
   const [isProfileMenu, setIsProfileMenu] = useRecoilState(profileMenuAtom);
   const { address } = walletData;
-  // const { setTheme, theme } = useTheme();
 
   const closeMenuModal = () => {
     setIsMenuModal(false);
   };
 
-  const openMenuModal = () => {
-    setIsMenuModal(true);
+  const toggleMenuModal = () => {
+    setIsMenuModal(!isMenuModal);
   };
 
   const outSideRef = useClickOutside(closeMenuModal);
-
-  // const toggleTheme = () => {
-  //   setIsLightTheme(!isLightTheme);
-  //   theme === "light" ? setTheme("dark") : setTheme("light");
-  // };
 
   const toggleWallets = () => {
     setIsWalletsDisplayed(!isWalletsDisplayed);
@@ -111,9 +103,8 @@ const Header = () => {
             </p>
           </Link>
         </div>
-        <div className="grid grid-cols-2 min-lg:flex min-lg:justify-start justify-center items-center w-full">
+        <div className="flex justify-center w-full items-center">
           <SearchInputBar />
-          <Menu />
         </div>
         <div className="flex items-center">
           <button className="border dark:text-white border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-lg:block hidden">
@@ -133,19 +124,9 @@ const Header = () => {
             Sign in
           </button>
           <SwitchThemeButton />
-          {/* <button
-            className="border border-gray-300 transition-all duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full dark:text-white"
-            onClick={toggleTheme}
-          >
-            {isLightTheme ? (
-              <MoonVector className="w-5 h-5" />
-            ) : (
-              <VSun className="w-5 h-5" />
-            )}
-          </button> */}
           <button
-            onClick={openMenuModal}
-            className="border border-gray-300 transition-all dark:text-white duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block hidden"
+            onClick={toggleMenuModal}
+            className="border border-gray-300 transition-all dark:text-white duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block "
           >
             <VMenu className="w-6 h-6" />
           </button>
@@ -166,28 +147,27 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <ShowWidget condition={isMenuModal}>
-        <div className="min-md:fixed min-md:z-40 hidden min-md:flex min-md:items-center min-md:backdrop-blur-sm bg-white dark:bg-darkPrimary/20 bg-opacity-50 mx-auto min-md:justify-center min-md:top-0 min-md:left-0 min-md:right-0 min-md:bottom-0 min-md:h-full min-md:w-full">
-          <div
-            ref={outSideRef}
-            className="bg-white dark:bg-darkPrimary h-[80%] w-[80%] rounded-lg shadow-xl p-4 flex justify-between"
-          >
-            <MenuList
-              walletAddress={
-                LocalStorage.getItem("ongame_signer-address") ||
-                currentAccount?.walletAddress ||
-                walletData.address
-              }
-              className="flex flex-col gap-4 text-2xl font-bold dark:text-white"
-              onDotVectorClick={() => null}
-              isShortMenu={false}
-            />
-            <div>
-              <SwitchThemeButton />
-            </div>
-          </div>
+      <div
+        className={`${
+          isMenuModal
+            ? "fixed translate-x-[200] transition-all"
+            : "fixed translate-x-[3000px] transition-all"
+        } top-16 mobile:top-20 left-0 right-14 bottom-0 z-20 py-5 mobile:py-0 ml-5`}
+      >
+        <div
+          ref={outSideRef}
+          className="flex flex-col relative h-fit justify-between w-96 mobile:w-full bg-white dark:bg-darkPrimary float-right ml-5 px-5 py-5 shadow-xl rounded-2xl border border-gray-200 dark:border-darkLight"
+        >
+          <MenuList
+            walletAddress={
+              LocalStorage.getItem("ongame_signer-address") ||
+              currentAccount?.walletAddress ||
+              walletData.address
+            }
+            className="flex flex-col gap-4 text-xl font-bold dark:text-white"
+          />
         </div>
-      </ShowWidget>
+      </div>
     </>
   );
 };

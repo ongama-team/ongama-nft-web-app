@@ -7,6 +7,10 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    gridTemplateColumns: {
+      "auto-fit": "repeat(auto-fit, minmax(20rem, 1fr))",
+      // "auto-fit": "repeat(auto-fit, minmax(16rem, 1fr)",
+    },
     colors: {
       ...colors,
       darkPrimary: "#041C32",

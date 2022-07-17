@@ -60,11 +60,12 @@ const NFTCard: FC<Props> = ({
             className="w-full h-full object-cover rounded-xl shadow-lg border-gray-400"
           />
         </ShowWidget>
+
         <div
           className={`
           ${
             isNFTCardOvered
-              ? "absolute top-0 left-0 right-0 bottom-0 w-full h-full transition-all bg-gradient-to-b from-black/50 rounded-xl text-sm "
+              ? "absolute top-0 left-0 right-0 bottom-0 w-full h-full flex-col justify-center items-center transition-all bg-gradient-to-b from-black/50 rounded-xl text-sm "
               : "hidden transition-all"
           }`}
         >
@@ -78,11 +79,11 @@ const NFTCard: FC<Props> = ({
           </div>
         </div>
       </section>
-      <section className="items-center">
+      <section className="items-center mt-7">
         <div className="flex justify-between items-center">
           <ShowWidget condition={!useAsPreview}>
             <div className="flex mr-1 items-center">
-              <h2 className="text-sm font-medium mt-2 text-gray-400">
+              <h2 className="text-sm font-bold mt-2 text-black dark:text-white">
                 {nft?.name}
               </h2>
               {nft?.owner.verified && (
@@ -102,6 +103,7 @@ const NFTCard: FC<Props> = ({
           </ShowWidget>
         </div>
       </section>
+
       <section className="h-[18%] flex items-center justify-between bg-slate-100 dark:bg-darkLight rounded-xl mt-2 py-2 px-3">
         <ShowWidget condition={!useAsPreview}>
           <div>
@@ -133,19 +135,19 @@ const NFTCard: FC<Props> = ({
           </span>
         </div>
       </section>
-      <ShowWidget condition={!useAsPreview}>
-        <div className={`w-full mt-3 ${!isBuyAvailable && "hidden"}`}>
+      <div className={`${!isBuyAvailable && "hidden"}`}>
+        <ShowWidget condition={!useAsPreview}>
           {!isAuction ? (
-            <button className="w-full py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-semibold">
+            <button className="w-full mt-2 py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-semibold">
               Buy Now
             </button>
           ) : (
-            <button className="w-full py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-semibold">
+            <button className="w-full mt-2 py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-semibold">
               Place a bid
             </button>
           )}
-        </div>
-      </ShowWidget>
+        </ShowWidget>
+      </div>
     </div>
   );
 };

@@ -7,7 +7,7 @@ const SubScribesContainer = () => {
 
   return (
     <>
-      <div className="border relative bg-white m-4 p-6 rounded-2xl max-h-[35rem] overflow-y-scroll w-[30rem] custom-scroll-bar">
+      <div className="border relative bg-white dark:bg-darkPrimary dark:border-darkLight m-4 p-6 rounded-2xl max-h-[35rem] overflow-y-scroll w-[30rem] custom-scroll-bar">
         <p className="text-2xl font-bold">followers</p>
         {staticImages.map((item, index) => {
           return (
@@ -24,10 +24,12 @@ const SubScribesContainer = () => {
                   <p className="font-bold text-lg w-40 text-ellipsis overflow-hidden whitespace-nowrap">
                     {item.name}
                   </p>
-                  <p className="font-medium text-stone-600">10 followers</p>
+                  <p className="font-medium text-stone-600 dark:text-gray-400">
+                    10 followers
+                  </p>
                 </div>
               </div>
-              <button className="w-full max-w-[100px] rounded-full transition-all bg-blue-500 hover:bg-blue-600 text-gray-100 font-medium">
+              <button className="w-full max-w-[100px] rounded-full transition-all font-bold bg-blue-500 hover:bg-blue-600 text-gray-100">
                 Follow
               </button>
             </div>

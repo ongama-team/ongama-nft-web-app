@@ -3,8 +3,8 @@ import React from "react";
 import cookieParser from "@lib/cookieParser";
 import { backendApiService } from "@lib/services/BackendApiService";
 
-function Profile() {
-  return <ProfileContainer />;
+function Profile({ user }) {
+  return <ProfileContainer searchedUserProfile={user} />;
 }
 
 export async function getServerSideProps(context: {

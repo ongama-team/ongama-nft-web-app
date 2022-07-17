@@ -26,7 +26,7 @@ const SearchInputBar = () => {
 
   return (
     <div
-      className={`w-[95%] pr-5 pl-3 mx-auto flex items-center bg-gray-100 dark:bg-darkLight dark:text-white rounded-full transition-all ease-in-out duration-300 hover:border px-5 border-gray-300 dark:border-darkPrimary ${
+      className={`w-[60%] pr-5 pl-3 mx-auto flex items-center bg-gray-100 dark:bg-darkLight dark:text-white rounded-full transition-all ease-in-out duration-300 hover:border px-5 border-gray-300 dark:border-darkPrimary ${
         isInputFocused && "bg-white shadow-md"
       } min-lg:hidden`}
     >
@@ -38,7 +38,7 @@ const SearchInputBar = () => {
         onBlur={onInputSearchBlur}
         value={inputValue}
         placeholder="Collections, items, user"
-        className="w-full py-2  bg-transparent placeholder:text-gray-500 outline-none px-2 font-ibmPlexSans "
+        className="w-full py-3  bg-transparent placeholder:text-gray-500 outline-none px-2 font-ibmPlexSans "
       />
       {inputValue && (
         <div onClick={cleanInputVlaue}>

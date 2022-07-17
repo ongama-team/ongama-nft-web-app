@@ -62,7 +62,7 @@ const ConnectWalletsModal = () => {
 
   return (
     <div>
-      <div className="text-center">
+      <div className="text-center dark:text-white">
         <p className="text-xl mt-6 font-medium font-ibmPlexSans">
           Sign in with your Wallet
         </p>
@@ -77,7 +77,7 @@ const ConnectWalletsModal = () => {
         >
           <div
             onClick={onConnectCoinBaseWallet}
-            className="flex space-y-3 hover:bg-gray-200 p-4 rounded-lg justify-center flex-col items-center"
+            className="flex space-y-3 hover:bg-gray-200 dark:hover:bg-darkLight p-4 rounded-lg justify-center flex-col items-center"
           >
             <CoinBaseVector className="h-12 w-12" />
             <label className="font-ibmPlexSans font-thin">Coin Base</label>
@@ -91,7 +91,7 @@ const ConnectWalletsModal = () => {
         >
           <div
             onClick={onConnectBrowserWallet}
-            className="flex space-y-3 hover:bg-gray-200 p-4 rounded-lg justify-center flex-col items-center"
+            className="flex space-y-3 hover:bg-gray-200 dark:hover:bg-darkLight p-4 rounded-lg justify-center flex-col items-center"
           >
             <MetaMaskVector className="h-12 w-12" />
             <label className="font-ibmPlexSans font-thin">MetaMask</label>
@@ -105,7 +105,7 @@ const ConnectWalletsModal = () => {
         >
           <div
             onClick={onConnectTrustOrConnectWallet}
-            className="flex space-y-3 hover:bg-gray-200 p-4 rounded-lg justify-center flex-col items-center"
+            className="flex space-y-3 hover:bg-gray-200 dark:hover:bg-darkLight p-4 rounded-lg justify-center flex-col items-center"
           >
             <TrustWalletVector className="h-12 w-12" />
             <label className="font-ibmPlexSans font-thin">Trust Wallet</label>
@@ -119,7 +119,7 @@ const ConnectWalletsModal = () => {
         >
           <div
             onClick={onConnectTrustOrConnectWallet}
-            className="flex space-y-3 hover:bg-gray-200 p-4 rounded-lg justify-center flex-col items-center"
+            className="flex space-y-3 hover:bg-gray-200 dark:hover:bg-darkLight p-4 rounded-lg justify-center flex-col items-center"
           >
             <div className="flex justify-center self-center flex-col">
               <WalletConnectVector className="h-12 w-12 flex self-center" />

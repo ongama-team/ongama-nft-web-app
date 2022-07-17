@@ -1,3 +1,4 @@
+import useClickOutside from "@components/hooks/useClickOutside";
 import NFTCard from "@components/modules/__modules__/Card/NFTCard";
 import NFTCardFallback from "@components/modules/__modules__/NFTCardFallback";
 import ShowWidget from "@components/modules/__modules__/ShowWidget";
@@ -13,6 +14,9 @@ const ExploreNFTs = () => {
   const [isSortModal, setIsSortModal] = useState(false);
   const currentNfts = useRecoilValue(nftsState);
   const { nfts, metadata, isLoading } = currentNfts;
+  const blockchainModalRef = useClickOutside(() => setIsBlockchainModal(false));
+  const priceRangeModalRef = useClickOutside(() => setIsPriceRangeModal(false));
+  const sortModalRef = useClickOutside(() => setIsSortModal(false));
 
   const toggleBlockchainModal = () => {
     setIsBlockchainModal(!isBlockchainModal);
@@ -35,7 +39,7 @@ const ExploreNFTs = () => {
           Explore NFTs
         </h2>
         <ShowWidget condition={!isLoading}>
-          <div className="flex justify-between items-center mx-5 dark:text-white font-bold relative mobile:w-[95%] overflow-x-auto">
+          <div className="flex justify-between mobile:justify-center items-center mx-5 dark:text-white font-bold relative mobile:w-[95%]">
             <div className="flex gap-5 relative">
               <button
                 onClick={toggleBlockchainModal}
@@ -50,22 +54,20 @@ const ExploreNFTs = () => {
                 Price Range
               </button>
               <ShowWidget condition={isBlockchainModal}>
-                <div className="absolute top-14 bg-white dark:bg-darkPrimary z-20 w-full rounded-lg shadow-lg transition-all">
+                <div
+                  ref={blockchainModalRef}
+                  className="absolute top-14 bg-white dark:bg-darkPrimary border border-gray-200 dark:border-darkLight z-20 w-full rounded-lg shadow-lg transition-all"
+                >
                   <p className="py-5 px-2 flex justify-between items-center">
                     Polygon <VSingleDot className="text-green-600" />
                   </p>
-                  <div className="flex gap-3">
-                    <button className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg cursor-not-allowed">
-                      Clear
-                    </button>
-                    <button className="w-full py-2 bg-blue-600 text-white m-1 rounded-lg cursor-not-allowed">
-                      Apply
-                    </button>
-                  </div>
                 </div>
               </ShowWidget>
               <ShowWidget condition={isPriceRangeModal}>
-                <div className="absolute top-14 left-28 bg-white dark:bg-darkPrimary z-20 w-full rounded-lg shadow-lg transition-all">
+                <div
+                  ref={priceRangeModalRef}
+                  className="absolute top-14 left-28 bg-white dark:bg-darkPrimary border border-gray-200 dark:border-darkLight z-20 w-full rounded-lg shadow-lg transition-all"
+                >
                   <p className="py-5 px-2 flex justify-between items-center">
                     MATIC
                   </p>
@@ -73,19 +75,19 @@ const ExploreNFTs = () => {
                     <input
                       type="number"
                       placeholder="from"
-                      className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg cursor-not-allowed px-2 outline-none transition-all focus:shadow-md  focus:bg-white dark:focus:bg-darkLight"
+                      className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg px-2 outline-none transition-all focus:shadow-md  focus:bg-white dark:focus:bg-darkLight"
                     />
                     <input
                       type="number"
                       placeholder="to"
-                      className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg cursor-not-allowed px-2 outline-none transition-all focus:shadow-md  focus:bg-white dark:focus:bg-darkLight"
+                      className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg px-2 outline-none transition-all focus:shadow-md  focus:bg-white dark:focus:bg-darkLight"
                     />
                   </div>
                   <div className="flex gap-1">
-                    <button className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg cursor-not-allowed">
+                    <button className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg">
                       Clear
                     </button>
-                    <button className="w-full py-2 bg-blue-600 text-white m-1 rounded-lg cursor-not-allowed">
+                    <button className="w-full py-2 bg-blue-600 text-white m-1 rounded-lg">
                       Apply
                     </button>
                   </div>
@@ -99,7 +101,10 @@ const ExploreNFTs = () => {
               Filter & Sort
             </button>
             <ShowWidget condition={isSortModal}>
-              <div className="absolute top-14 bg-white dark:bg-darkPrimary z-20 w-60 right-0 rounded-lg shadow-lg transition-all p-4">
+              <div
+                ref={sortModalRef}
+                className="absolute top-14 bg-white border border-gray-200 dark:border-darkLight dark:bg-darkPrimary z-20 w-60 right-0 rounded-lg shadow-lg transition-all p-4"
+              >
                 <p className="py-5 px-2 flex justify-between items-center cursor-pointer hover:bg-gray-200 hover:dark:bg-darkLight rounded-lg transition-all">
                   DESC <VSingleDot className="text-green-600" />
                 </p>
@@ -107,10 +112,10 @@ const ExploreNFTs = () => {
                   ASC
                 </p>
                 <div className="flex gap-3 mt-3">
-                  <button className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg cursor-not-allowed">
+                  <button className="w-full py-2 bg-gray-200 dark:bg-gray-500 m-1 rounded-lg">
                     Clear
                   </button>
-                  <button className="w-full py-2 bg-blue-600 text-white m-1 rounded-lg cursor-not-allowed">
+                  <button className="w-full py-2 bg-blue-600 text-white m-1 rounded-lg">
                     Apply
                   </button>
                 </div>
@@ -119,7 +124,7 @@ const ExploreNFTs = () => {
           </div>
         </ShowWidget>
 
-        <div className="flex flex-wrap mx-5 items-center mobile:justify-center gap-3 h-fit">
+        <div className="grid grid-cols-auto-fit gap-3 mx-5 justify-center h-fit">
           <ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>
             {nfts.map((nft: NFTData, index: React.Key | null | undefined) => {
               return <NFTCard key={index} nft={nft} likes={0} />;

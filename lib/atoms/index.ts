@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 import { UserAccount } from "@lib/models/UserAccount";
-import { NFT, NFTData, NFTMetaData } from "@lib/models/GeneralModel";
+import { NFTData, NFTMetaData } from "@lib/models/GeneralModel";
 
 export const currentAccountState = atom<UserAccount | null>({
   key: "currentAccountState",
