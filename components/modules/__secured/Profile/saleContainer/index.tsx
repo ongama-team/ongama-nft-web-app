@@ -17,7 +17,14 @@ export const SaleContainer = ({ nfts, isLoading, metadata }: IProps) => {
     <div className="flex flex-wrap justify-start mobile:justify-center my-5 gap-3">
       <ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>
         {listedNfts.map((nft: NFTData, index: React.Key | null | undefined) => {
-          return <NFTCard key={index} nft={nft} isBuyAvailable={false} />;
+          return (
+            <NFTCard
+              key={index}
+              nft={nft}
+              isBuyAvailable={false}
+              isEditable={true}
+            />
+          );
         })}
       </ShowWidget>
 

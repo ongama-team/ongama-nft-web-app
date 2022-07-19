@@ -61,6 +61,23 @@ class Web3Actions {
       return null;
     }
   }
+
+  public async updateNftPrice(tokenUri: string, newPrice: number) {
+    const formatedPrice = web3Instance.web3Instance.utils.toWei(
+      `${newPrice}`,
+      "ether"
+    );
+
+    try {
+      const isUpdated = await web3Instance
+        .contract()
+        .updatePrice(tokenUri, formatedPrice);
+      return isUpdated;
+    } catch (err) {
+      console.log("update price failed", err);
+      return false;
+    }
+  }
 }
 
 const web3Actions = new Web3Actions();

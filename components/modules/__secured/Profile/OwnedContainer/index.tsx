@@ -18,7 +18,12 @@ const OwnedContainer = ({ nfts, isLoading, metadata }: IProps) => {
         {nfts.map((nft: NFTData, index: React.Key | null | undefined) => {
           return (
             <div key={index}>
-              <NFTCard key={index} nft={nft} isBuyAvailable={false} />
+              <NFTCard
+                key={index}
+                nft={nft}
+                isBuyAvailable={false}
+                isEditable={true}
+              />
             </div>
           );
         })}
