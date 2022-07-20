@@ -62,16 +62,20 @@ class Web3Actions {
     }
   }
 
-  public async updateNftPrice(tokenUri: string, newPrice: number) {
+  public async updateNftPrice(tokenId: number, newPrice: number) {
+    console.log("new price", newPrice);
     const formatedPrice = web3Instance.web3Instance.utils.toWei(
       `${newPrice}`,
       "ether"
     );
 
+    console.log("formated price", formatedPrice, "token is", tokenId);
+
     try {
       const isUpdated = await web3Instance
         .contract()
-        .updatePrice(tokenUri, formatedPrice);
+        .updatePrice(tokenId, formatedPrice);
+      console.log("is updated", isUpdated);
       return isUpdated;
     } catch (err) {
       console.log("update price failed", err);

@@ -30,6 +30,7 @@ import { UserAccount } from "@lib/models/UserAccount";
 import { NFTData, NFTMetaData } from "@lib/models/GeneralModel";
 import { backendApiService } from "@lib/services/BackendApiService";
 import ProfileReportOption from "./module/ProfileReportOptions";
+import ShowWidget from "@components/modules/__modules__/ShowWidget";
 
 interface IProps {
   searchedUserProfile: UserAccount;
@@ -87,7 +88,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
           isLoading: false,
         });
       })();
-  }, [searchedUserProfile, searchedUserProfile.walletAddress]);
+  }, [searchedUserProfile]);
 
   const onEditProfile = () => {
     router.push("/profile/edit");
