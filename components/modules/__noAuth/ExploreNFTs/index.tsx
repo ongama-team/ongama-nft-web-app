@@ -130,11 +130,6 @@ const ExploreNFTs = () => {
         </ShowWidget>
 
         <div className="grid grid-cols-auto-fit gap-3 mx-5 justify-center h-fit">
-          {/*<ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>*/}
-          {/*  {nfts.map((nft: NFTData, index: React.Key | null | undefined) => {*/}
-          {/*    return <NFTCard key={index} nft={nft} likes={0} />;*/}
-          {/*  })}*/}
-          {/*</ShowWidget>*/}
           <ListViewBuilder
             items={nfts}
             renderItem={(item) => (
