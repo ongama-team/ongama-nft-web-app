@@ -7,30 +7,31 @@ import NotFound from "../module/NotFound";
 import ListViewBuilder from "@components/modules/__modules__/ListViewBuilder";
 import { List } from "antd";
 import useNfTs from "@components/hooks/useNFTs";
+import { UserAccount } from "@lib/models/UserAccount";
 
 interface IProps {
   nfts: NFTData[];
   isLoading: boolean;
   metadata: NFTMetaData;
-  walletAddress: string;
+  searchedUserProfile: UserAccount;
 }
 
 const CreatedContainer = ({
   nfts,
   isLoading,
   metadata,
-  walletAddress,
+  searchedUserProfile,
 }: IProps) => {
   const createdNFts = nfts.filter(
-    (nft) => nft.creatorAddress === walletAddress
+    (nft) => nft.creatorAddress === searchedUserProfile.walletAddress
   );
 
   const { onLoadMore, shouldShowLoadMoreButton } = useNfTs();
 
   return (
-    <div className="flex flex-wrap justify-start mobile:justify-center my-5 gap-3">
+    <div className="flex flex-wrap justify-center mobile:justify-center my-5 gap-3">
       <ListViewBuilder
-        items={nfts}
+        items={createdNFts}
         renderItem={(item) => (
           <List.Item>
             <NFTCard nft={item} />
@@ -42,7 +43,7 @@ const CreatedContainer = ({
         loadingMore={false}
         onLoadMore={onLoadMore}
       />
-      <ShowWidget condition={createdNFts.length === 0}>
+      <ShowWidget condition={createdNFts.length === 0 && !isLoading}>
         <NotFound content="Created NFTs" />
       </ShowWidget>
     </div>

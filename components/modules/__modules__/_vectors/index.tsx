@@ -19,6 +19,7 @@ import {
   HiChevronRight as VChevronRight,
   HiChevronLeft as VChevronLeft,
   HiOutlineLink as VLink,
+  HiOutlineFilter as VFilter,
 } from "react-icons/hi";
 import {
   FaEthereum as VEthereum,
@@ -82,4 +83,5 @@ export {
   VSpinner,
   VCheckFill,
   VSingleDot,
+  VFilter,
 };

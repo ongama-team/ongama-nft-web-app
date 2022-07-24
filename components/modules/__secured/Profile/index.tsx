@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Block,
   Collections,
@@ -87,7 +87,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
           isLoading: false,
         });
       })();
-  }, [searchedUserProfile, searchedUserProfile.walletAddress]);
+  }, []);
 
   const onEditProfile = () => {
     router.push("/profile/edit");
@@ -97,7 +97,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
     <div className="dark:bg-darkPrimary dark:text-white pt-24">
       <Header />
       <ProfileMenu />
-      <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
+      <div className="lg:mx-[5rem] xl:mx-[10rem] mx-[1rem]">
         <div>
           <AvatarAndCoverCard
             isEditable={isCurrentConnectedUserProfile ? true : false}
@@ -199,6 +199,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   nfts={searchedUserProfileNfts.nfts}
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
+                  searchedUserProfile={searchedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
@@ -206,6 +207,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   nfts={searchedUserProfileNfts.nfts}
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
+                  searchedUserProfile={searchedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
@@ -213,7 +215,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   nfts={searchedUserProfileNfts.nfts}
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
-                  walletAddress={searchedUserProfile.walletAddress}
+                  searchedUserProfile={searchedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">

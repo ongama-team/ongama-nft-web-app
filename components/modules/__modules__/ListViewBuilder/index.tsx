@@ -38,8 +38,8 @@ export const ListView: FC<IListView> = ({
             <div className={!loadingMore ? "flex justify-center" : ""}>
               {(!loadingMore && (
                 <LoadMore
-                  onLoadMore={onLoadMore}
-                  showLoadMore={showLoadMoreButton}
+                  onLoadMore={onLoadMore!}
+                  showLoadMore={showLoadMoreButton!}
                   size={items && items.length}
                 />
               )) || (
