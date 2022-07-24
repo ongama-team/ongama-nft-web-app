@@ -43,7 +43,6 @@ class Web3Actions {
     }
   }
 
-  //--------------------- this's the function that handles the mint nft from smart contract ------//
   public async mintNft(tokenUri: string, address: string, price: number) {
     const formatedPrice = web3Instance.web3Instance.utils.toWei(
       `${price}`,
