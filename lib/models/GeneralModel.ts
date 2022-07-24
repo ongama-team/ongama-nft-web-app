@@ -53,13 +53,13 @@ export type NFTData = {
   updatedAt: Date | string;
 };
 
-export interface NFT {
+export interface NftCardData {
   category?: string;
   oldDropID?: string;
-  dropId?: number;
+  dropId?: number | null;
   tokenUri: string;
   description: string;
-  fileSize: number;
+  fileSize: number | null;
   fileType: string;
   name: string;
   ownerAddress: string;
@@ -67,8 +67,28 @@ export interface NFT {
   storageFee: number;
   storageFeeTransaction: string;
   url?: string;
-  urlCompressed?: string;
+  urlCompressed?: string | null;
   urlMedium?: string;
-  urlThumbnail?: string;
+  urlThumbnail?: string | null;
   owner?: UserAccount;
+}
+
+export function NftModelToCardData(nftModel: NFTData): NftCardData {
+  const nftCardData: NftCardData = {
+    dropId: nftModel.dropId,
+    tokenUri: nftModel.tokenUri,
+    description: nftModel.description,
+    fileSize: nftModel.fileSize,
+    fileType: nftModel.fileType,
+    name: nftModel.name,
+    ownerAddress: nftModel.ownerAddress,
+    price: nftModel.price,
+    storageFee: nftModel.storageFee,
+    storageFeeTransaction: nftModel.storageFeeTransaction,
+    url: nftModel.url,
+    urlCompressed: nftModel.urlCompressed,
+    urlThumbnail: nftModel.urlThumbnail,
+    owner: nftModel.owner,
+  };
+  return nftCardData;
 }

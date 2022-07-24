@@ -5,8 +5,11 @@ import ShowWidget from "@components/modules/__modules__/ShowWidget";
 import { VSingleDot } from "@components/modules/__modules__/_vectors";
 import { nftsState } from "@lib/atoms";
 import { NFTData } from "@lib/models/GeneralModel";
-import React, { useState } from "react";
+import { List } from "antd";
+import React, { useState, useRef } from "react";
 import { useRecoilValue } from "recoil";
+import ListViewBuilder from "@components/modules/__modules__/ListViewBuilder";
+import useNfTs from "@components/hooks/useNFTs";
 
 const ExploreNFTs = () => {
   const [isBlockchainModal, setIsBlockchainModal] = useState(false);
@@ -17,6 +20,8 @@ const ExploreNFTs = () => {
   const blockchainModalRef = useClickOutside(() => setIsBlockchainModal(false));
   const priceRangeModalRef = useClickOutside(() => setIsPriceRangeModal(false));
   const sortModalRef = useClickOutside(() => setIsSortModal(false));
+
+  const { onLoadMore, shouldShowLoadMoreButton } = useNfTs();
 
   const toggleBlockchainModal = () => {
     setIsBlockchainModal(!isBlockchainModal);
@@ -125,11 +130,24 @@ const ExploreNFTs = () => {
         </ShowWidget>
 
         <div className="grid grid-cols-auto-fit gap-3 mx-5 justify-center h-fit">
-          <ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>
-            {nfts.map((nft: NFTData, index: React.Key | null | undefined) => {
-              return <NFTCard key={index} nft={nft} likes={0} />;
-            })}
-          </ShowWidget>
+          {/*<ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>*/}
+          {/*  {nfts.map((nft: NFTData, index: React.Key | null | undefined) => {*/}
+          {/*    return <NFTCard key={index} nft={nft} likes={0} />;*/}
+          {/*  })}*/}
+          {/*</ShowWidget>*/}
+          <ListViewBuilder
+            items={nfts}
+            renderItem={(item) => (
+              <List.Item>
+                <NFTCard nft={item} />
+              </List.Item>
+            )}
+            hasMore={false}
+            showLoadMoreButton={shouldShowLoadMoreButton}
+            loading={currentNfts.isLoading}
+            loadingMore={false}
+            onLoadMore={onLoadMore}
+          />
         </div>
       </section>
     </div>

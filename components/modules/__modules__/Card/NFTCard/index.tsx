@@ -43,7 +43,7 @@ const NFTCard: FC<Props> = ({
     <div
       onMouseOver={onOverNFTCard}
       onMouseOut={onOverNFTCardOut}
-      className="h-fit w-80 mobile:w-full transition-all flex-none border hover:border-2 border-slate-200 dark:border-gray-500 relative p-2 mobile:mr-0 rounded-xl snap-center"
+      className="h-fit w-fit mobile:w-full transition-all flex-none border hover:border-2 border-slate-200 dark:border-gray-500 relative p-2 mobile:mr-0 rounded-xl snap-center"
     >
       <section className="h-72 relative">
         <ShowWidget condition={!useAsPreview}>
