@@ -30,16 +30,20 @@ const ChangePriceModal = ({ onCloseChangePriceModal, nft }: IProps) => {
   };
 
   const onUpdateNftPrice = async () => {
+    console.log("new price", newPrice);
     setUpdateProcessing(true);
+
     const isUpdated = await web3Actions.updateNftPrice(
-      nft.tokenID as number,
+      Number(nft.tokenID),
       newPrice
     );
+
     setUpdateProcessing(false);
 
     if (isUpdated) {
       setUpdatefailed(false);
       onCloseChangePriceModal();
+
       nft.price = newPrice;
     } else {
       setUpdatefailed(true);
@@ -91,8 +95,8 @@ const ChangePriceModal = ({ onCloseChangePriceModal, nft }: IProps) => {
         <div className="flex flex-col gap-3 pt-5">
           <button
             onClick={onUpdateNftPrice}
-            disabled={newPrice === 0}
-            className="bg-blue-500 py-3 rounded-lg flex justify-center items-center text-white font-bold hover:bg-blue-600 transition-all disabled:cursor-not-allowed disabled:bg-opacity-50"
+            disabled={newPrice === 0 || updateProcessing}
+            className="bg-blue-500 py-3 rounded-lg flex justify-center items-center text-white font-bold hover:bg-blue-600 transition-all disabled:cursor-not-allowed disabled:bg-opacity-50 disabled:hover:bg-blue-500 disabled:hover:cursor-not-allowed"
           >
             {updateProcessing ? (
               <VSpinner className="h-6 w-6 animate-spin" />
