@@ -4,7 +4,6 @@ import {
   Block,
   Collections,
   DotsVector,
-  Ethereum,
   VShare,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
@@ -25,18 +24,71 @@ import OwnedContainer from "./OwnedContainer";
 import CreatedContainer from "./CreatedContainer";
 import ActivityContainer from "./ActivityContainer";
 import { useRouter } from "next/router";
-import truncateAddress from "@lib/helper/truncateAddress";
 import SubScribesContainer from "./module/Subscribes";
 import CopingAddressCard from "@components/modules/__modules__/Card/CopingAddressCard";
+import { UserAccount } from "@lib/models/UserAccount";
+import { NFTData, NFTMetaData } from "@lib/models/GeneralModel";
+import { backendApiService } from "@lib/services/BackendApiService";
+import ProfileReportOption from "./module/ProfileReportOptions";
+import ShowWidget from "@components/modules/__modules__/ShowWidget";
 
-function ProfileContainer() {
+interface IProps {
+  searchedUserProfile: UserAccount;
+}
+
+function ProfileContainer({ searchedUserProfile }: IProps) {
   const router = useRouter();
   const connectedWallet = useRecoilValue(walletAddressAtom);
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
   const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
-  const currentUser = useRecoilValue(currentAccountState);
+  const currentConnectedUser = useRecoilValue(currentAccountState);
+  const [isCurrentConnectedUserProfile, setIsCurrentConnectUserProfile] =
+    useState(true);
+
+  const [searchedUserProfileNfts, setSearchedUserProfileNFts] = useState<{
+    nfts: NFTData[];
+    metadata: NFTMetaData | null;
+    isLoading: boolean;
+  }>({
+    nfts: [],
+    isLoading: true,
+    metadata: null,
+  });
+
+  const [isPageReportModal, setIsPageReportModal] = useState(false);
+
+  useEffect(() => {
+    if (currentConnectedUser && searchedUserProfile) {
+      currentConnectedUser?.walletAddress === searchedUserProfile.walletAddress
+        ? setIsCurrentConnectUserProfile(true)
+        : setIsCurrentConnectUserProfile(false);
+    }
+  }, [
+    currentConnectedUser,
+    currentConnectedUser?.walletAddress,
+    searchedUserProfile,
+  ]);
+
+  useEffect(() => {
+    if (searchedUserProfile)
+      (async () => {
+        setSearchedUserProfileNFts({
+          ...searchedUserProfileNfts,
+          isLoading: true,
+        });
+        const response = await backendApiService.findNFts({
+          walletAddress: searchedUserProfile.walletAddress,
+        });
+        console.log("nfts", response);
+        setSearchedUserProfileNFts({
+          nfts: response.nfts,
+          metadata: response.meta,
+          isLoading: false,
+        });
+      })();
+  }, [searchedUserProfile]);
 
   const onEditProfile = () => {
     router.push("/profile/edit");
@@ -48,23 +100,31 @@ function ProfileContainer() {
       <ProfileMenu />
       <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
         <div>
-          <AvatarAndCoverCard isEditable={true} />
+          <AvatarAndCoverCard
+            isEditable={isCurrentConnectedUserProfile ? true : false}
+          />
         </div>
         <div className="mx-auto max-w-xs mt-4">
           <p className="text-center text-3xl font-bold">
-            {currentUser?.username}
+            {isCurrentConnectedUserProfile
+              ? currentConnectedUser?.username
+              : searchedUserProfile.username}
           </p>
           <div className="flex justify-center mt-4 items-center space-x-6">
             <CopingAddressCard
               walletAddress={
-                currentUser?.walletAddress || connectedWallet.address
+                isCurrentConnectedUserProfile
+                  ? currentConnectedUser?.walletAddress ||
+                    connectedWallet.address
+                  : searchedUserProfile.walletAddress
               }
             />
-            <button className="w-[80px] p-1 font-bold text-xs rounded-full border-2 border-gray-300">
-              +1 more
-            </button>
           </div>
-          <p className="text-center mt-4 font-bold">{currentUser?.userBio}</p>
+          <p className="text-center mt-4 font-bold">
+            {isCurrentConnectedUserProfile
+              ? currentConnectedUser?.userBio
+              : searchedUserProfile.userBio}
+          </p>
           <div className="flex relative space-x-4 mt-4 justify-center">
             <p
               className="hover:cursor-pointer text-gray-600 hover:text-gray-900 font-semibold transition-all"
@@ -80,22 +140,38 @@ function ProfileContainer() {
             </p>
           </div>
           <div className="flex relative justify-center gap-3 mt-4">
+            {isCurrentConnectedUserProfile ? (
+              <button
+                onClick={onEditProfile}
+                className="px-6 py-2 rounded-full font-bold border-gray-300 border hover:bg-gray-200 dark:hover:text-darkPrimary"
+              >
+                Edit
+              </button>
+            ) : (
+              <button className="px-6 py-2 rounded-full font-bold border-gray-300 border hover:bg-gray-200 dark:hover:text-darkPrimary">
+                Follow
+              </button>
+            )}
+            {isCurrentConnectedUserProfile && (
+              <button
+                onClick={() => setIsShareOpen(!isShareOpen)}
+                disabled={isShareOpen ? false : true}
+                className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border disabled:opacity-50 dark:hover:text-darkPrimary"
+              >
+                <VShare className="w-4 h-4 opacity-75" />
+              </button>
+            )}
             <button
-              onClick={onEditProfile}
-              className="px-6 py-2 rounded-full font-bold border-gray-300 border hover:bg-gray-200 dark:hover:text-darkPrimary"
+              onClick={() => setIsPageReportModal(true)}
+              className="px-4 py-2 rounded-full border-gray-300 border hover:bg-gray-200 dark:hover:text-darkPrimary"
             >
-              Edit
-            </button>
-            <button
-              onClick={() => setIsShareOpen(!isShareOpen)}
-              disabled={isShareOpen ? false : true}
-              className="hover:bg-gray-200 px-4 py-2 rounded-full border-gray-300 border disabled:opacity-50 dark:hover:text-darkPrimary"
-            >
-              <VShare className="w-4 h-4 opacity-75" />
-            </button>
-            <button className="px-4 py-2 rounded-full border-gray-300 border hover:bg-gray-200 dark:hover:text-darkPrimary">
               <DotsVector className="w-4 h-4" />
             </button>
+            <ProfileReportOption
+              isPageReport={!isPageReportModal}
+              setIsPageReport={setIsPageReportModal}
+              isCurrentConnectedUserProfile={isCurrentConnectedUserProfile}
+            />
             <ShareContainer isShareOpen={isShareOpen} />
           </div>
         </div>
@@ -120,13 +196,26 @@ function ProfileContainer() {
                 </div>
               </div>
               <Tab.Panel className="pb-10">
-                <SaleContainer />
+                <SaleContainer
+                  nfts={searchedUserProfileNfts.nfts}
+                  metadata={searchedUserProfileNfts.metadata!}
+                  isLoading={searchedUserProfileNfts.isLoading}
+                />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
-                <OwnedContainer />
+                <OwnedContainer
+                  nfts={searchedUserProfileNfts.nfts}
+                  metadata={searchedUserProfileNfts.metadata!}
+                  isLoading={searchedUserProfileNfts.isLoading}
+                />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
-                <CreatedContainer />
+                <CreatedContainer
+                  nfts={searchedUserProfileNfts.nfts}
+                  metadata={searchedUserProfileNfts.metadata!}
+                  isLoading={searchedUserProfileNfts.isLoading}
+                  walletAddress={searchedUserProfile.walletAddress}
+                />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
                 <ActivityContainer />

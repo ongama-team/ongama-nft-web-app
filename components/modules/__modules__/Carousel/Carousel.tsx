@@ -40,7 +40,7 @@ const Carousel: FC<Props> = ({ children, canBeDisabled = false }: Props) => {
       </button>
 
       <div
-        className={`overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory ${
+        className={`overflow-x-auto w-full scrollbar-hide scroll-smooth snap-x snap-mandatory ${
           canBeDisabled && "mobile:mx-5"
         }`}
         ref={scrollContainer}

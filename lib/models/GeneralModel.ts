@@ -6,8 +6,8 @@ export interface SignResult {
 }
 
 export interface IGetRequestNFTsParams {
-  limit: number;
-  page: number;
+  limit?: number;
+  page?: number;
   minPrice?: number;
   maxPrice?: number;
   sortField?: string;

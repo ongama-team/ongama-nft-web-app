@@ -34,17 +34,19 @@ const LandingPage = () => {
     <>
       <Header />
       <Presentation />
-      <TopCollection />
+      {/* <TopCollection /> */}
       <TopSellers />
       <HotCollections />
-      <HotBids />
-      <LiveAuctions />
+      {/* <HotBids /> */}
+      {/* <LiveAuctions /> */}
       <ProfileMenu />
       <ConnectWalletBox />
-      <TrendingNFTs />
+      {/* <TrendingNFTs /> */}
       <ExploreNFTs />
     </>
   );
 };
+
+/* -------------- commented components are temporarily unavailable  ------------------- */
 
 export default LandingPage;
