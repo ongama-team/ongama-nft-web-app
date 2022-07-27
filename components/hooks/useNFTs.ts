@@ -46,8 +46,6 @@ const useNfTs = () => {
       ...state,
       isLoading: false,
     }));
-
-    console.log("onLoadMore");
   };
 
   return { shouldShowLoadMoreButton, onLoadMore };

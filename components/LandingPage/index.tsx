@@ -21,7 +21,7 @@ const LandingPage = () => {
     (async () => {
       setNfts({ ...nfts, isLoading: true });
       const response = await backendApiService.findNFts();
-      console.log("nfts", response);
+
       setNfts({
         nfts: response.nfts,
         metadata: response.meta,

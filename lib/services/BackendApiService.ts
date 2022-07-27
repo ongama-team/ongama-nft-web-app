@@ -36,7 +36,6 @@ class BackendApiService {
       params,
     });
 
-    console.log("reponse in services", data);
     return {
       nfts: data.nfts as NFTData[],
       meta: data.meta as NFTMetaData,

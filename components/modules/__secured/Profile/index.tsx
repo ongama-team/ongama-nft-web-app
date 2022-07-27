@@ -81,7 +81,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
         const response = await backendApiService.findNFts({
           walletAddress: searchedUserProfile.walletAddress,
         });
-        console.log("nfts", response);
+
         setSearchedUserProfileNFts({
           nfts: response.nfts,
           metadata: response.meta,
