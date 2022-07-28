@@ -201,6 +201,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
                   searchedUserProfile={searchedUserProfile}
+                  isCurrentconnectedUser={isCurrentConnectedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
@@ -209,6 +210,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
                   searchedUserProfile={searchedUserProfile}
+                  isCurrentconnectedUser={isCurrentConnectedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
@@ -217,6 +219,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
                   searchedUserProfile={searchedUserProfile}
+                  isCurrentconnectedUser={isCurrentConnectedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">

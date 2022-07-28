@@ -14,9 +14,15 @@ interface IProps {
   isLoading: boolean;
   metadata: NFTMetaData;
   searchedUserProfile: UserAccount;
+  isCurrentconnectedUser: boolean;
 }
 
-const OwnedContainer = ({ nfts, isLoading, searchedUserProfile }: IProps) => {
+const OwnedContainer = ({
+  nfts,
+  isLoading,
+  searchedUserProfile,
+  isCurrentconnectedUser,
+}: IProps) => {
   const { onLoadMore, shouldShowLoadMoreButton } = useNfTs();
 
   const ownedNfts = nfts.filter(
@@ -29,7 +35,11 @@ const OwnedContainer = ({ nfts, isLoading, searchedUserProfile }: IProps) => {
         items={ownedNfts}
         renderItem={(item) => (
           <List.Item>
-            <NFTCard nft={item} />
+            <NFTCard
+              nft={item}
+              isBuyAvailable={isCurrentconnectedUser ? false : true}
+              isEditable={isCurrentconnectedUser ? true : false}
+            />
           </List.Item>
         )}
         hasMore={false}

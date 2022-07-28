@@ -14,6 +14,7 @@ interface IProps {
   isLoading: boolean;
   metadata: NFTMetaData;
   searchedUserProfile: UserAccount;
+  isCurrentconnectedUser: boolean;
 }
 
 export const SaleContainer = ({
@@ -21,6 +22,7 @@ export const SaleContainer = ({
   isLoading,
   metadata,
   searchedUserProfile,
+  isCurrentconnectedUser,
 }: IProps) => {
   const listedNfts = nfts.filter(
     (nft) =>
@@ -35,7 +37,11 @@ export const SaleContainer = ({
         items={listedNfts}
         renderItem={(item) => (
           <List.Item>
-            <NFTCard nft={item} />
+            <NFTCard
+              nft={item}
+              isBuyAvailable={isCurrentconnectedUser ? false : true}
+              isEditable={isCurrentconnectedUser ? true : false}
+            />
           </List.Item>
         )}
         hasMore={false}

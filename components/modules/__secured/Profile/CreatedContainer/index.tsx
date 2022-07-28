@@ -14,6 +14,7 @@ interface IProps {
   isLoading: boolean;
   metadata: NFTMetaData;
   searchedUserProfile: UserAccount;
+  isCurrentconnectedUser: boolean;
 }
 
 const CreatedContainer = ({
@@ -21,6 +22,7 @@ const CreatedContainer = ({
   isLoading,
   metadata,
   searchedUserProfile,
+  isCurrentconnectedUser,
 }: IProps) => {
   const createdNFts = nfts.filter(
     (nft) => nft.creatorAddress === searchedUserProfile.walletAddress
@@ -34,7 +36,11 @@ const CreatedContainer = ({
         items={createdNFts}
         renderItem={(item) => (
           <List.Item>
-            <NFTCard nft={item} />
+            <NFTCard
+              nft={item}
+              isBuyAvailable={isCurrentconnectedUser ? false : true}
+              isEditable={isCurrentconnectedUser ? true : false}
+            />
           </List.Item>
         )}
         hasMore={false}
