@@ -9,6 +9,7 @@ import ShowWidget from "@components/modules/__modules__/ShowWidget";
 import ListViewBuilder from "@components/modules/__modules__/ListViewBuilder";
 import { List } from "antd";
 import useNfTs from "@components/hooks/useNFTs";
+import NotFound from "@components/modules/__secured/Profile/module/NotFound";
 
 const Items = () => {
   const currentNfts = useRecoilValue(nftsState);
@@ -19,7 +20,8 @@ const Items = () => {
   return (
     <div>
       <div className="flex flex-wrap justify-center my-5 gap-3">
-        <ListViewBuilder
+        <NotFound content={"Drop NFTs"} />
+        {/* <ListViewBuilder
           items={nfts}
           renderItem={(item) => (
             <List.Item>
@@ -31,14 +33,7 @@ const Items = () => {
           loading={isLoading}
           loadingMore={false}
           onLoadMore={onLoadMore}
-        />
-      </div>
-      <div className="w-full bg-gradient-to-r p-[3px] from-[#7928ca] to-pink-600 rounded-3xl">
-        <button className="w-full py-2 bg-white rounded-3xl dark:bg-darkPrimary">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7928ca] to-pink-600 font-semibold">
-            Load More
-          </span>
-        </button>
+        /> */}
       </div>
     </div>
   );
