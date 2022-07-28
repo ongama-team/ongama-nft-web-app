@@ -1,9 +1,24 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import CreateNftPage from "@components/CreateNftPage";
 import Head from "next/head";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { walletAddressAtom, walletAtom } from "@lib/atoms";
+import { useRouter } from "next/router";
 
-const create = () => {
+const Create = () => {
+  const { address } = useRecoilValue(walletAddressAtom);
+  const [isWalletsDisplayed, setIsWalletsDisplayed] =
+    useRecoilState(walletAtom);
+  const routes = useRouter();
+
+  useLayoutEffect(() => {
+    if (!address) {
+      routes.push("/");
+      setIsWalletsDisplayed(!isWalletsDisplayed);
+    }
+  }, [address]);
+
   return (
     <>
       <Head>
@@ -16,4 +31,4 @@ const create = () => {
   );
 };
 
-export default create;
+export default Create;
