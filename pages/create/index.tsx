@@ -7,10 +7,10 @@ import { walletAddressAtom, walletAtom } from "@lib/atoms";
 import { useRouter } from "next/router";
 
 const Create = () => {
+  const routes = useRouter();
   const { address } = useRecoilValue(walletAddressAtom);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
-  const routes = useRouter();
 
   useLayoutEffect(() => {
     if (!address) {
