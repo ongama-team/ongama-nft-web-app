@@ -188,11 +188,11 @@ const NFTCard: FC<Props> = ({
         <div className={`${!isBuyAvailable && "hidden"}`}>
           <ShowWidget condition={!useAsPreview}>
             {!isAuction ? (
-              <button className="w-full mt-2 py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-semibold">
+              <button className="w-full mt-2 py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-bold">
                 Buy Now
               </button>
             ) : (
-              <button className="w-full mt-2 py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-semibold">
+              <button className="w-full mt-2 py-2 px-2 bg-blue-600 hover:bg-blue-700 transition-all text-gray-200 rounded-lg font-bold">
                 Place a bid
               </button>
             )}

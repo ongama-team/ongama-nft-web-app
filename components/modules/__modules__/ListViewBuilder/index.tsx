@@ -2,9 +2,11 @@ import React, { FC, memo } from "react";
 import { IListView, IListViewBuilder } from "@lib/@Types";
 import { NftModelToCardData } from "@lib/models/GeneralModel";
 import useMediaQuery from "@components/hooks/useMediaQuery";
-import { List } from "antd";
+import { List, Skeleton } from "antd";
 import { LoadMore } from "@components/modules/__modules__/Card/LoadMore";
 import SkeletonLoader from "@components/modules/__modules__/Card/SkeletonLoader";
+import NFTCardFallback from "../NFTCardFallback";
+import NftPreview from "@components/CreateNftPage/NftPreview";
 
 export const ListView: FC<IListView> = ({
   loading,
@@ -33,6 +35,7 @@ export const ListView: FC<IListView> = ({
     <div className="items-center">
       <List
         loading={loading}
+        className={loading ? "hidden" : "block"}
         loadMore={
           loadMore || (
             <div className={!loadingMore ? "flex justify-center" : ""}>
@@ -62,6 +65,9 @@ export const ListView: FC<IListView> = ({
           return renderItem(item);
         }}
       />
+      <div className={loading ? "flex flex-wrap justify-between" : "hidden"}>
+        <NFTCardFallback />
+      </div>
     </div>
   );
 };

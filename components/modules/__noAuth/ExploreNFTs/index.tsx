@@ -5,7 +5,7 @@ import ShowWidget from "@components/modules/__modules__/ShowWidget";
 import { VFilter, VSingleDot } from "@components/modules/__modules__/_vectors";
 import { nftsState } from "@lib/atoms";
 import { NFTData } from "@lib/models/GeneralModel";
-import { List } from "antd";
+import { List, Skeleton } from "antd";
 import React, { useState, useRef } from "react";
 import { useRecoilValue } from "recoil";
 import ListViewBuilder from "@components/modules/__modules__/ListViewBuilder";
@@ -134,7 +134,7 @@ const ExploreNFTs = () => {
           </div>
         </ShowWidget>
 
-        <div className="grid grid-cols-auto-fit gap-3 mx-5 justify-center h-fit">
+        <div className="mx-5 justify-center h-fit">
           <ListViewBuilder
             items={nfts}
             renderItem={(item) => (
@@ -144,7 +144,8 @@ const ExploreNFTs = () => {
             )}
             hasMore={false}
             showLoadMoreButton={shouldShowLoadMoreButton}
-            loading={currentNfts.isLoading}
+            // loading={currentNfts.isLoading}
+            loading={true}
             loadingMore={false}
             onLoadMore={onLoadMore}
           />
