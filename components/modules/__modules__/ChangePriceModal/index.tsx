@@ -30,7 +30,6 @@ const ChangePriceModal = ({ onCloseChangePriceModal, nft }: IProps) => {
   };
 
   const onUpdateNftPrice = async () => {
-    console.log("new price", newPrice);
     setUpdateProcessing(true);
 
     const isUpdated = await web3Actions.updateNftPrice(

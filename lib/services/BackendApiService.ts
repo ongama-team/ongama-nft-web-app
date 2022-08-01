@@ -5,7 +5,7 @@ import { orderObject } from "@lib/Utils";
 import { updateProfileInterface } from "@lib/@Types";
 import {
   IGetRequestNFTsParams,
-  NFT,
+  NftCardData,
   NFTData,
   NFTMetaData,
 } from "@lib/models/GeneralModel";
@@ -36,7 +36,6 @@ class BackendApiService {
       params,
     });
 
-    console.log("reponse in services", data);
     return {
       nfts: data.nfts as NFTData[],
       meta: data.meta as NFTMetaData,
@@ -79,7 +78,7 @@ class BackendApiService {
     }
   }
 
-  async mintNft(nftData: NFT) {
+  async mintNft(nftData: NftCardData) {
     try {
       const mintNFtEndpoint = "/nfts";
       const response = await http.post(

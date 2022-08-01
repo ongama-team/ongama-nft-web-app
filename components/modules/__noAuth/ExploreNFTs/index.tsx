@@ -2,11 +2,14 @@ import useClickOutside from "@components/hooks/useClickOutside";
 import NFTCard from "@components/modules/__modules__/Card/NFTCard";
 import NFTCardFallback from "@components/modules/__modules__/NFTCardFallback";
 import ShowWidget from "@components/modules/__modules__/ShowWidget";
-import { VSingleDot } from "@components/modules/__modules__/_vectors";
+import { VFilter, VSingleDot } from "@components/modules/__modules__/_vectors";
 import { nftsState } from "@lib/atoms";
 import { NFTData } from "@lib/models/GeneralModel";
-import React, { useState } from "react";
+import { List } from "antd";
+import React, { useState, useRef } from "react";
 import { useRecoilValue } from "recoil";
+import ListViewBuilder from "@components/modules/__modules__/ListViewBuilder";
+import useNfTs from "@components/hooks/useNFTs";
 
 const ExploreNFTs = () => {
   const [isBlockchainModal, setIsBlockchainModal] = useState(false);
@@ -17,6 +20,8 @@ const ExploreNFTs = () => {
   const blockchainModalRef = useClickOutside(() => setIsBlockchainModal(false));
   const priceRangeModalRef = useClickOutside(() => setIsPriceRangeModal(false));
   const sortModalRef = useClickOutside(() => setIsSortModal(false));
+
+  const { onLoadMore, shouldShowLoadMoreButton } = useNfTs();
 
   const toggleBlockchainModal = () => {
     setIsBlockchainModal(!isBlockchainModal);
@@ -30,33 +35,35 @@ const ExploreNFTs = () => {
 
   const toggleSortModal = () => {
     setIsSortModal(!isSortModal);
+    setIsPriceRangeModal(false);
+    setIsBlockchainModal(false);
   };
 
   return (
     <div>
-      <section className="2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit mt-12">
+      <section className="2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto h-fit mt-12 ">
         <h2 className="font-bold text-xl text-black font-ibmPlexSans md:text-2xl lg:text-3xl dark:text-white px-6 pb-3">
           Explore NFTs
         </h2>
         <ShowWidget condition={!isLoading}>
-          <div className="flex justify-between mobile:justify-center items-center mx-5 dark:text-white font-bold relative mobile:w-[95%]">
-            <div className="flex gap-5 relative">
+          <div className="flex justify-between mobile:mx-1 mobile:gap-2 mb-5 items-center dark:text-white font-bold relative px-5">
+            <div className="flex gap-5 mobile:gap-2 mobile:w-full">
               <button
                 onClick={toggleBlockchainModal}
-                className="border border-gray-300 dark:border-gray-500 py-2 px-3 mb-5 rounded-lg"
+                className="border border-gray-300 dark:border-gray-500 py-2 px-3 rounded-lg"
               >
                 Blockchain
               </button>
               <button
                 onClick={togglePriceRangeModal}
-                className="border border-gray-300 dark:border-gray-500 py-2 px-3 mb-5 rounded-lg"
+                className="border border-gray-300 dark:border-gray-500 py-2 px-3 rounded-lg"
               >
                 Price Range
               </button>
               <ShowWidget condition={isBlockchainModal}>
                 <div
                   ref={blockchainModalRef}
-                  className="absolute top-14 bg-white dark:bg-darkPrimary border border-gray-200 dark:border-darkLight z-20 w-full rounded-lg shadow-lg transition-all"
+                  className="absolute w-44 top-14 bg-white dark:bg-darkPrimary border border-gray-200 dark:border-darkLight z-20 rounded-lg shadow-lg transition-all"
                 >
                   <p className="py-5 px-2 flex justify-between items-center">
                     Polygon <VSingleDot className="text-green-600" />
@@ -66,7 +73,7 @@ const ExploreNFTs = () => {
               <ShowWidget condition={isPriceRangeModal}>
                 <div
                   ref={priceRangeModalRef}
-                  className="absolute top-14 left-28 bg-white dark:bg-darkPrimary border border-gray-200 dark:border-darkLight z-20 w-full rounded-lg shadow-lg transition-all"
+                  className="absolute w-60 top-14 left-28 mobile:left-0 mobile:mx-5 bg-white dark:bg-darkPrimary border border-gray-200 dark:border-darkLight z-20 rounded-lg shadow-lg transition-all"
                 >
                   <p className="py-5 px-2 flex justify-between items-center">
                     MATIC
@@ -96,9 +103,12 @@ const ExploreNFTs = () => {
             </div>
             <button
               onClick={toggleSortModal}
-              className="border border-gray-300 dark:border-gray-500 py-2 px-3 mb-5 rounded-lg"
+              className="border border-gray-300 dark:border-gray-500 py-2 px-3 rounded-lg"
             >
-              Filter & Sort
+              <span className="mobile:hidden block">Filter & Sort</span>
+              <span className="hidden mobile:block text-2xl">
+                <VFilter />
+              </span>
             </button>
             <ShowWidget condition={isSortModal}>
               <div
@@ -125,11 +135,19 @@ const ExploreNFTs = () => {
         </ShowWidget>
 
         <div className="grid grid-cols-auto-fit gap-3 mx-5 justify-center h-fit">
-          <ShowWidget condition={!isLoading} fallback={<NFTCardFallback />}>
-            {nfts.map((nft: NFTData, index: React.Key | null | undefined) => {
-              return <NFTCard key={index} nft={nft} likes={0} />;
-            })}
-          </ShowWidget>
+          <ListViewBuilder
+            items={nfts}
+            renderItem={(item) => (
+              <List.Item>
+                <NFTCard nft={item} />
+              </List.Item>
+            )}
+            hasMore={false}
+            showLoadMoreButton={shouldShowLoadMoreButton}
+            loading={currentNfts.isLoading}
+            loadingMore={false}
+            onLoadMore={onLoadMore}
+          />
         </div>
       </section>
     </div>

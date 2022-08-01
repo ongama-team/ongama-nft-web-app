@@ -2,7 +2,6 @@
 import React from "react";
 import dummy_profile from "@components/DropPage/AvatarAndCover/dummy_profile";
 import NFTCard from "@components/modules/__modules__/Card/NFTCard";
-import { NFT, NFTData } from "@lib/models/GeneralModel";
 
 interface IProps {
   previewUrl: string;
@@ -17,7 +16,6 @@ const NftPreview = ({
   previewPrice,
   isImage,
 }: IProps) => {
-  const { avatarUrl } = dummy_profile.user;
   return (
     <div className="mx-5">
       <p className="font-bold">Preview</p>
