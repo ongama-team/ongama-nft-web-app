@@ -144,8 +144,7 @@ const ExploreNFTs = () => {
             )}
             hasMore={false}
             showLoadMoreButton={shouldShowLoadMoreButton}
-            // loading={currentNfts.isLoading}
-            loading={true}
+            loading={currentNfts.isLoading}
             loadingMore={false}
             onLoadMore={onLoadMore}
           />

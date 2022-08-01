@@ -51,7 +51,7 @@ export const ListView: FC<IListView> = ({
                   dataSource={items.slice(0, preloaderLimit())}
                   renderItem={() => (
                     <List.Item>
-                      <SkeletonLoader />
+                      <NFTCardFallback />
                     </List.Item>
                   )}
                 />
@@ -65,9 +65,19 @@ export const ListView: FC<IListView> = ({
           return renderItem(item);
         }}
       />
-      <div className={loading ? "flex flex-wrap justify-between" : "hidden"}>
-        <NFTCardFallback />
-      </div>
+
+      <List
+        grid={grid}
+        // loading={false}
+        loading={loading}
+        className={loading ? "block" : "hidden"}
+        dataSource={items.slice(0, preloaderLimit())}
+        renderItem={() => (
+          <List.Item>
+            <NFTCardFallback />
+          </List.Item>
+        )}
+      />
     </div>
   );
 };
