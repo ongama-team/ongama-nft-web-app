@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/link-passhref */
-import { walletAddressAtom } from "@lib/atoms";
+import { walletAddressAtom, walletAtom } from "@lib/atoms";
 import Link from "next/link";
 import React from "react";
-import { useRecoilValue } from "recoil";
-import { VDotHorizontal } from "../../../__modules__/_vectors";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 interface IMenuListProps {
   walletAddress: string | null;
@@ -11,6 +10,13 @@ interface IMenuListProps {
 }
 
 export const MenuList = ({ walletAddress, className }: IMenuListProps) => {
+  const [isWalletsDisplayed, setIsWalletsDisplayed] =
+    useRecoilState(walletAtom);
+
+  const onDisplayWallets = () => {
+    setIsWalletsDisplayed(!isWalletsDisplayed);
+  };
+
   return (
     <ul className={className}>
       <Link href={`/profile/${walletAddress}`}>
@@ -21,6 +27,16 @@ export const MenuList = ({ walletAddress, className }: IMenuListProps) => {
       <li className="min-lg:px-3 hover:text-black text-gray-500 hover:bg-gray-100 py-2 pl-2 rounded-md dark:text-gray-300 dark:hover:text-black transition-all cursor-pointer">
         Activity
       </li>
+      {!walletAddress && (
+        <li
+          role="button"
+          onKeyDown={() => null}
+          onClick={onDisplayWallets}
+          className="hidden  min-md:block min-lg:px-3 hover:text-black text-gray-500 hover:bg-gray-100 py-2 pl-2 rounded-md dark:text-gray-300 dark:hover:text-black transition-all cursor-pointer"
+        >
+          Sign in
+        </li>
+      )}
     </ul>
   );
 };

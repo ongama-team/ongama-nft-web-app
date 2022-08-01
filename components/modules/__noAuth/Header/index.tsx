@@ -41,11 +41,11 @@ const Header = () => {
     setIsMenuModal(false);
   };
 
+  const outSideRef = useClickOutside(closeMenuModal);
+
   const toggleMenuModal = () => {
     setIsMenuModal(!isMenuModal);
   };
-
-  const outSideRef = useClickOutside(closeMenuModal);
 
   const toggleWallets = () => {
     setIsWalletsDisplayed(!isWalletsDisplayed);
@@ -119,7 +119,7 @@ const Header = () => {
           <button
             onClick={toggleWallets}
             className={`${address && "hidden"}
-           border border-gray-300 transition-all duration-300 font-bold ease-in-out hover:border-gray-400 px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden`}
+           border border-gray-300 transition-all duration-300 font-bold ease-in-out hover:border-gray-400 dark:text-white px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden`}
           >
             Sign in
           </button>
@@ -152,7 +152,7 @@ const Header = () => {
           isMenuModal
             ? "fixed translate-x-[200] transition-all"
             : "fixed translate-x-[3000px] transition-all"
-        } top-16 mobile:top-20 left-0 right-14 bottom-0 z-20 py-5 mobile:py-0 ml-5`}
+        } top-16 mobile:top-20 left-0 right-5 bottom-0 z-20 py-5 mobile:py-0 ml-5`}
       >
         <div
           ref={outSideRef}
