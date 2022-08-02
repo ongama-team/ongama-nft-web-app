@@ -1,5 +1,3 @@
-import { NFT } from "./models/GeneralModel";
-
 export const removeEmpty = (obj: any) => {
   Object.keys(obj).forEach((k) => {
     if (obj[k] === undefined || obj[k] === "" || obj[k] === null) {

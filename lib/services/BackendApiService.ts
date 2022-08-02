@@ -2,10 +2,10 @@ import { UserAccount } from "@lib/models/UserAccount";
 import http from "@lib/http";
 import * as Sentry from "@sentry/nextjs";
 import { orderObject } from "@lib/Utils";
-import { updateProfileInterface } from "@lib/@Types";
+import { IUpdateProfile } from "@lib/@Types";
 import {
   IGetRequestNFTsParams,
-  NFT,
+  NftCardData,
   NFTData,
   NFTMetaData,
 } from "@lib/models/GeneralModel";
@@ -36,7 +36,6 @@ class BackendApiService {
       params,
     });
 
-    console.log("reponse in services", data);
     return {
       nfts: data.nfts as NFTData[],
       meta: data.meta as NFTMetaData,
@@ -53,7 +52,7 @@ class BackendApiService {
     coverThumbnailUrl,
     coverUrl,
     signature,
-  }: updateProfileInterface): Promise<any | null> {
+  }: IUpdateProfile): Promise<any | null> {
     try {
       const profileEndpoint = "/users/profile";
       const response = await http.put(
@@ -79,7 +78,7 @@ class BackendApiService {
     }
   }
 
-  async mintNft(nftData: NFT) {
+  async mintNft(nftData: NftCardData) {
     try {
       const mintNFtEndpoint = "/nfts";
       const response = await http.post(
