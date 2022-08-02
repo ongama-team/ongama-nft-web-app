@@ -2,11 +2,11 @@ import React, { FC, memo } from "react";
 import { IListView, IListViewBuilder } from "@lib/@Types";
 import { NftModelToCardData } from "@lib/models/GeneralModel";
 import useMediaQuery from "@components/hooks/useMediaQuery";
-import { List, Skeleton } from "antd";
+import { List } from "antd";
 import { LoadMore } from "@components/modules/__modules__/Card/LoadMore";
 import SkeletonLoader from "@components/modules/__modules__/Card/SkeletonLoader";
 import NFTCardFallback from "../NFTCardFallback";
-import NftPreview from "@components/CreateNftPage/NftPreview";
+import LoadNftsFallback from "./LoadNftsFallback";
 
 export const ListView: FC<IListView> = ({
   loading,
@@ -34,8 +34,10 @@ export const ListView: FC<IListView> = ({
   return (
     <div className="items-center">
       <List
-        loading={loading}
-        className={loading ? "hidden" : "block"}
+        loading={{
+          indicator: <LoadNftsFallback />,
+          spinning: loading,
+        }}
         loadMore={
           loadMore || (
             <div className={!loadingMore ? "flex justify-center" : ""}>
@@ -64,19 +66,6 @@ export const ListView: FC<IListView> = ({
         renderItem={(item) => {
           return renderItem(item);
         }}
-      />
-
-      <List
-        grid={grid}
-        // loading={false}
-        loading={loading}
-        className={loading ? "block" : "hidden"}
-        dataSource={items.slice(0, preloaderLimit())}
-        renderItem={() => (
-          <List.Item>
-            <NFTCardFallback />
-          </List.Item>
-        )}
       />
     </div>
   );
