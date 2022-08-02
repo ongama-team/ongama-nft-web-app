@@ -30,7 +30,7 @@ const OwnedContainer = ({
   );
 
   return (
-    <div className="my-5 w-full">
+    <div className="my-5">
       <ListViewBuilder
         items={ownedNfts}
         renderItem={(item) => (

@@ -134,7 +134,13 @@ const ExploreNFTs = () => {
         </div>
       </ShowWidget>
 
-      <div className="mx-5">
+      <div
+        className={`mx-5 ${
+          currentNfts.isLoading
+            ? "2xl:h-[40rem] xl:h-[40rem] lg:h-[60rem] md:h-[60rem] mobile:h-[120rem]"
+            : ""
+        }`}
+      >
         <ListViewBuilder
           items={nfts}
           renderItem={(item) => (

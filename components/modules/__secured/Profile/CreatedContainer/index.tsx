@@ -31,7 +31,7 @@ const CreatedContainer = ({
   const { onLoadMore, shouldShowLoadMoreButton } = useNfTs();
 
   return (
-    <div className="my-5 w-full">
+    <div className="my-5">
       <ListViewBuilder
         items={createdNFts}
         renderItem={(item) => (

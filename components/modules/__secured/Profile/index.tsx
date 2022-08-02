@@ -177,7 +177,13 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
         <Tab.Group defaultIndex={1}>
           <TabList />
           <Tab.Panels>
-            <div className="mx-auto">
+            <div
+              className={`mx-auto ${
+                searchedUserProfileNfts.isLoading
+                  ? "2xl:h-[40rem] xl:h-[40rem] lg:h-[60rem] md:h-[60rem] mobile:h-[130rem]"
+                  : ""
+              }`}
+            >
               <div className="flex items-center justify-around w-full">
                 <div className="flex  py-4 space-x-2 lg:overflow-x-hidden overflow-x-scroll scrollbar-hide ">
                   <div className="flex px-10 space-x-3 py-4 border dark:border-gray-500 rounded-full justify-center items-center">
