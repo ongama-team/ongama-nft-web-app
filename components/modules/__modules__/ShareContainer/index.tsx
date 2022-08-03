@@ -7,21 +7,17 @@ import {
 } from "@components/modules/__modules__/_vectors";
 import useClickOutside from "@components/hooks/useClickOutside";
 import { useRecoilState } from "recoil";
-import { shareProfileLinkAtom } from "@lib/atoms";
+import { sharePageLinkAtom } from "@lib/atoms";
 
-type openModel = {
-  isShareOpen: boolean;
-};
-
-const ShareContainer: FC<openModel> = () => {
-  const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+const ShareContainer: FC = () => {
+  const [isShareOpen, setIsShareOpen] = useRecoilState(sharePageLinkAtom);
   const ref = useClickOutside(() => setIsShareOpen(true));
   return (
     <div
       ref={ref}
       className={`${
         isShareOpen ? "scale-0 transition-all" : "scale-100 transition-all"
-      } absolute z-10 border border-gray-100 dark:border-darkLight dark:bg-darkPrimary shadow-xl top-12 transform transition-all bg-white rounded-xl p-2 `}
+      } absolute z-30 border border-gray-100 dark:border-darkPrimary dark:bg-darkLight shadow-xl top-12 transform transition-all bg-white rounded-xl p-2 `}
     >
       <p className="text-center font-extrabold text-xl">
         Share link to this page

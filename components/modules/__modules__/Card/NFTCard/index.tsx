@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
 import React, { FC, useState } from "react";
 import { VerifiedImg } from "@lib/Resources";
@@ -7,6 +8,7 @@ import { NFTData } from "@lib/models/GeneralModel";
 import ShowWidget from "../../ShowWidget";
 import useClickOutside from "@components/hooks/useClickOutside";
 import ChangePriceModal from "../../ChangePriceModal";
+import Link from "next/link";
 
 interface Props {
   likes?: number;
@@ -58,73 +60,75 @@ const NFTCard: FC<Props> = ({
         onMouseOut={onOverNFTCardOut}
         className="h-fit w-full mobile:w-full transition-all flex-none border hover:border-2 border-slate-200 dark:border-gray-500 relative p-2 mobile:mr-0 rounded-xl snap-center"
       >
-        <section className="h-72 relative">
-          <ShowWidget condition={!useAsPreview}>
-            <img
-              src={nft?.url || nft?.urlCompressed || nft?.urlThumbnail || ""}
-              alt={nft?.name}
-              className="object-cover rounded-xl shadow-lg border-gray-400 h-80 w-full"
-            />
-          </ShowWidget>
-          <ShowWidget condition={useAsPreview}>
-            <img
-              src={previewUrl}
-              alt={previewName}
-              className="w-full h-full object-cover rounded-xl shadow-lg border-gray-400"
-            />
-          </ShowWidget>
+        <Link href={`/token/${nft?.tokenUri}`}>
+          <section className="h-72 relative cursor-pointer">
+            <ShowWidget condition={!useAsPreview}>
+              <img
+                src={nft?.url || nft?.urlCompressed || nft?.urlThumbnail || ""}
+                alt={nft?.name}
+                className="object-cover rounded-xl shadow-lg border-gray-400 h-80 w-full"
+              />
+            </ShowWidget>
+            <ShowWidget condition={useAsPreview}>
+              <img
+                src={previewUrl}
+                alt={previewName}
+                className="w-full h-full object-cover rounded-xl shadow-lg border-gray-400"
+              />
+            </ShowWidget>
 
-          <div
-            className={`
+            <div
+              className={`
           ${
             isNFTCardOvered
               ? "absolute top-0 left-0 right-0 bottom-0 w-full h-full flex-col justify-center items-center transition-all bg-gradient-to-b from-black/50 rounded-xl text-sm "
               : "hidden transition-all"
           }`}
-          >
-            <div className="flex justify-between items-center">
-              <p className="text-white px-3 py-5 font-bold">Polygon</p>
+            >
+              <div className="flex justify-between items-center">
+                <p className="text-white px-3 py-5 font-bold">Polygon</p>
 
-              <div className="py-2 px-3 right-2 flex justify-center items-center font-bold  m-2-0 text-white mx-3 text-lg bg-black rounded-lg opacity-40">
-                <HeartVector className="w-5 h-5 font-bold" />
-                <span className=" ml-1 text-sm">{likes}</span>
+                <div className="py-2 px-3 right-2 flex justify-center items-center font-bold  m-2-0 text-white mx-3 text-lg bg-black rounded-lg opacity-40">
+                  <HeartVector className="w-5 h-5 font-bold" />
+                  <span className=" ml-1 text-sm">{likes}</span>
+                </div>
               </div>
             </div>
-          </div>
-          <ShowWidget condition={isNftMenu}>
-            <div
-              ref={nftMenuRef}
-              className="absolute bg-white border w-1/2 -bottom-10 right-0 p-2 rounded-lg font-bold text-sm dark:bg-darkPrimary dark:text-white dark:border-darkLight"
-            >
-              {isEditable ? (
-                <ul>
-                  <li
-                    role="button"
-                    onClick={() => setIsChangePriceModal(true)}
-                    className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight"
-                  >
-                    Change Price
-                  </li>
-                  <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
-                    Remove from sale
-                  </li>
-                  <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
-                    Transfer
-                  </li>
-                </ul>
-              ) : (
-                <ul>
-                  <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
-                    Report
-                  </li>
-                  <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
-                    Share
-                  </li>
-                </ul>
-              )}
-            </div>
-          </ShowWidget>
-        </section>
+            <ShowWidget condition={isNftMenu}>
+              <div
+                ref={nftMenuRef}
+                className="absolute bg-white border w-1/2 -bottom-10 right-0 p-2 rounded-lg font-bold text-sm dark:bg-darkPrimary dark:text-white dark:border-darkLight"
+              >
+                {isEditable ? (
+                  <ul>
+                    <li
+                      role="button"
+                      onClick={() => setIsChangePriceModal(true)}
+                      className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight"
+                    >
+                      Change Price
+                    </li>
+                    <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
+                      Remove from sale
+                    </li>
+                    <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
+                      Transfer
+                    </li>
+                  </ul>
+                ) : (
+                  <ul>
+                    <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
+                      Report
+                    </li>
+                    <li className="p-2 cursor-pointer hover:bg-gray-100 rounded-lg dark:hover:bg-darkLight">
+                      Share
+                    </li>
+                  </ul>
+                )}
+              </div>
+            </ShowWidget>
+          </section>
+        </Link>
         <section className="items-center mt-7">
           <div className="flex justify-between items-center">
             <ShowWidget condition={!useAsPreview}>

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ConnectWalletsModal from "../__modules__/model";
+import ConnectWalletsModal from "../../__modules__/model";
 
 type openMenuT = {
   openWalletMenu: boolean;

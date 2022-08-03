@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "antd";
 import { CrossVector } from "@components/modules/__modules__/_vectors";
-import ConnectWallets from "@components/modules/__secured";
+import ConnectWallets from "@components/modules/__secured/ConnectWalletsModal";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { walletAtom } from "@lib/atoms";
 

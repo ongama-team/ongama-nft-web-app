@@ -7,11 +7,11 @@ import {
   VShare,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
-import ShareContainer from "./module/shareContainer";
+import ShareContainer from "../../__modules__/ShareContainer";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   currentAccountState,
-  shareProfileLinkAtom,
+  sharePageLinkAtom,
   subscribesAtom,
   walletAddressAtom,
 } from "@lib/atoms";
@@ -41,7 +41,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
-  const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+  const [isShareOpen, setIsShareOpen] = useRecoilState(sharePageLinkAtom);
   const currentConnectedUser = useRecoilValue(currentAccountState);
   const [isCurrentConnectedUserProfile, setIsCurrentConnectUserProfile] =
     useState(true);
@@ -171,7 +171,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
               setIsPageReport={setIsPageReportModal}
               isCurrentConnectedUserProfile={isCurrentConnectedUserProfile}
             />
-            <ShareContainer isShareOpen={isShareOpen} />
+            <ShareContainer />
           </div>
         </div>
         <Tab.Group defaultIndex={1}>
