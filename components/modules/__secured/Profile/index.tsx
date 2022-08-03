@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Block,
   Collections,
@@ -7,11 +7,11 @@ import {
   VShare,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
-import ShareContainer from "./module/shareContainer";
+import ShareContainer from "../../__modules__/ShareContainer";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   currentAccountState,
-  shareProfileLinkAtom,
+  sharePageLinkAtom,
   subscribesAtom,
   walletAddressAtom,
 } from "@lib/atoms";
@@ -30,7 +30,6 @@ import { UserAccount } from "@lib/models/UserAccount";
 import { NFTData, NFTMetaData } from "@lib/models/GeneralModel";
 import { backendApiService } from "@lib/services/BackendApiService";
 import ProfileReportOption from "./module/ProfileReportOptions";
-import ShowWidget from "@components/modules/__modules__/ShowWidget";
 
 interface IProps {
   searchedUserProfile: UserAccount;
@@ -42,7 +41,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
   const isSubscribesOpen = useRecoilValue(subscribesAtom);
   const [isSubscribesDisplayed, setIsSubscribesDisplayed] =
     useRecoilState(subscribesAtom);
-  const [isShareOpen, setIsShareOpen] = useRecoilState(shareProfileLinkAtom);
+  const [isShareOpen, setIsShareOpen] = useRecoilState(sharePageLinkAtom);
   const currentConnectedUser = useRecoilValue(currentAccountState);
   const [isCurrentConnectedUserProfile, setIsCurrentConnectUserProfile] =
     useState(true);
@@ -81,14 +80,14 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
         const response = await backendApiService.findNFts({
           walletAddress: searchedUserProfile.walletAddress,
         });
-        console.log("nfts", response);
+
         setSearchedUserProfileNFts({
           nfts: response.nfts,
           metadata: response.meta,
           isLoading: false,
         });
       })();
-  }, [searchedUserProfile]);
+  }, []);
 
   const onEditProfile = () => {
     router.push("/profile/edit");
@@ -98,7 +97,7 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
     <div className="dark:bg-darkPrimary dark:text-white pt-24">
       <Header />
       <ProfileMenu />
-      <div className="lg:mx-[12rem] mx-[1rem] rounded-lg">
+      <div className="lg:mx-[5rem] xl:mx-[10rem] mx-[1rem]">
         <div>
           <AvatarAndCoverCard
             isEditable={isCurrentConnectedUserProfile ? true : false}
@@ -172,13 +171,19 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
               setIsPageReport={setIsPageReportModal}
               isCurrentConnectedUserProfile={isCurrentConnectedUserProfile}
             />
-            <ShareContainer isShareOpen={isShareOpen} />
+            <ShareContainer />
           </div>
         </div>
         <Tab.Group defaultIndex={1}>
           <TabList />
           <Tab.Panels>
-            <div className="mx-auto">
+            <div
+              className={`mx-auto ${
+                searchedUserProfileNfts.isLoading
+                  ? "2xl:h-[40rem] xl:h-[40rem] lg:h-[60rem] md:h-[60rem] mobile:h-[130rem]"
+                  : ""
+              }`}
+            >
               <div className="flex items-center justify-around w-full">
                 <div className="flex  py-4 space-x-2 lg:overflow-x-hidden overflow-x-scroll scrollbar-hide ">
                   <div className="flex px-10 space-x-3 py-4 border dark:border-gray-500 rounded-full justify-center items-center">
@@ -200,6 +205,8 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   nfts={searchedUserProfileNfts.nfts}
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
+                  searchedUserProfile={searchedUserProfile}
+                  isCurrentconnectedUser={isCurrentConnectedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
@@ -207,6 +214,8 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   nfts={searchedUserProfileNfts.nfts}
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
+                  searchedUserProfile={searchedUserProfile}
+                  isCurrentconnectedUser={isCurrentConnectedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">
@@ -214,7 +223,8 @@ function ProfileContainer({ searchedUserProfile }: IProps) {
                   nfts={searchedUserProfileNfts.nfts}
                   metadata={searchedUserProfileNfts.metadata!}
                   isLoading={searchedUserProfileNfts.isLoading}
-                  walletAddress={searchedUserProfile.walletAddress}
+                  searchedUserProfile={searchedUserProfile}
+                  isCurrentconnectedUser={isCurrentConnectedUserProfile}
                 />
               </Tab.Panel>
               <Tab.Panel className="pb-10">

@@ -19,6 +19,7 @@ import {
   HiChevronRight as VChevronRight,
   HiChevronLeft as VChevronLeft,
   HiOutlineLink as VLink,
+  HiOutlineFilter as VFilter,
 } from "react-icons/hi";
 import {
   FaEthereum as VEthereum,
@@ -34,7 +35,7 @@ import {
   BsFillCheckCircleFill as VCheckFill,
 } from "react-icons/bs";
 import { AiOutlineMail as VEmail } from "react-icons/ai";
-import { IoShareOutline as VShare } from "react-icons/io5";
+import { IoShareOutline as VShare, IoFlash as VFlash } from "react-icons/io5";
 import { ImInfinite as VInfinite } from "react-icons/im";
 import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
 import { RiUserLine as VUser } from "react-icons/ri";
@@ -42,6 +43,7 @@ import { TiFlash as Vflash } from "react-icons/ti";
 import { BiTransfer as VTransaction } from "react-icons/bi";
 import { CgSpinnerTwo as VSpinner } from "react-icons/cg";
 import { GoPrimitiveDot as VSingleDot } from "react-icons/go";
+import { FiEye as VEye } from "react-icons/fi";
 
 export {
   CoinBaseVector,
@@ -82,4 +84,7 @@ export {
   VSpinner,
   VCheckFill,
   VSingleDot,
+  VFilter,
+  VEye,
+  VFlash,
 };

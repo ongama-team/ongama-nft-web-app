@@ -14,7 +14,7 @@ const NotFound = ({ content }: IProps) => {
       </h2>
       <p className="text-gray-400 font-ibmPlexSans py-2 w-56 text-center font-bold">
         Looks like there&apos;s still nothing.
-        {content} will be shown here
+        <span className="ml-1">{content}</span> will be shown here
       </p>
       <button
         onClick={() => router.push("/")}

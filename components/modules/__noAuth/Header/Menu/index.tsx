@@ -3,7 +3,6 @@ import { walletAddressAtom } from "@lib/atoms";
 import Link from "next/link";
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { VDotHorizontal } from "../../../__modules__/_vectors";
 
 interface IMenuListProps {
   walletAddress: string | null;
@@ -21,6 +20,11 @@ export const MenuList = ({ walletAddress, className }: IMenuListProps) => {
       <li className="min-lg:px-3 hover:text-black text-gray-500 hover:bg-gray-100 py-2 pl-2 rounded-md dark:text-gray-300 dark:hover:text-black transition-all cursor-pointer">
         Activity
       </li>
+      <Link href={"/create"}>
+        <li className="min-lg:px-3 hover:text-black text-gray-500 hover:bg-gray-100 py-2 pl-2 rounded-md dark:text-gray-300 dark:hover:text-black transition-all cursor-pointer">
+          Create
+        </li>
+      </Link>
     </ul>
   );
 };

@@ -141,7 +141,7 @@ const CreateNftPage = () => {
       });
       const web3Service = new Web3Service();
       const transaction = await web3Service.sendStorageFee();
-      console.log("transaction", transaction);
+
       setMintProcess({
         ...mintProcess,
         sendStorageFeeStatus: SUCCED_STATUS,

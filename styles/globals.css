@@ -54,3 +54,39 @@ input[type="number"]::-webkit-outer-spin-button {
     flex-direction: column;
   }
 }
+
+.skeleton {
+  display: inline-block;
+  min-height: 1em;
+  position: relative;
+  overflow: hidden;
+  background-color: #dddbdd;
+  box-shadow: none;
+  padding-top: 100%;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+}
+
+.animate {
+  animation: shimmer 3s infinite linear;
+  background: linear-gradient(to right, #eff1f3 4%, #e2e2e2 25%, #eff1f3 36%);
+  background-size: 1000px 100%;
+  -webkit-animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* hide default spin div container as w're using a custom fallback */
+.ant-spin-blur {
+  display: none;
+}
