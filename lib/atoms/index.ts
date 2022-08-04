@@ -33,8 +33,8 @@ export const profileMenuAtom = atom({
   default: true,
 });
 
-export const shareProfileLinkAtom = atom({
-  key: "shareProfileLinkAtom",
+export const sharePageLinkAtom = atom({
+  key: "sharePageLinkAtom",
   default: true,
 });
 

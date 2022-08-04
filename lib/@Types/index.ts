@@ -8,7 +8,7 @@ export const defaultVectorProps: classNameInterface = {
   className: "h-6 w-6",
 };
 
-export interface updateProfileInterface {
+export interface IUpdateProfile {
   walletAddress: string;
   username?: string;
   userBio?: string;

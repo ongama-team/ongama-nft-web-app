@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import NFTCardFallback from "../../NFTCardFallback";
 
 interface Props {
   className?: string;

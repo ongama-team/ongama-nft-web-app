@@ -31,7 +31,7 @@ const CreatedContainer = ({
   const { onLoadMore, shouldShowLoadMoreButton } = useNfTs();
 
   return (
-    <div className="flex flex-wrap justify-center mobile:justify-center my-5 gap-3">
+    <div className="my-5">
       <ListViewBuilder
         items={createdNFts}
         renderItem={(item) => (

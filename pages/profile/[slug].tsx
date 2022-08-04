@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import cookieParser from "@lib/cookieParser";
 import { backendApiService } from "@lib/services/BackendApiService";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
+import Head from "next/head";
 
 function Profile({ user, loaded }) {
   if (!user && !loaded) {
@@ -20,10 +21,22 @@ function Profile({ user, loaded }) {
       </div>
     );
   }
+
   return (
-    <UploadFileProcessing isProcessing={!user}>
-      <ProfileContainer searchedUserProfile={user} />
-    </UploadFileProcessing>
+    <>
+      <Head>
+        <title>{user?.username || "Profile"}</title>
+        <meta name="description" content={user?.userBio} />
+        <meta property="og:image" content={user?.avatarUrl || ""} />
+        <meta property="og:image:type" content="image/*" />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
+        <meta property="og:image:alt" content={user?.userBio} />
+      </Head>
+      <UploadFileProcessing isProcessing={!user}>
+        <ProfileContainer searchedUserProfile={user} />
+      </UploadFileProcessing>
+    </>
   );
 }
 

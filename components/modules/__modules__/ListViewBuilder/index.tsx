@@ -5,6 +5,8 @@ import useMediaQuery from "@components/hooks/useMediaQuery";
 import { List } from "antd";
 import { LoadMore } from "@components/modules/__modules__/Card/LoadMore";
 import SkeletonLoader from "@components/modules/__modules__/Card/SkeletonLoader";
+import NFTCardFallback from "../NFTCardFallback";
+import LoadNftsFallback from "./LoadNftsFallback";
 
 export const ListView: FC<IListView> = ({
   loading,
@@ -32,7 +34,10 @@ export const ListView: FC<IListView> = ({
   return (
     <div className="items-center">
       <List
-        loading={loading}
+        loading={{
+          indicator: <LoadNftsFallback />,
+          spinning: loading,
+        }}
         loadMore={
           loadMore || (
             <div className={!loadingMore ? "flex justify-center" : ""}>
@@ -48,7 +53,7 @@ export const ListView: FC<IListView> = ({
                   dataSource={items.slice(0, preloaderLimit())}
                   renderItem={() => (
                     <List.Item>
-                      <SkeletonLoader />
+                      <NFTCardFallback />
                     </List.Item>
                   )}
                 />
