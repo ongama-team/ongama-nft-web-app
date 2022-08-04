@@ -96,7 +96,6 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
             </Tab.Group>
           </section>
           <section className="w-96 min-lg:w-full">
-            <h1 className="text-3xl font-bold dark:text-white">{nft.name}</h1>
             <Link href={`/profile/${nft.owner.walletAddress}`}>
               <div className="py-5 flex gap-3 border-b dark:border-b-gray-600 cursor-pointer">
                 <img
