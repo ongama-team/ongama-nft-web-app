@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import SelectedItem from "../../__secured/SelectedItem";
+import SelectedItem from "../../../__secured/SelectedItem";
 import {
   WalletConnectVector,
   TrustWalletVector,
   MetaMaskVector,
   CoinBaseVector,
-} from "../../__modules__/_vectors/";
+} from "../../../__modules__/_vectors";
 import { web3Actions } from "@lib/web3";
 import { walletAddressAtom, walletAtom } from "@lib/atoms";
 import { useRecoilState } from "recoil";
@@ -14,7 +14,7 @@ type openMenuT = {
   openWalletMenu: boolean;
 };
 
-const ConnectWalletsModal = () => {
+const WalletContainer = () => {
   const [editMode, setEditMode] = useState(false);
   const [startProcess, setStartProcess] = useState(false);
 
@@ -131,4 +131,4 @@ const ConnectWalletsModal = () => {
     </div>
   );
 };
-export default ConnectWalletsModal;
+export default WalletContainer;
