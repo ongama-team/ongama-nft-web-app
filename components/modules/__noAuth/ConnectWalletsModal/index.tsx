@@ -30,7 +30,7 @@ const ConnectWalletsModal = () => {
             <CrossVector className="h-4 w-4 rotate-45" />
           </Button>
         </div>
-        <div className="bg-white dark:text-white dark:bg-darkPrimary border dark:border-darkLight pt-1 rounded-xl mobile:rounded-b-none transform transition-all">
+        <div className="bg-white dark:text-white dark:bg-darkPrimary border dark:border-gray-700 dark:shadow-xl pt-1 rounded-xl mobile:rounded-b-none transform transition-all">
           <WalletContainer />
         </div>
       </div>
