@@ -176,7 +176,7 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
           </section>
         </div>
         <div>
-          <h1 className="text-2xl py-10 text-center font-bold">
+          <h1 className="text-2xl py-10 text-center font-bold dark:text-white">
             More from The Owner
           </h1>
         </div>
