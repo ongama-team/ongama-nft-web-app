@@ -6,7 +6,6 @@ import useNfTs from "@components/hooks/useNFTs";
 import NFTCard from "@components/modules/__modules__/Card/NFTCard";
 import ListViewBuilder from "@components/modules/__modules__/ListViewBuilder";
 import ShareContainer from "@components/modules/__modules__/ShareContainer";
-import ShowWidget from "@components/modules/__modules__/ShowWidget";
 import {
   DotsVector,
   HeartVector,
