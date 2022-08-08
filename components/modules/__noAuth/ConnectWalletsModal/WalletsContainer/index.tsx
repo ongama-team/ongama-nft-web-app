@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import SelectedItem from "../../__secured/SelectedItem";
+import SelectedItem from "../../../__secured/SelectedItem";
 import {
   WalletConnectVector,
   TrustWalletVector,
   MetaMaskVector,
   CoinBaseVector,
-} from "../../__modules__/_vectors/";
+} from "../../../__modules__/_vectors";
 import { web3Actions } from "@lib/web3";
 import { walletAddressAtom, walletAtom } from "@lib/atoms";
 import { useRecoilState } from "recoil";
@@ -14,7 +14,7 @@ type openMenuT = {
   openWalletMenu: boolean;
 };
 
-const ConnectWalletsModal = () => {
+const WalletContainer = () => {
   const [editMode, setEditMode] = useState(false);
   const [startProcess, setStartProcess] = useState(false);
 
@@ -63,12 +63,12 @@ const ConnectWalletsModal = () => {
   return (
     <div>
       <div className="text-center dark:text-white">
-        <p className="text-xl mt-6 font-medium font-ibmPlexSans">
+        <p className="text-xl mt-6 font-bold font-ibmPlexSans">
           Sign in with your Wallet
         </p>
       </div>
 
-      <div className="grid grid-cols-2 gap-1 justify-center items-center ">
+      <div className="grid grid-cols-2 justify-center items-center">
         <SelectedItem
           key={"coinBase"}
           processing={startProcess}
@@ -105,7 +105,7 @@ const ConnectWalletsModal = () => {
         >
           <div
             onClick={onConnectTrustOrConnectWallet}
-            className="flex space-y-3 hover:bg-gray-200 dark:hover:bg-darkLight p-4 rounded-lg justify-center flex-col items-center"
+            className="flex space-y-3 hover:bg-gray-200 dark:hover:bg-darkLight p-4 rounded-lg justify-center flex-col  items-center"
           >
             <TrustWalletVector className="h-12 w-12" />
             <label className="font-ibmPlexSans font-thin">Trust Wallet</label>
@@ -131,4 +131,4 @@ const ConnectWalletsModal = () => {
     </div>
   );
 };
-export default ConnectWalletsModal;
+export default WalletContainer;

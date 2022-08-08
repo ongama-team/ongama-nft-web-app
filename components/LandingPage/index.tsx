@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Header from "../modules/__noAuth/Header";
 import Presentation from "../modules/__noAuth/Presentation";
 import TopCollection from "@components/modules/__noAuth/TopCollection";
-import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
 import TopSellers from "@components/modules/__noAuth/TopSellers";
 import HotCollections from "@components/modules/__noAuth/HotCollections";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
@@ -13,6 +12,7 @@ import { useRecoilState } from "recoil";
 import { nftsState } from "@lib/atoms";
 import { backendApiService } from "@lib/services/BackendApiService";
 import ExploreNFTs from "@components/modules/__noAuth/ExploreNFTs";
+import ConnectWalletsModal from "@components/modules/__noAuth/ConnectWalletsModal";
 
 const LandingPage = () => {
   const [nfts, setNfts] = useRecoilState(nftsState);
@@ -40,7 +40,7 @@ const LandingPage = () => {
       {/* <HotBids /> */}
       {/* <LiveAuctions /> */}
       <ProfileMenu />
-      <ConnectWalletBox />
+      <ConnectWalletsModal />
       {/* <TrendingNFTs /> */}
       <ExploreNFTs />
     </>

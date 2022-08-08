@@ -20,27 +20,27 @@ const CollectionCard: FC<Props> = ({
 }) => {
   return (
     <div className="h-200 w-72 mobile:w-full flex-none border hover:border-2 border-slate-200 dark:border-gray-500 relative p-2 mr-4 mobile:mr-0 rounded-xl snap-center cursor-pointer">
-      <section className="h-[60%]">
+      <section className="h-[60%] relative">
         <img
           src={bannerUrl}
           alt={name}
           className="w-full h-full object-cover rounded-xl border-solid border-[1px] shadow-md dark:border-none"
         />
-      </section>
-      <section className="absolute top-[50%] left-[6rem]">
-        <div className="relative">
-          <img
-            src={profileUrl}
-            alt={name}
-            className="h-16 w-16 rounded-full ml-4 mr-4 border-solid border-2 border-white dark:border-darkPrimary"
-          />
-          {isVerified && (
+        <div className="absolute w-full flex justify-center -mt-10">
+          <div className="relative">
             <img
-              src={VerifiedImg.src}
-              alt="verified"
-              className="h-8 absolute bottom-[-7px] right-2"
+              src={profileUrl}
+              alt={name}
+              className="h-20 w-20 rounded-full ml-4 mr-4 border-solid border-2 border-white dark:border-darkPrimary"
             />
-          )}
+            {isVerified && (
+              <img
+                src={VerifiedImg.src}
+                alt="verified"
+                className="h-8 absolute bottom-[5px] right-2"
+              />
+            )}
+          </div>
         </div>
       </section>
       <section className=" h-[55%] flex items-center justify-center flex-col ">

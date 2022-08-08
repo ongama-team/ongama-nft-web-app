@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ConnectWalletBox from "@components/modules/__noAuth/ConnectWalletsBox";
+import ConnectWalletsModal from "@components/modules/__noAuth/ConnectWalletsModal";
 import Header from "@components/modules/__noAuth/Header";
 import Activity from "./Activity";
 import AvatarAndCover from "./AvatarAndCover";
@@ -45,7 +45,7 @@ const DropPage = () => {
         {activeMenu === "items" && <Items />}
         {activeMenu === "activity" && <Activity />}
       </div>
-      <ConnectWalletBox />
+      <ConnectWalletsModal />
       <ProfileMenu />
     </div>
   );
