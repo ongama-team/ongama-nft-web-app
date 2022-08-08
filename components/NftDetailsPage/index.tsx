@@ -6,7 +6,6 @@ import useNfTs from "@components/hooks/useNFTs";
 import NFTCard from "@components/modules/__modules__/Card/NFTCard";
 import ListViewBuilder from "@components/modules/__modules__/ListViewBuilder";
 import ShareContainer from "@components/modules/__modules__/ShareContainer";
-import ShowWidget from "@components/modules/__modules__/ShowWidget";
 import {
   DotsVector,
   HeartVector,
@@ -177,7 +176,7 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
           </section>
         </div>
         <div>
-          <h1 className="text-2xl py-10 text-center font-bold">
+          <h1 className="text-2xl py-10 text-center font-bold dark:text-white">
             More from The Owner
           </h1>
         </div>

@@ -5,7 +5,7 @@ import { Tab } from "@headlessui/react";
 const NftBid = () => {
   return (
     <Tab.Panel>
-      <div className="flex flex-col gap-4 text-gray-700 justify-center items-center border h-36 mb-10 rounded-lg">
+      <div className="flex flex-col gap-4 text-gray-700 dark:text-gray-500 justify-center items-center border h-36 mb-10 rounded-lg">
         <p>
           <VFlash />
         </p>

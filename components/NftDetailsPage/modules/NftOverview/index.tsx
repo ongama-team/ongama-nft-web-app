@@ -23,7 +23,7 @@ const NftOverView: FC<IProps> = ({ nft }) => {
         </p>
       </div>
       <div className="pt-6">
-        <h2 className="text-2xl font-bold dark:text-white">Latet Bids</h2>
+        <h2 className="text-2xl font-bold dark:text-white">Latest Bids</h2>
         <div className="border dark:border-gray-600 dark:text-gray-200 py-5 px-3 my-2 rounded-lg text-gray-500 font-bold">
           No bids yet.
         </div>
