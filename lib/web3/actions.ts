@@ -18,6 +18,12 @@ class Web3Actions {
     }
   }
 
+  public async disconnectBrowserWallet() {
+    await web3Services.disconnect();
+
+    LocalStorage.removeItem("ongama_signer_address");
+  }
+
   public async connectTrustOrConnectWallet() {
     let signer;
     try {

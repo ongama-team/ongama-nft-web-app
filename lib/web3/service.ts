@@ -54,6 +54,10 @@ class Web3Service {
     return walletAddress;
   }
 
+  public async disconnect() {
+    //handle disconnect
+  }
+
   public async coinBaseConnect() {
     const connectCoinbaseWallet = await connectCoinbase();
     return connectCoinbaseWallet;
