@@ -126,6 +126,7 @@ const CreateNftPage = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { value, name } = event.target;
+
     setNftData((prevData) => ({ ...prevData, [name]: value }));
   };
 

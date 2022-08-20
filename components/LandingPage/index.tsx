@@ -33,7 +33,7 @@ const LandingPage = () => {
   return (
     <>
       <Header />
-      <Presentation />
+      {/* <Presentation /> */}
       {/* <TopCollection /> */}
       <TopSellers />
       <HotCollections />
