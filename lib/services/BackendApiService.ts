@@ -92,6 +92,18 @@ class BackendApiService {
       return null;
     }
   }
+
+  async transferNFT(): Promise<any | null> {
+    try {
+      const transferNftEndpoint = "";
+      const response = await http.post(transferNftEndpoint, orderObject({}));
+
+      return response;
+    } catch (e) {
+      Sentry.captureException(e);
+      return null;
+    }
+  }
 }
 
 export const backendApiService = new BackendApiService();
