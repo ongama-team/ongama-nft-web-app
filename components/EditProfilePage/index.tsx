@@ -5,7 +5,6 @@ import Header from "@components/modules/__noAuth/Header";
 import { useState, ChangeEvent, useEffect } from "react";
 import UpdateStatusModal from "./updateStatusModal";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
-import { VSpinner } from "@components/modules/__modules__/_vectors";
 import { Web3Service } from "@lib/web3";
 import { orderObject } from "@lib/Utils";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";

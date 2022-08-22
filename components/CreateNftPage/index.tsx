@@ -86,7 +86,6 @@ const CreateNftPage = () => {
     if (inputFiles) {
       setUploadFileProcessing(true);
 
-      // const fileUrl = await saveFileWithIpfs(inputFiles);
       const fileUrl = await saveFileWithWeb3Storage(inputFiles);
 
       setUploadFileProcessing(false);
