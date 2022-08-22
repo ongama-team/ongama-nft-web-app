@@ -97,7 +97,6 @@ class Web3Service {
   }
 
   public async sendStorageFee() {
-    console.log("web3 instance", this.web3Instance);
     const transaction = await this.web3Instance.eth.sendTransaction(
       {
         from: LocalStorage.getItem("ongama_signer_address")!,

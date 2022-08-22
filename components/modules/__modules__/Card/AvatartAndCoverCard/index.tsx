@@ -2,12 +2,12 @@
 import UpdateStatusModal from "@components/EditProfilePage/updateStatusModal";
 import { currentAccountState } from "@lib/atoms";
 import LocalStorage from "@lib/helper/LocalStorage";
-import { saveFileWithIpfs } from "@lib/ipfsClient";
 import { UserAccount } from "@lib/models/UserAccount";
 import { NoCoverImg } from "@lib/Resources";
 import { backendApiService } from "@lib/services/BackendApiService";
 import { orderObject } from "@lib/Utils";
 import { Web3Service } from "@lib/web3";
+import { saveFileWithWeb3Storage } from "@lib/web3StorageClient";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -77,7 +77,7 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
     setIsAddCover(false);
     setIsUpdateModal(!isUpdateModal);
     setIsUpdatePending(true);
-    const fileUrl = await saveFileWithIpfs(files);
+    const fileUrl = await saveFileWithWeb3Storage(files);
 
     if (fileUrl) {
       const signature = await getSignature(fileUrl);
