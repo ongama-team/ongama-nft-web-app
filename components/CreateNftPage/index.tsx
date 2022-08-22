@@ -16,7 +16,6 @@ import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
-import { saveFileWithIpfs } from "@lib/ipfsClient";
 import { generateTokenUri } from "@lib/Utils";
 import { web3Actions, Web3Service } from "@lib/web3";
 import CreateNftProcessModal, {
@@ -28,6 +27,7 @@ import { backendApiService } from "@lib/services/BackendApiService";
 import LocalStorage from "@lib/helper/LocalStorage";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
 import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFileErrorCard";
+import { saveFileWithWeb3Storage } from "@lib/web3StorageClient";
 
 const CreateNftPage = () => {
   const [nftData, setNftData] = useState({
@@ -82,11 +82,12 @@ const CreateNftPage = () => {
     inputFileRef.current?.click();
   };
 
-  const uploadFileOnIPFS = async (inputFiles) => {
+  const uploadFileOnWeb3Storage = async (inputFiles) => {
     if (inputFiles) {
       setUploadFileProcessing(true);
 
-      const fileUrl = await saveFileWithIpfs(inputFiles);
+      // const fileUrl = await saveFileWithIpfs(inputFiles);
+      const fileUrl = await saveFileWithWeb3Storage(inputFiles);
 
       setUploadFileProcessing(false);
       if (fileUrl) {
@@ -113,7 +114,7 @@ const CreateNftPage = () => {
     setIsImage((files[0].type as string).includes("image"));
     const filePreviewUrl = URL.createObjectURL(files[0]);
     try {
-      const uploadResult = await uploadFileOnIPFS(files);
+      const uploadResult = await uploadFileOnWeb3Storage(files);
 
       if (uploadResult) setPreviewUrl(filePreviewUrl);
     } catch (err) {

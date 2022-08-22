@@ -10,11 +10,11 @@ interface IMenuListProps {
 }
 
 export const MenuList = ({ walletAddress, className }: IMenuListProps) => {
-  const [isWalletsDisplayed, setIsWalletsDisplayed] =
+  const [isWalletsModalDisplayed, setIsWalletsModalDisplayed] =
     useRecoilState(walletAtom);
 
-  const onDisplayWallets = () => {
-    setIsWalletsDisplayed(!isWalletsDisplayed);
+  const onDisplayWalletsModal = () => {
+    setIsWalletsModalDisplayed(!isWalletsModalDisplayed);
   };
 
   return (
@@ -31,7 +31,7 @@ export const MenuList = ({ walletAddress, className }: IMenuListProps) => {
         <li
           role="button"
           onKeyDown={() => null}
-          onClick={onDisplayWallets}
+          onClick={onDisplayWalletsModal}
           className="hidden  min-md:block min-lg:px-3 hover:text-black text-gray-500 hover:bg-gray-100 py-2 pl-2 rounded-md dark:text-gray-300 dark:hover:text-black transition-all cursor-pointer"
         >
           Sign in

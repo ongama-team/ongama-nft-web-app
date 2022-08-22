@@ -19,9 +19,8 @@ class Web3Actions {
   }
 
   public async disconnectBrowserWallet() {
-    await web3Services.disconnect();
-
     LocalStorage.removeItem("ongama_signer_address");
+    window.location.href = "/";
   }
 
   public async connectTrustOrConnectWallet() {
