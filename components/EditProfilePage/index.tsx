@@ -164,7 +164,7 @@ const EditProfile = () => {
               onChange={(e) =>
                 setProfile({ ...profile, username: e.target.value })
               }
-              value={currentUserInformations[0]?.username}
+              // value={currentUserInformations[0]?.username}
             />
             <label
               htmlFor="bio"
@@ -179,7 +179,7 @@ const EditProfile = () => {
               onChange={(e) =>
                 setProfile({ ...profile, userBio: e.target.value })
               }
-              value={currentUserInformations[0]?.userBio}
+              // value={currentUserInformations[0]?.userBio}
             />
             <label
               htmlFor="portfolio"
