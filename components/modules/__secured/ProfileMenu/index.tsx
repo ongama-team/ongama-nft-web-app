@@ -12,6 +12,7 @@ import truncateAddress from "@lib/helper/truncateAddress";
 import { useRouter } from "next/router";
 import UserAvatarCard from "@components/modules/__modules__/Card/UserAvatarCard";
 import { UserAccount } from "@lib/models/UserAccount";
+import { web3Actions } from "@lib/web3";
 
 const ProfileMenu = () => {
   const currentAccount = useRecoilValue(currentAccountState);
@@ -32,6 +33,10 @@ const ProfileMenu = () => {
   const onRedirectToEditProfile = () => {
     router.push("/profile/edit");
     setIsProfileMenu(!isProfileMenu);
+  };
+
+  const onLogout = async () => {
+    await web3Actions.disconnectBrowserWallet();
   };
 
   return (
@@ -87,6 +92,12 @@ const ProfileMenu = () => {
             </span>
           </button>
         </div>
+        <button
+          onClick={onLogout}
+          className="border rounded-xl py-3 hover:border-gray-400 font-bold transition-all"
+        >
+          Log out
+        </button>
       </div>
     </div>
   );

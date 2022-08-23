@@ -29,7 +29,7 @@ import SwitchThemeButton from "./SwitchThemeButton";
 const Header = () => {
   const routes = useRouter();
   const [isMenuModal, setIsMenuModal] = useState(false);
-  const [isWalletsDisplayed, setIsWalletsDisplayed] =
+  const [isWalletsModalDisplayed, setIsWalletsModalDisplayed] =
     useRecoilState(walletAtom);
   const [currentAccount, setCurrentAccount] =
     useRecoilState(currentAccountState);
@@ -47,11 +47,11 @@ const Header = () => {
     setIsMenuModal(!isMenuModal);
   };
 
-  const toggleWallets = () => {
-    setIsWalletsDisplayed(!isWalletsDisplayed);
+  const toggleWalletsModal = () => {
+    setIsWalletsModalDisplayed(!isWalletsModalDisplayed);
   };
 
-  const onCreateNft = () => {
+  const onRedirectToCreateNftPage = () => {
     routes.push("/create");
   };
 
@@ -111,25 +111,32 @@ const Header = () => {
             <VSearch className="w-6 h-6" />
           </button>
           <button
-            onClick={onCreateNft}
+            onClick={onRedirectToCreateNftPage}
             className="border-none px-2 py-3 mx-1 w-20 font-bold rounded-full text-white transition-all duration-500 ease-in-out bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-blue-400 hover:to-blue-600 font-ibmPlexSans min-md:hidden"
           >
             Create
           </button>
           <button
-            onClick={toggleWallets}
+            onClick={toggleWalletsModal}
             className={`${address && "hidden"}
            border border-gray-300 transition-all duration-300 font-bold ease-in-out hover:border-gray-400 dark:text-white px-2 py-3 mx-1 w-20  rounded-full font-ibmPlexSans min-md:hidden`}
           >
             Sign in
           </button>
           <SwitchThemeButton />
-          <button
-            onClick={toggleMenuModal}
-            className="border border-gray-300 transition-all dark:text-white duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block "
+          <ShowWidget
+            condition={
+              currentAccount?.walletAddress !== undefined ||
+              walletData.address !== ""
+            }
           >
-            <VMenu className="w-6 h-6" />
-          </button>
+            <button
+              onClick={toggleMenuModal}
+              className="border border-gray-300 transition-all dark:text-white duration-300 ease-in-out hover:border-gray-400 px-3 py-3 mx-1 rounded-full min-md:block "
+            >
+              <VMenu className="w-6 h-6" />
+            </button>
+          </ShowWidget>
           <div
             onClick={openProfileMenu}
             className={`${

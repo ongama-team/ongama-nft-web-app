@@ -18,6 +18,11 @@ class Web3Actions {
     }
   }
 
+  public async disconnectBrowserWallet() {
+    LocalStorage.removeItem("ongama_signer_address");
+    window.location.href = "/";
+  }
+
   public async connectTrustOrConnectWallet() {
     let signer;
     try {
