@@ -10,14 +10,15 @@ import { orderObject } from "@lib/Utils";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
 import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFileErrorCard";
 import { currentAccountState } from "@lib/atoms";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { saveFileWithWeb3Storage } from "@lib/web3StorageClient";
-import { useRecoilValue } from "recoil";
 
 const EditProfile = () => {
   const userAccount = useRecoilValue(currentAccountState);
   const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState(userAccount?.avatarUrl);
+  console.log(userAccount, "user account");
+
   const [profile, setProfile] = useState({
     walletAddress: "",
     username: "",
@@ -165,8 +166,9 @@ const EditProfile = () => {
               onChange={(e) =>
                 setProfile({ ...profile, username: e.target.value })
               }
-              // value={currentUserInformations[0]?.username}
+              defaultValue={userAccount?.username}
             />
+
             <label
               htmlFor="bio"
               className="dark:text-white font-semibold pt-4 pb-2"
@@ -180,7 +182,7 @@ const EditProfile = () => {
               onChange={(e) =>
                 setProfile({ ...profile, userBio: e.target.value })
               }
-              // value={currentUserInformations[0]?.userBio}
+              defaultValue={userAccount?.userBio}
             />
             <label
               htmlFor="portfolio"
