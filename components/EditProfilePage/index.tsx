@@ -11,10 +11,15 @@ import { Web3Service } from "@lib/web3";
 import { orderObject } from "@lib/Utils";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
 import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFileErrorCard";
+import { currentAccountState } from "@lib/atoms";
+import { useRecoilState } from "recoil";
 
 const EditProfile = () => {
+  const currentUserInformations: any = useRecoilState(currentAccountState);
   const [img, setImg] = useState<File | null>(null);
-  const [previewImgLink, setPreviewImgLink] = useState("");
+  const [previewImgLink, setPreviewImgLink] = useState(
+    currentUserInformations[0]?.avatarUrl
+  );
   const [profile, setProfile] = useState({
     walletAddress: "",
     username: "",
@@ -32,6 +37,8 @@ const EditProfile = () => {
   const [isWrongFileSize, setIsWrongFileSize] = useState(false);
   const [isUserAvaterUploading, setIsUserAvatarUploading] = useState(false);
   const [fileUploadingError, setFileUploadingError] = useState(false);
+
+  console.log(currentUserInformations[0], "user informations");
   const profilePlaceholder =
     "https://lh3.googleusercontent.com/9KIL56q19B9i8BasJfTcVZFn7QOcvdtBqww5dgK5Zk5Mi5w4Ljekw0ibITpf6TBtGnyqcLTDNEEG9OpUC98aLukfcM9yXhSltJoe=w600";
 
@@ -152,11 +159,12 @@ const EditProfile = () => {
             </label>
             <input
               id="name"
-              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
+              className="dark:bg-darkLight border-none py-2 px-3 outline-none dark:text-white bg-gray-100"
               placeholder="The Dev bro"
               onChange={(e) =>
                 setProfile({ ...profile, username: e.target.value })
               }
+              value={currentUserInformations[0]?.username}
             />
             <label
               htmlFor="bio"
@@ -166,11 +174,12 @@ const EditProfile = () => {
             </label>
             <input
               id="bio"
-              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
+              className="dark:bg-darkLight px-3 border-none py-2 outline-none dark:text-white bg-gray-100"
               placeholder="The big boy doing wonders"
               onChange={(e) =>
                 setProfile({ ...profile, userBio: e.target.value })
               }
+              value={currentUserInformations[0]?.userBio}
             />
             <label
               htmlFor="portfolio"
@@ -180,7 +189,7 @@ const EditProfile = () => {
             </label>
             <input
               id="portfolio"
-              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
+              className="dark:bg-darkLight border-none py-2 px-3  outline-none dark:text-white bg-gray-100"
               placeholder="https://www.dev.to/web3"
             />
             <label
@@ -191,7 +200,7 @@ const EditProfile = () => {
             </label>
             <input
               id="email"
-              className="dark:bg-darkLight border-none py-2 outline-none dark:text-white bg-gray-100"
+              className="dark:bg-darkLight border-none px-3 py-2 outline-none dark:text-white bg-gray-100"
               placeholder="Enter your email"
             />
           </div>
