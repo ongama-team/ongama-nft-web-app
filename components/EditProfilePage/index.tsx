@@ -12,12 +12,13 @@ import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFile
 import { currentAccountState } from "@lib/atoms";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { saveFileWithWeb3Storage } from "@lib/web3StorageClient";
+import { useRouter } from "next/router";
 
 const EditProfile = () => {
   const userAccount = useRecoilValue(currentAccountState);
   const [img, setImg] = useState<File | null>(null);
   const [previewImgLink, setPreviewImgLink] = useState(userAccount?.avatarUrl);
-  console.log(userAccount, "user account");
+  const router = useRouter();
 
   const [profile, setProfile] = useState({
     walletAddress: "",
@@ -138,6 +139,7 @@ const EditProfile = () => {
 
   const onCloseStatusModal = () => {
     setIsStatusModal(!isStatusModal);
+    if (updateSuccess) router.back();
   };
 
   return (
