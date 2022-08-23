@@ -17,7 +17,9 @@ class Web3Service {
     this.provider = new ethers.providers.JsonRpcProvider(
       CHAINS_ENV.polygon.nodeRPC
     );
-    this.web3Instance = new Web3(Web3.givenProvider || "http://localhost:8545");
+    this.web3Instance = new Web3(
+      Web3.givenProvider || this.provider || "http://localhost:8545"
+    );
   }
 
   public contract(chain: TChain = "polygon") {
@@ -77,11 +79,13 @@ class Web3Service {
     data: string,
     address: string
   ): Promise<SignResult | null> {
-    let signer: any;
     try {
       const web3 = this.web3Instance;
+
       const hashedData = web3.utils.sha3(data);
+
       const signature = await web3.eth.personal.sign(hashedData!, address, "");
+
       return {
         signature,
         data,

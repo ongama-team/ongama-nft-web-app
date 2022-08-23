@@ -5,21 +5,19 @@ import Header from "@components/modules/__noAuth/Header";
 import { useState, ChangeEvent, useEffect } from "react";
 import UpdateStatusModal from "./updateStatusModal";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
-import ipfsClient, { saveFileWithIpfs } from "@lib/ipfsClient";
-import { VSpinner } from "@components/modules/__modules__/_vectors";
 import { Web3Service } from "@lib/web3";
 import { orderObject } from "@lib/Utils";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
 import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFileErrorCard";
 import { currentAccountState } from "@lib/atoms";
 import { useRecoilState } from "recoil";
+import { saveFileWithWeb3Storage } from "@lib/web3StorageClient";
+import { useRecoilValue } from "recoil";
 
 const EditProfile = () => {
-  const currentUserInformations: any = useRecoilState(currentAccountState);
+  const userAccount = useRecoilValue(currentAccountState);
   const [img, setImg] = useState<File | null>(null);
-  const [previewImgLink, setPreviewImgLink] = useState(
-    currentUserInformations[0]?.avatarUrl
-  );
+  const [previewImgLink, setPreviewImgLink] = useState(userAccount?.avatarUrl);
   const [profile, setProfile] = useState({
     walletAddress: "",
     username: "",
@@ -38,8 +36,8 @@ const EditProfile = () => {
   const [isUserAvaterUploading, setIsUserAvatarUploading] = useState(false);
   const [fileUploadingError, setFileUploadingError] = useState(false);
 
-  console.log(currentUserInformations[0], "user informations");
   const profilePlaceholder =
+    userAccount?.avatarUrl ||
     "https://lh3.googleusercontent.com/9KIL56q19B9i8BasJfTcVZFn7QOcvdtBqww5dgK5Zk5Mi5w4Ljekw0ibITpf6TBtGnyqcLTDNEEG9OpUC98aLukfcM9yXhSltJoe=w600";
 
   const checkFileSize = (file: FileList) => {
@@ -54,10 +52,13 @@ const EditProfile = () => {
     checkFileSize(files);
     setImg(files[0]);
     if (files.length === 0) return;
+
     const previewUrl = URL.createObjectURL(files[0]);
     setIsUserAvatarUploading(true);
-    const fileUrl = await saveFileWithIpfs(files);
+
+    const fileUrl = await saveFileWithWeb3Storage(files);
     setIsUserAvatarUploading(false);
+
     if (fileUrl) {
       setProfile({ ...profile, avatarUrl: fileUrl });
       setPreviewImgLink(previewUrl);
@@ -105,7 +106,7 @@ const EditProfile = () => {
           coverThumbnailUrl,
         })
       ),
-      walletAddress
+      walletAddress || userAccount?.walletAddress!
     );
 
     setIsStatusModal(true);

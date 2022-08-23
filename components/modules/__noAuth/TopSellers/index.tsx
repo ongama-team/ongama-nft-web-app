@@ -3,7 +3,7 @@ import AllTopSellers from "./AllTopSellers";
 
 const TopSellers = () => {
   return (
-    <div className="flex flex-col justify-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto my-10">
+    <div className="flex flex-col justify-center 2xl:w-[80%] xl:w-[85%] lg:w-[90%] md:w-[95%] mx-auto pb-10 pt-24">
       <div className="font-bold text-xl text-black font-ibmPlexSans md:text-2xl lg:text-3xl">
         <span className="dark:text-white px-2">Top</span>
         <select
