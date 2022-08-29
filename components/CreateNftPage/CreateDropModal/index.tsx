@@ -8,15 +8,29 @@ import { useRecoilValue } from "recoil";
 import { currentAccountState } from "@lib/atoms";
 import { Web3Service } from "@lib/web3";
 import LocalStorage from "@lib/helper/LocalStorage";
-import { v4 as uuid } from "uuid";
 import { backendApiService } from "@lib/services/BackendApiService";
 import ShowWidget from "@components/modules/__modules__/ShowWidget";
 import CreateDropProcessingModal from "./CreateDropProcessingModal";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
+import imageResizer from "@lib/helper/ImageResizer";
+import { generateTokenUri as generateDropId } from "@lib/Utils";
 
 interface IProps {
   setIsCreateDropModal: (value: boolean) => void;
 }
+
+const DEFAULT_DROP_DATA: ICreateDrop = {
+  creationFeeTransactionHash: "",
+  creatorId: 0,
+  creatorAddress: "",
+  creatorUsername: "",
+  description: "",
+  dropID: "",
+  imageUrl: "",
+  imageUrlThumbnail: "",
+  title: "",
+  collection: true,
+};
 
 const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
   const [previewUrl, setPreviewUrl] = useState("");
@@ -32,18 +46,7 @@ const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
   const [isCreateDropProcessingModal, setIsCreateDropProcessingModal] =
     useState(false);
 
-  const [dropData, setDropData] = useState<ICreateDrop>({
-    creationFeeTransactionHash: "",
-    creatorId: 0,
-    creatorAddress: "",
-    creatorUsername: "",
-    description: "",
-    dropID: "",
-    imageUrl: "",
-    imageUrlThumbnail: "",
-    title: "",
-    collection: true,
-  });
+  const [dropData, setDropData] = useState<ICreateDrop>(DEFAULT_DROP_DATA);
 
   const userAccount = useRecoilValue(currentAccountState);
 
@@ -63,19 +66,25 @@ const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
 
     setNewDropImageIsLoading(true);
     const imageUrl = await saveFileWithWeb3Storage(files);
-    setNewDropImageIsLoading(false);
 
     if (!imageUrl) {
       setFileSavingFailed(true);
       return;
     }
 
+    imageResizer(files[0], async (resizedFile) => {
+      const imageUrlThumbnail = await saveFileWithWeb3Storage([resizedFile]);
+      setNewDropImageIsLoading(false);
+
+      if (imageUrlThumbnail) {
+        setDropData({ ...dropData, imageUrl, imageUrlThumbnail });
+      }
+    });
+
     setFileSavingFailed(false);
 
     const previewUrl = URL.createObjectURL(files[0]);
     setPreviewUrl(previewUrl);
-
-    setDropData({ ...dropData, imageUrl, imageUrlThumbnail: imageUrl });
   };
 
   const onDropDetailsChange = (
@@ -87,11 +96,13 @@ const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
   };
 
   const onCreateDrop = async () => {
+    console.log(userAccount);
     if (
       !dropData.description ||
       !dropData.title ||
       !dropData.imageUrl ||
-      !dropData.imageUrlThumbnail
+      !dropData.imageUrlThumbnail ||
+      !userAccount
     )
       return;
 
@@ -118,7 +129,7 @@ const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
       }`,
       creatorId: Number(userAccount?.id),
       creatorUsername: `${userAccount?.username}`,
-      dropID: uuid(),
+      dropID: generateDropId(),
     };
 
     setCreateDropProcessing(true);
@@ -131,29 +142,17 @@ const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
     }
     setDropSavingOnDatabasefailed(false);
 
-    setDropData({
-      creationFeeTransactionHash: "",
-      creatorId: 0,
-      creatorAddress: "",
-      creatorUsername: "",
-      description: "",
-      dropID: "",
-      imageUrl: "",
-      imageUrlThumbnail: "",
-      title: "",
-      collection: true,
-    });
+    setDropData(DEFAULT_DROP_DATA);
   };
 
   return (
     <div className="fixed top-0 bottom-0 left-0 right-0 w-full h-screen bg-black/80 z-20 flex justify-center items-center mobile:flex-none backdrop-blur-sm">
-      <div
-        role="button"
+      <button
         onClick={onCloseCreateDropModal}
-        className="absolute top-0 right-0 m-10 border border-gray-400 hover:border-gray-200 transition-all cursor-pointer p-2 rounded-full"
+        className="absolute top-0 right-0 m-10 border border-gray-400 hover:border-gray-200 transition-all p-2 rounded-full"
       >
         <CrossVector className="h-6 w-6 cursor-pointer text-white rotate-45" />
-      </div>
+      </button>
       <div className="bg-white dark:bg-darkPrimary w-fit h-fit p-7 rounded-md mobile:absolute mobile:bottom-0 mobile:left-0 mobile:right-0 mobile:w-full mobile:rounded-b-none">
         <ShowWidget
           condition={!isCreateDropProcessingModal}
