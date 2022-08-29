@@ -65,7 +65,7 @@ const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
     const { files } = event.target;
 
     setNewDropImageIsLoading(true);
-    const imageUrl = await saveFileWithWeb3Storage(files);
+    const imageUrl = await saveFileWithWeb3Storage([files[0]]);
 
     if (!imageUrl) {
       setFileSavingFailed(true);
@@ -96,7 +96,6 @@ const CreateDropModal = ({ setIsCreateDropModal }: IProps) => {
   };
 
   const onCreateDrop = async () => {
-    console.log(userAccount);
     if (
       !dropData.description ||
       !dropData.title ||

@@ -56,7 +56,7 @@ const EditProfile = () => {
     const previewUrl = URL.createObjectURL(files[0]);
     setIsUserAvatarUploading(true);
 
-    const fileUrl = await saveFileWithWeb3Storage(files);
+    const fileUrl = await saveFileWithWeb3Storage([files[0]]);
     setIsUserAvatarUploading(false);
 
     if (fileUrl) {

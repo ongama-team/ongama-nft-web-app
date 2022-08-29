@@ -117,7 +117,7 @@ const CreateNftPage = () => {
     setIsImage((files[0].type as string).includes("image"));
     const filePreviewUrl = URL.createObjectURL(files[0]);
     try {
-      const uploadResult = await uploadFileOnWeb3Storage(files);
+      const uploadResult = await uploadFileOnWeb3Storage([files[0]]);
 
       if (uploadResult) setPreviewUrl(filePreviewUrl);
     } catch (err) {
