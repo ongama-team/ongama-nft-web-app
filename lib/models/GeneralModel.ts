@@ -15,6 +15,19 @@ export interface IGetRequestNFTsParams {
   walletAddress?: string;
 }
 
+export interface ICreateDrop {
+  creationFeeTransactionHash: string;
+  creatorId: number;
+  creatorAddress: string;
+  creatorUsername: string;
+  description: string;
+  dropID: string;
+  imageUrl: string;
+  imageUrlThumbnail: string;
+  title: string;
+  collection: boolean;
+}
+
 export interface NFTMetaData {
   page: number;
   totalPages: number;

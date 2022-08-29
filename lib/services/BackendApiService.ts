@@ -4,11 +4,13 @@ import * as Sentry from "@sentry/nextjs";
 import { orderObject } from "@lib/Utils";
 import { IUpdateProfile } from "@lib/@Types";
 import {
+  ICreateDrop,
   IGetRequestNFTsParams,
   NftCardData,
   NFTData,
   NFTMetaData,
 } from "@lib/models/GeneralModel";
+import { AxiosError } from "axios";
 
 class BackendApiService {
   async findAccountWhereAddressOrUsername(
@@ -85,6 +87,18 @@ class BackendApiService {
         mintNFtEndpoint,
         orderObject({ ...nftData })
       );
+
+      return response;
+    } catch (e) {
+      Sentry.captureException(e);
+      return null;
+    }
+  }
+
+  async createDrop(drop: ICreateDrop) {
+    try {
+      const createDropEndpoint = "/nfts-drops";
+      const response = await http.post(createDropEndpoint, orderObject(drop));
 
       return response;
     } catch (e) {

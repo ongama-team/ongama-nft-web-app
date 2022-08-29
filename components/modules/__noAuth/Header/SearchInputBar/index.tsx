@@ -41,7 +41,7 @@ const SearchInputBar = () => {
         className="w-full py-3  bg-transparent placeholder:text-gray-500 outline-none px-2 font-ibmPlexSans "
       />
       {inputValue && (
-        <div onClick={cleanInputVlaue}>
+        <div role="button" onClick={cleanInputVlaue}>
           <CrossVector className="h-4 w-4 cursor-pointer text-gray-600 rotate-45" />
         </div>
       )}
