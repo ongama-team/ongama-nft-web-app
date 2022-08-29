@@ -81,6 +81,10 @@ class Web3Actions {
       return false;
     }
   }
+
+  public async transferNft(from: string, to: string, nftId: number) {
+    await web3Services.contract().transferFrom(from, to, nftId);
+  }
 }
 
 const web3Actions = new Web3Actions();
