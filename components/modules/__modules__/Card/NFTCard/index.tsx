@@ -159,7 +159,7 @@ const NFTCard: FC<Props> = ({
         <section className="h-[18%] flex items-center justify-between bg-slate-100 dark:bg-darkLight rounded-xl mt-2 py-2 px-3">
           <ShowWidget condition={!useAsPreview}>
             <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-thine">
+              <p className="text-sm text-gray-500 font-semibold dark:text-gray-400 font-thine">
                 {!isAuction ? "Price" : "Time left"}
               </p>
               {!isAuction ? (

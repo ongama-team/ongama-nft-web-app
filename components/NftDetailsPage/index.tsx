@@ -110,7 +110,7 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
                   className="w-12 h-12 object-cover rounded-full"
                 />
                 <div>
-                  <p className="text-gray-500 text-[15px]  dark:text-gray-300">
+                  <p className="text-gray-500 text-[15px] font-semibold dark:text-gray-300">
                     Current owner
                   </p>
                   <p className=" dark:text-white">{nft.owner.username}</p>
@@ -163,7 +163,9 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
 
             <div className="border pt-5 px-5 mt-5 rounded-lg dark:border-gray-600">
               <div className="bg-gray-100 dark:bg-darkLight py-5 px-3 rounded-lg flex flex-col gap-1">
-                <p className="text-gray-700  dark:text-gray-200">Price</p>
+                <p className="text-gray-700 font-semibold dark:text-gray-200">
+                  Price
+                </p>
                 <p className=" dark:text-white font-semibold">
                   {nft.price} MATIC
                 </p>
@@ -176,7 +178,7 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
           </section>
         </div>
         <div>
-          <h1 className="text-2xl py-10 text-center  dark:text-white">
+          <h1 className="text-2xl py-10 text-center font-semibold dark:text-white">
             More from the owner
           </h1>
         </div>
