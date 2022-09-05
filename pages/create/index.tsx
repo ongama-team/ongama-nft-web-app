@@ -8,13 +8,15 @@ import { useRouter } from "next/router";
 
 const Create = () => {
   const routes = useRouter();
+
+  routes.replace;
   const { address } = useRecoilValue(walletAddressAtom);
   const [isWalletsDisplayed, setIsWalletsDisplayed] =
     useRecoilState(walletAtom);
 
   useLayoutEffect(() => {
     if (!address) {
-      routes.push("/");
+      routes.push("/", undefined, { shallow: true });
       setIsWalletsDisplayed(!isWalletsDisplayed);
     }
   }, [address]);

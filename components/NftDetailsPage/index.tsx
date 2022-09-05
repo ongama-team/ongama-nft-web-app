@@ -20,6 +20,7 @@ import { List } from "antd";
 import Link from "next/link";
 import React, { FC, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import History from "./modules/History";
 import NftBid from "./modules/NftBid";
 import NftOverView from "./modules/NftOverview";
 import NftsDetailTabs from "./NftDetailTabs";
@@ -91,6 +92,7 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
               <Tab.Panels>
                 <NftOverView nft={nft} />
                 <NftBid />
+                <History />
               </Tab.Panels>
             </Tab.Group>
           </section>
@@ -108,12 +110,10 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
                   className="w-12 h-12 object-cover rounded-full"
                 />
                 <div>
-                  <p className="text-gray-500 font-bold dark:text-gray-300">
+                  <p className="text-gray-500 text-[15px]  dark:text-gray-300">
                     Current owner
                   </p>
-                  <p className="font-bold dark:text-white">
-                    {nft.owner.username}
-                  </p>
+                  <p className=" dark:text-white">{nft.owner.username}</p>
                 </div>
               </div>
             </Link>
@@ -124,17 +124,17 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
                   <span>
                     <HeartVector className="h-6 w-6" />
                   </span>
-                  <span className="font-bold">0</span>
+                  <span className="">0</span>
                 </p>
                 <p
                   role="button"
                   onClick={toggleShareContainer}
                   className="flex items-center gap-2 cursor-pointer hover:text-black hover:dark:text-white transition-all"
                 >
-                  <span className="font-bold text-2xl">
+                  <span className=" text-2xl">
                     <VShare />
                   </span>
-                  <span className="font-bold">Share</span>
+                  <span className="">Share</span>
                 </p>
               </div>
               <p
@@ -155,7 +155,7 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
                   !isNftOptions
                     ? "scale-0 transition-all"
                     : "scale-100 transition-all"
-                } absolute right-0 mt-20 bg-white py-5 px-3 border shadow-lg rounded-lg font-bold dark:bg-darkLight dark:border-gray-600 cursor-pointer transition-all dark:hover:text-white hover:text-black`}
+                } absolute right-0 mt-20 bg-white py-5 px-3 border shadow-lg rounded-lg  dark:bg-darkLight dark:border-gray-600 cursor-pointer transition-all dark:hover:text-white hover:text-black`}
               >
                 <p>Report this NFT</p>
               </div>
@@ -163,21 +163,21 @@ const NftDetailsPage: FC<IProps> = ({ nft }) => {
 
             <div className="border pt-5 px-5 mt-5 rounded-lg dark:border-gray-600">
               <div className="bg-gray-100 dark:bg-darkLight py-5 px-3 rounded-lg flex flex-col gap-1">
-                <p className="text-gray-700 font-bold dark:text-gray-200">
-                  Price
+                <p className="text-gray-700  dark:text-gray-200">Price</p>
+                <p className=" dark:text-white font-semibold">
+                  {nft.price} MATIC
                 </p>
-                <p className="font-bold dark:text-white">{nft.price} MATIC</p>
               </div>
 
-              <button className="bg-blue-600 w-full py-2 my-5 text-white font-bold rounded-lg hover:bg-blue-700 transition-all">
+              <button className="bg-blue-600 w-full font-semibold py-2 my-5 text-white  rounded-lg hover:bg-blue-700 transition-all">
                 Buy now for {nft.price} MATIC
               </button>
             </div>
           </section>
         </div>
         <div>
-          <h1 className="text-2xl py-10 text-center font-bold dark:text-white">
-            More from The Owner
+          <h1 className="text-2xl py-10 text-center  dark:text-white">
+            More from the owner
           </h1>
         </div>
         <div

@@ -12,8 +12,8 @@ const NftsDetailTabs = () => {
         <Tab
           className={({ selected }) =>
             selected
-              ? "font-extrabold text-gray-900 p-3 rounded-md bg-white dark:bg-darkPrimary transition-all dark:text-white"
-              : "text-black p-2 dark:bg-transparent dark:text-gray-300 font-semibold transition-all"
+              ? " w-full text-gray-900 p-3 rounded-md bg-white dark:bg-darkPrimary transition-all dark:text-white"
+              : "text-black p-2 w-full dark:bg-transparent dark:text-gray-300 font-semibold transition-all"
           }
         >
           Overview
@@ -21,8 +21,8 @@ const NftsDetailTabs = () => {
         <Tab
           className={({ selected }) =>
             selected
-              ? "font-extrabold text-gray-900 p-3 rounded-md  bg-white dark:text-white dark:bg-darkPrimary transition-all"
-              : "text-black p-2 dark:bg-transparent dark:text-gray-300 font-semibold transition-all"
+              ? " w-full text-gray-900 p-3 rounded-md  bg-white dark:text-white dark:bg-darkPrimary transition-all"
+              : "text-black p-2 w-full dark:bg-transparent dark:text-gray-300 font-semibold transition-all"
           }
         >
           Bids
@@ -30,8 +30,8 @@ const NftsDetailTabs = () => {
         <Tab
           className={({ selected }) =>
             selected
-              ? "font-extrabold text-gray-900 p-3 rounded-md  bg-white dark:text-white dark:bg-darkPrimary transition-all"
-              : "text-black p-2 dark:bg-transparent dark:text-gray-300 font-semibold transition-all"
+              ? " w-full text-gray-900 p-3 rounded-md  bg-white dark:text-white dark:bg-darkPrimary transition-all"
+              : "text-black w-full p-2 dark:bg-transparent dark:text-gray-300 font-semibold transition-all"
           }
         >
           History
