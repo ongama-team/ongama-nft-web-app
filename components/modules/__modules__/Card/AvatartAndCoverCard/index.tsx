@@ -77,7 +77,7 @@ const AvatarAndCoverCard = ({ isEditable, user }: IProps) => {
     setIsAddCover(false);
     setIsUpdateModal(!isUpdateModal);
     setIsUpdatePending(true);
-    const fileUrl = await saveFileWithWeb3Storage(files);
+    const fileUrl = await saveFileWithWeb3Storage([files[0]]);
 
     if (fileUrl) {
       const signature = await getSignature(fileUrl);

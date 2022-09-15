@@ -4,7 +4,7 @@ const storageClient = new Web3Storage({
   token: `${process.env.NEXT_PUBLIC_WEB3_STORAGE_TOKEN}`,
 });
 
-export const saveFileWithWeb3Storage = async (file: FileList) => {
+export const saveFileWithWeb3Storage = async (file: File[]) => {
   if (!file) return;
 
   const fileIdenfier = await storageClient.put(file);

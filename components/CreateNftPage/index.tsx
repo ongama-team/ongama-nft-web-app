@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
   CrossVector,
+  VPlusCircleFill,
   VQuestionMark,
 } from "@components/modules/__modules__/_vectors";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -12,7 +13,6 @@ import DetailsForm from "./DetailsForm";
 import AdvancedSettingForm from "./AdvanceSettingForm";
 import Header from "@components/modules/__noAuth/Header";
 import PutOnMarketMenu from "./PutOnMarketMenu";
-import ChooseCollection from "./ChooseCollection";
 import NftPreview from "./NftPreview";
 import WalletInfoCard from "@components/modules/__modules__/Card/WalletInfoCard";
 import ProfileMenu from "@components/modules/__secured/ProfileMenu";
@@ -28,6 +28,8 @@ import LocalStorage from "@lib/helper/LocalStorage";
 import UploadFileProcessing from "@components/modules/__modules__/Card/UploadFileProcessing";
 import UploadFileErrorCard from "@components/modules/__modules__/Card/UploadFileErrorCard";
 import { saveFileWithWeb3Storage } from "@lib/web3StorageClient";
+import ShowWidget from "@components/modules/__modules__/ShowWidget";
+import CreateDropModal from "./CreateDropModal";
 
 const CreateNftPage = () => {
   const [nftData, setNftData] = useState({
@@ -57,9 +59,11 @@ const CreateNftPage = () => {
 
   const [isFreeMinting, setIsFreeMinting] = useState(true);
   const [isAdvancedForm, setIsAdvancedForm] = useState(false);
-  const [previewUrl, setPreviewUrl] = useState("");
   const [isImage, setIsImage] = useState(true);
   const [isCreateNftProcessModal, setIsCreateNftProcessModal] = useState(false);
+  const [isCreateDropModal, setIsCreateDropModal] = useState(false);
+
+  const [previewUrl, setPreviewUrl] = useState("");
   const [uploadFileProcessing, setUploadFileProcessing] = useState(false);
   const [fileUploadingError, setFileUploadingError] = useState(false);
   const [mintEroor, setMintError] = useState(false);
@@ -113,7 +117,7 @@ const CreateNftPage = () => {
     setIsImage((files[0].type as string).includes("image"));
     const filePreviewUrl = URL.createObjectURL(files[0]);
     try {
-      const uploadResult = await uploadFileOnWeb3Storage(files);
+      const uploadResult = await uploadFileOnWeb3Storage([files[0]]);
 
       if (uploadResult) setPreviewUrl(filePreviewUrl);
     } catch (err) {
@@ -221,6 +225,10 @@ const CreateNftPage = () => {
     }
   };
 
+  const toggleCreateDropModal = () => {
+    setIsCreateDropModal(!isCreateDropModal);
+  };
+
   return (
     <div className="dark:bg-darkPrimary">
       <Header />
@@ -299,7 +307,19 @@ const CreateNftPage = () => {
               }
               nftPrice={nftData.price.toString()}
             />
-            <ChooseCollection />
+            <div className="mt-5">
+              <p className="font-bold">Choose Collection</p>
+              <button
+                onClick={toggleCreateDropModal}
+                className="py-3 px-8 border border-gray-300 dark:border-gray-500 flex flex-col justify-center items-center my-5 rounded-2xl mobile:w-full"
+              >
+                <VPlusCircleFill className="text-6xl py-3" />
+                <p className="flex flex-col">
+                  <span className="font-bold">Create</span>
+                  <span className="text-gray-400">ERC-21</span>
+                </p>
+              </button>
+            </div>
             <div className="flex justify-between">
               <p className="flex flex-col">
                 <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-800 text-[18px]">
@@ -354,7 +374,7 @@ const CreateNftPage = () => {
         </div>
       </div>
       <ProfileMenu />
-      {isCreateNftProcessModal && (
+      <ShowWidget condition={isCreateNftProcessModal}>
         <CreateNftProcessModal
           sendStorageFeeStatus={sendStorageFeeStatus}
           mintNftStatus={mintNftStatus}
@@ -363,7 +383,10 @@ const CreateNftPage = () => {
           onMintAgain={onPutOnMarket}
           mintError={mintEroor}
         />
-      )}
+      </ShowWidget>
+      <ShowWidget condition={isCreateDropModal}>
+        <CreateDropModal setIsCreateDropModal={setIsCreateDropModal} />
+      </ShowWidget>
     </div>
   );
 };
