@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import {
   VBookmark,
   VEthereum,
-  Vflash,
   VTransaction,
   VFillHeart,
   CrossVector,
+  VFlash,
 } from "@components/modules/__modules__/_vectors";
 import { Tab } from "@headlessui/react";
 
@@ -65,7 +65,7 @@ const ActivityFilters = () => {
                 : "flex justify-between items-center p-2 border dark:border-gray-500 rounded-md m-2"
             }
           >
-            <Vflash />
+            <VFlash />
             <span className="px-2">Sales</span>
           </Tab>
           <Tab

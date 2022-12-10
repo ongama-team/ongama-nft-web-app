@@ -39,8 +39,10 @@ import { IoShareOutline as VShare, IoFlash as VFlash } from "react-icons/io5";
 import { ImInfinite as VInfinite } from "react-icons/im";
 import { MdOutlineTimelapse as VTimeLapse } from "react-icons/md";
 import { RiUserLine as VUser } from "react-icons/ri";
-import { TiFlash as Vflash } from "react-icons/ti";
-import { BiTransfer as VTransaction } from "react-icons/bi";
+import {
+  BiTransfer as VTransaction,
+  BiHistory as VHistory,
+} from "react-icons/bi";
 import { CgSpinnerTwo as VSpinner } from "react-icons/cg";
 import { GoPrimitiveDot as VSingleDot } from "react-icons/go";
 import { FiEye as VEye } from "react-icons/fi";
@@ -78,7 +80,7 @@ export {
   VPlusCircleFill,
   VQuestionMark,
   VUser,
-  Vflash,
+  VHistory,
   VTransaction,
   VFillHeart,
   VSpinner,

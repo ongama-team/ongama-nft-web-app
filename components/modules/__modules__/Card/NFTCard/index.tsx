@@ -133,7 +133,7 @@ const NFTCard: FC<Props> = ({
           <div className="flex justify-between items-center">
             <ShowWidget condition={!useAsPreview}>
               <div className="flex mr-1 items-center">
-                <h2 className="text-sm font-bold mt-2 text-black dark:text-white">
+                <h2 className="text-sm font-semibold tracking-[.01em] text-[16px] mt-2 text-black dark:text-white">
                   {nft?.name}
                 </h2>
                 {nft?.owner.verified && (
@@ -159,7 +159,7 @@ const NFTCard: FC<Props> = ({
         <section className="h-[18%] flex items-center justify-between bg-slate-100 dark:bg-darkLight rounded-xl mt-2 py-2 px-3">
           <ShowWidget condition={!useAsPreview}>
             <div>
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-thine">
+              <p className="text-sm text-gray-500 font-semibold dark:text-gray-400 font-thine">
                 {!isAuction ? "Price" : "Time left"}
               </p>
               {!isAuction ? (
